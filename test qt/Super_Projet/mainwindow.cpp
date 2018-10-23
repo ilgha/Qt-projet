@@ -45,7 +45,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(int i = 0; i<x; i++){
             QRectF target(i*this->width()/x, j*this->height()/y, this->width()/x, this->height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("C:/Users/Gaspard/Desktop/advance wars sprites/tileset projet");
+            QImage image("C:/Users/Gaspard/cours C++/github/QtProjet/test qt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -55,7 +55,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     QRectF target(8*this->width()/x, 3*this->height()/y, this->width()/x, this->height()/y);
     QRectF source(0, 0, 16, 16);
-    QImage image("C:/Users/Gaspard/Desktop/advance wars sprites/player");
+    QImage image("C:/Users/Gaspard/cours C++/github/QtProjet/test qt/advance wars sprites/player");
     QPainter painter(this);
     painter.drawImage(target, image, source);
 }
