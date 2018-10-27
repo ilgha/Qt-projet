@@ -4,7 +4,8 @@ Game::Game(Player* player1){
     this->player1 = player1;
     //this->player2 = player2;
     active = player1;
-    army.push_back((Unit)Infantery(1,1,1,1,1,player1));
+    army.reserve(10);
+    army.push_back(Infantery(1,1,1,1,1,player1));
 }
 
 int Game::endTurn() {
@@ -22,6 +23,6 @@ int Game::endTurn() {
 }
 
 std::vector<Unit> Game::getArmy(){
-    std::cout<<"done"<<std::endl;
+    std::cout<<army[0].getX()<<std::endl;
     return army;
 }

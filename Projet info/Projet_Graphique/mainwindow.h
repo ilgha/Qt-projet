@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
     Game* game = nullptr;
     std::vector<Unit> army;
 public:
-    explicit MainWindow(QWidget *parent = nullptr, Player* player = nullptr, Game* game = nullptr);
+    explicit MainWindow(QWidget *parent, Player* player, Game* game);
     ~MainWindow();
 
     void paintEvent(QPaintEvent *event);

@@ -15,5 +15,4 @@ public:
     std::vector<Unit> getArmy();
 };
 
-
 #endif //PROJECT_GAME_H

@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent, Player* player, Game* game) : QMainWindo
     this->game = game;
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
-    //this->army = game->getArmy();
-    //std::cout<<army.data()<<std::endl;
+    this->army = game->getArmy();
     //timer.start(10);
 }
 
@@ -51,19 +50,19 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
     //infantry
-    //QRectF target((army.front().getX())*this->width()/x, (army.front().getY())*this->height()/y, this->width()/x, this->height()/y);
+    QRectF target(( army[0].getX())*this->width()/x, (army[0].getY())*this->height()/y, this->width()/x, this->height()/y);
     QRectF source(0, 0, 16, 16);
     QImage image("../advance wars sprites/player");
     QPainter painter(this);
-    //painter.drawImage(target, image, source);
+    painter.drawImage(target, image, source);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     QPainter painter(this);
     painter.fillRect(0,0,this->width()/x, this->height()/y,Qt::blue);
     std::cout << event->x() << "," << event->y() << std::endl;
-    //army.front().setX(army.front().getX()+1);
-    //army.front().setY(army.front().getY()+1);
+    army[0].setX( army[0].getX()+1);
+     army[0].setY( army[0].getY()+1);
     update();
 }
 
