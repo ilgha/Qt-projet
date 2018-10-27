@@ -1,25 +1,24 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+//
+// Created by Pierre Vander Eyken on 20/10/2018.
+//
+
+#ifndef PROJECT_PLAYER_H
+#define PROJECT_PLAYER_H
 
 
-class Player
-{
+class Player {
+    int income, money, IA;
+    bool isActive = false;
 public:
-    Player();
-    Player(int x, int y);
-
-    int getPosX();
-    int getPosY();
-    void setPosX(int x);
-    void setPosY(int y);
-    void isMovable();
-    void notMovable();
-
-private:
-    int posX;
-    int posY;
-    bool movable;
+    explicit Player(int IA, int money);
+    ~Player();
+    int getIncome()const ;
+    void addIncome(int newIncome);
+    void addMoney(int newMoney);
+    int getMoney() const ;
+    bool isItActive();
 
 };
 
-#endif // PLAYER_H
+
+#endif //PROJECT_PLAYER_H

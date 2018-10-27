@@ -1,10 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "player.h"
+#include "Player.h"
+#include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTimer>
-
+#include "infantery.h"
+#include "game.h"
+#include <vector>
 
 namespace Ui {
 class MainWindow;
@@ -13,9 +16,12 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+    int t[12][18];
+    Player* player = nullptr;
+    Game* game = nullptr;
+    std::vector<Unit> army;
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr, Player* player = nullptr, Game* game = nullptr);
     ~MainWindow();
 
     void paintEvent(QPaintEvent *event);

@@ -1,42 +1,40 @@
-#include "player.h"
+//
+// Created by Pierre Vander Eyken on 20/10/2018.
+//
 
-Player::Player()
-{
+#include "Player.h"
+
+Player::Player(int IA, int money) {
+    this->IA = IA;
+    this->money = money;
+}
+
+Player::~Player() {
 
 }
 
-Player::Player(int x, int y)
-{
-    posX = x;
-    posY = y;
+int Player::getIncome() const {
+    return income;
 }
 
-int Player::getPosX()
-{
-    return posX;
+void Player::addIncome(int newIncome) {
+    income = income+newIncome;
+    if(income < 0){
+        income = 0;
+    }
 }
 
-int Player::getPosY()
-{
-    return posY;
+int Player::getMoney() const {
+    return money;
 }
 
-void Player::setPosX(int x)
-{
-    posX = x;
+void Player::addMoney(int newMoney){
+    money = money+newMoney;
+    if(money<0){
+        money = 0;
+    }
+}
+bool Player::isItActive() {
+    return isActive;
 }
 
-void Player::setPosY(int y)
-{
-    posY = y;
-}
-
-void Player::isMovable()
-{
-    movable = true;
-}
-
-void Player::notMovable()
-{
-    movable = false;
-}

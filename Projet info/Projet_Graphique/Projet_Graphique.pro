@@ -27,11 +27,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    player.cpp
+    infantery.cpp \
+    Player.cpp \
+    Unit.cpp \
+    game.cpp
 
 HEADERS += \
         mainwindow.h \
-    player.h
+    infantery.h \
+    Player.h \
+    game.h \
+    unit.h
 
 FORMS += \
         mainwindow.ui
@@ -40,3 +46,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    tileset projet.png

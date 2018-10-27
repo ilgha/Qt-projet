@@ -1,19 +1,18 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "player.h"
-
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QDebug>
 #include <iostream>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+
+MainWindow::MainWindow(QWidget *parent, Player* player, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
+    this->player = player;
+    this->game = game;
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+    //this->army = game->getArmy();
+    //std::cout<<army.data()<<std::endl;
     //timer.start(10);
 }
 
@@ -45,26 +44,26 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(int i = 0; i<x; i++){
             QRectF target(i*this->width()/x, j*this->height()/y, this->width()/x, this->height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("C:/Users/Gaspard/cours C++/github/QtProjet/test qt/advance wars sprites/tileset projet");
+            QImage image("../advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
     }
 
-    //player
-
-    QRectF target(8*this->width()/x, 3*this->height()/y, this->width()/x, this->height()/y);
+    //infantry
+    //QRectF target((army.front().getX())*this->width()/x, (army.front().getY())*this->height()/y, this->width()/x, this->height()/y);
     QRectF source(0, 0, 16, 16);
-    QImage image("C:/Users/Gaspard/cours C++/github/QtProjet/test qt/advance wars sprites/player");
+    QImage image("../advance wars sprites/player");
     QPainter painter(this);
-    painter.drawImage(target, image, source);
+    //painter.drawImage(target, image, source);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     QPainter painter(this);
     painter.fillRect(0,0,this->width()/x, this->height()/y,Qt::blue);
     std::cout << event->x() << "," << event->y() << std::endl;
-
+    //army.front().setX(army.front().getX()+1);
+    //army.front().setY(army.front().getY()+1);
     update();
 }
 
