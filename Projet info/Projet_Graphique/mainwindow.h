@@ -20,6 +20,13 @@ class MainWindow : public QMainWindow
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit> army;
+    bool inMenu;
+
+    Ui::MainWindow *ui;
+    QTimer timer;
+    int a = 5;
+    int x = 18;
+    int y = 12;
 public:
     explicit MainWindow(QWidget *parent, Player* player, Game* game);
     ~MainWindow();
@@ -30,13 +37,6 @@ public:
 
 public slots:
     void tick();
-
-private:
-    Ui::MainWindow *ui;
-    QTimer timer;
-    int a = 5;
-    int x = 18;
-    int y = 12;
 };
 
 #endif // MAINWINDOW_H

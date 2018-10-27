@@ -18,8 +18,8 @@ int Game::endTurn() {
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
         endGame();
-    }
-    return 0;*/
+    }*/
+    return 0;
 }
 
 std::vector<Unit> Game::getArmy(){

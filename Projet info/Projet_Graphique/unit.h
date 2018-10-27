@@ -1,5 +1,5 @@
-#ifndef UNIT_H
-#define UNIT_H
+#ifndef PROJECT_UNIT_H
+#define PROJECT_UNIT_H
 
 #include <string>
 #include "Player.h"
@@ -32,4 +32,4 @@ public:
     //int damage(unit1, unit2);
 };
 
-#endif //UNIT_H
+#endif //PROJECT_UNIT_H

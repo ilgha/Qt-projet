@@ -1,7 +1,3 @@
-//
-// Created by Pierre Vander Eyken on 20/10/2018.
-//
-
 #ifndef PROJECT_PLAYER_H
 #define PROJECT_PLAYER_H
 

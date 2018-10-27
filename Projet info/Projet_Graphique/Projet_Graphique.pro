@@ -30,14 +30,18 @@ SOURCES += \
     infantery.cpp \
     Player.cpp \
     Unit.cpp \
-    game.cpp
+    game.cpp \
+    Land.cpp \
+    Plain.cpp
 
 HEADERS += \
         mainwindow.h \
     infantery.h \
     Player.h \
     game.h \
-    unit.h
+    unit.h \
+    Land.h \
+    Plain.h
 
 FORMS += \
         mainwindow.ui

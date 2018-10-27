@@ -41,7 +41,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     for(int j = 0; j<y; j++){
         for(int i = 0; i<x; i++){
-            QRectF target(i*this->width()/x, j*this->height()/y, this->width()/x, this->height()/y);
+            QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
             QImage image("../advance wars sprites/tileset projet");
             QPainter painter(this);
@@ -50,7 +50,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
     //infantry
-    QRectF target(( army[0].getX())*this->width()/x, (army[0].getY())*this->height()/y, this->width()/x, this->height()/y);
+    QRectF target(( army[0].getX())*width()/x, (army[0].getY())*height()/y, width()/x, height()/y);
     QRectF source(0, 0, 16, 16);
     QImage image("../advance wars sprites/player");
     QPainter painter(this);
@@ -58,11 +58,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    QPainter painter(this);
-    painter.fillRect(0,0,this->width()/x, this->height()/y,Qt::blue);
+
     std::cout << event->x() << "," << event->y() << std::endl;
-    army[0].setX( army[0].getX()+1);
-     army[0].setY( army[0].getY()+1);
     update();
 }
 
@@ -71,7 +68,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 void MainWindow::tick(){
-    std::cout << this->width() << "," << this->height() << a << std::endl;
+    std::cout << width() << "," << height() << a << std::endl;
 
 
     update();
