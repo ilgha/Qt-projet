@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\infantery.o
+./debug\Player.o
+./debug\Unit.o
+./debug\game.o
+./debug\Land.o
+./debug\Plain.o
+./debug\building.o
+./debug\moc_mainwindow.o
+);

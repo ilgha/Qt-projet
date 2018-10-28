@@ -38,7 +38,7 @@ string Unit::getMT() const {
     return mt;
 }
 
-int Unit::getCost() const {
+int Unit::getCost(){
     return cost;
 }
 

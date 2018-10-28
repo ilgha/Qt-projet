@@ -1,5 +1,5 @@
-#ifndef PROJECT_GAME_H
-#define PROJECT_GAME_H
+#ifndef GAME_H
+#define GAME_H
 #include "Player.h"
 #include "unit.h"
 #include "infantery.h"
@@ -22,12 +22,12 @@ class Game {
                            {1,1,1,1,1,34,1,26,1,1,2,1,34,1,34,1,1,1},
                            {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
                            {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
-    Plain plain = Plain(1,1);
 public:
     Game(Player* player1);
     int endTurn();
+    void recruit(Unit* unit, string buy);
     int endGame();
     std::vector<Unit> getArmy();
 };
 
-#endif //PROJECT_GAME_H
+#endif //GAME_H
