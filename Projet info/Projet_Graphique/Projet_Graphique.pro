@@ -33,7 +33,8 @@ SOURCES += \
     game.cpp \
     Land.cpp \
     Plain.cpp \
-    building.cpp
+    building.cpp \
+    factory.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     unit.h \
     Land.h \
     Plain.h \
-    building.h
+    building.h \
+    factory.h
 
 FORMS += \
         mainwindow.ui

@@ -39,8 +39,10 @@ return NULL;
 }
 }
 
-
-
 int Land::getX() const {
     return x;
+}
+
+int Land::getY() const {
+    return y;
 }

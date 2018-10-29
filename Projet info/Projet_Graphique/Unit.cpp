@@ -2,7 +2,7 @@
 #include <string>
 using std::string;
 
-Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, int cost, Player* team) {
+Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team) {
     x = posX;
     y = posY;
     this->health = health;
@@ -10,7 +10,6 @@ Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, str
     this->mp = mp;
     this->mpMax = mpMax;
     this->mt = mt;
-    this->cost = cost;
     this->team = team;
 }
 
@@ -38,10 +37,6 @@ string Unit::getMT() const {
     return mt;
 }
 
-int Unit::getCost(){
-    return cost;
-}
-
 Player* Unit::getTeam() const {
     return team;
 }
@@ -51,4 +46,8 @@ void Unit::setX(int x){
 }
 void Unit::setY(int y){
     this->y = y;
+}
+
+void Unit::newTurn(){
+    mp = mpMax;
 }
