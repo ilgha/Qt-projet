@@ -35,7 +35,10 @@ SOURCES += \
     Plain.cpp \
     building.cpp \
     factory.cpp \
-    map.cpp
+    map.cpp \
+    bridge.cpp \
+    mountain.cpp \
+    river.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +50,10 @@ HEADERS += \
     Plain.h \
     building.h \
     factory.h \
-    map.h
+    map.h \
+    bridge.h \
+    mountain.h \
+    river.h
 
 FORMS += \
         mainwindow.ui

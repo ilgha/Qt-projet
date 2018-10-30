@@ -7,11 +7,13 @@
 #include "Plain.h"
 #include "building.h"
 #include "factory.h"
+#include "map.h"
 #include <vector>
 class Game {
     Player* player1;
     Player* player2;
     Player* active;
+    Map map;
     std::vector<Unit> army;
     std::vector<Building> buildings;
     int terrain[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},

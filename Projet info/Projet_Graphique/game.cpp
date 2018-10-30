@@ -4,6 +4,7 @@
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
+    map = Map();
     active = player1;
     army.reserve(10);
     army.push_back(Infantery(0,3,10,1,player2));
