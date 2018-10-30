@@ -3,9 +3,7 @@
 #include <iostream>
 
 
-Land::Land(int posX, int posY, int defence, int f, int b, int tr, int ti, int a){
-    x = posX;
-    y = posY;
+Land::Land(int defence, int f, int b, int tr, int ti, int a){
     def = defence;
     this->f = f;
     this->b = b;
@@ -37,12 +35,4 @@ else {
 std::cout << "error not a valid mt" << std::endl;
 return NULL;
 }
-}
-
-int Land::getX() const {
-    return x;
-}
-
-int Land::getY() const {
-    return y;
 }

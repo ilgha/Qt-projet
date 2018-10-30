@@ -3,10 +3,11 @@
 
 #include "unit.h"
 #include "Player.h"
+#include "Land.h"
 
-class Building{
+class Building : public Land{
     Player* team = nullptr;
-    int hp;
+    int x, y, hp;
     Player* switchTeam(Player* team);
     void reset();
     int maxHp = 20;
@@ -15,9 +16,9 @@ public:
     Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a);
     Player* getTeam() const ;
     int getHp() const ;
+    int getX() const;
+    int getY() const;
     int setHp(Unit* unit);
-    int getX();
-    int getY();
     int addHp(int newHp, Unit* unit);
 
 };

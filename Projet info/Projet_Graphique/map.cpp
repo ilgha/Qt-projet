@@ -1,8 +1,7 @@
 #include "map.h"
-
-Map::Map()
-{
-
+#include "Plain.h"
+Map::Map(){
+    Plain plain = Plain();
 }
 
 int Map::getTile(int x, int y){

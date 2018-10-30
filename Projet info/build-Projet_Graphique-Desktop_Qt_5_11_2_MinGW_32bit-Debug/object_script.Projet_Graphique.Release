@@ -9,5 +9,6 @@ INPUT(
 ./release\Plain.o
 ./release\building.o
 ./release\factory.o
+./release\map.o
 ./release\moc_mainwindow.o
 );
