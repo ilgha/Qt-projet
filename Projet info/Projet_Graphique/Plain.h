@@ -6,6 +6,5 @@
 class Plain : public Land{
 public:
     Plain();
-    ~Plain();
 };
 #endif //PLAIN_H

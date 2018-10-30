@@ -10,5 +10,7 @@ INPUT(
 ./release\building.o
 ./release\factory.o
 ./release\map.o
+./release\bridge.o
+./release\mountain.o
 ./release\moc_mainwindow.o
 );

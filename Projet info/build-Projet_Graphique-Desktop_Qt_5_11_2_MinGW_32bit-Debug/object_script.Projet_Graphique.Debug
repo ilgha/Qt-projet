@@ -10,5 +10,7 @@ INPUT(
 ./debug\building.o
 ./debug\factory.o
 ./debug\map.o
+./debug\bridge.o
+./debug\mountain.o
 ./debug\moc_mainwindow.o
 );
