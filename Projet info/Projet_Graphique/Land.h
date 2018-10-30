@@ -4,7 +4,7 @@
 #include <string>
 class Land
 {
-    int x, y, def, f, b, tr, ti, a;
+    int def, f, b, tr, ti, a;
 
 public:
     Land(int defence, int f, int b, int tr, int ti, int a);

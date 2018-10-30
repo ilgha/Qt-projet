@@ -9,5 +9,6 @@ INPUT(
 ./debug\Plain.o
 ./debug\building.o
 ./debug\factory.o
+./debug\map.o
 ./debug\moc_mainwindow.o
 );

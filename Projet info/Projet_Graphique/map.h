@@ -1,6 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
-
+#include "Plain.h"
 
 class Map
 {
@@ -16,6 +16,7 @@ class Map
                        {1,1,1,1,1,34,1,26,1,1,2,1,34,1,34,1,1,1},
                        {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
                        {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
+    Plain plain;
 public:
     Map();
     int getTile(int x, int y);
