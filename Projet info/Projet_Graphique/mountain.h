@@ -2,7 +2,7 @@
 #define MOUNTAIN_H
 #include "Land.h"
 
-class Mountain
+class Mountain : public Land
 {
 public:
     Mountain();
