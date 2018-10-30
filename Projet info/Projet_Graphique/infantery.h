@@ -4,6 +4,6 @@
 #include "unit.h"
 class Infantery : public Unit{
 public:
-Infantery(int x, int y, int health, int mp,int cost, Player* team);
+Infantery(int x, int y, int health, int mp, Player* team);
 };
 #endif //PROJECT_INFANTERY_H

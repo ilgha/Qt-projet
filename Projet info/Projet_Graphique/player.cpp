@@ -34,7 +34,3 @@ void Player::addMoney(int newMoney){
         money = 0;
     }
 }
-bool Player::isItActive() {
-    return isActive;
-}
-

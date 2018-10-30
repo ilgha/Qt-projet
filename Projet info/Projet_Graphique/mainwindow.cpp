@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent, Player* player, Game* game) : QMainWindo
     this->player = player;
     this->game = game;
     ui->setupUi(this);
-    connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+    //connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
     this->army = game->getArmy();
     //timer.start(10);
 }
@@ -58,7 +58,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-
     std::cout << event->x() << "," << event->y() << std::endl;
     update();
 }
@@ -68,9 +67,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 void MainWindow::tick(){
-    std::cout << width() << "," << height() << a << std::endl;
-
-
     update();
 }
 

@@ -5,11 +5,15 @@
 #include "infantery.h"
 #include "Land.h"
 #include "Plain.h"
+#include "building.h"
+#include "factory.h"
 #include <vector>
 class Game {
     Player* player1;
+    Player* player2;
     Player* active;
     std::vector<Unit> army;
+    std::vector<Building> buildings;
     int terrain[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
                            {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
                            {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
@@ -23,11 +27,13 @@ class Game {
                            {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
                            {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
 public:
-    Game(Player* player1);
+    Game(Player* player1, Player* player2);
     int endTurn();
     void recruit(Unit* unit, string buy);
     int endGame();
     std::vector<Unit> getArmy();
+    Building* check(Unit* unit);
+    Player* getActive() const;
 };
 
 #endif //GAME_H

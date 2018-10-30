@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Player.h"
+
 using std::string;
 
 class Unit{
@@ -13,11 +14,10 @@ class Unit{
     int mp;
     int mpMax;
     string mt;
-    int cost;
     Player* team;
 
 public:
-    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, int cost, Player* team);
+    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team);
     ~Unit();
 
     int getX() const ;
@@ -25,10 +25,10 @@ public:
     int getHealth() const;
     int getMP() const;
     string getMT() const;
-    int getCost() ;
     Player* getTeam() const;
     void setX(int x);
     void setY(int y);
+    void newTurn();
     //int damage(unit1, unit2);
 };
 
