@@ -1,11 +1,10 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "Unit.h"
+#include "unit.h"
 #include "Player.h"
-#include "Land.h"
 
-class Building : public Land{
+class Building{
     Player* team = nullptr;
     int hp;
     Player* switchTeam(Player* team);
@@ -17,6 +16,8 @@ public:
     Player* getTeam() const ;
     int getHp() const ;
     int setHp(Unit* unit);
+    int getX();
+    int getY();
     int addHp(int newHp, Unit* unit);
 
 };
