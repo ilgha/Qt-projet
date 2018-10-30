@@ -4,6 +4,11 @@ Map::Map(){
     Plain plain = Plain();
 }
 
-int Map::getTile(int x, int y){
-    return map[x][y];
+Land Map::getTile(int x, int y){
+    int type = map[x][y];
+    if(type == 1){
+        return plain;
+    }else{
+        return plain;
+    }
 }

@@ -19,7 +19,7 @@ class Map
     Plain plain;
 public:
     Map();
-    int getTile(int x, int y);
+    Land getTile(int x, int y);
 };
 
 #endif // MAP_H
