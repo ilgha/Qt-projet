@@ -51,3 +51,12 @@ void Unit::setY(int y){
 void Unit::newTurn(){
     mp = mpMax;
 }
+void Unit::setMovable(bool b)
+{
+    movable = b;
+}
+
+bool Unit::isMovable()
+{
+    return  movable;
+}

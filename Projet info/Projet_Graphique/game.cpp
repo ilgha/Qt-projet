@@ -39,8 +39,8 @@ void Game::recruit(Unit* unit, string buy){
 }
 
 
-std::vector<Unit> Game::getArmy(){
-    return army;
+std::vector<Unit>* Game::getArmy(){
+    return &army;
 }
 
 Building* Game::check(Unit* unit){

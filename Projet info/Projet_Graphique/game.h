@@ -31,7 +31,7 @@ public:
     int endTurn();
     void recruit(Unit* unit, string buy);
     int endGame();
-    std::vector<Unit> getArmy();
+    std::vector<Unit> *getArmy();
     Building* check(Unit* unit);
     Player* getActive() const;
 };
