@@ -6,8 +6,8 @@
 #include <iostream>
 
 
-MainWindow::MainWindow(QWidget *parent, Player* player, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
-    this->player = player;
+MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
+    this->army[0] = army[0];
     this->game = game;
     ui->setupUi(this);
     //connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
@@ -43,27 +43,66 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../advance wars sprites/tileset projet");
+            QImage image("../Projet info/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
     }
 
     //infantry
-    QRectF target(( army[0].getX())*width()/x, (army[0].getY())*height()/y, width()/x, height()/y);
+    QRectF target(( army->at(0).getX())*width()/x, (army->at(0).getY())*height()/y, width()/x, height()/y);
     QRectF source(0, 0, 16, 16);
-    QImage image("../advance wars sprites/player");
+    QImage image("../Projet info/advance wars sprites/player");
     QPainter painter(this);
     painter.drawImage(target, image, source);
+
+    //infantry move
+
+    if(army->at(0).isMovable()){
+        showMove();
+    }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
+    QPainter painter(this);
     std::cout << event->x() << "," << event->y() << std::endl;
+
+    if(!army->at(0).isMovable()){
+        if(event->x() > army->at(0).getX()*this->width()/x && event->x() < (army->at(0).getX()*this->width()/x + this->width()/x) &&
+                event->y() > army->at(0).getY()*this->height()/y && event->y() < (army->at(0).getY()*this->height()/y + this->height()/y)) army->at(0).setMovable(true);
+        else{
+            std::cout << "PAS OK" << std::endl;
+        }
+    }
+
+    if(army->at(0).isMovable()){
+        if(event->x() > (army->at(0).getX()*this->width()/x+ this->width()/x) && event->x() < (army->at(0).getX()*this->width()/x + 2*this->width()/x) &&
+                event->y() > army->at(0).getY()*this->height()/y && event->y() < (army->at(0).getY()*this->height()/y + this->height()/y)){
+                    army->at(0).setX(army->at(0).getX()+1);
+                    army->at(0).setMovable(false);
+        }
+    }
+
+
     update();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     qDebug() << event->key();
+}
+
+void MainWindow::showMove()
+{
+    QPainter painter(this);
+    painter.fillRect(army->at(0).getX()*this->width()/x+this->width()/x, army->at(0).getY()*this->height()/y, 2*this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x-2*this->width()/x, army->at(0).getY()*this->height()/y, 2*this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x, army->at(0).getY()*this->height()/y+this->height()/y, this->width()/x, 2*this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x, army->at(0).getY()*this->height()/y-2*this->height()/y, this->width()/x, 2*this->height()/y, Qt::red);
+
+    painter.fillRect(army->at(0).getX()*this->width()/x+this->width()/x, army->at(0).getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x-this->width()/x, army->at(0).getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x+this->width()/x, army->at(0).getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(0).getX()*this->width()/x-this->width()/x, army->at(0).getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
 }
 
 void MainWindow::tick(){

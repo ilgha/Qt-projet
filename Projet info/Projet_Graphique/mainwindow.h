@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
     int t[12][18];
     Player* player = nullptr;
     Game* game = nullptr;
-    std::vector<Unit> army;
+    std::vector<Unit> *army;
     bool inMenu;
 
     Ui::MainWindow *ui;
@@ -28,12 +28,13 @@ class MainWindow : public QMainWindow
     int x = 18;
     int y = 12;
 public:
-    explicit MainWindow(QWidget *parent, Player* player, Game* game);
+    explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
 
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
+    void showMove();
 
 public slots:
     void tick();

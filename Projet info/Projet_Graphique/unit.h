@@ -13,6 +13,7 @@ class Unit{
     int healthMax;
     int mp;
     int mpMax;
+    bool movable = false;
     string mt;
     Player* team;
 
@@ -29,6 +30,9 @@ public:
     void setX(int x);
     void setY(int y);
     void newTurn();
+    void setMovable(bool b);
+    bool isMovable();
+
     //int damage(unit1, unit2);
 };
 
