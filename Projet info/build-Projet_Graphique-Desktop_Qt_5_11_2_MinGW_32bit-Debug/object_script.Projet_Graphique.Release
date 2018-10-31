@@ -13,5 +13,7 @@ INPUT(
 ./release\bridge.o
 ./release\mountain.o
 ./release\river.o
+./release\road.o
+./release\woods.o
 ./release\moc_mainwindow.o
 );
