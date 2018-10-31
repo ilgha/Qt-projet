@@ -13,5 +13,7 @@ INPUT(
 ./debug\bridge.o
 ./debug\mountain.o
 ./debug\river.o
+./debug\road.o
+./debug\woods.o
 ./debug\moc_mainwindow.o
 );

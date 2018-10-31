@@ -1,6 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
 #include "Plain.h"
+#include "mountain.h"
+#include "woods.h"
+#include "road.h"
+#include "bridge.h"
+#include "river.h"
 
 class Map
 {
@@ -17,7 +22,12 @@ class Map
                        {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
                        {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
     Plain plain;
-public:
+    Mountain mountain;
+    Woods woods;
+    Road road;
+    Bridge bridge;
+    River river;
+public :
     Map();
     Land getTile(int x, int y);
 };

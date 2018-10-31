@@ -43,7 +43,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../Projet info/advance wars sprites/tileset projet");
+            QImage image("../advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -52,7 +52,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     //infantry
     QRectF target(( army->at(0).getX())*width()/x, (army->at(0).getY())*height()/y, width()/x, height()/y);
     QRectF source(0, 0, 16, 16);
-    QImage image("../Projet info/advance wars sprites/player");
+    QImage image("../advance wars sprites/player");
     QPainter painter(this);
     painter.drawImage(target, image, source);
 

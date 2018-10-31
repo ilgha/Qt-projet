@@ -38,7 +38,9 @@ SOURCES += \
     map.cpp \
     bridge.cpp \
     mountain.cpp \
-    river.cpp
+    river.cpp \
+    road.cpp \
+    woods.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -53,7 +55,9 @@ HEADERS += \
     map.h \
     bridge.h \
     mountain.h \
-    river.h
+    river.h \
+    road.h \
+    woods.h
 
 FORMS += \
         mainwindow.ui
