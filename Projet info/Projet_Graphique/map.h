@@ -6,6 +6,7 @@
 #include "road.h"
 #include "bridge.h"
 #include "river.h"
+#include "factory.h"
 
 class Map
 {
@@ -30,6 +31,7 @@ class Map
 public :
     Map();
     Land getTile(int x, int y);
+    int getValue(int x, int y);
 };
 
 #endif // MAP_H

@@ -60,3 +60,7 @@ bool Unit::isMovable()
 {
     return  movable;
 }
+
+void Unit::fusion(Unit* unit){
+
+}

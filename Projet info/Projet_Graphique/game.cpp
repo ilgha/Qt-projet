@@ -5,6 +5,13 @@ Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
     map = Map();
+    for(unsigned int j = 0; j<sizeof map/sizeof map[0]; j++){
+        for(unsigned int i = 0; i<sizeof map[0]/sizeof(int); i++){
+            if(map[j][i] == 44){
+                Building fact = Factory(i, j);
+            }
+        }
+    }
     active = player1;
     army.reserve(10);
     army.push_back(Infantery(0,3,10,1,player2));
@@ -59,4 +66,21 @@ int Game::endGame(){
 
 Player* Game::getActive() const{
     return active;
+}
+
+void Game::checkFusion(Unit* unit){
+    int x = unit->getX();
+    int y = unit->getY();
+    Unit* fus[2];
+    int t = 0;
+    for(unsigned int i = 0; army.size();i++){
+        if(army.at(i).getX() == x && army.at(i).getY() == y){
+            try {
+                fus[t] = &army.at(i);
+                t = 1;
+            } catch (const std::exception&) {
+            }
+        }
+    }
+
 }

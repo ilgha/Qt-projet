@@ -36,6 +36,7 @@ public:
     std::vector<Unit> *getArmy();
     Building* check(Unit* unit);
     Player* getActive() const;
+    void checkFusion(Unit* unit);
 };
 
 #endif //GAME_H
