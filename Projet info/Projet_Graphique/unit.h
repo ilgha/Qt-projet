@@ -32,6 +32,7 @@ public:
     void newTurn();
     void setMovable(bool b);
     bool isMovable();
+    void fusion(Unit* unit);
 
     //int damage(unit1, unit2);
 };

@@ -28,3 +28,7 @@ Land Map::getTile(int x, int y){
     }
     return plain;
 }
+
+int Map::getValue(int x, int y){
+    return map[x][y];
+}
