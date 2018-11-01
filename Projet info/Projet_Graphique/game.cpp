@@ -69,5 +69,16 @@ Player* Game::getActive() const{
 }
 
 void Game::checkFusion(Unit* unit){
+    for(unsigned int i = 0; i<=army.size(); i++){
+        if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
+            unit->setHealth(army.at(i)->getHealth());
+            army.at(i)->setHealth(-1000);
+        }
+    }
+}
 
+void Game::erase(Unit* unit){
+    for(unsigned int i = 0; i<= army.size(); i++){
+
+    }
 }
