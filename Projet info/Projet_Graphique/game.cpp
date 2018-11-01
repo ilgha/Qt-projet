@@ -15,16 +15,16 @@ Game::Game(Player* player1, Player* player2){
         }
     }
     army.push_back(new Infantery(0,3,10,1,player1));
-<<<<<<< HEAD
+
     army.push_back(new Infantery(4,2,10,1,player2));
-=======
+
     army.push_back(new Infantery(1,3,10,1,player2));
     army.push_back(new Infantery(1,4,10,1,player2));
     army.push_back(new Infantery(1,5,10,1,player2));
     army.push_back(new Infantery(1,6,10,1,player2));
     army.push_back(new Infantery(1,7,10,1,player2));
     army.push_back(new Infantery(1,8,10,1,player2));
->>>>>>> 599b57fc61c07d23a6e9d24701b3fc9ebc4e08ea
+
     active = player1;
 }
 
