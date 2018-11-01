@@ -15,23 +15,22 @@ Game::Game(Player* player1, Player* player2){
         }
     }
     army.push_back(new Infantery(0,3,10,1,player1));
-<<<<<<< HEAD
+
 
     army.push_back(new Infantery(4,2,10,1,player2));
 
-=======
+
     army.push_back(new Infantery(4,2,10,1,player2));
->>>>>>> 4ca749a1d4110ae4de35d8acc3d59f10445175f4
+
     army.push_back(new Infantery(1,3,10,1,player2));
     army.push_back(new Infantery(1,4,10,1,player2));
     army.push_back(new Infantery(1,5,10,1,player2));
     army.push_back(new Infantery(1,6,10,1,player2));
     army.push_back(new Infantery(1,7,10,1,player2));
     army.push_back(new Infantery(1,8,10,1,player2));
-<<<<<<< HEAD
 
-=======
->>>>>>> 4ca749a1d4110ae4de35d8acc3d59f10445175f4
+
+
     active = player1;
 }
 
@@ -70,9 +69,7 @@ std::vector<Unit*>* Game::getArmy(){
 Building* Game::check(Unit* unit){
     //std::cout << unit->getX() << "," << unit->getY() << std::endl;
     for(unsigned int i = 0; i < buildings.size(); i++){
-        std::cout <<  buildings.at(i).getX() << "," << buildings.at(i).getY() << std::endl;
         if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
-            std::cout << "factory" << std::endl;
             return &buildings[i];
         }
     }

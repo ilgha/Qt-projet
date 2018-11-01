@@ -55,7 +55,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
-        QImage image("../advance wars sprites/player");
+        QImage image("../Projet info/advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
@@ -65,7 +65,13 @@ void MainWindow::paintEvent(QPaintEvent *event){
             showMove(i);
         }
 
-
+        // infantry action
+        if(game->check(army->at(i)) != nullptr){
+            if(game->check(army->at(i))->getTeam() != army->at(i)->getTeam()){
+                std::cout << "pas de la meme team" << std::endl;
+                showMenu(*game->check(army->at(i)),*army->at(i));
+            }
+        }
     }
 
 
@@ -79,16 +85,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
         if(!army->at(i)->isMovable()){
             if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)) army->at(i)->setMovable(true);
-            else{
-                std::cout << "PAS OK" << std::endl;
-            }
         }
 
         if(army->at(i)->isMovable()){
             if(event->x() > (army->at(i)->getX()*this->width()/x+ this->width()/x) && event->x() < (army->at(i)->getX()*this->width()/x + 2*this->width()/x) &&
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                         army->at(i)->setX(army->at(i)->getX()+1);
-                        game->check(army->at(i));
                         army->at(i)->setMovable(false);
             }
         }
@@ -114,15 +116,14 @@ void MainWindow::showMove(int i)
     painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
 }
 
-void MainWindow::showMenu(Building b, Unit u)
-{
-    //if(b.getTeam() != u.getTeam()){
-        QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
-        QRectF source(865, 1446, 42, 63);
-        QImage image("../advance wars sprites/all sprites");
-        QPainter painter(this);
-        painter.drawImage(target, image, source);
-    //}
+void MainWindow::showMenu(Building b, Unit u){
+
+    QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
+    QRectF source(865, 1446, 42, 63);
+    QImage image("../Projet info/advance wars sprites/all sprites");
+    QPainter painter(this);
+    painter.drawImage(target, image, source);
+
 }
 
 void MainWindow::tick(){
