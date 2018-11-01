@@ -16,9 +16,10 @@ class Unit{
     bool movable = false;
     string mt;
     Player* team;
+    int ID;
 
 public:
-    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team);
+    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID);
     ~Unit();
 
     int getX() const ;
@@ -34,6 +35,7 @@ public:
     void setMovable(bool b);
     bool isMovable();
     void fusion(Unit* unit);
+    int getDamage(Unit * unitA, Unit * unitD);
 
     //int damage(unit1, unit2);
 };

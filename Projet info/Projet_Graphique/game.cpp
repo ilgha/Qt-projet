@@ -67,7 +67,7 @@ std::vector<Unit*>* Game::getArmy(){
 }
 
 Building* Game::check(Unit* unit){
-    //std::cout << unit->getX() << "," << unit->getY() << std::endl;
+    std::cout << unit->getX() << "," << unit->getY() << std::endl;
     for(unsigned int i = 0; i < buildings.size(); i++){
         if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
             return &buildings[i];
@@ -101,4 +101,12 @@ void Game::erase(Unit* unit){
            save->setHealth(-10000);
         }
     }
+}
+
+Unit* Game::getActiveUnit() const{
+    return activeUnit;
+}
+
+void Game::setActiveUnit(Unit* unit){
+    activeUnit = unit;
 }
