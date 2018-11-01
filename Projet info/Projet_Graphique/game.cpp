@@ -14,8 +14,8 @@ Game::Game(Player* player1, Player* player2){
             }
         }
     }
-    army.push_back(Infantery(0,3,10,1,player1));
-    army.push_back(Infantery(5,5,10,1,player2));
+    army.push_back(new Infantery(0,3,10,1,player1));
+    army.push_back(new Infantery(1,3,10,1,player2));
     active = player1;
 }
 
@@ -26,7 +26,7 @@ int Game::endTurn() {
         active = player1;
     }
     for(unsigned int i = 0; i< army.size(); i++){
-        army[i].newTurn();
+        army[i]->newTurn();
     }
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
@@ -47,7 +47,7 @@ void Game::recruit(Unit* unit, string buy){
 }
 
 
-std::vector<Unit>* Game::getArmy(){
+std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
@@ -69,17 +69,5 @@ Player* Game::getActive() const{
 }
 
 void Game::checkFusion(Unit* unit){
-    int x = unit->getX();
-    int y = unit->getY();
-    Unit* fus[2];
-    int t = 0;
-    for(unsigned int i = 0; army.size();i++){
-        if(army.at(i).getX() == x && army.at(i).getY() == y && t<2){
-            fus[t] = &army.at(i);
-            t++;
-        }
-    }
-
-
 
 }

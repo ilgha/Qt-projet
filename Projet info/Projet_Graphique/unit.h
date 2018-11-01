@@ -24,6 +24,7 @@ public:
     int getX() const ;
     int getY() const;
     int getHealth() const;
+    int setHealth(int newHp);
     int getMP() const;
     string getMT() const;
     Player* getTeam() const;
