@@ -74,13 +74,12 @@ void Game::checkFusion(Unit* unit){
     Unit* fus[2];
     int t = 0;
     for(unsigned int i = 0; army.size();i++){
-        if(army.at(i).getX() == x && army.at(i).getY() == y){
-            try {
-                fus[t] = &army.at(i);
-                t = 1;
-            } catch (const std::exception&) {
-            }
+        if(army.at(i).getX() == x && army.at(i).getY() == y && t<2){
+            fus[t] = &army.at(i);
+            t++;
         }
     }
+
+
 
 }

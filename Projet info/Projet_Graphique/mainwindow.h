@@ -25,8 +25,8 @@ class MainWindow : public QMainWindow
     Ui::MainWindow *ui;
     QTimer timer;
     int a = 5;
-    int x = 18;
-    int y = 12;
+    unsigned int x = 18;
+    unsigned int y = 12;
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
@@ -34,7 +34,7 @@ public:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
-    void showMove();
+    void showMove(int i);
 
 public slots:
     void tick();
