@@ -19,9 +19,6 @@ Game::Game(Player* player1, Player* player2){
 
     army.push_back(new Infantery(4,2,10,1,player2));
 
-
-    army.push_back(new Infantery(4,2,10,1,player2));
-
     army.push_back(new Infantery(1,3,10,1,player2));
     army.push_back(new Infantery(1,4,10,1,player2));
     army.push_back(new Infantery(1,5,10,1,player2));

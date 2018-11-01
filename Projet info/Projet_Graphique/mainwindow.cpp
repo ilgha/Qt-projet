@@ -45,7 +45,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(unsigned int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../advance wars sprites/tileset projet");
+            QImage image("../Projet info/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -79,27 +79,24 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     QPainter painter(this);
-    std::cout << event->x() << "," << event->y() << std::endl;
+
 
     for(int i = 0; i<army->size(); i++){
         if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
             if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
-<<<<<<< HEAD
-                    event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)) army->at(i)->setMovable(true);
-=======
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                 army->at(i)->setMovable(true);
                 game->setActiveUnit(army->at(i));
             }
-            else{
-                }
+
+
         }else if(army->at(i)->isMovable() && game->getActiveUnit() == army->at(i)){
             if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                 game->setActiveUnit(nullptr);
                 army->at(i)->setMovable(false);
             }
->>>>>>> 49d98720838539a589a8a031a294aefd7ad98c9f
+
         }
 
         //droite
