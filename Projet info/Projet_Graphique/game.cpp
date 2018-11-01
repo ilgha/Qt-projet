@@ -4,19 +4,19 @@
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
+    buildings.reserve(20);
+    army.reserve(20);
     map = Map();
-    for(unsigned int j = 0; j<sizeof map/sizeof map[0]; j++){
-        for(unsigned int i = 0; i<sizeof map[0]/sizeof(int); i++){
-            if(map[j][i] == 44){
-                Building fact = Factory(i, j);
+    for(int j = 0; j<18; j++){
+        for(int i = 0; i<12; i++){
+            if(map.getValue(i, j) == 44){
+                buildings.push_back(Factory(i, j));
             }
         }
     }
+    army.push_back(Infantery(0,3,10,1,player1));
+    army.push_back(Infantery(5,5,10,1,player2));
     active = player1;
-    army.reserve(10);
-    army.push_back(Infantery(0,3,10,1,player2));
-    buildings.reserve(20);
-    buildings.push_back(Factory(0, 3));
 }
 
 int Game::endTurn() {
