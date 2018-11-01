@@ -16,6 +16,11 @@ Game::Game(Player* player1, Player* player2){
     }
     army.push_back(new Infantery(0,3,10,1,player1));
     army.push_back(new Infantery(1,3,10,1,player2));
+    army.push_back(new Infantery(1,4,10,1,player2));
+    army.push_back(new Infantery(1,5,10,1,player2));
+    army.push_back(new Infantery(1,6,10,1,player2));
+    army.push_back(new Infantery(1,7,10,1,player2));
+    army.push_back(new Infantery(1,8,10,1,player2));
     active = player1;
 }
 
@@ -69,7 +74,7 @@ Player* Game::getActive() const{
 }
 
 void Game::checkFusion(Unit* unit){
-    for(unsigned int i = 0; i<=army.size(); i++){
+    for(unsigned int i = 0; i<army.size(); i++){
         if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
             unit->setHealth(army.at(i)->getHealth());
             army.at(i)->setHealth(-1000);
@@ -78,7 +83,11 @@ void Game::checkFusion(Unit* unit){
 }
 
 void Game::erase(Unit* unit){
-    for(unsigned int i = 0; i<= army.size(); i++){
-
+    Unit* save = unit;
+    for(unsigned int i = 0; i< army.size(); i++){
+        if(unit == army.at(i)){
+           army.erase(army.begin()+i);
+           save->setHealth(-10000);
+        }
     }
 }

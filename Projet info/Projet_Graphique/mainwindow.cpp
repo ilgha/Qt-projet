@@ -88,11 +88,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
             }
         }
     }
-    std::cout<< army->at(0)->getHealth()<<std::endl;
-    std::cout<< army->at(1)->getHealth()<<std::endl;
-    army->at(0)->setHealth(-1000);
-    std::cout<< army->at(0)->getHealth()<<std::endl;
-    std::cout<< army->at(1)->getHealth()<<std::endl;
+    game->erase(army->at(0));
     update();
 }
 
