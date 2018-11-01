@@ -4,6 +4,8 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <iostream>
+#include <typeinfo>
+#include "Plain.h"
 
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
@@ -63,9 +65,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             showMove(i);
         }
 
-        //infantry action
 
-        //showMenu(*game->check(&army->at(i)), army->at(i));
     }
 
 
@@ -88,6 +88,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
             if(event->x() > (army->at(i)->getX()*this->width()/x+ this->width()/x) && event->x() < (army->at(i)->getX()*this->width()/x + 2*this->width()/x) &&
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                         army->at(i)->setX(army->at(i)->getX()+1);
+                        game->check(army->at(i));
                         army->at(i)->setMovable(false);
             }
         }
@@ -116,16 +117,16 @@ void MainWindow::showMove(int i)
     painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
 }
 
-//void MainWindow::showMenu(Building b, Unit u)
-//{
-//    if(b.getTeam() != u.getTeam()){
-//        QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
-//        QRectF source(865, 1446, 42, 63);
-//        QImage image("../Projet info/advance wars sprites/all sprites");
-//        QPainter painter(this);
-//        painter.drawImage(target, image, source);
-//    }
-//}
+void MainWindow::showMenu(Building b, Unit u)
+{
+    //if(b.getTeam() != u.getTeam()){
+        QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
+        QRectF source(865, 1446, 42, 63);
+        QImage image("../Projet info/advance wars sprites/all sprites");
+        QPainter painter(this);
+        painter.drawImage(target, image, source);
+    //}
+}
 
 void MainWindow::tick(){
     update();

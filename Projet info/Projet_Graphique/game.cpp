@@ -7,15 +7,15 @@ Game::Game(Player* player1, Player* player2){
     buildings.reserve(20);
     army.reserve(20);
     map = Map();
-    for(int j = 0; j<18; j++){
-        for(int i = 0; i<12; i++){
-            if(map.getValue(i, j) == 44){
-                buildings.push_back(Factory(i, j));
+    for(int i = 0; i<12; i++){
+        for(int j = 0; j<18; j++){
+            if(map.getValue(i, j) == 35){
+                buildings.push_back(Factory(j, i));
             }
         }
     }
     army.push_back(new Infantery(0,3,10,1,player1));
-    army.push_back(new Infantery(1,3,10,1,player2));
+    army.push_back(new Infantery(4,2,10,1,player2));
     active = player1;
 }
 
@@ -52,8 +52,11 @@ std::vector<Unit*>* Game::getArmy(){
 }
 
 Building* Game::check(Unit* unit){
+    //std::cout << unit->getX() << "," << unit->getY() << std::endl;
     for(unsigned int i = 0; i < buildings.size(); i++){
-        if(unit->getX() == buildings[i].getX() && unit->getY() == buildings[i].getY()){
+        std::cout <<  buildings.at(i).getX() << "," << buildings.at(i).getY() << std::endl;
+        if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
+            std::cout << "factory" << std::endl;
             return &buildings[i];
         }
     }
