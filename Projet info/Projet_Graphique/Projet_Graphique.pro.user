@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.7.1, 2018-11-01T10:23:52. -->
+=======
+<!-- Written by QtCreator 4.7.1, 2018-11-01T10:23:06. -->
+>>>>>>> 5605347b99b2f4592b99218d9987d5fdde69eb30
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -536,8 +540,13 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Projet_Graphique</value>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Projet_Graphique2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
+>>>>>>> 5605347b99b2f4592b99218d9987d5fdde69eb30
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Projet_Graphique.pro</value>
