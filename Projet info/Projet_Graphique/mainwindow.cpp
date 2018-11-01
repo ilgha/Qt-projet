@@ -43,7 +43,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../advance wars sprites/tileset projet");
+            QImage image("../Projet info/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
