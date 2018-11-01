@@ -40,7 +40,8 @@ SOURCES += \
     mountain.cpp \
     river.cpp \
     road.cpp \
-    woods.cpp
+    woods.cpp \
+    AntiAir.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +58,8 @@ HEADERS += \
     mountain.h \
     river.h \
     road.h \
-    woods.h
+    woods.h \
+    AntiAir.h
 
 FORMS += \
         mainwindow.ui
