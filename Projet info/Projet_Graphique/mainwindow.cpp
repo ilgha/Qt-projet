@@ -147,15 +147,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 void MainWindow::showMove(int i)
 {
     QPainter painter(this);
-    painter.fillRect(army->at(i)->getX()*this->width()/x+this->width()/x, army->at(i)->getY()*this->height()/y, 2*this->width()/x, this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x-2*this->width()/x, army->at(i)->getY()*this->height()/y, 2*this->width()/x, this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y+this->height()/y, this->width()/x, 2*this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y-2*this->height()/y, this->width()/x, 2*this->height()/y, Qt::red);
-
-    painter.fillRect(army->at(i)->getX()*this->width()/x+this->width()/x, army->at(i)->getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x+this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
-    painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(i)->getX()*this->width()/x+this->width()/x, army->at(i)->getY()*this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
+    painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
 }
 
 void MainWindow::showMenu(Building b, Unit u)
