@@ -53,7 +53,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i).getX())*width()/x, (army->at(i).getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
-        QImage image("../advance wars sprites/player");
+        QImage image("../Projet info/advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
@@ -62,6 +62,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
         if(army->at(i).isMovable()){
             showMove(i);
         }
+
+        //infantry action
+
+        //showMenu(*game->check(&army->at(i)), army->at(i));
     }
 
 
@@ -109,6 +113,17 @@ void MainWindow::showMove(int i)
     painter.fillRect(army->at(i).getX()*this->width()/x+this->width()/x, army->at(i).getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
     painter.fillRect(army->at(i).getX()*this->width()/x-this->width()/x, army->at(i).getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
 }
+
+//void MainWindow::showMenu(Building b, Unit u)
+//{
+//    if(b.getTeam() != u.getTeam()){
+//        QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
+//        QRectF source(865, 1446, 42, 63);
+//        QImage image("../Projet info/advance wars sprites/all sprites");
+//        QPainter painter(this);
+//        painter.drawImage(target, image, source);
+//    }
+//}
 
 void MainWindow::tick(){
     update();

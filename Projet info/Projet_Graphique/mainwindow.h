@@ -35,6 +35,8 @@ public:
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
     void showMove(int i);
+    void showMenu();
+    void showMenu(Building b, Unit u);
 
 public slots:
     void tick();
