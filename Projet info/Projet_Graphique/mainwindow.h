@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
     int t[12][18];
     Player* player = nullptr;
     Game* game = nullptr;
-    std::vector<Unit> *army;
+    std::vector<Unit*> *army;
     bool inMenu;
 
     Ui::MainWindow *ui;

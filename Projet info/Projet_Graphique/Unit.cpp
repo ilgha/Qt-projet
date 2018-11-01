@@ -29,6 +29,16 @@ int Unit::getHealth() const {
     return health;
 }
 
+int Unit::setHealth(int newHp){
+    if(health+newHp <= healthMax){
+        health += newHp;
+    }
+    if(health<=0){
+        delete this;
+    }
+    return health;
+}
+
 int Unit::getMP() const {
     return mp;
 }

@@ -14,7 +14,7 @@ class Game {
     Player* player2;
     Player* active;
     Map map;
-    std::vector<Unit> army;
+    std::vector<Unit*> army;
     std::vector<Building> buildings;
     int terrain[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
                            {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
@@ -33,7 +33,7 @@ public:
     int endTurn();
     void recruit(Unit* unit, string buy);
     int endGame();
-    std::vector<Unit> *getArmy();
+    std::vector<Unit*> *getArmy();
     Building* check(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
