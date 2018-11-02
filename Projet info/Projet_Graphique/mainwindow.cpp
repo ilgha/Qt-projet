@@ -160,7 +160,6 @@ void MainWindow::showMove(int i)
 }
 
 void MainWindow::showMenu(Building b, Unit u){
-    std::cout << "menu" << std::endl;
     QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
     QRectF source(0,0,41,62);
     QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/menu");
