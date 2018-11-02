@@ -45,7 +45,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(unsigned int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../Projet info/advance wars sprites/tileset projet");
+            QImage image("../advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -55,7 +55,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
-        QImage image("../Projet info/advance wars sprites/player");
+        QImage image("../advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
@@ -163,7 +163,7 @@ void MainWindow::showMenu(Building b, Unit u){
 
     QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
     QRectF source(865, 1446, 42, 63);
-    QImage image("../Projet info/advance wars sprites/all sprites");
+    QImage image("../advance wars sprites/all sprites");
     QPainter painter(this);
     painter.drawImage(target, image, source);
 
