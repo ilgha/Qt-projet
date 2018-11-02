@@ -41,7 +41,10 @@ SOURCES += \
     river.cpp \
     road.cpp \
     woods.cpp \
-    AntiAir.cpp
+    AntiAir.cpp \
+    BCopter.cpp \
+    Bomber.cpp \
+    Fighter.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -59,7 +62,10 @@ HEADERS += \
     river.h \
     road.h \
     woods.h \
-    AntiAir.h
+    AntiAir.h \
+    BCopter.h \
+    Bomber.h \
+    Fighter.h
 
 FORMS += \
         mainwindow.ui
