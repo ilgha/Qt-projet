@@ -1,5 +1,5 @@
-#ifndef PROJECT_FIGHTER_H
-#define PROJECT_FIGHTER_H
+#ifndef FIGHTER_H
+#define FIGHTER_H
 #include "Player.h"
 #include "unit.h"
 
@@ -8,4 +8,4 @@ public:
 Fighter(int x, int y, int health, int mp, Player* team);
 };
 
-#endif //PROJECT_FIGHTER_H
+#endif //FIGHTER_H

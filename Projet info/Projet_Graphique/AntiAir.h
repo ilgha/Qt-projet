@@ -7,4 +7,4 @@ class AntiAir : public Unit {
 public:
 AntiAir(int x, int y, int health, int mp,Player* team);
 };
-#endif //PROJECT_ANTIAIR_H
+#endif //ANTIAIR_H

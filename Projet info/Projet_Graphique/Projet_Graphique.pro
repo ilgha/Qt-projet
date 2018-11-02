@@ -44,7 +44,13 @@ SOURCES += \
     AntiAir.cpp \
     BCopter.cpp \
     Bomber.cpp \
-    Fighter.cpp
+    Fighter.cpp \
+    MdTank.cpp \
+    Mech.cpp \
+    MegaTank.cpp \
+    NeoTank.cpp \
+    Recon.cpp \
+    Tank.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -65,7 +71,13 @@ HEADERS += \
     AntiAir.h \
     BCopter.h \
     Bomber.h \
-    Fighter.h
+    Fighter.h \
+    MdTank.h \
+    Mech.h \
+    MegaTank.h \
+    NeoTank.h \
+    Recon.h \
+    Tank.h
 
 FORMS += \
         mainwindow.ui
