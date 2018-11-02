@@ -40,7 +40,17 @@ SOURCES += \
     mountain.cpp \
     river.cpp \
     road.cpp \
-    woods.cpp
+    woods.cpp \
+    AntiAir.cpp \
+    BCopter.cpp \
+    Bomber.cpp \
+    Fighter.cpp \
+    MdTank.cpp \
+    Mech.cpp \
+    MegaTank.cpp \
+    NeoTank.cpp \
+    Recon.cpp \
+    Tank.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +67,17 @@ HEADERS += \
     mountain.h \
     river.h \
     road.h \
-    woods.h
+    woods.h \
+    AntiAir.h \
+    BCopter.h \
+    Bomber.h \
+    Fighter.h \
+    MdTank.h \
+    Mech.h \
+    MegaTank.h \
+    NeoTank.h \
+    Recon.h \
+    Tank.h
 
 FORMS += \
         mainwindow.ui
