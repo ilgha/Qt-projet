@@ -1,8 +1,8 @@
-#ifndef PROJECT_UNIT_H
-#define PROJECT_UNIT_H
+#ifndef UNIT_H
+#define UNIT_H
 
 #include <string>
-#include "Player.h"
+#include "player.h"
 
 using std::string;
 
@@ -37,8 +37,8 @@ public:
     bool isMovable();
     void fusion(Unit* unit);
     int getDamage(Unit * unitA, Unit * unitD);
+    int attack (Unit * unitA, Unit * unitD);
 
-    //int damage(unit1, unit2);
 };
 
-#endif //PROJECT_UNIT_H
+#endif //UNIT_H

@@ -1,5 +1,5 @@
-#ifndef PROJECT_PLAYER_H
-#define PROJECT_PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 
 class Player {
@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif //PROJECT_PLAYER_H
+#endif //PLAYER_H

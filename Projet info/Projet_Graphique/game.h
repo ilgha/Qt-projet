@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-#include "Player.h"
+#include "player.h"
 #include "unit.h"
 #include "infantery.h"
 #include "Land.h"

@@ -1,6 +1,6 @@
 #ifndef BOMBER_H
 #define BOMBER_H
-#include "Player.h"
+#include "player.h"
 #include "unit.h"
 class Bomber : public Unit {
 
