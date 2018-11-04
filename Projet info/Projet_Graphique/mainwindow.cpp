@@ -68,7 +68,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
 
-    // infantry action
+    // infantry action To set in a separated function
     for(int i = 0; i<army->size(); i++){
         if(game->check(army->at(i)) != nullptr){
            //showMenu(*game->check(army->at(i)),*army->at(i));
@@ -76,7 +76,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             //QRectF source(865, 1446, 42, 63);
             //QImage image("../Projet info/advance wars sprites/all sprites");
             QRectF source(0,0,41,62);
-            QImage image("../Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/menu");
+            QImage image("../advance wars sprites/menu");
             QPainter painter(this);
             painter.drawImage(target, image, source);
             painter.fillRect(0,0, this->width()/4,this->height()/4,Qt::red);

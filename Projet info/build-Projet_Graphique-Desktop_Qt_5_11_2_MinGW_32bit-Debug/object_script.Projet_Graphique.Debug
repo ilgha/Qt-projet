@@ -15,5 +15,15 @@ INPUT(
 ./debug\river.o
 ./debug\road.o
 ./debug\woods.o
+./debug\AntiAir.o
+./debug\BCopter.o
+./debug\Bomber.o
+./debug\Fighter.o
+./debug\MdTank.o
+./debug\Mech.o
+./debug\MegaTank.o
+./debug\NeoTank.o
+./debug\Recon.o
+./debug\Tank.o
 ./debug\moc_mainwindow.o
 );

@@ -15,5 +15,15 @@ INPUT(
 ./release\river.o
 ./release\road.o
 ./release\woods.o
+./release\AntiAir.o
+./release\BCopter.o
+./release\Bomber.o
+./release\Fighter.o
+./release\MdTank.o
+./release\Mech.o
+./release\MegaTank.o
+./release\NeoTank.o
+./release\Recon.o
+./release\Tank.o
 ./release\moc_mainwindow.o
 );
