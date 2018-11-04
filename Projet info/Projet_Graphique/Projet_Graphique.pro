@@ -50,7 +50,9 @@ SOURCES += \
     MegaTank.cpp \
     NeoTank.cpp \
     Recon.cpp \
-    Tank.cpp
+    Tank.cpp \
+    city.cpp \
+    airport.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -77,7 +79,9 @@ HEADERS += \
     MegaTank.h \
     NeoTank.h \
     Recon.h \
-    Tank.h
+    Tank.h \
+    city.h \
+    airport.h
 
 FORMS += \
         mainwindow.ui

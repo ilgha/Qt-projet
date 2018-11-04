@@ -25,5 +25,7 @@ INPUT(
 ./debug\NeoTank.o
 ./debug\Recon.o
 ./debug\Tank.o
+./debug\city.o
+./debug\airport.o
 ./debug\moc_mainwindow.o
 );

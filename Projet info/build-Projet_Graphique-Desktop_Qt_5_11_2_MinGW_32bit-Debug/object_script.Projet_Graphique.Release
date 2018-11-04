@@ -25,5 +25,7 @@ INPUT(
 ./release\NeoTank.o
 ./release\Recon.o
 ./release\Tank.o
+./release\city.o
+./release\airport.o
 ./release\moc_mainwindow.o
 );
