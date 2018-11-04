@@ -46,7 +46,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(unsigned int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../advance wars sprites/tileset projet");
+            QImage image("../Projet info/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -56,7 +56,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
-        QImage image("../advance wars sprites/player");
+        QImage image("../Projet info/advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
@@ -71,6 +71,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     // infantry action To set in a separated function
     for(int i = 0; i<army->size(); i++){
         if(game->check(army->at(i)) != nullptr){
+<<<<<<< HEAD
            //showMenu(*game->check(army->at(i)),*army->at(i));
             QRectF target(11*this->width()/18, this->height()/12, this->width()/4,this->height()/4);
             //QRectF source(865, 1446, 42, 63);
@@ -80,6 +81,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QPainter painter(this);
             painter.drawImage(target, image, source);
             painter.fillRect(0,0, this->width()/4,this->height()/4,Qt::red);
+=======
+           showMenu(*game->check(army->at(i)),*army->at(i));
+>>>>>>> 3d70c0ed1af36dbcc79cc6913a39488b7bdbff03
         }
       }
 }
@@ -150,6 +154,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     qDebug() << event->key();
+    for(int i = 0; i<army->size(); i++){
+        if(game->check(army->at(i)) != nullptr){
+
+        }
+      }
 }
 
 void MainWindow::showMove(int i)
@@ -163,11 +172,9 @@ void MainWindow::showMove(int i)
 }
 
 void MainWindow::showMenu(Building b, Unit u){
-    std::cout << "menu" << std::endl;
-    //QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
-    QRectF target(0,0, this->width(),this->height());
-    QRectF source(865, 1446, 42, 63);
-    QImage image("../advance wars sprites/all sprites");
+    QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
+    QRectF source(0,0,41,62);
+    QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/menu");
     QPainter painter(this);
     painter.drawImage(target, image, source);
 
