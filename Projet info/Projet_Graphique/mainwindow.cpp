@@ -119,8 +119,6 @@ void MainWindow::unitMove(QMouseEvent *event){
                             game->checkFusion(army->at(i));
                             army->at(i)->setMovable(false);
                             game->setActiveUnit(nullptr);
-                            std::cout<<army->at(i)->getHealth()<<std::endl;
-                            std::cout<<i<<std::endl;
                 }
                 //gauche
                 else if(event->x() < (army->at(i)->getX()*this->width()/x) && event->x() > (army->at(i)->getX()*this->width()/x - 1*this->width()/x) &&
@@ -129,8 +127,6 @@ void MainWindow::unitMove(QMouseEvent *event){
                             game->checkFusion(army->at(i));
                             army->at(i)->setMovable(false);
                             game->setActiveUnit(nullptr);
-                            std::cout<<army->at(i)->getHealth()<<std::endl;
-                            std::cout<<i<<std::endl;
                 }
                 //bas
                 else if(event->y() > (army->at(i)->getY()*this->height()/y+ this->height()/y) && event->y() < (army->at(i)->getY()*this->height()/y + 2*this->height()/y) &&
@@ -139,8 +135,6 @@ void MainWindow::unitMove(QMouseEvent *event){
                             game->checkFusion(army->at(i));
                             army->at(i)->setMovable(false);
                             game->setActiveUnit(nullptr);
-                            std::cout<<army->at(i)->getHealth()<<std::endl;
-                            std::cout<<i<<std::endl;
                 }
                 //haut
                 if(event->y() < (army->at(i)->getY()*this->height()/y) && event->y() > (army->at(i)->getY()*this->height()/y - 1*this->height()/y) &&
@@ -149,8 +143,6 @@ void MainWindow::unitMove(QMouseEvent *event){
                             game->checkFusion(army->at(i));
                             army->at(i)->setMovable(false);
                             game->setActiveUnit(nullptr);
-                            std::cout<<army->at(i)->getHealth()<<std::endl;
-                            std::cout<<i<<std::endl;
                 }
             }
         }
