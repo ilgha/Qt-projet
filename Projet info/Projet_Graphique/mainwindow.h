@@ -20,7 +20,8 @@ class MainWindow : public QMainWindow
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
-    bool inMenu;
+    bool inMenu = false;
+    bool inMove = false;
 
     Ui::MainWindow *ui;
     QTimer timer;
@@ -37,6 +38,7 @@ public:
     void showMove(int i);
     void showMenu();
     void showMenu(Building b, Unit u);
+    void unitMove(QMouseEvent *event);
 
 public slots:
     void tick();

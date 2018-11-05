@@ -34,6 +34,8 @@ int Unit::getHealth() const {
 int Unit::setHealth(int newHp){
     if(health+newHp <= healthMax){
         health += newHp;
+    }else{
+        health = healthMax;
     }
     if(health<=0){
         delete this;
