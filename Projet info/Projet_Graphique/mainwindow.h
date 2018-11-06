@@ -35,7 +35,7 @@ public:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
-    void showMove(int i);
+    void showMove(Unit* unit);
     void showMenu();
     void showMenu(Building b, Unit u);
     void unitMove(QMouseEvent *event);
