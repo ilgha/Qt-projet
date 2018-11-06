@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.7.2, 2018-11-05T18:12:09. -->
+=======
+<<<<<<< HEAD
+<!-- Written by QtCreator 4.7.1, 2018-11-05T08:20:40. -->
+=======
+<<<<<<< HEAD
+<!-- Written by QtCreator 4.7.1, 2018-11-02T16:44:03. -->
+>>>>>>> d91c53cd32b219f4315fa080a7106f130b8f4209
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{3457e57c-bd98-4c4f-bd32-d4976c4094b9}</value>
+<<<<<<< HEAD
+=======
+=======
+<!-- Written by QtCreator 4.7.1, 2018-11-02T18:44:35. -->
+>>>>>>> 98bb4850689ecddaa7c697c1ad2078102c0ecfcc
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{4eeff267-bfc8-415a-92fb-28e73b542c51}</value>
+>>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
+>>>>>>> d91c53cd32b219f4315fa080a7106f130b8f4209
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
