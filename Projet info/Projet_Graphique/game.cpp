@@ -24,6 +24,7 @@ Game::Game(Player* player1, Player* player2){
 }
 
 int Game::endTurn() {
+    erase();
     if(&active == &player1){
         active = player2;
     }else{
@@ -32,6 +33,7 @@ int Game::endTurn() {
     for(unsigned int i = 0; i< army.size(); i++){
         army[i]->newTurn();
     }
+    army.push_back(new Infantery(5,5,10,1,active));
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
         endGame();
@@ -75,19 +77,24 @@ Player* Game::getActive() const{
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
-            unit->setHealth(army.at(i)->getHealth());
-            erase(army.at(i));
+            setHealth(unit, army.at(i)->getHealth());
+            unit->setDead(true);
         }
     }
 }
 
-void Game::erase(Unit* unit){
-    Unit* save = unit;
+void Game::erase(){
     for(unsigned int i = 0; i< army.size(); i++){
-        if(unit == army.at(i)){
+        if(army.at(i)->getDead()){
            army.erase(army.begin()+i);
-           save->setHealth(-10000);
         }
+    }
+}
+
+void Game::setHealth(Unit* unit, int addedHealth){
+    unit->setHealth(addedHealth);
+    if(unit->getHealth()<=0){
+        unit->setDead(true);
     }
 }
 

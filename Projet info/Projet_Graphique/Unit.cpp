@@ -2,6 +2,10 @@
 #include <string>
 using std::string;
 
+
+
+
+
 Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt,int cost, Player* team, int ID) {
     x = posX;
     y = posY;
@@ -15,8 +19,24 @@ Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, str
     this->ID = ID;
 }
 
+void Unit::setDead(bool value)
+{
+    dead = value;
+}
 
-Unit::~Unit() {
+bool Unit::getDead() const
+{
+    return dead;
+}
+
+int Unit::getHealthMax() const
+{
+    return healthMax;
+}
+
+void Unit::setHealthMax(int value)
+{
+    healthMax = value;
 }
 
 int Unit::getX() const {
@@ -32,13 +52,9 @@ int Unit::getHealth() const {
 }
 
 int Unit::setHealth(int newHp){
-    if(health+newHp <= healthMax){
-        health += newHp;
-    }else{
+    health += newHp;
+    if(health >= healthMax){
         health = healthMax;
-    }
-    if(health<=0){
-        delete this;
     }
     return health;
 }
@@ -73,10 +89,6 @@ void Unit::setMovable(bool b)
 bool Unit::isMovable()
 {
     return  movable;
-}
-
-void Unit::fusion(Unit* unit){
-
 }
 
 int Unit::getDamage(Unit * unitA, Unit * unitD) {
