@@ -15,17 +15,22 @@ Game::Game(Player* player1, Player* player2){
         }
     }
 
+<<<<<<< HEAD
     army.push_back(new Infantery(1,4,10,2,player1));
     army.push_back(new Infantery(1,5,10,2,player1));
 
 
+=======
+    army.push_back(new Infantery(1,4,5,1,player1));
+    army.push_back(new Infantery(1,5,7,1,player1));
+>>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
 
     active = player1;
 }
 
 int Game::endTurn() {
     erase();
-    if(&active == &player1){
+    if(active == player1){
         active = player2;
     }else{
         active = player1;
@@ -78,7 +83,8 @@ void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
             setHealth(unit, army.at(i)->getHealth());
-            unit->setDead(true);
+            army.at(i)->setDead(true);
+
         }
     }
 }

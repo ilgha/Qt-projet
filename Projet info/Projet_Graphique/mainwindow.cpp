@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <iostream>
 #include <typeinfo>
+#include <string>
 #include "Plain.h"
 
 
@@ -55,8 +56,13 @@ void MainWindow::paintEvent(QPaintEvent *event){
     //infantry
     for(unsigned int i = 0; i<army->size(); i++){
         //infantry move
+<<<<<<< HEAD
         if(army->at(i)->isMovable()){
             showMove(army->at(i));
+=======
+        if(army->at(i)->isMovable() && !army->at(i)->getDead()){
+            showMove(i);
+>>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
         }
     }
 
@@ -66,7 +72,11 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QRectF source(0, 0, 16, 16);
             QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/player");
             QPainter painter(this);
+
             painter.drawImage(target, image, source);
+            painter.setPen(QPen(Qt::white));
+            painter.setFont(QFont("Times", 20, QFont::Bold));
+            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
         }
 
 
@@ -84,6 +94,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     unitMove(event);
+
     update();
 }
 
@@ -91,16 +102,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     qDebug() << event->key();
     switch(event->key()){
     case Qt::Key_P: {
-       game->endTurn();
+        game->endTurn();
+        break;
     }
 
+    case Qt::Key_Space: {
+        this->close();
+        break;
+    }
     }
     update();
 }
 
 void MainWindow::unitMove(QMouseEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
-        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
+        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && army->at(i)->getTeam() == game->getActive()){
             if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
                         event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
@@ -119,7 +135,12 @@ void MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
+<<<<<<< HEAD
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
+=======
+        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && army->at(i)->getTeam() == game->getActive()){
+            //droite
+>>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
             if(army->at(i)->isMovable()){
                 int amtMove = army->at(i)->getMP();
                 int wx = width()/x;
