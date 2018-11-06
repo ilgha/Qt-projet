@@ -38,7 +38,8 @@ public:
     Building* check(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
-    void erase(Unit* unit);
+    void erase();
+    void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
 };
