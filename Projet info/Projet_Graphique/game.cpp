@@ -15,15 +15,12 @@ Game::Game(Player* player1, Player* player2){
         }
     }
 
-<<<<<<< HEAD
+
     army.push_back(new Infantery(1,4,10,2,player1));
     army.push_back(new Infantery(1,5,10,2,player1));
 
 
-=======
-    army.push_back(new Infantery(1,4,5,1,player1));
-    army.push_back(new Infantery(1,5,7,1,player1));
->>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
+
 
     active = player1;
 }

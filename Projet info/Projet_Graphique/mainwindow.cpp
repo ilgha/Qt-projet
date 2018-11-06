@@ -56,13 +56,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
     //infantry
     for(unsigned int i = 0; i<army->size(); i++){
         //infantry move
-<<<<<<< HEAD
-        if(army->at(i)->isMovable()){
-            showMove(army->at(i));
-=======
+
         if(army->at(i)->isMovable() && !army->at(i)->getDead()){
-            showMove(i);
->>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
+            showMove(army->at(i));
+
         }
     }
 
@@ -135,12 +132,9 @@ void MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
-<<<<<<< HEAD
-        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
-=======
+
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && army->at(i)->getTeam() == game->getActive()){
-            //droite
->>>>>>> f337e0d77299d9e78571cbf531c426db5dbefb0a
+
             if(army->at(i)->isMovable()){
                 int amtMove = army->at(i)->getMP();
                 int wx = width()/x;
