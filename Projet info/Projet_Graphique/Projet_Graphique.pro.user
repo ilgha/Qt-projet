@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.7.1, 2018-11-05T08:20:40. -->
-=======
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.7.1, 2018-11-02T16:44:03. -->
-<qtcreator>
- <data>
-  <variable>EnvironmentId</variable>
-  <value type="QByteArray">{3457e57c-bd98-4c4f-bd32-d4976c4094b9}</value>
-=======
-<!-- Written by QtCreator 4.7.1, 2018-11-02T18:44:35. -->
->>>>>>> 98bb4850689ecddaa7c697c1ad2078102c0ecfcc
+<!-- Written by QtCreator 4.7.1, 2018-11-06T10:10:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{4eeff267-bfc8-415a-92fb-28e73b542c51}</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -83,11 +71,7 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -141,11 +125,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Release</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Release</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -199,11 +179,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Profile</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Profile</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -260,11 +236,7 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">0</value>
-<<<<<<< HEAD
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Déploiement</value>
-=======
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Deploy</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
     </valuemap>
@@ -319,20 +291,12 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Projet_Graphique</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
-=======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Projet_Graphique.pro</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
-<<<<<<< HEAD
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug</value>
-=======
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -353,11 +317,7 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Debug</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Debug</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -411,11 +371,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Release</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Release</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -469,11 +425,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Gaspard/cours C++/github/QtProjet/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Profile</value>
-=======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MSVC2017_64bit-Profile</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -530,7 +482,7 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">0</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Déploiement</value>
+     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Deploy</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
     </valuemap>
@@ -584,13 +536,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Projet_Graphique</value>
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Projet_Graphique2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
-=======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique/Projet_Graphique.pro</value>
->>>>>>> f3a041b3e441269ad6d767892a53c5acb77cbff7
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Projet_Graphique.pro</value>
