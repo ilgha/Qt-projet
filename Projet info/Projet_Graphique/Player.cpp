@@ -1,7 +1,3 @@
-//
-// Created by Pierre Vander Eyken on 20/10/2018.
-//
-
 #include "Player.h"
 
 Player::Player(int IA, int money) {

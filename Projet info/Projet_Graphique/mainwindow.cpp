@@ -1,3 +1,4 @@
+
 #include "mainwindow.h"
 #include <QPainter>
 #include <QMouseEvent>
@@ -266,9 +267,5 @@ int MainWindow::getYIm(int ID){
     case 10:{
         return 58;
     }
-
-
-
-
     }
 }

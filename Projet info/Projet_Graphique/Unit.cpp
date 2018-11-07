@@ -1,8 +1,7 @@
 #include "unit.h"
+#include <iostream>
 #include <string>
 using std::string;
-
-
 
 
 
@@ -19,30 +18,10 @@ Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, str
     this->mp = mp;
     this->mpMax = mpMax;
     this->mt = mt;
-
     this->team = team;
     this->ID = ID;
 }
 
-void Unit::setDead(bool value)
-{
-    dead = value;
-}
-
-bool Unit::getDead() const
-{
-    return dead;
-}
-
-int Unit::getHealthMax() const
-{
-    return healthMax;
-}
-
-void Unit::setHealthMax(int value)
-{
-    healthMax = value;
-}
 
 int Unit::getX() const {
     return x;
@@ -57,9 +36,11 @@ int Unit::getHealth() const {
 }
 
 int Unit::setHealth(int newHp){
-    health += newHp;
-    if(health >= healthMax){
-        health = healthMax;
+    if(health+newHp <= healthMax){
+        health += newHp;
+    }
+    if(health<=0){
+        delete this;
     }
     return health;
 }
@@ -96,6 +77,7 @@ bool Unit::isMovable()
     return  movable;
 }
 
+
 int Unit::getDamage(Unit * unitA, Unit * unitD) {
 
     int damageChart[11][11] = {{45,120,75,65,105,10,105,1,5,60,25},
@@ -120,18 +102,30 @@ int Unit::getDamage(Unit * unitA, Unit * unitD) {
         string typeD = unitD->mt;
         if (typeD == "a"){
             int D_TR = 0;
+            int damage =  B * A_HP / 10 * (100 - D_TR * D_HP) / 100;
+            return damage;
         }
         else{
             int PosXD = unitD->x;
             int PosYD = unitD->y;
             //Comment identifier le type de terrain?
             int D_TR = 0;
-        }
-//        int damage =  B * A_HP / 10 * (100 - D_TR * D_HP) / 100;
-//        return damage;
-//    }
-//    else{
-//       cout << "L'unité ne peut pas attaquer ce genre d'unités" << endl;
+            int damage =  B * A_HP / 10 * (100 - D_TR * D_HP) / 100;
+            return damage;
+        }        
+    }
+    else{
+       //Attaque impossible entre ces unités
         return 0;
     }
+}
+
+bool Unit::getDead() const
+{
+    return dead;
+}
+
+void Unit::setDead(bool value)
+{
+    dead = value;
 }

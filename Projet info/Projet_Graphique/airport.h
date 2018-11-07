@@ -2,8 +2,7 @@
 #define AIRPORT_H
 #include "building.h"
 
-class Airport : public Building
-{
+class Airport : public Building {
 public:
     Airport(int x, int y);
 };

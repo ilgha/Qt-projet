@@ -1,3 +1,4 @@
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -47,3 +48,4 @@ public slots:
 };
 
 #endif // MAINWINDOW_H
+

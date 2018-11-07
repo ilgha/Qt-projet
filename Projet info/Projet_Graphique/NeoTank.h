@@ -1,6 +1,8 @@
 #ifndef NEOTANK_H
 #define NEOTANK_H
+
 #include "Player.h"
+
 #include "unit.h"
 class NeoTank : public Unit {
 public:

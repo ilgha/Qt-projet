@@ -51,8 +51,8 @@ SOURCES += \
     NeoTank.cpp \
     Recon.cpp \
     Tank.cpp \
-    city.cpp \
-    airport.cpp
+    Airport.cpp \
+    City.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -80,8 +80,8 @@ HEADERS += \
     NeoTank.h \
     Recon.h \
     Tank.h \
-    city.h \
-    airport.h
+    Airport.h \
+    City.h
 
 FORMS += \
         mainwindow.ui
