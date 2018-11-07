@@ -19,7 +19,12 @@ Game::Game(Player* player1, Player* player2){
     army.push_back(new Infantery(0,2,10,1,player1));
 
 
+<<<<<<< HEAD
+    army.push_back(new Infantery(1,4,10,3,player1));
+    army.push_back(new Infantery(1,5,10,3,player1));
+=======
     army.push_back(new Infantery(4,2,10,1,player2));
+>>>>>>> 76bd361e150ebbc440580d4d08e25c3647a1a549
 
     army.push_back(new Infantery(1,3,10,1,player2));
     army.push_back(new Infantery(1,4,10,1,player2));
@@ -65,13 +70,17 @@ std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
-Building* Game::check(Unit* unit){
+Building* Game::checkBuildings(Unit* unit){
     for(unsigned int i = 0; i < buildings.size(); i++){
         if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
             return &buildings[i];
         }
     }
     return nullptr;
+}
+
+Land Game::checkLand(Unit* unit){
+    return map.getTile(unit->getX(), unit->getY());
 }
 
 int Game::endGame(){
