@@ -37,7 +37,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void showMove(Land l, Unit* unit);
     void showMenu();
-    void showMenu(Building b, Unit u);
+    void showMenu(Building* b, Unit u);
     void unitMove(QMouseEvent *event);
 
 public slots:

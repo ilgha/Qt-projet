@@ -189,12 +189,15 @@ void MainWindow::showMove(Land l, Unit* unit){
     }
 }
 
-void MainWindow::showMenu(Building b, Unit u){
-    QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
-    QRectF source(0,0,41,62);
-    QImage image(":sprt/advance wars sprites/menu");
-    QPainter painter(this);
-    painter.drawImage(target, image, source);
+void MainWindow::showMenu(Building* b, Unit u){
+    if(b != nullptr){
+
+        QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
+        QRectF source(0,0,41,62);
+        QImage image(":sprt/advance wars sprites/menu");
+        QPainter painter(this);
+        painter.drawImage(target, image, source);
+    }
 
 }
 
