@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../advance wars sprites/all sprites.png</file>
+        <file>../advance wars sprites/Blue_Moon.png</file>
+        <file>../advance wars sprites/menu.png</file>
+        <file>../advance wars sprites/Orange_Star.png</file>
+        <file>../advance wars sprites/plain.gif</file>
+        <file>../advance wars sprites/player.png</file>
+        <file>../advance wars sprites/tileset projet.png</file>
+    </qresource>
+</RCC>
