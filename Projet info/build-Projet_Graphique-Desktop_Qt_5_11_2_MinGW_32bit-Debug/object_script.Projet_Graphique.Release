@@ -27,5 +27,6 @@ INPUT(
 ./release\Tank.o
 ./release\Airport.o
 ./release\City.o
+./release\qrc_sprites.o
 ./release\moc_mainwindow.o
 );
