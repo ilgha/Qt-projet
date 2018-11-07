@@ -13,9 +13,8 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->army[0] = army[0];
     this->game = game;
     ui->setupUi(this);
-    //connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+    connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
     this->army = game->getArmy();
-    //timer.start(10);
 }
 
 MainWindow::~MainWindow()
@@ -66,15 +65,24 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
             QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
-            QRectF source(0, 0, 16, 16);
-            if(army->at(i)->getTeam() == )
-            QImage image("../advance wars sprites/player");
-            QPainter painter(this);
+            QRectF source(56, 36, 16, 16);
+            if(army->at(i)->getTeam() == game->getPlayer1()){
+                QImage image("../advance wars sprites/Orange_Star");
+                QPainter painter(this);
+                painter.drawImage(target, image, source);
+                painter.setPen(QPen(Qt::white));
+                painter.setFont(QFont("Times", 20, QFont::Bold));
+                painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
+            }else {
+                QImage image("../advance wars sprites/Blue_Moon");
+                QPainter painter(this);
+                painter.drawImage(target, image, source);
+                painter.setPen(QPen(Qt::white));
+                painter.setFont(QFont("Times", 20, QFont::Bold));
+                painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
+            }
 
-            painter.drawImage(target, image, source);
-            painter.setPen(QPen(Qt::white));
-            painter.setFont(QFont("Times", 20, QFont::Bold));
-            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
+
         }
 
 

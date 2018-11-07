@@ -15,13 +15,12 @@ class Unit{
     int mpMax;
     bool movable = false;
     string mt;
-    int cost;
     Player* team;
     int ID;
     bool dead = false;
 
 public:
-    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt,int cost, Player* team, int ID);
+    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID);
 
     int getX() const ;
     int getY() const;

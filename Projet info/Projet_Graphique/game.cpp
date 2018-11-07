@@ -36,10 +36,6 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-    army.push_back(new Infantery(1,4,10,2,player1));
-    army.push_back(new Infantery(1,5,10,2,player1));
-
-
 
 
     active = player1;
@@ -63,14 +59,51 @@ int Game::endTurn() {
     return 0;
 }
 
-void Game::recruit(Unit* unit, string buy){
-    Unit recruited = Infantery(unit->getX(), unit->getY(), 10, 1, unit->getTeam());
-    /* append all units here*/
-    if(buy == "infantery" && unit->getTeam()->getMoney()>1000){
-        recruited = Infantery(unit->getX(), unit->getY(), 10, 1, unit->getTeam());
-        unit->getTeam()->addMoney(-1000);
-    }else{
-        recruited = Infantery(unit->getX(), unit->getY(), 10, 1, unit->getTeam());
+void Game::recruit(Building* building, string buy){
+    if(buy == "AntiAir" && building->getTeam()->getMoney()>8000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-8000);
+        army.push_back(recruited);
+    }else if(buy == "BCopter" && building->getTeam()->getMoney()>9000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-9000);
+        army.push_back(recruited);
+    }else if(buy == "Bomber" && building->getTeam()->getMoney()>22000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-22000);
+        army.push_back(recruited);
+    }else if(buy == "Fighter" && building->getTeam()->getMoney()>20000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-20000);
+        army.push_back(recruited);
+    }else if(buy == "infantery" && building->getTeam()->getMoney()>1000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-1000);
+        army.push_back(recruited);
+    }else if(buy == "MdTank" && building->getTeam()->getMoney()>16000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-16000);
+        army.push_back(recruited);
+    }else if(buy == "Mech" && building->getTeam()->getMoney()>3000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-3000);
+        army.push_back(recruited);
+    }else if(buy == "MegaTank" && building->getTeam()->getMoney()>28000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-28000);
+        army.push_back(recruited);
+    }else if(buy == "NeoTank" && building->getTeam()->getMoney()>22000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-22000);
+        army.push_back(recruited);
+    }else if(buy == "Recon" && building->getTeam()->getMoney()>15000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-15000);
+        army.push_back(recruited);
+    }else if(buy == "Tank" && building->getTeam()->getMoney()>7000){
+        Unit* recruited = new Infantery(building->getX(), building->getY(), 10, 1, building->getTeam());
+        recruited->getTeam()->addMoney(-7000);
+        army.push_back(recruited);
     }
 }
 

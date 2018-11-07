@@ -6,7 +6,7 @@ using std::string;
 
 
 
-Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt,int cost, Player* team, int ID) {
+Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID) {
     x = posX;
     y = posY;
     this->health = health;
@@ -14,7 +14,7 @@ Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, str
     this->mp = mp;
     this->mpMax = mpMax;
     this->mt = mt;
-    this->cost = cost;
+
     this->team = team;
     this->ID = ID;
 }

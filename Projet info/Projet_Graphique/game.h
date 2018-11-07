@@ -32,7 +32,7 @@ class Game {
 public:
     Game(Player* player1, Player* player2);
     int endTurn();
-    void recruit(Unit* unit, string buy);
+    void recruit(Building* building, string buy);
     int endGame();
     std::vector<Unit*> *getArmy();
     Building* check(Unit* unit);
