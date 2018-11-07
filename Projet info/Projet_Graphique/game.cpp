@@ -1,6 +1,26 @@
 #include "game.h"
 #include <iostream>
 
+Player *Game::getPlayer2() const
+{
+    return player2;
+}
+
+void Game::setPlayer2(Player *value)
+{
+    player2 = value;
+}
+
+Player *Game::getPlayer1() const
+{
+    return player1;
+}
+
+void Game::setPlayer1(Player *value)
+{
+    player1 = value;
+}
+
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;

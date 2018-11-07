@@ -42,6 +42,10 @@ public:
     void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
+    Player *getPlayer2() const;
+    void setPlayer2(Player *value);
+    Player *getPlayer1() const;
+    void setPlayer1(Player *value);
 };
 
 #endif //GAME_H
