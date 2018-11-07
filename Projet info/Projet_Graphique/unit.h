@@ -41,6 +41,7 @@ public:
     void setHealthMax(int value);
     void setDead(bool value);
     bool getDead() const;
+    int getID() const;
 };
 
 #endif //PROJECT_UNIT_H

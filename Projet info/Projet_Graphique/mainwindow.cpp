@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->army[0] = army[0];
     this->game = game;
     ui->setupUi(this);
-    connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+    //connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
     this->army = game->getArmy();
 }
 
@@ -65,7 +65,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
             QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
-            QRectF source(56, 36, 16, 16);
+            QRectF source(getXIm(army->at(i)->getID()), getYIm(army->at(i)->getID()), 16, 16);
             if(army->at(i)->getTeam() == game->getPlayer1()){
                 QImage image("../advance wars sprites/Orange_Star");
                 QPainter painter(this);
@@ -191,4 +191,84 @@ void MainWindow::showMenu(Building b, Unit u){
 
 void MainWindow::tick(){
     update();
+}
+
+int MainWindow::getXIm(int ID){
+    switch(ID){
+    case 0:{
+        return 21;
+    }
+    case 1:{
+        return 21;
+    }
+    case 2:{
+        return 40;
+    }
+    case 3:{
+        return 59;
+    }
+    case 4:{
+        return 55;
+    }
+    case 5:{
+        return 40;
+    }
+    case 6:{
+        return 36;
+    }
+    case 7:{
+        return 40;
+    }
+    case 8:{
+        return 3;
+    }
+    case 9:{
+        return 20;
+    }
+    case 10:{
+        return 76;
+    }
+    }
+}
+
+int MainWindow::getYIm(int ID){
+    switch(ID){
+    case 0:{
+        return 73;
+    }
+    case 1:{
+        return 113;
+    }
+    case 2:{
+        return 113;
+    }
+    case 3:{
+        return 113;
+    }
+    case 4:{
+        return 36;
+    }
+    case 5:{
+        return 74;
+    }
+    case 6:{
+        return 35;
+    }
+    case 7:{
+        return 74;
+    }
+    case 8:{
+        return 73;
+    }
+    case 9:{
+        return 37;
+    }
+    case 10:{
+        return 58;
+    }
+
+
+
+
+    }
 }

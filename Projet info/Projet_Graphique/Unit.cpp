@@ -6,6 +6,11 @@ using std::string;
 
 
 
+int Unit::getID() const
+{
+    return ID;
+}
+
 Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID) {
     x = posX;
     y = posY;

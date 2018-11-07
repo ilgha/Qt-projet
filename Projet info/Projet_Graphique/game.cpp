@@ -52,6 +52,16 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     army.push_back(new Infantery(5,5,10,1,active));
+    army.push_back(new AntiAir(5,5,10,1,active));
+    army.push_back(new BCopter(5,5,10,1,active));
+    army.push_back(new Bomber(5,5,10,1,active));
+    army.push_back(new Fighter(5,5,10,1,active));
+    army.push_back(new MdTank(5,5,10,1,active));
+    army.push_back(new Mech(5,5,10,1,active));
+    army.push_back(new MegaTank(5,5,10,1,active));
+    army.push_back(new NeoTank(5,5,10,1,active));
+    army.push_back(new Recon(5,5,10,1,active));
+
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
         endGame();
