@@ -3,7 +3,7 @@
 using std::string;
 
 AntiAir::AntiAir(int x,int y, int health,int mp, Player* team ):
-    Unit(x, y, health, 10,  mp,  6, "tr", 8000, team, 0){
+    Unit(x, y, health, 10,  mp,  6, "tr", team, 0){
 }
 
 

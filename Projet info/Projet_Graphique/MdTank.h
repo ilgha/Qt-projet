@@ -1,6 +1,6 @@
 #ifndef MDTANK_H
 #define MDTANK_H
-#include "Player.h"
+#include "player.h"
 #include "unit.h"
 class MdTank : public Unit {
 public:

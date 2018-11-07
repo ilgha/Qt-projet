@@ -39,7 +39,7 @@ public:
     Land checkLand(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
-    void erase();
+    void erase(Unit* unit);
     void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
@@ -50,3 +50,4 @@ public:
 };
 
 #endif //GAME_H
+

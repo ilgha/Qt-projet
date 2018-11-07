@@ -1,26 +1,6 @@
 #include "game.h"
 #include <iostream>
 
-Player *Game::getPlayer2() const
-{
-    return player2;
-}
-
-void Game::setPlayer2(Player *value)
-{
-    player2 = value;
-}
-
-Player *Game::getPlayer1() const
-{
-    return player1;
-}
-
-void Game::setPlayer1(Player *value)
-{
-    player1 = value;
-}
-
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
@@ -34,11 +14,22 @@ Game::Game(Player* player1, Player* player2){
             }
         }
     }
+    army.push_back(new Infantery(0,2,10,1,player1));
 
 
+<<<<<<< HEAD
     army.push_back(new Infantery(1,4,10,3,player1));
     army.push_back(new Infantery(1,5,10,3,player1));
+=======
+    army.push_back(new Infantery(4,2,10,1,player2));
+>>>>>>> 76bd361e150ebbc440580d4d08e25c3647a1a549
 
+    army.push_back(new Infantery(1,3,10,1,player2));
+    army.push_back(new Infantery(1,4,10,1,player2));
+    army.push_back(new Infantery(1,5,10,1,player2));
+    army.push_back(new Infantery(2,6,10,1,player2));
+    army.push_back(new Infantery(1,7,10,1,player2));
+    army.push_back(new Infantery(1,8,10,1,player2));
 
 
 
@@ -46,8 +37,7 @@ Game::Game(Player* player1, Player* player2){
 }
 
 int Game::endTurn() {
-    erase();
-    if(active == player1){
+    if(&active == &player1){
         active = player2;
     }else{
         active = player1;
@@ -55,7 +45,6 @@ int Game::endTurn() {
     for(unsigned int i = 0; i< army.size(); i++){
         army[i]->newTurn();
     }
-    army.push_back(new Infantery(5,5,10,1,active));
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
         endGame();
@@ -103,25 +92,19 @@ Player* Game::getActive() const{
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
-            setHealth(unit, army.at(i)->getHealth());
-            army.at(i)->setDead(true);
-
+            unit->setHealth(army.at(i)->getHealth());
+            army.at(i)->setHealth(-1000);
         }
     }
 }
 
-void Game::erase(){
+void Game::erase(Unit* unit){
+    Unit* save = unit;
     for(unsigned int i = 0; i< army.size(); i++){
-        if(army.at(i)->getDead()){
+        if(unit == army.at(i)){
            army.erase(army.begin()+i);
+           save->setHealth(-10000);
         }
-    }
-}
-
-void Game::setHealth(Unit* unit, int addedHealth){
-    unit->setHealth(addedHealth);
-    if(unit->getHealth()<=0){
-        unit->setDead(true);
     }
 }
 

@@ -1,6 +1,6 @@
 #ifndef MEGATANK_H
 #define MEGATANK_H
-#include "Player.h"
+#include "player.h"
 #include "unit.h"
 
 class MegaTank : public Unit {
