@@ -58,7 +58,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         //infantry move
 
         if(army->at(i)->isMovable() && !army->at(i)->getDead()){
-            showMove(army->at(i));
+            showMove(game->checkLand(army->at(i)), army->at(i));
 
         }
     }
@@ -66,6 +66,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
             QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
+
             QRectF source(56, 36, 16, 16);
             QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/Orange_Star");
             QPainter painter(this);
@@ -83,8 +84,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
-        if(game->check(army->at(i)) != nullptr){
-            showMenu(*game->check(army->at(i)),*army->at(i));
+        if(game->checkBuildings(army->at(i)) != nullptr){
+            showMenu(*game->checkBuildings(army->at(i)),*army->at(i));
         }
     }
 }
@@ -156,8 +157,9 @@ void MainWindow::unitMove(QMouseEvent *event){
     }
 }
 
-void MainWindow::showMove(Unit* unit){
+void MainWindow::showMove(Land l, Unit* unit){
     int amtMove = unit->getMP();
+    int cost = l.getMoved(unit->getMT());
     QPainter painter(this);
     for(int i = -amtMove; i<=amtMove; i++){
         for(int j = -amtMove; j<=amtMove; j++){
@@ -167,7 +169,6 @@ void MainWindow::showMove(Unit* unit){
 
             }
         }
-
     }
 }
 

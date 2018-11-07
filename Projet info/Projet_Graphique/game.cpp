@@ -1,6 +1,26 @@
 #include "game.h"
 #include <iostream>
 
+Player *Game::getPlayer2() const
+{
+    return player2;
+}
+
+void Game::setPlayer2(Player *value)
+{
+    player2 = value;
+}
+
+Player *Game::getPlayer1() const
+{
+    return player1;
+}
+
+void Game::setPlayer1(Player *value)
+{
+    player1 = value;
+}
+
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
@@ -16,8 +36,8 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-    army.push_back(new Infantery(1,4,10,2,player1));
-    army.push_back(new Infantery(1,5,10,2,player1));
+    army.push_back(new Infantery(1,4,10,3,player1));
+    army.push_back(new Infantery(1,5,10,3,player1));
 
 
 
@@ -59,13 +79,17 @@ std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
-Building* Game::check(Unit* unit){
+Building* Game::checkBuildings(Unit* unit){
     for(unsigned int i = 0; i < buildings.size(); i++){
         if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
             return &buildings[i];
         }
     }
     return nullptr;
+}
+
+Land Game::checkLand(Unit* unit){
+    return map.getTile(unit->getX(), unit->getY());
 }
 
 int Game::endGame(){

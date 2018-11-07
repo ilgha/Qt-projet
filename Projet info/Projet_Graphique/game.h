@@ -35,13 +35,18 @@ public:
     void recruit(Unit* unit, string buy);
     int endGame();
     std::vector<Unit*> *getArmy();
-    Building* check(Unit* unit);
+    Building* checkBuildings(Unit* unit);
+    Land checkLand(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
     void erase();
     void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
+    Player *getPlayer2() const;
+    void setPlayer2(Player *value);
+    Player *getPlayer1() const;
+    void setPlayer1(Player *value);
 };
 
 #endif //GAME_H
