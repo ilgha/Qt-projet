@@ -12,8 +12,6 @@ Land::Land(int defence, int f, int b, int tr, int ti, int a){
     this->a = a;
 }
 
-Land::~Land(){
-}
 
 int Land::getMoved(std::string mt) const {
 if (mt == "f") {

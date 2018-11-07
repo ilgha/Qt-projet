@@ -2,7 +2,7 @@
 #define BUILDING_H
 
 #include "unit.h"
-#include "player.h"
+#include "Player.h"
 #include "Land.h"
 
 class Building : public Land{

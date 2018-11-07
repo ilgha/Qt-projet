@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-INPUT(
-./debug\main.o
-./debug\mainwindow.o
-./debug\infantery.o
-./debug\Player.o
-./debug\Unit.o
-./debug\game.o
-./debug\Land.o
-./debug\Plain.o
-./debug\building.o
-./debug\factory.o
-./debug\map.o
-./debug\bridge.o
-./debug\mountain.o
-./debug\river.o
-./debug\road.o
-./debug\woods.o
-./debug\moc_mainwindow.o
-);
-=======
 INPUT(
 ./debug\main.o
 ./debug\mainwindow.o
@@ -46,8 +25,7 @@ INPUT(
 ./debug\NeoTank.o
 ./debug\Recon.o
 ./debug\Tank.o
-./debug\city.o
-./debug\airport.o
+./debug\Airport.o
+./debug\City.o
 ./debug\moc_mainwindow.o
 );
->>>>>>> d213571adbf17e6bc20bc589b13de732c6dfed5e

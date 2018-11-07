@@ -9,6 +9,7 @@
 #include "Plain.h"
 
 
+
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
     this->army[0] = army[0];
     this->game = game;
@@ -53,17 +54,15 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
     //infantry
-<<<<<<< HEAD
-    for(int i = 0; i<army->size(); i++){
+
+    for(unsigned int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
         QImage image("../advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
-=======
-    for(unsigned int i = 0; i<army->size(); i++){
->>>>>>> d213571adbf17e6bc20bc589b13de732c6dfed5e
+
         //infantry move
 
         if(army->at(i)->isMovable() && !army->at(i)->getDead()){
