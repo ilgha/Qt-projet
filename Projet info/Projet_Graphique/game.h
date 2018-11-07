@@ -1,8 +1,19 @@
+
 #ifndef GAME_H
 #define GAME_H
 #include "Player.h"
 #include "unit.h"
 #include "infantery.h"
+#include "AntiAir.h"
+#include "BCopter.h"
+#include "Bomber.h"
+#include "Fighter.h"
+#include "MdTank.h"
+#include "Mech.h"
+#include "MegaTank.h"
+#include "NeoTank.h"
+#include "Recon.h"
+#include "Tank.h"
 #include "Land.h"
 #include "Plain.h"
 #include "building.h"
@@ -32,23 +43,21 @@ class Game {
 public:
     Game(Player* player1, Player* player2);
     int endTurn();
-    void recruit(Unit* unit, string buy);
+    void recruit(Building* building, string buy);
     int endGame();
     std::vector<Unit*> *getArmy();
     Building* checkBuildings(Unit* unit);
-    Land checkLand(Unit* unit);
+    Land* checkLand(Unit* units);
     Player* getActive() const;
     void checkFusion(Unit* unit);
-    void erase(Unit* unit);
+    void erase();
     void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
     Player *getPlayer2() const;
     void setPlayer2(Player *value);
-
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
 };
 
 #endif //GAME_H
-

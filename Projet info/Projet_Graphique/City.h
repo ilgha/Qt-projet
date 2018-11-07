@@ -1,7 +1,7 @@
 #ifndef CITY_H
 #define CITY_H
 
-#include "player.h"
+#include "Player.h"
 #include "building.h"
 
 class City : public Building{

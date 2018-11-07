@@ -1,6 +1,7 @@
 #ifndef INFANTERY_H
 #define INFANTERY_H
-#include "player.h"
+
+#include "Player.h"
 #include "unit.h"
 class Infantery : public Unit{
 public:

@@ -1,4 +1,3 @@
-
 #include "Player.h"
 
 Player::Player(int IA, int money) {

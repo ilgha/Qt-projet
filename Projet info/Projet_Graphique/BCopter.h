@@ -1,6 +1,8 @@
 #ifndef BCOPTER_H
 #define BCOPTER_H
-#include "player.h"
+
+#include "Player.h"
+
 #include "unit.h"
 class BCopter : public Unit {
 public:

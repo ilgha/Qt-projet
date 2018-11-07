@@ -27,5 +27,6 @@ INPUT(
 ./debug\Tank.o
 ./debug\Airport.o
 ./debug\City.o
+./debug\qrc_sprites.o
 ./debug\moc_mainwindow.o
 );
