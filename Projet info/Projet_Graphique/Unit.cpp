@@ -5,8 +5,7 @@ using std::string;
 
 
 
-
-Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt,int cost, Player* team,int ID) {
+Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt,int cost, Player* team, int ID) {
     x = posX;
     y = posY;
     this->health = health;

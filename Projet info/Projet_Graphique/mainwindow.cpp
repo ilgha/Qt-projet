@@ -25,6 +25,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
+
     //map
 
     int t[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
@@ -45,7 +46,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(unsigned int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../Projet info/advance wars sprites/tileset projet");
+            QImage image("../advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
@@ -55,7 +56,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(int i = 0; i<army->size(); i++){
         QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
         QRectF source(0, 0, 16, 16);
-        QImage image("../Projet info/advance wars sprites/player");
+        QImage image("../advance wars sprites/player");
         QPainter painter(this);
         painter.drawImage(target, image, source);
 
@@ -64,22 +65,18 @@ void MainWindow::paintEvent(QPaintEvent *event){
         if(army->at(i)->isMovable()){
             showMove(i);
         }
-
-        // infantry action
-        if(game->check(army->at(i)) != nullptr){
-            if(game->check(army->at(i))->getTeam() != army->at(i)->getTeam()){
-                std::cout << "pas de la meme team" << std::endl;
-                showMenu(*game->check(army->at(i)),*army->at(i));
-            }
-        }
     }
 
 
+    // infantry action
+    for(int i = 0; i<army->size(); i++){
+        if(game->check(army->at(i)) != nullptr){
+           showMenu(*game->check(army->at(i)),*army->at(i));
+        }
+      }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    QPainter painter(this);
-
 
     for(int i = 0; i<army->size(); i++){
         if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
@@ -114,7 +111,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
             if(event->x() < (army->at(i)->getX()*this->width()/x) && event->x() > (army->at(i)->getX()*this->width()/x - 1*this->width()/x) &&
                     event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                         army->at(i)->setX(army->at(i)->getX()-1);
-                        game->check(army->at(i));
                         army->at(i)->setMovable(false);
                         game->setActiveUnit(nullptr);
             }
@@ -125,7 +121,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
             if(event->y() > (army->at(i)->getY()*this->height()/y+ this->height()/y) && event->y() < (army->at(i)->getY()*this->height()/y + 2*this->height()/y) &&
                     event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x)){
                         army->at(i)->setY(army->at(i)->getY()+1);
-                        game->check(army->at(i));
                         army->at(i)->setMovable(false);
                         game->setActiveUnit(nullptr);
             }
@@ -136,7 +131,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
             if(event->y() < (army->at(i)->getY()*this->height()/y) && event->y() > (army->at(i)->getY()*this->height()/y - 1*this->height()/y) &&
                     event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x)){
                         army->at(i)->setY(army->at(i)->getY()-1);
-                        game->check(army->at(i));
                         army->at(i)->setMovable(false);
                         game->setActiveUnit(nullptr);
             }
@@ -148,6 +142,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     qDebug() << event->key();
+    for(int i = 0; i<army->size(); i++){
+        if(game->check(army->at(i)) != nullptr){
+
+        }
+      }
 }
 
 void MainWindow::showMove(int i)
@@ -157,13 +156,13 @@ void MainWindow::showMove(int i)
     painter.fillRect(army->at(i)->getX()*this->width()/x-this->width()/x, army->at(i)->getY()*this->height()/y, this->width()/x, this->height()/y, Qt::red);
     painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y+this->height()/y, this->width()/x, this->height()/y, Qt::red);
     painter.fillRect(army->at(i)->getX()*this->width()/x, army->at(i)->getY()*this->height()/y-this->height()/y, this->width()/x, this->height()/y, Qt::red);
+
 }
 
 void MainWindow::showMenu(Building b, Unit u){
-
-    QRectF target(11/18*this->width(), 1/12*this->height(), 1/3*this->width(),1/3*this->height());
-    QRectF source(865, 1446, 42, 63);
-    QImage image("../Projet info/advance wars sprites/all sprites");
+    QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
+    QRectF source(0,0,41,62);
+    QImage image("../advance wars sprites/menu");
     QPainter painter(this);
     painter.drawImage(target, image, source);
 

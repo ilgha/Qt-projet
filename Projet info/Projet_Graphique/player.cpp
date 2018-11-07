@@ -2,7 +2,7 @@
 // Created by Pierre Vander Eyken on 20/10/2018.
 //
 
-#include "player.h"
+#include "Player.h"
 
 Player::Player(int IA, int money) {
     this->IA = IA;
