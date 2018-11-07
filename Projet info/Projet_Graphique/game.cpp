@@ -1,6 +1,8 @@
 #include "game.h"
 #include <iostream>
 
+
+
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
     this->player2 = player2;
@@ -105,4 +107,13 @@ Unit* Game::getActiveUnit() const{
 
 void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
+}
+Player *Game::getPlayer1() const
+{
+    return player1;
+}
+
+void Game::setPlayer1(Player *value)
+{
+    player1 = value;
 }

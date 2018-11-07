@@ -38,8 +38,8 @@ public:
     int getDamage(Unit * unitA, Unit * unitD);
     int getHealthMax() const;
     void setHealthMax(int value);
-    void setDead(bool value);
     bool getDead() const;
+    void setDead(bool value);
 };
 
 #endif //PROJECT_UNIT_H

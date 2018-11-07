@@ -114,3 +114,13 @@ int Unit::getDamage(Unit * unitA, Unit * unitD) {
         return 0;
     }
 }
+
+bool Unit::getDead() const
+{
+    return dead;
+}
+
+void Unit::setDead(bool value)
+{
+    dead = value;
+}
