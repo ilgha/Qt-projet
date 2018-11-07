@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/sprt">
         <file>../advance wars sprites/all sprites.png</file>
         <file>../advance wars sprites/Blue_Moon.png</file>
         <file>../advance wars sprites/menu.png</file>
