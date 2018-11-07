@@ -66,8 +66,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
             QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
-            QRectF source(0, 0, 16, 16);
-            QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/player");
+            QRectF source(56, 36, 16, 16);
+            QImage image("C:/Users/Gaspard/Desktop/github/Qt-projet/Projet info/advance wars sprites/Orange_Star");
             QPainter painter(this);
 
             painter.drawImage(target, image, source);
