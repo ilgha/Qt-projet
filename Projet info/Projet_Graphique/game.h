@@ -48,6 +48,7 @@ public:
     std::vector<Unit*> *getArmy();
     Building* checkBuildings(Unit* unit);
     Land* checkLand(Unit* units);
+    bool ennemyNear(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
     void erase();

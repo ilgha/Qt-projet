@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include <cmath>
 
 Player *Game::getPlayer2() const
 {
@@ -52,15 +53,15 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     army.push_back(new Infantery(5,5,10,1,active));
-    army.push_back(new AntiAir(5,5,10,1,active));
-    army.push_back(new BCopter(5,5,10,1,active));
-    army.push_back(new Bomber(5,5,10,1,active));
-    army.push_back(new Fighter(5,5,10,1,active));
-    army.push_back(new MdTank(5,5,10,1,active));
-    army.push_back(new Mech(5,5,10,1,active));
-    army.push_back(new MegaTank(5,5,10,1,active));
-    army.push_back(new NeoTank(5,5,10,1,active));
-    army.push_back(new Recon(5,5,10,1,active));
+    army.push_back(new AntiAir(6,5,10,1,active));
+    army.push_back(new BCopter(7,5,10,1,active));
+    army.push_back(new Bomber(8,5,10,1,active));
+    army.push_back(new Fighter(9,5,10,1,active));
+    army.push_back(new MdTank(10,5,10,1,active));
+    army.push_back(new Mech(5,6,10,1,active));
+    army.push_back(new MegaTank(7,5,10,1,active));
+    army.push_back(new NeoTank(8,5,10,1,active));
+    army.push_back(new Recon(2,9,10,1,active));
 
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
@@ -133,6 +134,13 @@ Building* Game::checkBuildings(Unit* unit){
 
 Land* Game::checkLand(Unit* u){
     return nullptr;
+}
+
+bool Game::ennemyNear(Unit *unit)
+{
+    for(unsigned int i = 0; i < army.size(); i++){
+        return (sqrt(pow(unit->getX() - army.at(i)->getX(), 2) + pow(unit->getY() - army.at(i)->getY(), 2) == 1) && army.at(i)->getTeam() != active);
+    }
 }
 
 int Game::endGame(){
