@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Player.h"
+#include "map.h"
 
 using std::string;
 
@@ -18,6 +19,7 @@ class Unit{
     Player* team;
     int ID;
     bool dead = false;
+
 
 
 public:
@@ -36,8 +38,6 @@ public:
     void setMovable(bool b);
     bool isMovable();
     int getDamage(Unit * unitA, Unit * unitD);
-
-    //int damage(unit1, unit2);
     int getHealthMax() const;
     void setHealthMax(int value);
     void setDead(bool value);

@@ -1,7 +1,7 @@
 #ifndef TANK_H
 #define TANK_H
 
-#include "Player.h"
+#include "player.h"
 #include "unit.h"
 
 class Tank : public Unit {

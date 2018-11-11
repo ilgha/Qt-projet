@@ -94,15 +94,13 @@ int Unit::getDamage(Unit * unitA, Unit * unitD) {
 
     int IDA = unitA->ID;
     int IDD = unitD->ID;
-
-    if (damageChart[IDA][IDD] >0 ){
-        int B = damageChart[IDA][IDD];
+    int B = damageChart[IDA][IDD];
+    if (B >0 ){
         int A_HP = unitA->health;
         int D_HP = unitD->health;
         string typeD = unitD->mt;
         if (typeD == "a"){
-            int D_TR = 0;
-            int damage =  B * A_HP / 10 * (100 - D_TR * D_HP) / 100;
+            int damage =  B * A_HP / 10 ;
             return damage;
         }
         else{
@@ -115,7 +113,7 @@ int Unit::getDamage(Unit * unitA, Unit * unitD) {
         }        
     }
     else{
-       //Attaque impossible entre ces unités
+       std::cout << "Attaque impossible entre ces unités" << std::endl;
         return 0;
     }
 }
