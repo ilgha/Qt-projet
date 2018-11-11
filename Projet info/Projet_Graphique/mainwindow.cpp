@@ -77,14 +77,14 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
             QRectF source(56, 36, 16, 16);
             if(army->at(i)->getTeam() == game->getPlayer1()){
-                QImage image(":sprt/advance wars sprites/Orange_Star");
+                QImage image(":/sprt/advance wars sprites/Orange_Star");
                 QPainter painter(this);
                 painter.drawImage(target, image, source);
                 painter.setPen(QPen(Qt::white));
                 painter.setFont(QFont("Times", 20, QFont::Bold));
                 painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
             }else {
-                QImage image(":sprt/advance wars sprites/Blue_Moon");
+                QImage image(":/sprt/advance wars sprites/Blue_Moon");
                 QPainter painter(this);
                 painter.drawImage(target, image, source);
                 painter.setPen(QPen(Qt::white));
