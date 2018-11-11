@@ -35,13 +35,16 @@ public:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
-    void showMove(Land l, Unit* unit);
-    void showMenu();
-    void showMenu(Building b, Unit u);
+    void showMove(Unit* unit);
+    void showMenu(Building* b, Unit* u);
     void unitMove(QMouseEvent *event);
+    int getXIm(int ID);
+    int getYIm(int ID);
 
 public slots:
     void tick();
 };
 
 #endif // MAINWINDOW_H
+
+

@@ -1,6 +1,8 @@
 #ifndef FIGHTER_H
 #define FIGHTER_H
-#include "player.h"
+
+#include "Player.h"
+
 #include "unit.h"
 
 class Fighter : public Unit{

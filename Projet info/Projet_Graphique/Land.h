@@ -9,6 +9,7 @@ class Land
 public:
     Land(int defence, int f, int b, int tr, int ti, int a);
 
+
     int getMoved(std::string mt) const ;
     int getDef()const ;
 };

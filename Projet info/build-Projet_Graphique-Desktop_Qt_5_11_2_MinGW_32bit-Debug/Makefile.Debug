@@ -72,7 +72,8 @@ SOURCES       = ..\Projet_Graphique\main.cpp \
 		..\Projet_Graphique\Recon.cpp \
 		..\Projet_Graphique\Tank.cpp \
 		..\Projet_Graphique\Airport.cpp \
-		..\Projet_Graphique\City.cpp debug\moc_mainwindow.cpp
+		..\Projet_Graphique\City.cpp debug\qrc_sprites.cpp \
+		debug\moc_mainwindow.cpp
 OBJECTS       = debug/main.o \
 		debug/mainwindow.o \
 		debug/infantery.o \
@@ -101,6 +102,7 @@ OBJECTS       = debug/main.o \
 		debug/Tank.o \
 		debug/Airport.o \
 		debug/City.o \
+		debug/qrc_sprites.o \
 		debug/moc_mainwindow.o
 
 DIST          = tileset \
@@ -177,10 +179,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Projet_Graphique.zip $(SOURCES) $(DIST) ..\Projet_Graphique\Projet_Graphique.pro C:\Qt\5.11.2\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.11.2\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\windows-vulkan.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\g++-win32.conf C:\Qt\5.11.2\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.11.2\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.11.2\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\default_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qml_debug.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\lex.prf ..\Projet_Graphique\Projet_Graphique.pro C:\Qt\5.11.2\mingw53_32\lib\qtmaind.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Cored.prl    C:\Qt\5.11.2\mingw53_32\mkspecs\features\data\dummy.cpp ..\Projet_Graphique\mainwindow.h ..\Projet_Graphique\infantery.h ..\Projet_Graphique\Player.h ..\Projet_Graphique\game.h ..\Projet_Graphique\unit.h ..\Projet_Graphique\Land.h ..\Projet_Graphique\Plain.h ..\Projet_Graphique\building.h ..\Projet_Graphique\factory.h ..\Projet_Graphique\map.h ..\Projet_Graphique\bridge.h ..\Projet_Graphique\mountain.h ..\Projet_Graphique\river.h ..\Projet_Graphique\road.h ..\Projet_Graphique\woods.h ..\Projet_Graphique\AntiAir.h ..\Projet_Graphique\BCopter.h ..\Projet_Graphique\Bomber.h ..\Projet_Graphique\Fighter.h ..\Projet_Graphique\MdTank.h ..\Projet_Graphique\Mech.h ..\Projet_Graphique\MegaTank.h ..\Projet_Graphique\NeoTank.h ..\Projet_Graphique\Recon.h ..\Projet_Graphique\Tank.h ..\Projet_Graphique\Airport.h ..\Projet_Graphique\City.h  ..\Projet_Graphique\main.cpp ..\Projet_Graphique\mainwindow.cpp ..\Projet_Graphique\infantery.cpp ..\Projet_Graphique\Player.cpp ..\Projet_Graphique\Unit.cpp ..\Projet_Graphique\game.cpp ..\Projet_Graphique\Land.cpp ..\Projet_Graphique\Plain.cpp ..\Projet_Graphique\building.cpp ..\Projet_Graphique\factory.cpp ..\Projet_Graphique\map.cpp ..\Projet_Graphique\bridge.cpp ..\Projet_Graphique\mountain.cpp ..\Projet_Graphique\river.cpp ..\Projet_Graphique\road.cpp ..\Projet_Graphique\woods.cpp ..\Projet_Graphique\AntiAir.cpp ..\Projet_Graphique\BCopter.cpp ..\Projet_Graphique\Bomber.cpp ..\Projet_Graphique\Fighter.cpp ..\Projet_Graphique\MdTank.cpp ..\Projet_Graphique\Mech.cpp ..\Projet_Graphique\MegaTank.cpp ..\Projet_Graphique\NeoTank.cpp ..\Projet_Graphique\Recon.cpp ..\Projet_Graphique\Tank.cpp ..\Projet_Graphique\Airport.cpp ..\Projet_Graphique\City.cpp ..\Projet_Graphique\mainwindow.ui    
+	$(ZIP) Projet_Graphique.zip $(SOURCES) $(DIST) ..\Projet_Graphique\Projet_Graphique.pro C:\Qt\5.11.2\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.11.2\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\windows-vulkan.conf C:\Qt\5.11.2\mingw53_32\mkspecs\common\g++-win32.conf C:\Qt\5.11.2\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.11.2\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.11.2\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.11.2\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\default_pre.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qml_debug.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.11.2\mingw53_32\mkspecs\features\lex.prf ..\Projet_Graphique\Projet_Graphique.pro ..\Projet_Graphique\sprites.qrc C:\Qt\5.11.2\mingw53_32\lib\qtmaind.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.11.2\mingw53_32\lib\Qt5Cored.prl   ..\Projet_Graphique\sprites.qrc C:\Qt\5.11.2\mingw53_32\mkspecs\features\data\dummy.cpp ..\Projet_Graphique\mainwindow.h ..\Projet_Graphique\infantery.h ..\Projet_Graphique\Player.h ..\Projet_Graphique\game.h ..\Projet_Graphique\unit.h ..\Projet_Graphique\Land.h ..\Projet_Graphique\Plain.h ..\Projet_Graphique\building.h ..\Projet_Graphique\factory.h ..\Projet_Graphique\map.h ..\Projet_Graphique\bridge.h ..\Projet_Graphique\mountain.h ..\Projet_Graphique\river.h ..\Projet_Graphique\road.h ..\Projet_Graphique\woods.h ..\Projet_Graphique\AntiAir.h ..\Projet_Graphique\BCopter.h ..\Projet_Graphique\Bomber.h ..\Projet_Graphique\Fighter.h ..\Projet_Graphique\MdTank.h ..\Projet_Graphique\Mech.h ..\Projet_Graphique\MegaTank.h ..\Projet_Graphique\NeoTank.h ..\Projet_Graphique\Recon.h ..\Projet_Graphique\Tank.h ..\Projet_Graphique\Airport.h ..\Projet_Graphique\City.h  ..\Projet_Graphique\main.cpp ..\Projet_Graphique\mainwindow.cpp ..\Projet_Graphique\infantery.cpp ..\Projet_Graphique\Player.cpp ..\Projet_Graphique\Unit.cpp ..\Projet_Graphique\game.cpp ..\Projet_Graphique\Land.cpp ..\Projet_Graphique\Plain.cpp ..\Projet_Graphique\building.cpp ..\Projet_Graphique\factory.cpp ..\Projet_Graphique\map.cpp ..\Projet_Graphique\bridge.cpp ..\Projet_Graphique\mountain.cpp ..\Projet_Graphique\river.cpp ..\Projet_Graphique\road.cpp ..\Projet_Graphique\woods.cpp ..\Projet_Graphique\AntiAir.cpp ..\Projet_Graphique\BCopter.cpp ..\Projet_Graphique\Bomber.cpp ..\Projet_Graphique\Fighter.cpp ..\Projet_Graphique\MdTank.cpp ..\Projet_Graphique\Mech.cpp ..\Projet_Graphique\MegaTank.cpp ..\Projet_Graphique\NeoTank.cpp ..\Projet_Graphique\Recon.cpp ..\Projet_Graphique\Tank.cpp ..\Projet_Graphique\Airport.cpp ..\Projet_Graphique\City.cpp ..\Projet_Graphique\mainwindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\infantery.o debug\Player.o debug\Unit.o debug\game.o debug\Land.o debug\Plain.o debug\building.o debug\factory.o debug\map.o debug\bridge.o debug\mountain.o debug\river.o debug\road.o debug\woods.o debug\AntiAir.o debug\BCopter.o debug\Bomber.o debug\Fighter.o debug\MdTank.o debug\Mech.o debug\MegaTank.o debug\NeoTank.o debug\Recon.o debug\Tank.o debug\Airport.o debug\City.o debug\moc_mainwindow.o
+	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\infantery.o debug\Player.o debug\Unit.o debug\game.o debug\Land.o debug\Plain.o debug\building.o debug\factory.o debug\map.o debug\bridge.o debug\mountain.o debug\river.o debug\road.o debug\woods.o debug\AntiAir.o debug\BCopter.o debug\Bomber.o debug\Fighter.o debug\MdTank.o debug\Mech.o debug\MegaTank.o debug\NeoTank.o debug\Recon.o debug\Tank.o debug\Airport.o debug\City.o debug\qrc_sprites.o debug\moc_mainwindow.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -197,8 +199,13 @@ benchmark: first
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all:
+compiler_rcc_make_all: debug/qrc_sprites.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) debug\qrc_sprites.cpp
+debug/qrc_sprites.cpp: ../Projet_Graphique/sprites.qrc \
+		C:/Qt/5.11.2/mingw53_32/bin/rcc.exe
+	C:\Qt\5.11.2\mingw53_32\bin\rcc.exe -name sprites ..\Projet_Graphique\sprites.qrc -o debug\qrc_sprites.cpp
+
 compiler_moc_predefs_make_all: debug/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) debug\moc_predefs.h
@@ -208,7 +215,7 @@ debug/moc_predefs.h: C:/Qt/5.11.2/mingw53_32/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: debug/moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) debug\moc_mainwindow.cpp
-debug/moc_mainwindow.cpp: ../Projet_Graphique/player.h \
+debug/moc_mainwindow.cpp: ../Projet_Graphique/Player.h \
 		ui_mainwindow.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qvariant.h \
@@ -339,8 +346,17 @@ debug/moc_mainwindow.cpp: ../Projet_Graphique/player.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h \
 		../Projet_Graphique/game.h \
+		../Projet_Graphique/AntiAir.h \
+		../Projet_Graphique/BCopter.h \
+		../Projet_Graphique/Bomber.h \
+		../Projet_Graphique/Fighter.h \
+		../Projet_Graphique/MdTank.h \
+		../Projet_Graphique/Mech.h \
+		../Projet_Graphique/MegaTank.h \
+		../Projet_Graphique/NeoTank.h \
+		../Projet_Graphique/Recon.h \
+		../Projet_Graphique/Tank.h \
 		../Projet_Graphique/Land.h \
 		../Projet_Graphique/Plain.h \
 		../Projet_Graphique/building.h \
@@ -354,7 +370,7 @@ debug/moc_mainwindow.cpp: ../Projet_Graphique/player.h \
 		../Projet_Graphique/mainwindow.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.11.2/mingw53_32/bin/moc.exe
-	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Chloé/Desktop/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/debug/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Chloé/Desktop/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/debug/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -373,14 +389,14 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 
 
 ####### Compile
 
 debug/main.o: ../Projet_Graphique/main.cpp ../Projet_Graphique/mainwindow.h \
-		../Projet_Graphique/player.h \
+		../Projet_Graphique/Player.h \
 		ui_mainwindow.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qvariant.h \
@@ -511,8 +527,17 @@ debug/main.o: ../Projet_Graphique/main.cpp ../Projet_Graphique/mainwindow.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h \
 		../Projet_Graphique/game.h \
+		../Projet_Graphique/AntiAir.h \
+		../Projet_Graphique/BCopter.h \
+		../Projet_Graphique/Bomber.h \
+		../Projet_Graphique/Fighter.h \
+		../Projet_Graphique/MdTank.h \
+		../Projet_Graphique/Mech.h \
+		../Projet_Graphique/MegaTank.h \
+		../Projet_Graphique/NeoTank.h \
+		../Projet_Graphique/Recon.h \
+		../Projet_Graphique/Tank.h \
 		../Projet_Graphique/Land.h \
 		../Projet_Graphique/Plain.h \
 		../Projet_Graphique/building.h \
@@ -526,7 +551,7 @@ debug/main.o: ../Projet_Graphique/main.cpp ../Projet_Graphique/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Projet_Graphique\main.cpp
 
 debug/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mainwindow.h \
-		../Projet_Graphique/player.h \
+		../Projet_Graphique/Player.h \
 		ui_mainwindow.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qvariant.h \
@@ -657,8 +682,17 @@ debug/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mainw
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h \
 		../Projet_Graphique/game.h \
+		../Projet_Graphique/AntiAir.h \
+		../Projet_Graphique/BCopter.h \
+		../Projet_Graphique/Bomber.h \
+		../Projet_Graphique/Fighter.h \
+		../Projet_Graphique/MdTank.h \
+		../Projet_Graphique/Mech.h \
+		../Projet_Graphique/MegaTank.h \
+		../Projet_Graphique/NeoTank.h \
+		../Projet_Graphique/Recon.h \
+		../Projet_Graphique/Tank.h \
 		../Projet_Graphique/Land.h \
 		../Projet_Graphique/Plain.h \
 		../Projet_Graphique/building.h \
@@ -679,9 +713,8 @@ debug/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mainw
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Projet_Graphique\mainwindow.cpp
 
 debug/infantery.o: ../Projet_Graphique/infantery.cpp ../Projet_Graphique/infantery.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\infantery.o ..\Projet_Graphique\infantery.cpp
 
 debug/Player.o: ../Projet_Graphique/Player.cpp ../Projet_Graphique/Player.h
@@ -695,7 +728,16 @@ debug/game.o: ../Projet_Graphique/game.cpp ../Projet_Graphique/game.h \
 		../Projet_Graphique/Player.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/infantery.h \
-		../Projet_Graphique/player.h \
+		../Projet_Graphique/AntiAir.h \
+		../Projet_Graphique/BCopter.h \
+		../Projet_Graphique/Bomber.h \
+		../Projet_Graphique/Fighter.h \
+		../Projet_Graphique/MdTank.h \
+		../Projet_Graphique/Mech.h \
+		../Projet_Graphique/MegaTank.h \
+		../Projet_Graphique/NeoTank.h \
+		../Projet_Graphique/Recon.h \
+		../Projet_Graphique/Tank.h \
 		../Projet_Graphique/Land.h \
 		../Projet_Graphique/Plain.h \
 		../Projet_Graphique/building.h \
@@ -718,7 +760,6 @@ debug/Plain.o: ../Projet_Graphique/Plain.cpp ../Projet_Graphique/Plain.h \
 debug/building.o: ../Projet_Graphique/building.cpp ../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/player.h \
 		../Projet_Graphique/Land.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\building.o ..\Projet_Graphique\building.cpp
 
@@ -726,7 +767,6 @@ debug/factory.o: ../Projet_Graphique/factory.cpp ../Projet_Graphique/factory.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/player.h \
 		../Projet_Graphique/Land.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\factory.o ..\Projet_Graphique\factory.cpp
 
@@ -741,8 +781,7 @@ debug/map.o: ../Projet_Graphique/map.cpp ../Projet_Graphique/map.h \
 		../Projet_Graphique/factory.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h \
-		../Projet_Graphique/player.h
+		../Projet_Graphique/Player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\map.o ..\Projet_Graphique\map.cpp
 
 debug/bridge.o: ../Projet_Graphique/bridge.cpp ../Projet_Graphique/bridge.h \
@@ -771,45 +810,38 @@ debug/AntiAir.o: ../Projet_Graphique/AntiAir.cpp ../Projet_Graphique/AntiAir.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\AntiAir.o ..\Projet_Graphique\AntiAir.cpp
 
 debug/BCopter.o: ../Projet_Graphique/BCopter.cpp ../Projet_Graphique/BCopter.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\BCopter.o ..\Projet_Graphique\BCopter.cpp
 
 debug/Bomber.o: ../Projet_Graphique/Bomber.cpp ../Projet_Graphique/Bomber.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Bomber.o ..\Projet_Graphique\Bomber.cpp
 
 debug/Fighter.o: ../Projet_Graphique/Fighter.cpp ../Projet_Graphique/Fighter.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Fighter.o ..\Projet_Graphique\Fighter.cpp
 
 debug/MdTank.o: ../Projet_Graphique/MdTank.cpp ../Projet_Graphique/MdTank.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\MdTank.o ..\Projet_Graphique\MdTank.cpp
 
 debug/Mech.o: ../Projet_Graphique/Mech.cpp ../Projet_Graphique/Mech.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Mech.o ..\Projet_Graphique\Mech.cpp
 
 debug/MegaTank.o: ../Projet_Graphique/MegaTank.cpp ../Projet_Graphique/MegaTank.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\MegaTank.o ..\Projet_Graphique\MegaTank.cpp
 
 debug/NeoTank.o: ../Projet_Graphique/NeoTank.cpp ../Projet_Graphique/NeoTank.h \
-		../Projet_Graphique/player.h \
-		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\NeoTank.o ..\Projet_Graphique\NeoTank.cpp
 
 debug/Recon.o: ../Projet_Graphique/Recon.cpp ../Projet_Graphique/Recon.h \
@@ -822,21 +854,22 @@ debug/Tank.o: ../Projet_Graphique/Tank.cpp ../Projet_Graphique/Tank.h \
 		../Projet_Graphique/unit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Tank.o ..\Projet_Graphique\Tank.cpp
 
-debug/Airport.o: ../Projet_Graphique/Airport.cpp ../Projet_Graphique/airport.h \
+debug/Airport.o: ../Projet_Graphique/Airport.cpp ../Projet_Graphique/Airport.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/player.h \
 		../Projet_Graphique/Land.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Airport.o ..\Projet_Graphique\Airport.cpp
 
-debug/City.o: ../Projet_Graphique/City.cpp ../Projet_Graphique/city.h \
+debug/City.o: ../Projet_Graphique/City.cpp ../Projet_Graphique/City.h \
+		../Projet_Graphique/Player.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h \
-		../Projet_Graphique/player.h \
 		../Projet_Graphique/Land.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\City.o ..\Projet_Graphique\City.cpp
+
+debug/qrc_sprites.o: debug/qrc_sprites.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\qrc_sprites.o debug\qrc_sprites.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_mainwindow.o debug\moc_mainwindow.cpp

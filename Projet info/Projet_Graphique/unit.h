@@ -1,9 +1,8 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-
-#include "Player.h"
 #include <string>
+#include "Player.h"
 
 using std::string;
 
@@ -37,10 +36,13 @@ public:
     void setMovable(bool b);
     bool isMovable();
     int getDamage(Unit * unitA, Unit * unitD);
+
+    //int damage(unit1, unit2);
     int getHealthMax() const;
     void setHealthMax(int value);
-    bool getDead() const;
     void setDead(bool value);
+    bool getDead() const;
+    int getID() const;
 };
 
 #endif //UNIT_H

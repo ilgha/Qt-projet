@@ -1,6 +1,8 @@
 #ifndef MECH_H
 #define MECH_H
-#include "player.h"
+
+#include "Player.h"
+
 #include "unit.h"
 
 class Mech : public Unit{
