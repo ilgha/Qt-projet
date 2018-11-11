@@ -183,16 +183,7 @@ Unit* Game::getActiveUnit() const{
 void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
 }
-<<<<<<< HEAD
-Player *Game::getPlayer1() const
-{
-    return player1;
-}
 
-void Game::setPlayer1(Player *value)
-{
-    player1 = value;
-}
 
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     int damage = unitD->getDamage(unitA,unitD);
@@ -208,5 +199,4 @@ void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
         unitD->setHealth(health - damage);
     }
 };
-=======
->>>>>>> a63fa1c108ea2ba9eef292c30b27be93b6ff5965
+

@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-//
-// Created by Pierre Vander Eyken on 20/10/2018.
-//
-
-=======
->>>>>>> a63fa1c108ea2ba9eef292c30b27be93b6ff5965
-#include "Player.h"
+#include "player.h"
 
 Player::Player(int IA, int money) {
     this->IA = IA;
