@@ -123,3 +123,18 @@ void Game::setPlayer1(Player *value)
 {
     player1 = value;
 }
+
+void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
+    int damage = unitD->getDamage(unitA,unitD);
+    int health = unitD->getHealth();
+    if (health - damage <=0){
+        unitD->setHealth(0);
+    }
+    else if (bool isCounter = false) {
+        unitD -> setHealth(health - damage);
+        void attack(Unit* unitD, Unit* unitA,bool isCounter=true);
+    }
+    else{
+        unitD->setHealth(health - damage);
+    }
+};

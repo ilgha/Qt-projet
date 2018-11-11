@@ -48,6 +48,7 @@ public:
 
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
+    void attack (Unit* unitA, Unit* initD, bool isCounter);
 };
 
 #endif //GAME_H

@@ -1,5 +1,5 @@
-#ifndef PROJECT_UNIT_H
-#define PROJECT_UNIT_H
+#ifndef UNIT_H
+#define UNIT_H
 
 
 #include "Player.h"
@@ -19,6 +19,7 @@ class Unit{
     Player* team;
     int ID;
     bool dead = false;
+
 
 public:
     Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID);
@@ -42,5 +43,5 @@ public:
     void setDead(bool value);
 };
 
-#endif //PROJECT_UNIT_H
+#endif //UNIT_H
 
