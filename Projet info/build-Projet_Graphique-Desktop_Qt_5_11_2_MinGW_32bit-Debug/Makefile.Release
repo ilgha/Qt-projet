@@ -328,6 +328,17 @@ release/moc_mainwindow.cpp: ../Projet_Graphique/Player.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h \
 		../Projet_Graphique/game.h \
 		../Projet_Graphique/AntiAir.h \
 		../Projet_Graphique/BCopter.h \
@@ -339,20 +350,10 @@ release/moc_mainwindow.cpp: ../Projet_Graphique/Player.h \
 		../Projet_Graphique/NeoTank.h \
 		../Projet_Graphique/Recon.h \
 		../Projet_Graphique/Tank.h \
-		../Projet_Graphique/Land.h \
-		../Projet_Graphique/Plain.h \
-		../Projet_Graphique/building.h \
-		../Projet_Graphique/factory.h \
-		../Projet_Graphique/map.h \
-		../Projet_Graphique/mountain.h \
-		../Projet_Graphique/woods.h \
-		../Projet_Graphique/road.h \
-		../Projet_Graphique/bridge.h \
-		../Projet_Graphique/river.h \
 		../Projet_Graphique/mainwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/5.11.2/mingw53_32/bin/moc.exe
-	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Chloé/Desktop/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/release/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Chloé/Desktop/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/release/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -491,6 +492,17 @@ release/main.o: ../Projet_Graphique/main.cpp ../Projet_Graphique/mainwindow.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h \
 		../Projet_Graphique/game.h \
 		../Projet_Graphique/AntiAir.h \
 		../Projet_Graphique/BCopter.h \
@@ -502,16 +514,6 @@ release/main.o: ../Projet_Graphique/main.cpp ../Projet_Graphique/mainwindow.h \
 		../Projet_Graphique/NeoTank.h \
 		../Projet_Graphique/Recon.h \
 		../Projet_Graphique/Tank.h \
-		../Projet_Graphique/Land.h \
-		../Projet_Graphique/Plain.h \
-		../Projet_Graphique/building.h \
-		../Projet_Graphique/factory.h \
-		../Projet_Graphique/map.h \
-		../Projet_Graphique/mountain.h \
-		../Projet_Graphique/woods.h \
-		../Projet_Graphique/road.h \
-		../Projet_Graphique/bridge.h \
-		../Projet_Graphique/river.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qcoreapplication.h \
@@ -635,6 +637,17 @@ release/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mai
 		C:/Qt/5.11.2/mingw53_32/include/QtCore/qbasictimer.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h \
 		../Projet_Graphique/game.h \
 		../Projet_Graphique/AntiAir.h \
 		../Projet_Graphique/BCopter.h \
@@ -646,16 +659,6 @@ release/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mai
 		../Projet_Graphique/NeoTank.h \
 		../Projet_Graphique/Recon.h \
 		../Projet_Graphique/Tank.h \
-		../Projet_Graphique/Land.h \
-		../Projet_Graphique/Plain.h \
-		../Projet_Graphique/building.h \
-		../Projet_Graphique/factory.h \
-		../Projet_Graphique/map.h \
-		../Projet_Graphique/mountain.h \
-		../Projet_Graphique/woods.h \
-		../Projet_Graphique/road.h \
-		../Projet_Graphique/bridge.h \
-		../Projet_Graphique/river.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtGui/QPainter \
 		C:/Qt/5.11.2/mingw53_32/include/QtGui/qpainter.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtGui/qtextoption.h \
@@ -667,19 +670,52 @@ release/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mai
 
 release/infantery.o: ../Projet_Graphique/infantery.cpp ../Projet_Graphique/infantery.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\infantery.o ..\Projet_Graphique\infantery.cpp
 
-release/Player.o: ../Projet_Graphique/Player.cpp ../Projet_Graphique/Player.h
+release/Player.o: ../Projet_Graphique/Player.cpp ../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Player.o ..\Projet_Graphique\Player.cpp
 
 release/Unit.o: ../Projet_Graphique/Unit.cpp ../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Unit.o ..\Projet_Graphique\Unit.cpp
 
 release/game.o: ../Projet_Graphique/game.cpp ../Projet_Graphique/game.h \
 		../Projet_Graphique/Player.h \
 		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h \
 		../Projet_Graphique/infantery.h \
 		../Projet_Graphique/AntiAir.h \
 		../Projet_Graphique/BCopter.h \
@@ -690,17 +726,7 @@ release/game.o: ../Projet_Graphique/game.cpp ../Projet_Graphique/game.h \
 		../Projet_Graphique/MegaTank.h \
 		../Projet_Graphique/NeoTank.h \
 		../Projet_Graphique/Recon.h \
-		../Projet_Graphique/Tank.h \
-		../Projet_Graphique/Land.h \
-		../Projet_Graphique/Plain.h \
-		../Projet_Graphique/building.h \
-		../Projet_Graphique/factory.h \
-		../Projet_Graphique/map.h \
-		../Projet_Graphique/mountain.h \
-		../Projet_Graphique/woods.h \
-		../Projet_Graphique/road.h \
-		../Projet_Graphique/bridge.h \
-		../Projet_Graphique/river.h
+		../Projet_Graphique/Tank.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\game.o ..\Projet_Graphique\game.cpp
 
 release/Land.o: ../Projet_Graphique/Land.cpp ../Projet_Graphique/Land.h
@@ -713,14 +739,31 @@ release/Plain.o: ../Projet_Graphique/Plain.cpp ../Projet_Graphique/Plain.h \
 release/building.o: ../Projet_Graphique/building.cpp ../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/Land.h
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\building.o ..\Projet_Graphique\building.cpp
 
 release/factory.o: ../Projet_Graphique/factory.cpp ../Projet_Graphique/factory.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/Land.h
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\factory.o ..\Projet_Graphique\factory.cpp
 
 release/map.o: ../Projet_Graphique/map.cpp ../Projet_Graphique/map.h \
@@ -734,7 +777,8 @@ release/map.o: ../Projet_Graphique/map.cpp ../Projet_Graphique/map.h \
 		../Projet_Graphique/factory.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Player.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\map.o ..\Projet_Graphique\map.cpp
 
 release/bridge.o: ../Projet_Graphique/bridge.cpp ../Projet_Graphique/bridge.h \
@@ -759,67 +803,194 @@ release/woods.o: ../Projet_Graphique/woods.cpp ../Projet_Graphique/woods.h \
 
 release/AntiAir.o: ../Projet_Graphique/AntiAir.cpp ../Projet_Graphique/AntiAir.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\AntiAir.o ..\Projet_Graphique\AntiAir.cpp
 
 release/BCopter.o: ../Projet_Graphique/BCopter.cpp ../Projet_Graphique/BCopter.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\BCopter.o ..\Projet_Graphique\BCopter.cpp
 
 release/Bomber.o: ../Projet_Graphique/Bomber.cpp ../Projet_Graphique/Bomber.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Bomber.o ..\Projet_Graphique\Bomber.cpp
 
 release/Fighter.o: ../Projet_Graphique/Fighter.cpp ../Projet_Graphique/Fighter.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Fighter.o ..\Projet_Graphique\Fighter.cpp
 
 release/MdTank.o: ../Projet_Graphique/MdTank.cpp ../Projet_Graphique/MdTank.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MdTank.o ..\Projet_Graphique\MdTank.cpp
 
 release/Mech.o: ../Projet_Graphique/Mech.cpp ../Projet_Graphique/Mech.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Mech.o ..\Projet_Graphique\Mech.cpp
 
 release/MegaTank.o: ../Projet_Graphique/MegaTank.cpp ../Projet_Graphique/MegaTank.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MegaTank.o ..\Projet_Graphique\MegaTank.cpp
 
 release/NeoTank.o: ../Projet_Graphique/NeoTank.cpp ../Projet_Graphique/NeoTank.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\NeoTank.o ..\Projet_Graphique\NeoTank.cpp
 
 release/Recon.o: ../Projet_Graphique/Recon.cpp ../Projet_Graphique/Recon.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/unit.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Recon.o ..\Projet_Graphique\Recon.cpp
 
 release/Tank.o: ../Projet_Graphique/Tank.cpp ../Projet_Graphique/Tank.h \
+		../Projet_Graphique/player.h \
+		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/unit.h
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/building.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Tank.o ..\Projet_Graphique\Tank.cpp
 
 release/Airport.o: ../Projet_Graphique/Airport.cpp ../Projet_Graphique/Airport.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
 		../Projet_Graphique/Player.h \
-		../Projet_Graphique/Land.h
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h \
+		../Projet_Graphique/player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Airport.o ..\Projet_Graphique\Airport.cpp
 
 release/City.o: ../Projet_Graphique/City.cpp ../Projet_Graphique/City.h \
 		../Projet_Graphique/player.h \
-		../Projet_Graphique/Player.h \
 		../Projet_Graphique/building.h \
 		../Projet_Graphique/unit.h \
-		../Projet_Graphique/Land.h
+		../Projet_Graphique/Player.h \
+		../Projet_Graphique/map.h \
+		../Projet_Graphique/Plain.h \
+		../Projet_Graphique/Land.h \
+		../Projet_Graphique/mountain.h \
+		../Projet_Graphique/woods.h \
+		../Projet_Graphique/road.h \
+		../Projet_Graphique/bridge.h \
+		../Projet_Graphique/river.h \
+		../Projet_Graphique/factory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\City.o ..\Projet_Graphique\City.cpp
 
 release/qrc_sprites.o: release/qrc_sprites.cpp 

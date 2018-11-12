@@ -2,7 +2,7 @@
 #define UNIT_H
 
 #include <string>
-#include "Player.h"
+#include "player.h"
 #include "map.h"
 
 using std::string;
