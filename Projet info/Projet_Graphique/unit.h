@@ -3,7 +3,6 @@
 
 #include <string>
 #include "player.h"
-#include "map.h"
 
 using std::string;
 
@@ -45,5 +44,5 @@ public:
     int getID() const;
 };
 
-#endif //UNIT_H
+#endif // UNIT_H
 

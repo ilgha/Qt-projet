@@ -29,7 +29,6 @@ SOURCES += \
         mainwindow.cpp \
     infantery.cpp \
     Player.cpp \
-    Unit.cpp \
     game.cpp \
     Land.cpp \
     Plain.cpp \
@@ -52,7 +51,8 @@ SOURCES += \
     Recon.cpp \
     Tank.cpp \
     Airport.cpp \
-    City.cpp
+    City.cpp \
+    unit.cpp
 
 HEADERS += \
         mainwindow.h \

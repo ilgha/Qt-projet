@@ -3,7 +3,6 @@ INPUT(
 ./release\mainwindow.o
 ./release\infantery.o
 ./release\Player.o
-./release\Unit.o
 ./release\game.o
 ./release\Land.o
 ./release\Plain.o
@@ -27,6 +26,7 @@ INPUT(
 ./release\Tank.o
 ./release\Airport.o
 ./release\City.o
+./release\unit.o
 ./release\qrc_sprites.o
 ./release\moc_mainwindow.o
 );
