@@ -1,8 +1,9 @@
-#ifndef PROJECT_UNIT_H
-#define PROJECT_UNIT_H
+#ifndef UNIT_H
+#define UNIT_H
 
 #include <string>
 #include "Player.h"
+#include "map.h"
 
 using std::string;
 
@@ -18,6 +19,8 @@ class Unit{
     Player* team;
     int ID;
     bool dead = false;
+
+
 
 public:
     Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID);
@@ -35,8 +38,6 @@ public:
     void setMovable(bool b);
     bool isMovable();
     int getDamage(Unit * unitA, Unit * unitD);
-
-    //int damage(unit1, unit2);
     int getHealthMax() const;
     void setHealthMax(int value);
     void setDead(bool value);
@@ -44,5 +45,5 @@ public:
     int getID() const;
 };
 
-#endif //PROJECT_UNIT_H
+#endif //UNIT_H
 

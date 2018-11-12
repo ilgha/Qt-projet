@@ -9,11 +9,12 @@
 #include "Plain.h"
 
 
+
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
     this->army[0] = army[0];
     this->game = game;
     ui->setupUi(this);
-    //connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+    connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
     this->army = game->getArmy();
 }
 
@@ -46,14 +47,16 @@ void MainWindow::paintEvent(QPaintEvent *event){
         for(unsigned int i = 0; i<x; i++){
             QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
             QRectF source((t[j][i]-1)*16, 15, 16, 16);
-            QImage image("../advance wars sprites/tileset projet");
+            QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
     }
 
     //infantry
+
     for(unsigned int i = 0; i<army->size(); i++){
+
         //infantry move
 
         if(army->at(i)->isMovable() && !army->at(i)->getDead()){
@@ -62,25 +65,27 @@ void MainWindow::paintEvent(QPaintEvent *event){
         }
     }
 
+
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
             QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
             QRectF source(getXIm(army->at(i)->getID()), getYIm(army->at(i)->getID()), 16, 16);
             if(army->at(i)->getTeam() == game->getPlayer1()){
-                QImage image("../advance wars sprites/Orange_Star");
+                QImage image(":/sprt/advance wars sprites/Orange_Star");
                 QPainter painter(this);
                 painter.drawImage(target, image, source);
                 painter.setPen(QPen(Qt::white));
                 painter.setFont(QFont("Times", 20, QFont::Bold));
                 painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
             }else {
-                QImage image("../advance wars sprites/Blue_Moon");
+                QImage image(":/sprt/advance wars sprites/Blue_Moon");
                 QPainter painter(this);
                 painter.drawImage(target, image, source);
                 painter.setPen(QPen(Qt::white));
                 painter.setFont(QFont("Times", 20, QFont::Bold));
                 painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
             }
+
 
 
         }
@@ -92,8 +97,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
-        if(game->check(army->at(i)) != nullptr){
-            showMenu(*game->check(army->at(i)),*army->at(i));
+        if(game->checkBuildings(army->at(i)) != nullptr){
+            showMenu(game->checkBuildings(army->at(i)),army->at(i));
         }
     }
 }
@@ -122,7 +127,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 void MainWindow::unitMove(QMouseEvent *event){
     for(unsigned int i = 0; i<army->size(); i++){
-        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && army->at(i)->getTeam() == game->getActive()){
+        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
                         event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
@@ -142,7 +147,7 @@ void MainWindow::unitMove(QMouseEvent *event){
 
     for(unsigned int i = 0; i<army->size(); i++){
 
-        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && army->at(i)->getTeam() == game->getActive()){
+        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
 
             if(army->at(i)->isMovable()){
                 int amtMove = army->at(i)->getMP();
@@ -165,6 +170,7 @@ void MainWindow::unitMove(QMouseEvent *event){
     }
 }
 
+
 void MainWindow::showMove(Unit* unit){
     int amtMove = unit->getMP();
     QPainter painter(this);
@@ -180,18 +186,33 @@ void MainWindow::showMove(Unit* unit){
     }
 }
 
-void MainWindow::showMenu(Building b, Unit u){
-    QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
-    QRectF source(0,0,41,62);
-    QImage image("../advance wars sprites/menu");
-    QPainter painter(this);
-    painter.drawImage(target, image, source);
+void MainWindow::showMenu(Building* b, Unit* u){
+    if(b != nullptr){
+
+        QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
+        QRectF source(0,0,41,62);
+        QImage image(":/sprt/advance wars sprites/menu");
+        QPainter painter(this);
+        painter.drawImage(target, image, source);
+    }
+
+    if(this->game->ennemyNear(u)){
+        std::cout << "combat" << std::endl;
+        QRectF target(11*this->width()/18, this->height()/12, this->width()/5,this->height()/3);
+        QRectF source(0,42,41,62);
+        QImage image(":/sprt/advance wars sprites/menu");
+        QPainter painter(this);
+        painter.drawImage(target, image, source);
+    }
 
 }
+
+
 
 void MainWindow::tick(){
     update();
 }
+
 
 int MainWindow::getXIm(int ID){
     switch(ID){
@@ -274,3 +295,5 @@ int MainWindow::getYIm(int ID){
     }
     }
 }
+
+

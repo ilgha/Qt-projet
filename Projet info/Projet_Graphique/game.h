@@ -46,7 +46,9 @@ public:
     void recruit(Building* building, string buy);
     int endGame();
     std::vector<Unit*> *getArmy();
-    Building* check(Unit* unit);
+    Building* checkBuildings(Unit* unit);
+    Land* checkLand(Unit* units);
+    bool ennemyNear(Unit* unit);
     Player* getActive() const;
     void checkFusion(Unit* unit);
     void erase();
@@ -57,6 +59,7 @@ public:
     void setPlayer2(Player *value);
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
+    void attack (Unit* unitA, Unit* initD, bool isCounter);
 };
 
 #endif //GAME_H

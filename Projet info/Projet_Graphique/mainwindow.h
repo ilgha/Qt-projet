@@ -1,4 +1,3 @@
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -37,8 +36,7 @@ public:
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
     void showMove(Unit* unit);
-    void showMenu();
-    void showMenu(Building b, Unit u);
+    void showMenu(Building* b, Unit* u);
     void unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
@@ -48,4 +46,5 @@ public slots:
 };
 
 #endif // MAINWINDOW_H
+
 
