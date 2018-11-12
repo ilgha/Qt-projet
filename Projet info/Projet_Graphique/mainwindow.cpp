@@ -228,6 +228,9 @@ int MainWindow::getXIm(int ID){
     case 10:{
         return 76;
     }
+    default: {
+        return 21;
+    }
     }
 }
 
@@ -265,6 +268,9 @@ int MainWindow::getYIm(int ID){
     }
     case 10:{
         return 58;
+    }
+    default: {
+        return 73;
     }
     }
 }
