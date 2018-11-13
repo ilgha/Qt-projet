@@ -250,7 +250,7 @@ int MainWindow::getXIm(int ID){
         return 76;
     }
     default: {
-        return 21;
+        return 143;
     }
     }
 }
@@ -291,7 +291,7 @@ int MainWindow::getYIm(int ID){
         return 58;
     }
     default: {
-        return 73;
+        return 47;
     }
     }
 }
