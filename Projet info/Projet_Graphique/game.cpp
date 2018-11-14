@@ -184,6 +184,44 @@ void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
 }
 
+int Game::getDamage(Unit * unitA, Unit * unitD) {
+
+    int damageChart[11][11] = {{45,120,75,65,105,10,105,1,5,60,25},
+                               {25,65,0,0,75,25,75,10,20,55,55},
+                               {95,0,0,0,110,95,110,35,90,105,105},
+                               {0,100,100,55,0,0,0,0,0,0,0},
+                               {5,7,0,0,55,1,45,1,1,12,5},
+                               {105,12,0,0,105,55,95,25,45,105,85},
+                               {65,9,0,0,65,15,55,5,15,85,55},
+                               {195,22,0,0,135,125,125,65,115,195,180},
+                               {115,22,0,0,125,75,115,35,55,125,105},
+                               {4,12,0,0,70,1,65,1,1,35,6},
+                               {65,10,0,0,75,15,70,10,15,85,55}};
+
+    int IDA = unitA->getID();
+    int IDD = unitD->getID();
+    int B = damageChart[IDA][IDD];
+    if (B >0 ){
+        int A_HP = unitA->getHealth();
+        int D_HP = unitD->getHealth();
+        string typeD = unitD->getMT();
+        if (typeD == "a"){
+            int damage =  B * A_HP / 10 ;
+            return damage;
+        }
+        else{
+            int PosXD = unitD->getX();
+            int PosYD = unitD->getY();
+            int D_TR = map.getTile(PosXD, PosYD).getDef();
+            int damage =  B * A_HP / 10 * (100 - D_TR * D_HP) / 100;
+            return damage;
+        }
+    }
+    else{
+       std::cout << "Attaque impossible entre ces unités" << std::endl;
+        return 0;
+    }
+}
 
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     int damage = unitD->getDamage(unitA,unitD);

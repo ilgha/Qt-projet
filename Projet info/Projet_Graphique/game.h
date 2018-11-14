@@ -59,6 +59,7 @@ public:
     void setPlayer2(Player *value);
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
+    int getDamage(Unit* unitA, Unit* unitD);
     void attack (Unit* unitA, Unit* initD, bool isCounter);
 };
 

@@ -36,7 +36,7 @@ public:
     void newTurn();
     void setMovable(bool b);
     bool isMovable();
-    int getDamage(Unit * unitA, Unit * unitD);
+
     int getHealthMax() const;
     void setHealthMax(int value);
     void setDead(bool value);
