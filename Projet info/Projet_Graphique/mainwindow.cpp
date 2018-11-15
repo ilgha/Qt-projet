@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QDebug>
+#include <algorithm>
 #include <iostream>
 #include <typeinfo>
 #include <string>
@@ -299,5 +300,12 @@ int MainWindow::getYIm(int ID){
 void MainWindow::moveUnit(Unit unit)
 {
 
+    int left = 0;
+    IntPair pos = std::make_pair(x, y);
+    if(left >= 0 && std::find(cases.begin(), cases.end(), pos) == cases.end()){
+        cases.push_back(pos);
+    }else{
+
+    }
 }
 

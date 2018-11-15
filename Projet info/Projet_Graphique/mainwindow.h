@@ -4,6 +4,7 @@
 #include "player.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
+#include <utility>
 //#include <QtNetwork>
 #include <QTimer>
 #include "infantery.h"
@@ -14,6 +15,8 @@ namespace Ui {
 class MainWindow;
 }
 
+typedef std::pair <int, int> IntPair;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -21,6 +24,7 @@ class MainWindow : public QMainWindow
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
+    std::vector<IntPair> cases;
     bool inMenu = false;
     bool inMove = false;
 
