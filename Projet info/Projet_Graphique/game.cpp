@@ -224,12 +224,12 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
 }
 
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
-    int damage = unitD->getDamage(unitA,unitD);
+    int damage = getDamage(unitA,unitD);
     int health = unitD->getHealth();
     if (health - damage <=0){
         unitD->setHealth(0);
     }
-    else if (bool isCounter = false) {
+    else if (isCounter == false) {
         unitD -> setHealth(health - damage);
         void attack(Unit* unitD, Unit* unitA,bool isCounter=true);
     }

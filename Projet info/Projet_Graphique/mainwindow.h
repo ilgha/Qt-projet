@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Player.h"
+#include "player.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
+//#include <QtNetwork>
 #include <QTimer>
 #include "infantery.h"
 #include "game.h"
@@ -40,6 +41,8 @@ public:
     void unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
+    void moveUnit(Unit unit);
+    //QTcpServer* server = nullptr;
 
 public slots:
     void tick();

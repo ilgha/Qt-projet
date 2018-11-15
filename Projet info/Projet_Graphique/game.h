@@ -28,6 +28,7 @@ class Game {
     std::vector<Unit*> army;
     std::vector<Building> buildings;
     Unit* activeUnit = nullptr;
+    int getDamage(Unit* unitA, Unit* unitD);
     int terrain[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
                            {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
                            {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
@@ -59,7 +60,6 @@ public:
     void setPlayer2(Player *value);
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
-    int getDamage(Unit* unitA, Unit* unitD);
     void attack (Unit* unitA, Unit* initD, bool isCounter);
 };
 
