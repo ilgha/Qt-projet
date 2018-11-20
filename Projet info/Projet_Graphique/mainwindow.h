@@ -45,7 +45,11 @@ class MainWindow : public QMainWindow
     int a = 5;
     unsigned int x = 18;
     unsigned int y = 12;
+<<<<<<< HEAD
 
+=======
+    unsigned int z = 20;
+>>>>>>> ab4c4ccbc3c81337e3e0152e876543d9be129113
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
@@ -59,6 +63,7 @@ public:
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit unit);
+    void createUnit();
     //QTcpServer* server = nullptr;
 
 public slots:
