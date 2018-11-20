@@ -2,7 +2,10 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QBoxLayout>
 #include <QDebug>
+#include <QPushButton>
+#include <QMessageBox>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
@@ -28,6 +31,7 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *event){
 
 
+
     //map
 
     int t[12][18] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3},
@@ -44,16 +48,19 @@ void MainWindow::paintEvent(QPaintEvent *event){
                      {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
 
 
-    for(unsigned int j = 0; j<y; j++){
-        for(unsigned int i = 0; i<x; i++){
-            QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
-            QRectF source((t[j][i]-1)*16, 15, 16, 16);
+    for(unsigned int j = 0; j<x; j++){
+        for(unsigned int i = 0; i<y; i++){
+            QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
+            QRectF source((t[i][j]-1)*16, 15, 16, 16);
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
     }
 
+    QRectF info(width()/x,y*height()/(y+z),width(), height());
+    QPainter painter (this);
+    painter.drawRect(info);
     //infantry
 
     for(unsigned int i = 0; i<army->size(); i++){
@@ -88,7 +95,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
@@ -298,5 +304,9 @@ void MainWindow::moveUnit(Unit unit)
     if(left >= 0 && std::find(cases.begin(), cases.end(), pos) == cases.end()){
         cases.push_back(pos);
     }
+}
+
+void MainWindow::createUnit(){
+
 }
 
