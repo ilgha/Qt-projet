@@ -63,6 +63,7 @@ public:
     void setPlayer1(Player *value);
     void attack (Unit* unitA, Unit* initD, bool isCounter);
     Map getMap() const;
+    std::vector<Building> getBuildings() const;
 };
 
 #endif //GAME_H

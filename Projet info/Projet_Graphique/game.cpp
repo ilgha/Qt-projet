@@ -32,18 +32,12 @@ Game::Game(Player* player1, Player* player2){
         for(int j = 0; j<18; j++){
             if(map.getValue(i, j) == 35){
                 buildings.push_back(Factory(j, i));
-                map.setValue(i, j, 1);
             }else if(map.getValue(i, j) == 34){
-                buildings.push_back(City(i,j));
-                map.setValue(i, j, 1);
+                buildings.push_back(City(j,i));
             }
         }
     }
-
-
     active = player1;
-
-
 }
 
 int Game::endTurn() {
@@ -57,16 +51,7 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     army.push_back(new Infantery(5,5,10,1,active));
-    army.push_back(new AntiAir(6,5,10,1,active));
-    army.push_back(new BCopter(7,5,10,1,active));
-    army.push_back(new Bomber(8,5,10,1,active));
-    army.push_back(new Fighter(9,5,10,1,active));
-    army.push_back(new MdTank(10,5,10,1,active));
-    army.push_back(new Mech(5,6,10,1,active));
-    army.push_back(new MegaTank(7,5,10,1,active));
-    army.push_back(new NeoTank(8,5,10,1,active));
-    army.push_back(new Recon(2,9,10,1,active));
-
+    buildings.at(0).setHp(army.at(0));
     active->addMoney(active->getIncome());
     if(active->getMoney() == 0){
         endGame();
@@ -191,6 +176,11 @@ void Game::setActiveUnit(Unit* unit){
 Map Game::getMap() const
 {
     return map;
+}
+
+std::vector<Building> Game::getBuildings() const
+{
+    return buildings;
 }
 
 int Game::getDamage(Unit * unitA, Unit * unitD) {
