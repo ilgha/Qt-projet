@@ -18,6 +18,7 @@
 #include "Plain.h"
 #include "building.h"
 #include "factory.h"
+#include "city.h"
 #include "map.h"
 #include <vector>
 class Game {
@@ -61,6 +62,7 @@ public:
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
     void attack (Unit* unitA, Unit* initD, bool isCounter);
+    Map getMap() const;
 };
 
 #endif //GAME_H

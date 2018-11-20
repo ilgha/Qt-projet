@@ -30,9 +30,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     //map
 
-    int t[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
-                     {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
-                     {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
+    int t[12][18] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3},
+                     {1,1,15,15,15,15,15,15,15,1,1,1,1,1,1,1,1,1},
+                     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                      {35,1,1,2,1,1,1,3,1,43,1,1,3,34,1,35,1,2},
                      {34,1,1,34,2,1,3,1,1,3,1,1,1,1,3,1,1,1},
                      {1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1},
@@ -86,13 +86,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
                 painter.setFont(QFont("Times", 20, QFont::Bold));
                 painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
             }
-
-
-
         }
-
-
-
     }
 
 
@@ -299,13 +293,10 @@ int MainWindow::getYIm(int ID){
 
 void MainWindow::moveUnit(Unit unit)
 {
-
-    int left = 0;
+    int left = unit.getMP();
     IntPair pos = std::make_pair(x, y);
     if(left >= 0 && std::find(cases.begin(), cases.end(), pos) == cases.end()){
         cases.push_back(pos);
-    }else{
-
     }
 }
 

@@ -32,6 +32,7 @@ public :
     Map();
     Land getTile(int x, int y);
     int getValue(int x, int y);
+    void setValue(int x, int y, int value);
 };
 
 #endif // MAP_H

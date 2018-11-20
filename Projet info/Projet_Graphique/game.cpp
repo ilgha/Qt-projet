@@ -32,6 +32,10 @@ Game::Game(Player* player1, Player* player2){
         for(int j = 0; j<18; j++){
             if(map.getValue(i, j) == 35){
                 buildings.push_back(Factory(j, i));
+                map.setValue(i, j, 1);
+            }else if(map.getValue(i, j) == 34){
+                buildings.push_back(City(i,j));
+                map.setValue(i, j, 1);
             }
         }
     }
@@ -182,6 +186,11 @@ Unit* Game::getActiveUnit() const{
 
 void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
+}
+
+Map Game::getMap() const
+{
+    return map;
 }
 
 int Game::getDamage(Unit * unitA, Unit * unitD) {
