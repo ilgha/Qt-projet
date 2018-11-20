@@ -66,9 +66,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
         }
     }
 
-    QRectF info(width()/x,y*height()/(y+z),width(), height());
-    QPainter painter (this);
-    painter.drawRect(info);
     //infantry
 
     for(unsigned int i = 0; i<army->size(); i++){
