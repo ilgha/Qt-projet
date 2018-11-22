@@ -51,6 +51,8 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     active->addMoney(active->getIncome());
+    army.push_back(new Infantery(4, 5, 30, 5, active));
+    buildings.at(0).setHp(army.at(0));
     if(active->getMoney() == 0){
         endGame();
     }

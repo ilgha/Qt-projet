@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QLabel>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
@@ -110,7 +111,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
+   QMessageBox::information(this,"test","helloooooo");
+
     unitMove(event);
+    createUnit(event);
 
     update();
 }
@@ -311,7 +315,13 @@ void MainWindow::moveUnit(Unit unit)
     }
 }
 
-void MainWindow::createUnit(){
+void MainWindow::createUnit(QMouseEvent* event){
+    for(unsigned int i=0; i<game->getBuildings().size();i++){
+        if (event->x()>game->getBuildings().at(i).getX()*this->width()/x && event->x()<(game->getBuildings().at(i).getX()*this->width()/x+ this->width()/x)) {
+          QMessageBox::information(this,"test","helloooooo");
+        }
+    }
+
 
 }
 

@@ -59,7 +59,7 @@ public:
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit unit);
-    void createUnit();
+    void createUnit(QMouseEvent* event);
     //QTcpServer* server = nullptr;
 
 public slots:
