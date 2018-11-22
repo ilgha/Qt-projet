@@ -58,7 +58,7 @@ public:
     void unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
-    void moveUnit(Unit unit);
+    void moveUnit(Unit* unit, int x, int y);
     void createUnit();
     //QTcpServer* server = nullptr;
 

@@ -178,7 +178,7 @@ void MainWindow::unitMove(QMouseEvent *event){
 
 
 void MainWindow::showMove(Unit* unit){
-    int amtMove = unit->getMP();
+    /*int amtMove = unit->getMP();
     QPainter painter(this);
     for(int i = -amtMove; i<=amtMove; i++){
         for(int j = -amtMove; j<=amtMove; j++){
@@ -189,6 +189,11 @@ void MainWindow::showMove(Unit* unit){
             }
         }
 
+    }*/
+    moveUnit(unit, unit->getX(), unit->getY());
+    QPainter painter(this);
+    for(unsigned int i = 0; i<cases.size(); i++){
+        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
 }
 
@@ -302,12 +307,24 @@ int MainWindow::getYIm(int ID){
     }
 }
 
-void MainWindow::moveUnit(Unit unit)
+void MainWindow::moveUnit(Unit* unit, int x, int y)
 {
-    int left = unit.getMP();
-    IntPair pos = std::make_pair(x, y);
-    if(left >= 0 && std::find(cases.begin(), cases.end(), pos) == cases.end()){
-        cases.push_back(pos);
+    int left = unit->getMP();
+    for(int i = -1; i<2; i++){
+        for(int j = -1; j<2;j++){
+            IntPair pos = std::make_pair(x+i,y+j);
+            unit->setMp(unit->getMP()-game->getMap().getTile(i, j).getMoved(unit->getMT()));
+            bool exist = false;
+            for(unsigned int u = 0; u<cases.size(); u++){
+                if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+                    exist = true;
+                }
+            }
+            if(left >= 0 && exist == false){
+                cases.push_back(pos);
+                moveUnit(unit, x+i, y+j);
+            }
+        }
     }
 }
 

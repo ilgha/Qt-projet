@@ -42,6 +42,7 @@ public:
     void setDead(bool value);
     bool getDead() const;
     int getID() const;
+    void setMp(int value);
 };
 
 #endif // UNIT_H

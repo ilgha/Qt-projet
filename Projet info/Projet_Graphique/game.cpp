@@ -37,6 +37,7 @@ Game::Game(Player* player1, Player* player2){
             }
         }
     }
+    army.push_back(new Infantery(7,7,20,5,player1));
     active = player1;
 }
 
