@@ -5,6 +5,7 @@
 #include "Player.h"
 
 
+
 using std::string;
 
 class Unit{
@@ -37,12 +38,13 @@ public:
     void newTurn();
     void setMovable(bool b);
     bool isMovable();
-    int getDamage(Unit * unitA, Unit * unitD);
+
     int getHealthMax() const;
     void setHealthMax(int value);
     void setDead(bool value);
     bool getDead() const;
     int getID() const;
+    void setMp(int value);
 };
 
 #endif // UNIT_H

@@ -11,7 +11,7 @@ public:
 
 
     int getMoved(std::string mt) const ;
-    int getDef()const ;
+    int getDef() const;
 };
 
 #endif // LAND_H

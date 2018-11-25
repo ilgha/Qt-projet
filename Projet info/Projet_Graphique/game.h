@@ -18,6 +18,7 @@
 #include "Plain.h"
 #include "building.h"
 #include "factory.h"
+#include "city.h"
 #include "map.h"
 #include <vector>
 class Game {
@@ -28,6 +29,7 @@ class Game {
     std::vector<Unit*> army;
     std::vector<Building> buildings;
     Unit* activeUnit = nullptr;
+    int getDamage(Unit* unitA, Unit* unitD);
     int terrain[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
                            {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
                            {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
@@ -60,6 +62,8 @@ public:
     Player *getPlayer1() const;
     void setPlayer1(Player *value);
     void attack (Unit* unitA, Unit* initD, bool isCounter);
+    Map getMap() const;
+    std::vector<Building> getBuildings() const;
 };
 
 #endif //GAME_H

@@ -32,3 +32,7 @@ Land Map::getTile(int x, int y){
 int Map::getValue(int x, int y){
     return map[x][y];
 }
+
+void Map::setValue(int x, int y, int value){
+    map[x][y] = value;
+}

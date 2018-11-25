@@ -2,7 +2,11 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QBoxLayout>
 #include <QDebug>
+#include <QPushButton>
+#include <QMessageBox>
+#include <algorithm>
 #include <iostream>
 #include <typeinfo>
 #include <string>
@@ -27,26 +31,35 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *event){
 
 
+
     //map
-
-    int t[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
-                     {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
-                     {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
-                     {35,1,1,2,1,1,1,3,1,43,1,1,3,34,1,35,1,2},
-                     {34,1,1,34,2,1,3,1,1,3,1,1,1,1,3,1,1,1},
-                     {1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1},
-                     {28,35,1,1,1,1,1,1,1,3,2,1,3,1,1,34,1,34},
-                     {28,28,27,28,28,28,28,3,28,3,3,3,1,1,1,1,1,1},
-                     {1,1,1,1,1,35,28,28,28,28,3,3,1,1,34,1,35,1},
-                     {1,1,1,1,1,34,1,26,1,1,2,1,34,1,34,1,1,1},
-                     {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
-                     {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
-
 
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
-            QRectF target(i*width()/x, j*height()/y, width()/x, height()/y);
-            QRectF source((t[j][i]-1)*16, 15, 16, 16);
+            t[j][i] = game->getMap().getValue(j, i);
+        }
+    }
+
+
+    for(unsigned int j = 0; j<x; j++){
+        for(unsigned int i = 0; i<y; i++){
+            QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
+            QRectF source((t[i][j]-1)*16, 15, 16, 16);
+            QImage image(":/sprt/advance wars sprites/tileset projet");
+            QPainter painter(this);
+            painter.drawImage(target, image, source);
+        }
+    }
+    for(unsigned int u = 0; u < game->getBuildings().size(); u++){
+        if(game->getBuildings().at(u).getTeam() == game->getPlayer2()){
+            QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
+            QRectF source((t[game->getBuildings().at(u).getY()][game->getBuildings().at(u).getX()]+3)*16, 15, 16, 16);
+            QImage image(":/sprt/advance wars sprites/tileset projet");
+            QPainter painter(this);
+            painter.drawImage(target, image, source);
+        }else if(game->getBuildings().at(u).getTeam() == game->getPlayer1()){
+            QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
+            QRectF source((t[game->getBuildings().at(u).getY()][game->getBuildings().at(u).getX()]+8)*16, 15, 16, 16);
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
@@ -85,15 +98,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
                 painter.setFont(QFont("Times", 20, QFont::Bold));
                 painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(army->at(i)->getHealth())));
             }
-
-
-
         }
-
-
-
     }
-
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
@@ -172,7 +178,7 @@ void MainWindow::unitMove(QMouseEvent *event){
 
 
 void MainWindow::showMove(Unit* unit){
-    int amtMove = unit->getMP();
+    /*int amtMove = unit->getMP();
     QPainter painter(this);
     for(int i = -amtMove; i<=amtMove; i++){
         for(int j = -amtMove; j<=amtMove; j++){
@@ -183,6 +189,11 @@ void MainWindow::showMove(Unit* unit){
             }
         }
 
+    }*/
+    moveUnit(unit, unit->getX(), unit->getY());
+    QPainter painter(this);
+    for(unsigned int i = 0; i<cases.size(); i++){
+        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
 }
 
@@ -249,6 +260,9 @@ int MainWindow::getXIm(int ID){
     case 10:{
         return 76;
     }
+    default: {
+        return 143;
+    }
     }
 }
 
@@ -287,7 +301,34 @@ int MainWindow::getYIm(int ID){
     case 10:{
         return 58;
     }
+    default: {
+        return 47;
+    }
     }
 }
 
+void MainWindow::moveUnit(Unit* unit, int x, int y)
+{
+    int left = unit->getMP();
+    for(int i = -1; i<2; i++){
+        for(int j = -1; j<2;j++){
+            IntPair pos = std::make_pair(x+i,y+j);
+            unit->setMp(unit->getMP()-game->getMap().getTile(i, j).getMoved(unit->getMT()));
+            bool exist = false;
+            for(unsigned int u = 0; u<cases.size(); u++){
+                if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+                    exist = true;
+                }
+            }
+            if(left >= 0 && exist == false){
+                cases.push_back(pos);
+                moveUnit(unit, x+i, y+j);
+            }
+        }
+    }
+}
+
+void MainWindow::createUnit(){
+
+}
 

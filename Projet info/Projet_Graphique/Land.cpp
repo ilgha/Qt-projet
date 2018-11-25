@@ -3,6 +3,11 @@
 #include <iostream>
 
 
+int Land::getDef() const
+{
+    return def;
+}
+
 Land::Land(int defence, int f, int b, int tr, int ti, int a){
     def = defence;
     this->f = f;

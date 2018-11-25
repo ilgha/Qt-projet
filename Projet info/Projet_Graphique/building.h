@@ -20,8 +20,6 @@ public:
     int getX() const;
     int getY() const;
     int setHp(Unit* unit);
-    int addHp(int newHp, Unit* unit);
-
 };
 
 #endif // BUILDING_H
