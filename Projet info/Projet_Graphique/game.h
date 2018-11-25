@@ -2,7 +2,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include "Player.h"
-#include "unit.h"
+#include "Unit.h"
 #include "infantery.h"
 #include "AntiAir.h"
 #include "BCopter.h"

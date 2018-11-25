@@ -97,9 +97,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
-        if(game->checkBuildings(army->at(i)) != nullptr){
+        //if(game->checkBuildings(army->at(i)) != nullptr){
             showMenu(game->checkBuildings(army->at(i)),army->at(i));
-        }
+        //}
     }
 }
 

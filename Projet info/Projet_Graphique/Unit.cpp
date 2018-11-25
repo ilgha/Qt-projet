@@ -1,4 +1,6 @@
-#include "unit.h"
+#include "Unit.h"
+#include "Player.h"
+#include "map.h"
 #include <iostream>
 #include <string>
 using std::string;

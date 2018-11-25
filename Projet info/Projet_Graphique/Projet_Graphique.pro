@@ -59,7 +59,6 @@ HEADERS += \
     infantery.h \
     Player.h \
     game.h \
-    unit.h \
     Land.h \
     Plain.h \
     building.h \
@@ -81,7 +80,8 @@ HEADERS += \
     Recon.h \
     Tank.h \
     Airport.h \
-    City.h
+    City.h \
+    Unit.h
 
 FORMS += \
         mainwindow.ui
