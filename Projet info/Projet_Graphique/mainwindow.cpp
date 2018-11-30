@@ -334,7 +334,7 @@ void MainWindow::showMove(Unit* unit){
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
-        painter.fillRect(cases.at(i).second*width()/x, cases.at(i).first*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
+        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
     cases.clear();
 }
@@ -465,7 +465,7 @@ int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
                 present = false;
             }
         }
-    }
+    }/*
 
     if(MP >= 0 && !present){
         cases.push_back(pos);
@@ -537,7 +537,7 @@ int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
         cases.push_back(pos);
         depl.push_back(MP);
         moveUnit(unit, x+i, y+j, MP);
-    }
+    }*/
 }
 
 void MainWindow::createUnit(){
