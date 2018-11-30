@@ -68,7 +68,7 @@ public:
     void unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
-    int moveUnit(Unit* unit, int x, int y, int MP);
+    void moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit();
     
 private:
