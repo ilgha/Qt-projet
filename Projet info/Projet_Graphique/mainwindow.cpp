@@ -18,9 +18,28 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->army[0] = army[0];
     this->game = game;
     ui->setupUi(this);
-    connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
     this->army = game->getArmy();
+
+
+    server = new QTcpServer();
+
+    if(! server->listen(QHostAddress::Any, 8123)) {
+        std::cout << "I am a client" << std::endl;
+        other = new QTcpSocket();
+        connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
+        other->connectToHost("127.0.0.1", 8123);
+        connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+    } else {
+        std::cout << "I am the server" << std::endl;
+        other = nullptr;
+    }
+    
+    std::cout << server->nextPendingConnection() << std::endl;
+    connect(server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
+
+
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -28,8 +47,93 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::paintEvent(QPaintEvent *event){
+void MainWindow::onNewConnection() {
+    std::cout << "A new client is connecting !" << std::endl;
+    other = server->nextPendingConnection();
+    connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+    connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
 
+
+    QJsonObject info;
+    posX = 0;
+    posY = 0;
+    info["x"] = posX;
+    info["y"] = posY;
+
+
+    isConfigured = true;
+     myTurn = false;
+
+    sendJson(info);
+    update();
+    }
+
+void MainWindow::onConnected() {
+    std::cout << "I am connected" << std::endl;
+    connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
+}
+
+void MainWindow::onDisconnected() {
+    std::cout << "The other guy just disconnected" << std::endl;
+}
+
+void MainWindow::onData() {
+    std::cout << "Some data !" << std::endl;
+    if(currentSize == 0) {
+            if(other->bytesAvailable() < 4)
+                return;
+             QDataStream in(other);
+            in >> currentSize;
+        }
+         if(other->bytesAvailable() < currentSize)
+            return;
+
+    QByteArray data = other->read(currentSize);
+    std::cout << data.toStdString() << std::endl;
+    currentSize = 0;
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    QJsonObject json = doc.object();
+
+
+    if(! isConfigured) {
+        posY = json["y"].toInt();
+        posX = json["x"].toInt();
+        update();
+        isConfigured = true;
+        myTurn = true;
+        } else {
+        int oldX = json["oldX"].toInt();
+        int oldY = json["oldY"].toInt();
+        int newX = json["newX"].toInt();
+        int newY = json["newY"].toInt();
+
+
+        if(!(posX == oldX && posY == oldY)) {
+            std::cerr << "ERROR" << std::endl;
+            destroy();
+            return;
+        }
+
+
+        posX = newX;
+        posY = newY;
+        myTurn = true;
+        update();
+    }
+}
+
+
+void MainWindow::sendJson(QJsonObject obj) {
+    QByteArray data = QJsonDocument(obj).toJson();
+    QDataStream out(other);
+    out << (quint32) data.length();
+    other->write(data);
+     std::cout << "Sending " << data.toStdString() << std::endl;
+}
+
+
+void MainWindow::paintEvent(QPaintEvent *event){
 
 
     //map
@@ -103,16 +207,47 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
-        if(game->checkBuildings(army->at(i)) != nullptr){
+        //if(game->checkBuildings(army->at(i)) != nullptr){
             showMenu(game->checkBuildings(army->at(i)),army->at(i));
-        }
+        //}
+
+
+
+    //test réseau
+
+    QPainter painter(this);
+    painter.fillRect(posX, posY, 20, 40, Qt::red);
+    painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
+
+
     }
 }
+
+
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     unitMove(event);
 
+
+
+    //réseau
+    if(! myTurn)
+            return;
+
+    int oldX = posX;
+    int oldY = posY;
+    posX = event->x();
+    posY = event->y();
+    QJsonObject move;
+    move["oldX"] = oldX;
+    move["oldY"] = oldY;
+    move["newX"] = posX;
+    move["newY"] = posY;
+    sendJson(move);
+
+
     update();
+    myTurn = false;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){

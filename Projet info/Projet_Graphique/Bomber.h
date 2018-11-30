@@ -2,7 +2,7 @@
 #define BOMBER_H
 #include "Player.h"
 
-#include "unit.h"
+#include "Unit.h"
 class Bomber : public Unit {
 
 public:

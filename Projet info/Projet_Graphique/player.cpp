@@ -1,4 +1,7 @@
-#include "player.h"
+
+
+#include "Player.h"
+
 
 Player::Player(int IA, int money) {
     this->IA = IA;

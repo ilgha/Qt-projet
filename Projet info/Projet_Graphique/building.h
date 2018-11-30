@@ -1,7 +1,8 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "unit.h"
+
+#include "Unit.h"
 #include "player.h"
 #include "Land.h"
 
@@ -22,3 +23,4 @@ public:
 };
 
 #endif // BUILDING_H
+

@@ -2,7 +2,9 @@
 #define UNIT_H
 
 #include <string>
-#include "player.h"
+#include "Player.h"
+
+
 
 using std::string;
 

@@ -5,7 +5,7 @@
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <utility>
-//#include <QtNetwork>
+#include <QtNetwork>
 #include <QTimer>
 #include "infantery.h"
 #include "building.h"
@@ -21,6 +21,7 @@ typedef std::pair <int, int> IntPair;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
     int t[12][18] = {{1,1,1,1,1,1,1,1,44,1,44,1,1,1,1,1,34,3},
                        {1,1,15,15,15,15,15,15,15,47,1,43,1,1,1,1,1,34},
                        {1,1,1,1,34,35,34,1,34,1,43,1,1,1,1,1,34,1},
@@ -40,12 +41,20 @@ class MainWindow : public QMainWindow
     std::vector<int> depl;
     bool inMenu = false;
     bool inMove = false;
+    bool isConfigured = false;
+
 
     Ui::MainWindow *ui;
+    quint32 currentSize = 0;
     QTimer timer;
     int a = 5;
     unsigned int x = 18;
     unsigned int y = 12;
+
+    QTcpServer* server = nullptr;
+    QTcpSocket* other = nullptr;
+    int posX = 100, posY = 150;
+    bool myTurn = false;
 
 public:
     explicit MainWindow(QWidget *parent, Game* game);
@@ -61,10 +70,16 @@ public:
     int getYIm(int ID);
     int moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit();
-    //QTcpServer* server = nullptr;
+    
+private:
+    void sendJson(QJsonObject obj);
 
 public slots:
     void tick();
+    void onNewConnection();
+    void onConnected();
+    void onDisconnected();
+    void onData();
 };
 
 #endif // MAINWINDOW_H
