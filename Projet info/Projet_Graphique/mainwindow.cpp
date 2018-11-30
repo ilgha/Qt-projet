@@ -152,6 +152,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
+            painter.setPen(QPen(Qt::white));
+            painter.setFont(QFont("Times", 20, QFont::Bold));
+            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
@@ -313,7 +316,10 @@ void MainWindow::unitMove(QMouseEvent *event){
 
 
 void MainWindow::showMove(Unit* unit){
-    /*int amtMove = unit->getMP();
+    /*
+     *Legacy
+     *
+     * int amtMove = unit->getMP();
     QPainter painter(this);
     for(int i = -amtMove; i<=amtMove; i++){
         for(int j = -amtMove; j<=amtMove; j++){
@@ -325,11 +331,12 @@ void MainWindow::showMove(Unit* unit){
         }
 
     }*/
-    moveUnit(unit, unit->getX(), unit->getY());
+    moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
         painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
+    cases.clear();
 }
 
 void MainWindow::showMenu(Building* b, Unit* u){
@@ -442,25 +449,95 @@ int MainWindow::getYIm(int ID){
     }
 }
 
-void MainWindow::moveUnit(Unit* unit, int x, int y)
+int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 {
-    int left = unit->getMP();
-    for(int i = -1; i<2; i++){
-        for(int j = -1; j<2;j++){
-            IntPair pos = std::make_pair(x+i,y+j);
-            unit->setMp(unit->getMP()-game->getMap().getTile(i, j).getMoved(unit->getMT()));
-            bool exist = false;
-            for(unsigned int u = 0; u<cases.size(); u++){
-                if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
-                    exist = true;
-                }
+    int i = 0;
+    int j = 1;
+    IntPair pos = std::make_pair(x+i,y+j);
+    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+
+    bool present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
             }
-            if(left >= 0 && exist == false){
-                cases.push_back(pos);
-                moveUnit(unit, x+i, y+j);
+        }
+    }/*
+
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 0;
+    j = -1;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
             }
         }
     }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 1;
+    j = 0;
+    pos = std::make_pair(x+i,y+j);
+    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = -1;
+    j = 0;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }*/
 }
 
 void MainWindow::createUnit(){
