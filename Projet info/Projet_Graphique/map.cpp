@@ -11,7 +11,7 @@ Map::Map(){
 }
 
 Land Map::getTile(int x, int y){
-    int type = map[x][y];
+    int type = map[y][x];
     switch(type){
         case 1 :
             return plain;
