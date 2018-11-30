@@ -449,13 +449,13 @@ int MainWindow::getYIm(int ID){
     }
 }
 
-int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
+void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 {
     int i = 0;
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-
+    std::cout << "done" << std::endl;
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -465,7 +465,7 @@ int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
                 present = false;
             }
         }
-    }/*
+    }
 
     if(MP >= 0 && !present){
         cases.push_back(pos);
@@ -537,7 +537,7 @@ int MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
         cases.push_back(pos);
         depl.push_back(MP);
         moveUnit(unit, x+i, y+j, MP);
-    }*/
+    }
 }
 
 void MainWindow::createUnit(){
