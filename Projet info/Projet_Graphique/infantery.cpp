@@ -5,6 +5,6 @@ using std::string;
 
 
 Infantery::Infantery(int x, int y, int health, int mp, Player* team):
-    Unit(x, y, health, 10, mp, 3, "f",team, 1){
+    Unit(x, y, health, 10, mp, 3, "f",team, 4){
 }
 

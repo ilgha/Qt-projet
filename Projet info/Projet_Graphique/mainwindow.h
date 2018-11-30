@@ -37,6 +37,7 @@ class MainWindow : public QMainWindow
     Game* game = nullptr;
     std::vector<Unit*> *army;
     std::vector<IntPair> cases;
+    std::vector<int> depl;
     bool inMenu = false;
     bool inMove = false;
 
@@ -58,7 +59,7 @@ public:
     void unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
-    void moveUnit(Unit* unit, int x, int y);
+    int moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit();
     //QTcpServer* server = nullptr;
 
