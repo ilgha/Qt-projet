@@ -55,14 +55,16 @@ void MainWindow::onNewConnection() {
 
 
     QJsonObject info;
-    posX = 0;
-    posY = 0;
-    info["x"] = posX;
-    info["y"] = posY;
+    for(unsigned int i = 0; i<army->size(); i++){
+        posX = army->at(i)->getX();
+        posY = army->at(i)->getY();
+        info["x"] = posX;
+        info["y"] = posY;
+    }
 
 
     isConfigured = true;
-     myTurn = false;
+    myTurn = false;
 
     sendJson(info);
     update();
@@ -96,29 +98,28 @@ void MainWindow::onData() {
     QJsonObject json = doc.object();
 
 
-    if(! isConfigured) {
-        posY = json["y"].toInt();
-        posX = json["x"].toInt();
-        update();
-        isConfigured = true;
-        myTurn = true;
-        } else {
-        int oldX = json["oldX"].toInt();
-        int oldY = json["oldY"].toInt();
-        int newX = json["newX"].toInt();
-        int newY = json["newY"].toInt();
-
-
-        if(!(posX == oldX && posY == oldY)) {
-            std::cerr << "ERROR" << std::endl;
-            destroy();
-            return;
+    for(unsigned int i = 0; i<army->size(); i++){
+        if(! isConfigured) {
+            posY = json["y"].toInt();
+            posX = json["x"].toInt();
+            update();
+            isConfigured = true;
+            myTurn = true;
+            } else {
+            int oldX = json["oldX"].toInt();
+            int oldY = json["oldY"].toInt();
+            int newX = json["newX"].toInt();
+            int newY = json["newY"].toInt();
+            posX = newX;
+            posY = newY;
+            army->at(i)->setX(posX);
+            army->at(i)->setY(posY);
+            myTurn = true;
         }
 
 
-        posX = newX;
-        posY = newY;
-        myTurn = true;
+
+
         update();
     }
 }
@@ -188,7 +189,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     for(unsigned int i = 0; i<army->size(); i++){
         if(!army->at(i)->getDead()){
-            QRectF target(( army->at(i)->getX())*width()/x, (army->at(i)->getY())*height()/y, width()/x, height()/y);
+            QRectF target( army->at(i)->getX()*width()/x, army->at(i)->getY()*height()/y, width()/x, height()/y);
             QRectF source(getXIm(army->at(i)->getID()), getYIm(army->at(i)->getID()), 16, 16);
             if(army->at(i)->getTeam() == game->getPlayer1()){
                 QImage image(":/sprt/advance wars sprites/Orange_Star");
@@ -219,7 +220,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     //test réseau
 
     QPainter painter(this);
-    painter.fillRect(posX, posY, 20, 40, Qt::red);
+//    painter.fillRect(posX, posY, 20, 40, Qt::red);
     painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
@@ -229,28 +230,21 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    unitMove(event);
-
 
 
     //réseau
     if(! myTurn)
-            return;
+           return;
 
-    int oldX = posX;
-    int oldY = posY;
-    posX = event->x();
-    posY = event->y();
-    QJsonObject move;
-    move["oldX"] = oldX;
-    move["oldY"] = oldY;
-    move["newX"] = posX;
-    move["newY"] = posY;
-    sendJson(move);
-
-
+    sendJson(unitMove(event));
     update();
-    myTurn = false;
+
+    for(unsigned int i = 0; i<army->size(); i++){
+        if(!army->at(i)->isMovable()){
+            myTurn = false;
+        }
+    }
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -269,8 +263,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     update();
 }
 
-void MainWindow::unitMove(QMouseEvent *event){
+QJsonObject MainWindow::unitMove(QMouseEvent *event){
+
+    QJsonObject move;
+
     for(unsigned int i = 0; i<army->size(); i++){
+
+
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
@@ -290,6 +289,12 @@ void MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
+
+        int oldX = army->at(i)->getX();
+        int oldY = army->at(i)->getY();
+
+        move["oldX"] = oldX;
+        move["oldY"] = oldY;
 
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
 
@@ -311,7 +316,11 @@ void MainWindow::unitMove(QMouseEvent *event){
                }
             }
         }
+        move["newX"] = army->at(i)->getX();
+        move["newY"] = army->at(i)->getY();
     }
+
+    return move;
 }
 
 
@@ -455,7 +464,7 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    std::cout << "done" << std::endl;
+    //std::cout << "done" << std::endl;
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -470,7 +479,7 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     if(MP >= 0 && !present){
         cases.push_back(pos);
         depl.push_back(MP);
-        std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
+        //std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
         moveUnit(unit, x+i, y+j, MP);
     }
 
