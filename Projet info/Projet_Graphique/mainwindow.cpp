@@ -17,6 +17,8 @@
 
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
+
+
     this->game = game;
     this->army = game->getArmy();
 
