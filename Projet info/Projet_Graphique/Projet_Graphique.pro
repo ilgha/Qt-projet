@@ -99,4 +99,5 @@ DISTFILES += \
     tileset projet.png
 
 RESOURCES += \
-    sprites.qrc
+    sprites.qrc \
+    msc.qrc

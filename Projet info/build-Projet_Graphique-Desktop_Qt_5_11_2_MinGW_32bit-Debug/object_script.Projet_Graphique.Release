@@ -28,5 +28,6 @@ INPUT(
 ./release\City.o
 ./release\unit.o
 ./release\qrc_sprites.o
+./release\qrc_msc.o
 ./release\moc_mainwindow.o
 );

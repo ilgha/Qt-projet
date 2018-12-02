@@ -28,5 +28,6 @@ INPUT(
 ./debug\City.o
 ./debug\unit.o
 ./debug\qrc_sprites.o
+./debug\qrc_msc.o
 ./debug\moc_mainwindow.o
 );
