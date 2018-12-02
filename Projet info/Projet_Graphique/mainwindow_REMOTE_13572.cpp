@@ -5,11 +5,9 @@
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QDebug>
-#include <QLabel>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QComboBox>
-#include <QWindow>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
@@ -20,16 +18,6 @@
 
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
-
-    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
-    textWidget->setWindowTitle("Menu");
-    textWidget->move(50,50);
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-
-    textWidget->setStyleSheet("background-color: yellow");
-    textWidget->repaint();
-
     //create widgets
     // Set layout
     QHBoxLayout *layout = new QHBoxLayout;
@@ -44,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     // Set QWidget as the central layout of the main window
     setCentralWidget(window);
-
     this->army[0] = army[0];
 
     this->game = game;
@@ -63,10 +50,8 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        //other->connectToHost("192.168.1.6", 8123);
         other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-        game->endTurn();
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
@@ -164,12 +149,10 @@ void MainWindow::onData() {
                 army->at(i)->setX(posX.at(i));
                 army->at(i)->setY(posY.at(i));
             }
-
-
-
+            game->endTurn();
         }
 
-        std::cout << game->getActive() << std::endl;
+
 
 
         update();
@@ -188,7 +171,6 @@ void MainWindow::sendJson(QJsonObject obj) {
 
 
 void MainWindow::paintEvent(QPaintEvent *event){
-
 
     //map
 
@@ -300,7 +282,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     case Qt::Key_P: {
         if(! myTurn)
                return;
-        game->endTurn();
         myTurn = false;
         sendJson(changeTurn());
 
@@ -396,13 +377,13 @@ QJsonObject MainWindow::changeTurn()
         QString n = QString::number(i);
         turn[oldx.append(n)] = oldX;
         turn[oldy.append(n)] = oldY;
+
+
         QString newx = "newX";
         QString newy = "newY";
         turn[newx.append(n)] = oldX;
         turn[newy.append(n)] = oldY;
     }
-
-    game->endTurn();
 
     return turn;
 }
@@ -632,35 +613,15 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
-            QWidget *window = new QWidget();
-            window->setVisible(true);
-
-            QComboBox *liste = new QComboBox(window);
-
-            if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter");
-                liste->addItem("Bomber");
-                liste->addItem("Fighter");
-            }
-
-            else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air");
-                liste->addItem("Infantry");
-                liste->addItem("Md Tank");
-                liste->addItem("Mech");
-                liste->addItem("Mega Tank");
-                liste->addItem("Neo Tank");
-                liste->addItem("Recon");
-                liste->addItem("Tank");
-            }
-
-            liste->show();
-            window->show();
-
-
-
-
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
+            QWidget fenetre;
+            QComboBox *liste = new QComboBox(&fenetre);
+            liste->addItem("Paris");
+            liste->addItem("Londres");
+            liste->addItem("Singapour");
+            liste->addItem("Tokyo");
+            fenetre.setGeometry(500,500,10,10);
+            fenetre.show();
         }
 
     }

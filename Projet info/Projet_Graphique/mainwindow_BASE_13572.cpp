@@ -3,59 +3,33 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <QVBoxLayout>
+#include <QBoxLayout>
 #include <QDebug>
-#include <QLabel>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QComboBox>
-#include <QWindow>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
 #include <string>
-#include <QString>
 #include "Plain.h"
 
 
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
-
-    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
-    textWidget->setWindowTitle("Menu");
-    textWidget->move(50,50);
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-
-    textWidget->setStyleSheet("background-color: yellow");
-    textWidget->repaint();
-
-    //create widgets
-    // Set layout
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(qMap);
-    layout->addWidget(Menu);
-    qMap->setVisible(true);
-    Menu->setVisible(true);
-    // Set layout in QWidget
-    QWidget *window = new QWidget();
-    window->setLayout(layout);
-    window->setVisible(true);
-
-    // Set QWidget as the central layout of the main window
-    setCentralWidget(window);
-
+    QWidget window;
+       window.resize(320, 240);
+       window.setWindowTitle(QApplication::translate("childwidget", "Child widget"));
+       window.show();
+       QPushButton *button = new QPushButton(
+              QApplication::translate("childwidget", "Press me"), &window);
+          button->move(100, 100);
+          button->show();
     this->army[0] = army[0];
-
     this->game = game;
-    this->army = game->getArmy();
-
-    this->posX.resize(army->size());
-    this->posY.resize(army->size());
     ui->setupUi(this);
-
+    this->army = game->getArmy();
     music();
-
 
     server = new QTcpServer();
 
@@ -63,10 +37,8 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        //other->connectToHost("192.168.1.6", 8123);
         other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-        game->endTurn();
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
@@ -91,15 +63,11 @@ void MainWindow::onNewConnection() {
 
 
     QJsonObject info;
-
     for(unsigned int i = 0; i<army->size(); i++){
-        posX.at(i) = army->at(i)->getX();
-        posY.at(i) = army->at(i)->getY();
-        QString x = "x";
-        QString y = "y";
-        QString n = QString::number(i);
-        info.insert(x.append(n),posX.at(i));
-        info.insert(y.append(n),posY.at(i));
+        posX = army->at(i)->getX();
+        posY = army->at(i)->getY();
+        info["x"] = posX;
+        info["y"] = posY;
     }
 
 
@@ -108,7 +76,7 @@ void MainWindow::onNewConnection() {
 
     sendJson(info);
     update();
-}
+    }
 
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;
@@ -138,43 +106,31 @@ void MainWindow::onData() {
     QJsonObject json = doc.object();
 
 
+    for(unsigned int i = 0; i<army->size(); i++){
         if(! isConfigured) {
-            for(unsigned int i = 0; i<army->size(); i++){
-                QString x = "x";
-                QString y = "y";
-                QString n = QString::number(i);
-
-                posY.at(i) = json[y.append(n)].toInt();
-                posX.at(i) = json[x.append(n)].toInt();
-            }
-
+            posY = json["y"].toInt();
+            posX = json["x"].toInt();
             update();
             isConfigured = true;
             myTurn = true;
-        } else {
-            myTurn = json["turn"].toBool();
-            for(unsigned int i = 0; i<army->size(); i++){
-                QString n = QString::number(i);
-                QString newx = "newX";
-                QString newy = "newY";
-                int newX = json[newx.append(n)].toInt();
-                int newY = json[newy.append(n)].toInt();
-                posX.at(i) = newX;
-                posY.at(i) = newY;
-                army->at(i)->setX(posX.at(i));
-                army->at(i)->setY(posY.at(i));
-            }
-
-
-
+            } else {
+            int oldX = json["oldX"].toInt();
+            int oldY = json["oldY"].toInt();
+            int newX = json["newX"].toInt();
+            int newY = json["newY"].toInt();
+            posX = newX;
+            posY = newY;
+            army->at(i)->setX(posX);
+            army->at(i)->setY(posY);
+            myTurn = true;
         }
 
-        std::cout << game->getActive() << std::endl;
+
 
 
         update();
+    }
 }
-
 
 
 void MainWindow::sendJson(QJsonObject obj) {
@@ -182,13 +138,12 @@ void MainWindow::sendJson(QJsonObject obj) {
     QDataStream out(other);
     out << (quint32) data.length();
     other->write(data);
-    std::cout << "Sending " << data.toStdString() << std::endl;
+     std::cout << "Sending " << data.toStdString() << std::endl;
 }
 
 
-
 void MainWindow::paintEvent(QPaintEvent *event){
-
+/*
 
     //map
 
@@ -206,9 +161,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
-//            painter.setPen(QPen(Qt::white));
-//            painter.setFont(QFont("Times", 20, QFont::Bold));
-//            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
+            painter.setPen(QPen(Qt::white));
+            painter.setFont(QFont("Times", 20, QFont::Bold));
+            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
@@ -277,7 +232,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
-    }
+    }*/
 }
 
 
@@ -292,18 +247,19 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
     sendJson(unitMove(event));
     update();
 
+    for(unsigned int i = 0; i<army->size(); i++){
+        if(!army->at(i)->isMovable()){
+            myTurn = false;
+        }
+    }
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     qDebug() << event->key();
     switch(event->key()){
     case Qt::Key_P: {
-        if(! myTurn)
-               return;
         game->endTurn();
-        myTurn = false;
-        sendJson(changeTurn());
-
         break;
     }
 
@@ -344,11 +300,9 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
 
         int oldX = army->at(i)->getX();
         int oldY = army->at(i)->getY();
-        QString oldx = "oldX";
-        QString oldy = "oldY";
-        QString n = QString::number(i);
-        move[oldx.append(n)] = oldX;
-        move[oldy.append(n)] = oldY;
+
+        move["oldX"] = oldX;
+        move["oldY"] = oldY;
 
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
 
@@ -370,41 +324,11 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                }
             }
         }
-        QString newx = "newX";
-        QString newy = "newY";
-        move[newx.append(n)] = army->at(i)->getX();
-        move[newy.append(n)] = army->at(i)->getY();
+        move["newX"] = army->at(i)->getX();
+        move["newY"] = army->at(i)->getY();
     }
-
-
 
     return move;
-}
-
-QJsonObject MainWindow::changeTurn()
-{
-    QJsonObject turn;
-
-    turn["turn"] = (myTurn == false);
-
-    for(unsigned int i = 0; i<army->size(); i++){
-
-        int oldX = army->at(i)->getX();
-        int oldY = army->at(i)->getY();
-        QString oldx = "oldX";
-        QString oldy = "oldY";
-        QString n = QString::number(i);
-        turn[oldx.append(n)] = oldX;
-        turn[oldy.append(n)] = oldY;
-        QString newx = "newX";
-        QString newy = "newY";
-        turn[newx.append(n)] = oldX;
-        turn[newy.append(n)] = oldY;
-    }
-
-    game->endTurn();
-
-    return turn;
 }
 
 
@@ -632,35 +556,15 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
-            QWidget *window = new QWidget();
-            window->setVisible(true);
-
-            QComboBox *liste = new QComboBox(window);
-
-            if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter");
-                liste->addItem("Bomber");
-                liste->addItem("Fighter");
-            }
-
-            else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air");
-                liste->addItem("Infantry");
-                liste->addItem("Md Tank");
-                liste->addItem("Mech");
-                liste->addItem("Mega Tank");
-                liste->addItem("Neo Tank");
-                liste->addItem("Recon");
-                liste->addItem("Tank");
-            }
-
-            liste->show();
-            window->show();
-
-
-
-
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
+            QWidget fenetre;
+            QComboBox *liste = new QComboBox(&fenetre);
+            liste->addItem("Paris");
+            liste->addItem("Londres");
+            liste->addItem("Singapour");
+            liste->addItem("Tokyo");
+            fenetre.setGeometry(500,500,10,10);
+            fenetre.show();
         }
 
     }
@@ -668,8 +572,7 @@ void MainWindow::createUnit(QMouseEvent *event){
 
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
-    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
-
+    mus->setMedia(QUrl::fromLocalFile(QFileInfo("../advance wars sprites/take.mp3").absoluteFilePath()));
     mus->setVolume(50);
     mus->play();
 }
