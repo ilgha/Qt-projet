@@ -4,7 +4,7 @@
 using std::string;
 
 
-Infantery::Infantery(int x, int y, int health, int mp, Player* team):
-    Unit(x, y, health, 10, mp, 3, "f",team, 4){
+Infantery::Infantery(int x, int y, int health, Player* team):
+    Unit(x, y, health, 10, 3, "f",team, 4){
 }
 

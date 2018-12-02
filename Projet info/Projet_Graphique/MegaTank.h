@@ -7,6 +7,6 @@
 
 class MegaTank : public Unit {
 public:
-MegaTank(int x, int y, int health,int mp, Player* team);
+MegaTank(int x, int y, int health, Player* team);
 };
 #endif //MEGATANK_H

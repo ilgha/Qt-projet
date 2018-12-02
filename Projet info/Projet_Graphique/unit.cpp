@@ -14,13 +14,12 @@ void Unit::setMp(int value)
     mp = value;
 }
 
-Unit::Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID) {
+Unit::Unit(int posX, int posY, int health, int healthMax, int mp, string mt, Player* team, int ID) {
     x = posX;
     y = posY;
     this->health = health;
     this->healthMax = healthMax;
     this->mp = mp;
-    this->mpMax = mpMax;
     this->mt = mt;
     this->team = team;
     this->ID = ID;
@@ -69,7 +68,7 @@ void Unit::setY(int y){
 }
 
 void Unit::newTurn(){
-    mp = mpMax;
+
 }
 void Unit::setMovable(bool b)
 {

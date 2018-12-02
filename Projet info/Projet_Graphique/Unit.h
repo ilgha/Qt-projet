@@ -14,7 +14,6 @@ class Unit{
     int health;
     int healthMax;
     int mp;
-    int mpMax;
     bool movable = false;
     string mt;
     Player* team;
@@ -24,7 +23,7 @@ class Unit{
 
 
 public:
-    Unit(int posX, int posY, int health, int healthMax, int mp, int mpMax, string mt, Player* team, int ID);
+    Unit(int posX, int posY, int health, int healthMax, int mp, string mt, Player* team, int ID);
 
     int getX() const ;
     int getY() const;
