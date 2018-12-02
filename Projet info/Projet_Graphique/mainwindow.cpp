@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QComboBox>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
@@ -556,7 +557,14 @@ void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
         if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
-            QMessageBox::information(this,"Test","Batiment");
+            QWidget fenetre;
+            QComboBox *liste = new QComboBox(&fenetre);
+            liste->addItem("Paris");
+            liste->addItem("Londres");
+            liste->addItem("Singapour");
+            liste->addItem("Tokyo");
+            fenetre.setGeometry(500,500,10,10);
+            fenetre.show();
         }
 
     }
