@@ -1,10 +1,11 @@
 #include "building.h"
 #include <iostream>
 
-Building::Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a) : Land(defence, f, b, tr, ti, a){
+Building::Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a, int ID) : Land(defence, f, b, tr, ti, a){
     hp = maxHp;
     x = posX;
     y = posY;
+    this->ID = ID;
 }
 
 int Building::getHp() const{
@@ -21,6 +22,10 @@ int Building::getX() const {
 
 int Building::getY() const {
     return y;
+}
+
+int Building::getID() const{
+    return ID;
 }
 
 Player* Building::switchTeam(Player* team) {
