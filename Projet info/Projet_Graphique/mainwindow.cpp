@@ -616,7 +616,8 @@ void MainWindow::createUnit(QMouseEvent *event){
 
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
-    mus->setMedia(QUrl::fromLocalFile(QFileInfo("../Projet info/advance wars sprites/take.mp3").absoluteFilePath()));
+    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
+
     mus->setVolume(50);
     mus->play();
 }
