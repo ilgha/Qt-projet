@@ -168,6 +168,25 @@ void MainWindow::sendJson(QJsonObject obj) {
 }
 
 
+int MainWindow::tDtoIsoX(int x, int y){
+    x = x-y;
+    return x;
+}
+
+int MainWindow::tDtoIsoY(int x, int y){
+    y = (x+y)/2;
+    return y;
+}
+
+int MainWindow::isoToTDX(int x, int y){
+    x = (2*y+y)/2;
+    return x;
+}
+
+int MainWindow::isoToTDY(int x, int y){
+    y = (2*y-x)/2;
+    return y;
+}
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
@@ -184,7 +203,11 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
             QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
+
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
+            if(game->getMap().getTile(j, i).getDef()== 1){
+                QRectF source((t[i][j]-1+45)*16, 15, 16, 16);
+            }
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);

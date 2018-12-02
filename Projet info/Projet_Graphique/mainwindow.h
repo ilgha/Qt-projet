@@ -36,8 +36,6 @@ class MainWindow : public QMainWindow
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
-    void music();
-
 
     Ui::MainWindow *ui;
     quint32 currentSize = 0;
@@ -70,7 +68,11 @@ public:
     
 private:
     void sendJson(QJsonObject obj);
-
+    void music();
+    int tDtoIsoX(int x, int y);
+    int isoToTDX(int x, int y);
+    int tDtoIsoY(int x, int y);
+    int isoToTDY(int x, int y);
 public slots:
     void tick();
     void onNewConnection();
