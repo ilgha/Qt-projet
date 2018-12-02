@@ -213,7 +213,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
-            showMenu(game->checkBuildings(army->at(i)),army->at(i));
+            showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
         //}
 
 
@@ -231,7 +231,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-
+    createUnit(event);
 
     //réseau
     if(! myTurn)
@@ -546,8 +546,14 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     }
 }
 
-void MainWindow::createUnit(){
+void MainWindow::createUnit(QMouseEvent *event){
+    for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
+            QMessageBox::information(this,"Test","Batiment");
+        }
+
+    }
 }
 
 void MainWindow::music(){
