@@ -658,25 +658,29 @@ void MainWindow::createUnit(QMouseEvent *event){
         if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
             QWidget *window = new QWidget();
             window->setVisible(true);
+            window->setFixedSize(600,300);
+            window->setWindowTitle("Production of unit");
 
             QComboBox *liste = new QComboBox(window);
 
             if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter");
-                liste->addItem("Bomber");
-                liste->addItem("Fighter");
+                liste->addItem("BCopter: 9000$");
+                liste->addItem("Bomber: 22000$");
+                liste->addItem("Fighter: 20000$");
             }
 
             else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air");
-                liste->addItem("Infantry");
-                liste->addItem("Md Tank");
-                liste->addItem("Mech");
-                liste->addItem("Mega Tank");
-                liste->addItem("Neo Tank");
-                liste->addItem("Recon");
-                liste->addItem("Tank");
+                liste->addItem("Anti Air: 8000$");
+                liste->addItem("Infantry: 1000$");
+                liste->addItem("Md Tank: 1600$");
+                liste->addItem("Mech: 3000$");
+                liste->addItem("Mega Tank: 28000$");
+                liste->addItem("Neo Tank: 22000$");
+                liste->addItem("Recon: 15000$");
+                liste->addItem("Tank: 7000$");
             }
+
+
 
             liste->show();
             window->show();
