@@ -36,8 +36,10 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
+        //other->connectToHost("192.168.1.6", 8123);
         other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+        game->endTurn();
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
@@ -135,10 +137,12 @@ void MainWindow::onData() {
                 army->at(i)->setX(posX.at(i));
                 army->at(i)->setY(posY.at(i));
             }
-            game->endTurn();
+
+
+
         }
 
-
+        std::cout << game->getActive() << std::endl;
 
 
         update();
@@ -269,6 +273,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     case Qt::Key_P: {
         if(! myTurn)
                return;
+        game->endTurn();
         myTurn = false;
         sendJson(changeTurn());
 
@@ -364,13 +369,13 @@ QJsonObject MainWindow::changeTurn()
         QString n = QString::number(i);
         turn[oldx.append(n)] = oldX;
         turn[oldy.append(n)] = oldY;
-
-
         QString newx = "newX";
         QString newy = "newY";
         turn[newx.append(n)] = oldX;
         turn[newy.append(n)] = oldY;
     }
+
+    game->endTurn();
 
     return turn;
 }

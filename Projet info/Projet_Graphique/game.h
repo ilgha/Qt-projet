@@ -52,6 +52,7 @@ public:
     Land* checkLand(Unit* units);
     bool ennemyNear(Unit* unit);
     Player* getActive() const;
+    void setActive(Player* player);
     void checkFusion(Unit* unit);
     void erase();
     void setHealth(Unit* unit, int addedHealth);

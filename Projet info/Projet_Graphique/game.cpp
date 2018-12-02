@@ -144,6 +144,11 @@ Player* Game::getActive() const{
     return active;
 }
 
+void Game::setActive(Player* player){
+    this->active = player;
+}
+
+
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit){
