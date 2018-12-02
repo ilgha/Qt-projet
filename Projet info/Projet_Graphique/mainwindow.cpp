@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         other->connectToHost("192.168.1.6", 8123);
         //other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-        //game->endTurn();
+        game->endTurn();
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
