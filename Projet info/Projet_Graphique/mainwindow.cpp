@@ -143,7 +143,7 @@ void MainWindow::sendJson(QJsonObject obj) {
 
 
 void MainWindow::paintEvent(QPaintEvent *event){
-/*
+
 
     //map
 
@@ -232,7 +232,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
-    }*/
+    }
 }
 
 
@@ -563,7 +563,8 @@ void MainWindow::createUnit(QMouseEvent *event){
             liste->addItem("Londres");
             liste->addItem("Singapour");
             liste->addItem("Tokyo");
-            fenetre.setGeometry(500,500,10,10);
+
+            fenetre.setGeometry(500,500,70,40);
             fenetre.show();
         }
 
