@@ -281,7 +281,7 @@ void MainWindow::unitMove(QMouseEvent *event){
 
             }else if(army->at(i)->isMovable() && game->getActiveUnit() == army->at(i)){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
-                        event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
+                    event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                     game->setActiveUnit(nullptr);
                     army->at(i)->setMovable(false);
                 }
@@ -320,17 +320,15 @@ void MainWindow::showMove(Unit* unit){
      *Legacy
      *
      * int amtMove = unit->getMP();
-    QPainter painter(this);
-    for(int i = -amtMove; i<=amtMove; i++){
-        for(int j = -amtMove; j<=amtMove; j++){
-            if(std::abs(i) + std::abs(j) <= amtMove){
+     * QPainter painter(this);
+     * for(int i = -amtMove; i<=amtMove; i++){
+     *    for(int j = -amtMove; j<=amtMove; j++){
+     *        if(std::abs(i) + std::abs(j) <= amtMove){
+     *          painter.fillRect((unit->getX()*width()/x) + (i*std::abs(width()/x)), (unit->getY()*height()/y) + (j*std::abs(height()/y)), width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
+     *          }
+     *      }
+     *  }*/
 
-                painter.fillRect((unit->getX()*width()/x) + (i*std::abs(width()/x)), (unit->getY()*height()/y) + (j*std::abs(height()/y)), width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
-
-            }
-        }
-
-    }*/
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
@@ -455,7 +453,6 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    std::cout << "done" << std::endl;
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -470,7 +467,6 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     if(MP >= 0 && !present){
         cases.push_back(pos);
         depl.push_back(MP);
-        std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
         moveUnit(unit, x+i, y+j, MP);
     }
 
