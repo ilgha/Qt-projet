@@ -30,21 +30,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     textWidget->setStyleSheet("background-color: yellow");
     textWidget->repaint();
 
-    //create widgets
-    // Set layout
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(qMap);
-    layout->addWidget(Menu);
-    qMap->setVisible(true);
-    Menu->setVisible(true);
-    // Set layout in QWidget
-    QWidget *window = new QWidget();
-    window->setLayout(layout);
-    window->setVisible(true);
-
-    // Set QWidget as the central layout of the main window
-    setCentralWidget(window);
-
     this->army[0] = army[0];
 
     this->game = game;
