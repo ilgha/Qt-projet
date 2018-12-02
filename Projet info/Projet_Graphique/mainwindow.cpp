@@ -10,6 +10,7 @@
 #include <QDockWidget>
 #include <QMessageBox>
 #include <QComboBox>
+#include <QWindow>
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
@@ -613,6 +614,7 @@ void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
         if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
+
             QWidget fenetre;
             QComboBox *liste = new QComboBox(&fenetre);
             liste->addItem("Paris");
