@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QPushButton>
 #include "game.h"
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,5 @@ int main(int argc, char *argv[])
     Game* game = new Game(&player1, &player2);
     MainWindow w(nullptr, game);
     w.show();
-
     return a.exec();
 }
