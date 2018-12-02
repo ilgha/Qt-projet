@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     textWidget->setWindowTitle("Menu");
     textWidget->move(50,50);
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
+                        "\nUnits : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
 
     textWidget->setStyleSheet("background-color: yellow");
     textWidget->repaint();
@@ -182,25 +182,6 @@ void MainWindow::sendJson(QJsonObject obj) {
 }
 
 
-int MainWindow::tDtoIsoX(int x, int y){
-    x = x-y;
-    return x;
-}
-
-int MainWindow::tDtoIsoY(int x, int y){
-    y = (x+y)/2;
-    return y;
-}
-
-int MainWindow::isoToTDX(int x, int y){
-    x = (2*y+y)/2;
-    return x;
-}
-
-int MainWindow::isoToTDY(int x, int y){
-    y = (2*y-x)/2;
-    return y;
-}
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
@@ -217,11 +198,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
             QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
-
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-            if(game->getMap().getTile(j, i).getDef()== 1){
-                QRectF source((t[i][j]-1+45)*16, 15, 16, 16);
-            }
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
@@ -650,34 +627,17 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
             QWidget *window = new QWidget();
             window->setVisible(true);
 
             QComboBox *liste = new QComboBox(window);
-
-            if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter");
-                liste->addItem("Bomber");
-                liste->addItem("Fighter");
-            }
-
-            else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air");
-                liste->addItem("Infantry");
-                liste->addItem("Md Tank");
-                liste->addItem("Mech");
-                liste->addItem("Mega Tank");
-                liste->addItem("Neo Tank");
-                liste->addItem("Recon");
-                liste->addItem("Tank");
-            }
-
+            liste->addItem("Paris");
+            liste->addItem("Londres");
+            liste->addItem("Singapour");
+            liste->addItem("Tokyo");
             liste->show();
             window->show();
-
-
-
 
         }
 

@@ -8,17 +8,18 @@
 
 class Building : public Land{
     Player* team = nullptr;
-    int x, y, hp;
+    int x, y, hp, ID;
     Player* switchTeam(Player* team);
     void reset();
     int maxHp = 20;
     int income = 1000;
 public:
-    Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a);
+    Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a, int ID);
     Player* getTeam() const ;
     int getHp() const ;
     int getX() const;
     int getY() const;
+    int getID() const;
     int setHp(Unit* unit);
 };
 

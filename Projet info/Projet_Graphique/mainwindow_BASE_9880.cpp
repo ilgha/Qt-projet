@@ -5,8 +5,8 @@
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QDebug>
-#include <QLabel>
 #include <QPushButton>
+#include <QDockWidget>
 #include <QMessageBox>
 #include <QComboBox>
 #include <QWindow>
@@ -21,32 +21,16 @@
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
-    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
-    textWidget->setWindowTitle("Menu");
-    textWidget->move(50,50);
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
 
-    textWidget->setStyleSheet("background-color: yellow");
-    textWidget->repaint();
+    QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
+    dockWidget->setAllowedAreas(Qt::RightDockWidgetArea);
+    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
+    dockWidget->setWindowTitle("Menu");
 
-    //create widgets
-    // Set layout
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(qMap);
-    layout->addWidget(Menu);
-    qMap->setVisible(true);
-    Menu->setVisible(true);
-    // Set layout in QWidget
-    QWidget *window = new QWidget();
-    window->setLayout(layout);
-    window->setVisible(true);
-
-    // Set QWidget as the central layout of the main window
-    setCentralWidget(window);
+    dockWidget->setStyleSheet("background-color: yellow");
+    dockWidget->repaint();
 
     this->army[0] = army[0];
-
     this->game = game;
     this->army = game->getArmy();
 
@@ -63,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        other->connectToHost("127.0.0.1", 8123);
+        other->connectToHost("192.168.1.7", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
     } else {
         std::cout << "I am the server" << std::endl;
@@ -182,25 +166,6 @@ void MainWindow::sendJson(QJsonObject obj) {
 }
 
 
-int MainWindow::tDtoIsoX(int x, int y){
-    x = x-y;
-    return x;
-}
-
-int MainWindow::tDtoIsoY(int x, int y){
-    y = (x+y)/2;
-    return y;
-}
-
-int MainWindow::isoToTDX(int x, int y){
-    x = (2*y+y)/2;
-    return x;
-}
-
-int MainWindow::isoToTDY(int x, int y){
-    y = (2*y-x)/2;
-    return y;
-}
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
@@ -217,11 +182,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
             QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
-
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-            if(game->getMap().getTile(j, i).getDef()== 1){
-                QRectF source((t[i][j]-1+45)*16, 15, 16, 16);
-            }
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
@@ -650,35 +611,17 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
-            QWidget *window = new QWidget();
-            window->setVisible(true);
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
 
-            QComboBox *liste = new QComboBox(window);
+            QWidget fenetre;
+            QComboBox *liste = new QComboBox(&fenetre);
+            liste->addItem("Paris");
+            liste->addItem("Londres");
+            liste->addItem("Singapour");
+            liste->addItem("Tokyo");
 
-            if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter");
-                liste->addItem("Bomber");
-                liste->addItem("Fighter");
-            }
-
-            else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air");
-                liste->addItem("Infantry");
-                liste->addItem("Md Tank");
-                liste->addItem("Mech");
-                liste->addItem("Mega Tank");
-                liste->addItem("Neo Tank");
-                liste->addItem("Recon");
-                liste->addItem("Tank");
-            }
-
-            liste->show();
-            window->show();
-
-
-
-
+            fenetre.setGeometry(500,500,70,40);
+            fenetre.show();
         }
 
     }
@@ -687,7 +630,6 @@ void MainWindow::createUnit(QMouseEvent *event){
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
     mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
-
     mus->setVolume(50);
     mus->play();
 }
