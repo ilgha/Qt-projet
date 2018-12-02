@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QDebug>
+#include <QLabel>
 #include <QPushButton>
 #include <QDockWidget>
 #include <QMessageBox>
@@ -21,13 +22,14 @@
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
 
-    QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
-    dockWidget->setAllowedAreas(Qt::RightDockWidgetArea);
-    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
-    dockWidget->setWindowTitle("Menu");
+    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
+    textWidget->setWindowTitle("Menu");
+    textWidget->move(50,50);
+    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                        "\nUnits : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
 
-    dockWidget->setStyleSheet("background-color: yellow");
-    dockWidget->repaint();
+    textWidget->setStyleSheet("background-color: yellow");
+    textWidget->repaint();
 
     this->army[0] = army[0];
     this->game = game;
