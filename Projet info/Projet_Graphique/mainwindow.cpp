@@ -34,8 +34,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am the server" << std::endl;
         other = nullptr;
     }
-    
-    std::cout << server->nextPendingConnection() << std::endl;
     connect(server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
 
 

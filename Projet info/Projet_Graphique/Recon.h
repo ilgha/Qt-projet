@@ -4,6 +4,6 @@
 #include "Unit.h"
 class Recon : public Unit {
 public:
-Recon(int x, int y, int health, int mp, Player* team);
+Recon(int x, int y, int health, Player* team);
 };
 #endif // RECON_H
