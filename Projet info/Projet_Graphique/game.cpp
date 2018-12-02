@@ -111,9 +111,9 @@ std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
-Building* Game::checkBuildings(Unit* unit){
+Building* Game::checkBuildings(unsigned int x, unsigned int y){
     for(unsigned int i = 0; i < buildings.size(); i++){
-        if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
+        if(x == buildings.at(i).getX() && y == buildings.at(i).getY()){
             return &buildings[i];
         }
     }

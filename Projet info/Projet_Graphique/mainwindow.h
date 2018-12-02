@@ -63,7 +63,7 @@ public:
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
-    void createUnit();
+    void createUnit(QMouseEvent *event);
     
 private:
     void sendJson(QJsonObject obj);
