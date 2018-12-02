@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QMediaPlayer>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -19,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->game = game;
     ui->setupUi(this);
     this->army = game->getArmy();
-
+    music();
 
     server = new QTcpServer();
 
@@ -463,9 +464,9 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
 <<<<<<< HEAD
+
 =======
-    //std::cout << "done" << std::endl;
->>>>>>> 650e66da839a408d68b3a9004b3fe08715221d75
+>>>>>>> bbe8c6bba5c35641ea78ddb0e1d443130f0ccc16
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -481,9 +482,9 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
         cases.push_back(pos);
         depl.push_back(MP);
 <<<<<<< HEAD
+
 =======
-        //std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
->>>>>>> 650e66da839a408d68b3a9004b3fe08715221d75
+>>>>>>> bbe8c6bba5c35641ea78ddb0e1d443130f0ccc16
         moveUnit(unit, x+i, y+j, MP);
     }
 
@@ -557,3 +558,9 @@ void MainWindow::createUnit(){
 
 }
 
+void MainWindow::music(){
+    QMediaPlayer* mus = new QMediaPlayer;
+    mus->setMedia(QUrl::fromLocalFile(QFileInfo("../advance wars sprites/take.mp3").absoluteFilePath()));
+    mus->setVolume(50);
+    mus->play();
+}

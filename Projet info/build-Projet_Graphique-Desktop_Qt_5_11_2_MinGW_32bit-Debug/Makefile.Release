@@ -539,7 +539,11 @@ release/moc_mainwindow.cpp: ../Projet_Graphique/player.h \
 		../Projet_Graphique/mainwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/5.11.2/mingw53_32/bin/moc.exe
+<<<<<<< HEAD
 	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Chloé/Desktop/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/release/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Chloé/Desktop/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtMultimedia -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtNetwork -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o release\moc_mainwindow.cpp
+=======
+	C:\Qt\5.11.2\mingw53_32\bin\moc.exe $(DEFINES) --include "C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/build-Projet_Graphique-Desktop_Qt_5_11_2_MinGW_32bit-Debug/release/moc_predefs.h" -IC:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Pierre Vander Eyken/Documents/Git/Qt-projet/Projet info/Projet_Graphique" -IC:/Qt/5.11.2/mingw53_32/include -IC:/Qt/5.11.2/mingw53_32/include/QtWidgets -IC:/Qt/5.11.2/mingw53_32/include/QtMultimedia -IC:/Qt/5.11.2/mingw53_32/include/QtGui -IC:/Qt/5.11.2/mingw53_32/include/QtANGLE -IC:/Qt/5.11.2/mingw53_32/include/QtNetwork -IC:/Qt/5.11.2/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Projet_Graphique\mainwindow.h -o release\moc_mainwindow.cpp
+>>>>>>> bbe8c6bba5c35641ea78ddb0e1d443130f0ccc16
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1237,10 +1241,7 @@ release/mainwindow.o: ../Projet_Graphique/mainwindow.cpp ../Projet_Graphique/mai
 		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qmessagebox.h \
-		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qdialog.h \
-		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/QLabel \
-		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qlabel.h \
-		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qframe.h
+		C:/Qt/5.11.2/mingw53_32/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Projet_Graphique\mainwindow.cpp
 
 release/infantery.o: ../Projet_Graphique/infantery.cpp ../Projet_Graphique/infantery.h \

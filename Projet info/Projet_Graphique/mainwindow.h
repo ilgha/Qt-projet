@@ -62,9 +62,8 @@ public:
     QJsonObject unitMove(QMouseEvent *event);
     int getXIm(int ID);
     int getYIm(int ID);
-
     void moveUnit(Unit* unit, int x, int y, int MP);
-    QJsonObject createUnit(QMouseEvent* event);
+    void createUnit();
     
 private:
     void sendJson(QJsonObject obj);

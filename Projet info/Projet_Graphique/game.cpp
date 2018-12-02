@@ -52,8 +52,6 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     active->addMoney(active->getIncome());
-    army.push_back(new Infantery(4, 5, 30, 5, active));
-    buildings.at(0).setHp(army.at(0));
     if(active->getMoney() == 0){
         endGame();
     }
@@ -113,11 +111,10 @@ std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
-Building* Game::checkBuildings(unsigned int x,unsigned int y){
+Building* Game::checkBuildings(Unit* unit){
     for(unsigned int i = 0; i < buildings.size(); i++){
-        if(x == buildings.at(i).getX() && y == buildings.at(i).getY()){
+        if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
             return &buildings[i];
-
         }
     }
     return nullptr;
