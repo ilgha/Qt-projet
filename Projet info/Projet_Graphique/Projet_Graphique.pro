@@ -26,6 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+QT += multimedia
+
 SOURCES += \
         main.cpp \
         mainwindow.cpp \

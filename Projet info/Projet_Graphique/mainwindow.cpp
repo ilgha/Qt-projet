@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QMediaPlayer>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -20,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->game = game;
     ui->setupUi(this);
     this->army = game->getArmy();
-
+    music();
 
     server = new QTcpServer();
 
@@ -464,7 +465,10 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+<<<<<<< HEAD
 
+=======
+>>>>>>> c59fd284f862c011105d4ce13cbb25fcc0b4e850
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -479,7 +483,10 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     if(MP >= 0 && !present){
         cases.push_back(pos);
         depl.push_back(MP);
+<<<<<<< HEAD
 
+=======
+>>>>>>> c59fd284f862c011105d4ce13cbb25fcc0b4e850
         moveUnit(unit, x+i, y+j, MP);
     }
 
@@ -559,3 +566,9 @@ QJsonObject MainWindow::createUnit(QMouseEvent* event){
 
 }
 
+void MainWindow::music(){
+    QMediaPlayer* mus = new QMediaPlayer;
+    mus->setMedia(QUrl::fromLocalFile(QFileInfo("../advance wars sprites/take.mp3").absoluteFilePath()));
+    mus->setVolume(50);
+    mus->play();
+}
