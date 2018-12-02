@@ -27,20 +27,6 @@ class MainWindow : public QMainWindow
     //map 25087
     int t[17][21];
 
-
-//    int t[12][18] = {{1,1,1,1,1,1,1,1,35,1,35,1,1,1,1,1,34,3},
-//                     {1,1,3,3,3,3,3,3,3,34,1,34,1,1,1,1,1,34},
-//                     {1,1,1,1,34,35,34,1,34,1,34,1,1,1,1,1,34,1},
-//                     {35,1,1,2,1,1,1,3,1,34,1,1,3,34,1,35,1,2},
-//                     {34,1,1,34,2,1,3,1,1,3,1,1,1,1,3,1,1,1},
-//                     {1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1},
-//                     {28,35,1,1,1,1,1,1,1,3,2,1,3,1,1,34,1,34},
-//                     {28,28,27,28,28,28,28,3,28,3,3,3,1,1,1,1,1,1},
-//                     {1,1,1,1,1,35,28,28,28,28,3,3,1,1,34,1,35,1},
-//                     {1,1,1,1,1,34,1,26,1,1,2,1,34,1,34,1,1,1},
-//                     {1,1,1,1,1,1,1,34,28,28,1,1,1,1,34,1,3,1},
-//                     {1,1,1,1,1,1,34,28,28,3,3,1,3,34,1,3,34,3}};
-
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
@@ -60,7 +46,8 @@ class MainWindow : public QMainWindow
 
     QTcpServer* server = nullptr;
     QTcpSocket* other = nullptr;
-    int posX = 100, posY = 150;
+    std::vector<int> posX;
+    std::vector<int> posY;
     bool myTurn = false;
 
 public:
@@ -73,6 +60,7 @@ public:
     void showMove(Unit* unit);
     void showMenu(Building* b, Unit* u);
     QJsonObject unitMove(QMouseEvent *event);
+    QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
