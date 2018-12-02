@@ -7,7 +7,7 @@
 
 class Fighter : public Unit{
 public:
-Fighter(int x, int y, int health, int mp, Player* team);
+Fighter(int x, int y, int health, Player* team);
 };
 
 #endif //FIGHTER_H

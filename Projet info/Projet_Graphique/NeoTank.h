@@ -6,6 +6,6 @@
 #include "Unit.h"
 class NeoTank : public Unit {
 public:
-NeoTank(int x, int y, int health, int mp, Player* team);
+NeoTank(int x, int y, int health, Player* team);
 };
 #endif // NEOTANK_H

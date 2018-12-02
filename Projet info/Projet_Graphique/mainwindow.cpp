@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QMediaPlayer>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -18,9 +19,13 @@
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
     this->game = game;
     this->army = game->getArmy();
+
     this->posX.resize(army->size());
     this->posY.resize(army->size());
     ui->setupUi(this);
+
+    music();
+
 
     server = new QTcpServer();
 
@@ -34,8 +39,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am the server" << std::endl;
         other = nullptr;
     }
-    
-    std::cout << server->nextPendingConnection() << std::endl;
     connect(server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
 
 
@@ -228,7 +231,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
-            showMenu(game->checkBuildings(army->at(i)),army->at(i));
+            showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
         //}
 
 
@@ -246,7 +249,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-
+    createUnit(event);
 
     //réseau
     if(! myTurn)
@@ -294,7 +297,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
 
             }else if(army->at(i)->isMovable() && game->getActiveUnit() == army->at(i)){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
-                        event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
+                    event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
                     game->setActiveUnit(nullptr);
                     army->at(i)->setMovable(false);
                 }
@@ -375,17 +378,15 @@ void MainWindow::showMove(Unit* unit){
      *Legacy
      *
      * int amtMove = unit->getMP();
-    QPainter painter(this);
-    for(int i = -amtMove; i<=amtMove; i++){
-        for(int j = -amtMove; j<=amtMove; j++){
-            if(std::abs(i) + std::abs(j) <= amtMove){
+     * QPainter painter(this);
+     * for(int i = -amtMove; i<=amtMove; i++){
+     *    for(int j = -amtMove; j<=amtMove; j++){
+     *        if(std::abs(i) + std::abs(j) <= amtMove){
+     *          painter.fillRect((unit->getX()*width()/x) + (i*std::abs(width()/x)), (unit->getY()*height()/y) + (j*std::abs(height()/y)), width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
+     *          }
+     *      }
+     *  }*/
 
-                painter.fillRect((unit->getX()*width()/x) + (i*std::abs(width()/x)), (unit->getY()*height()/y) + (j*std::abs(height()/y)), width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
-
-            }
-        }
-
-    }*/
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
@@ -593,7 +594,19 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     }
 }
 
-void MainWindow::createUnit(){
+void MainWindow::createUnit(QMouseEvent *event){
+    for (unsigned int i=0; i<game->getBuildings().size(); i++){
 
+        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y)){
+            QMessageBox::information(this,"Test","Batiment");
+        }
+
+    }
 }
 
+void MainWindow::music(){
+    QMediaPlayer* mus = new QMediaPlayer;
+    mus->setMedia(QUrl::fromLocalFile(QFileInfo("../advance wars sprites/take.mp3").absoluteFilePath()));
+    mus->setVolume(50);
+    mus->play();
+}

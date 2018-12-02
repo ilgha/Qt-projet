@@ -7,6 +7,6 @@
 
 class Mech : public Unit{
 public:
-Mech(int x, int y, int health, int mp, Player* team);
+Mech(int x, int y, int health, Player* team);
 };
 #endif //MECH_H

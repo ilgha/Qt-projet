@@ -6,6 +6,6 @@
 class Bomber : public Unit {
 
 public:
-Bomber(int x, int y, int health, int mp , Player* team);
+Bomber(int x, int y, int health, Player* team);
 };
 #endif //BOMBER_H

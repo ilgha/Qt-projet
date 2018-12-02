@@ -6,7 +6,7 @@
 #include "Unit.h"
 class BCopter : public Unit {
 public:
-BCopter(int x, int y, int health, int mp, Player* team);
+BCopter(int x, int y, int health, Player* team);
 };
 
 #endif //BCOPTER_H

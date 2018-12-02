@@ -6,7 +6,7 @@
 
 class Tank : public Unit {
 public:
-Tank(int x, int y, int health,int mp, Player* team);
+Tank(int x, int y, int health, Player* team);
 };
 
 #endif // TANK_H

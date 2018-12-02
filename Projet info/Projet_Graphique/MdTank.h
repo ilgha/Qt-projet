@@ -6,6 +6,6 @@
 #include "Unit.h"
 class MdTank : public Unit {
 public:
-MdTank(int x, int y, int health, int mp, Player* team);
+MdTank(int x, int y, int health, Player* team);
 };
 #endif //MDTANK_H

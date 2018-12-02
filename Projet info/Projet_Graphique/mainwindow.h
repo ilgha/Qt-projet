@@ -35,6 +35,7 @@ class MainWindow : public QMainWindow
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
+    void music();
 
 
     Ui::MainWindow *ui;
@@ -64,7 +65,7 @@ public:
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
-    void createUnit();
+    void createUnit(QMouseEvent *event);
     
 private:
     void sendJson(QJsonObject obj);
