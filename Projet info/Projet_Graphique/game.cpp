@@ -37,7 +37,10 @@ Game::Game(Player* player1, Player* player2){
             }
         }
     }
+
     army.push_back(new MdTank(7,7,20,player1));
+    army.push_back(new MdTank(13,7,20,player2));
+
     active = player1;
 }
 

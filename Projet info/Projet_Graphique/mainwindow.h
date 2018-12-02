@@ -48,7 +48,8 @@ class MainWindow : public QMainWindow
 
     QTcpServer* server = nullptr;
     QTcpSocket* other = nullptr;
-    int posX = 100, posY = 150;
+    std::vector<int> posX;
+    std::vector<int> posY;
     bool myTurn = false;
 
 public:
@@ -61,6 +62,7 @@ public:
     void showMove(Unit* unit);
     void showMenu(Building* b, Unit* u);
     QJsonObject unitMove(QMouseEvent *event);
+    QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
