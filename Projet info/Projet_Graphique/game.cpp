@@ -37,6 +37,7 @@ Game::Game(Player* player1, Player* player2){
             }
         }
     }
+    army.push_back(new MdTank(7,7,20,5,player1));
     active = player1;
 }
 
@@ -112,10 +113,11 @@ std::vector<Unit*>* Game::getArmy(){
     return &army;
 }
 
-Building* Game::checkBuildings(Unit* unit){
+Building* Game::checkBuildings(unsigned int x,unsigned int y){
     for(unsigned int i = 0; i < buildings.size(); i++){
-        if(unit->getX() == buildings.at(i).getX() && unit->getY() == buildings.at(i).getY()){
+        if(x == buildings.at(i).getX() && y == buildings.at(i).getY()){
             return &buildings[i];
+
         }
     }
     return nullptr;
@@ -128,7 +130,9 @@ Land* Game::checkLand(Unit* u){
 bool Game::ennemyNear(Unit *unit)
 {
     for(unsigned int i = 0; i < army.size(); i++){
-        return (sqrt(pow(unit->getX() - army.at(i)->getX(), 2) + pow(unit->getY() - army.at(i)->getY(), 2) == 1) && army.at(i)->getTeam() != active);
+        if(sqrt(pow(unit->getX() - army[i]->getX(), 2) + pow(unit->getY() - army[i]->getY(), 2) == 1) && army[i]->getTeam() != unit->getTeam()){
+            return true;
+        }
     }
 }
 
@@ -142,9 +146,9 @@ Player* Game::getActive() const{
 
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
-        if(army.at(i)->getX() == unit->getX() && army.at(i)->getY() == unit->getY() && army.at(i) != unit){
-            setHealth(unit, army.at(i)->getHealth());
-            army.at(i)->setDead(true);
+        if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit){
+            setHealth(unit, army[i]->getHealth());
+            army[i]->setDead(true);
 
         }
     }
@@ -152,7 +156,7 @@ void Game::checkFusion(Unit* unit){
 
 void Game::erase(){
     for(unsigned int i = 0; i< army.size(); i++){
-        if(army.at(i)->getDead()){
+        if(army[i]->getDead()){
            army.erase(army.begin()+i);
         }
     }

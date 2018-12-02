@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QT       += network
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Projet_Graphique
@@ -59,7 +61,6 @@ HEADERS += \
     infantery.h \
     Player.h \
     game.h \
-    unit.h \
     Land.h \
     Plain.h \
     building.h \
@@ -81,7 +82,8 @@ HEADERS += \
     Recon.h \
     Tank.h \
     Airport.h \
-    City.h
+    City.h \
+    Unit.h
 
 FORMS += \
         mainwindow.ui

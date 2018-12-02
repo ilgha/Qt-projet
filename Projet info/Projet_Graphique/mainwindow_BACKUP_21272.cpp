@@ -213,7 +213,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     // infantry action To set in a separated function
     for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
-            showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
+            showMenu(game->checkBuildings(army->at(i)),army->at(i));
         //}
 
 
@@ -231,8 +231,14 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
+<<<<<<< HEAD
+   QMessageBox::information(this,"test","helloooooo");
 
+    unitMove(event);
     createUnit(event);
+=======
+>>>>>>> a8dd4f91b95321e75b6e5dac1979373118949d38
+
 
     //réseau
     if(! myTurn)
@@ -464,7 +470,10 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
     MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-
+<<<<<<< HEAD
+=======
+    //std::cout << "done" << std::endl;
+>>>>>>> 650e66da839a408d68b3a9004b3fe08715221d75
     bool present = false;
     for(unsigned int u = 0; u<cases.size(); u++){
         if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
@@ -479,7 +488,10 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     if(MP >= 0 && !present){
         cases.push_back(pos);
         depl.push_back(MP);
-
+<<<<<<< HEAD
+=======
+        //std::cout << game->getMap().getTile(pos.first, pos.second).getDef() << std::endl;
+>>>>>>> 650e66da839a408d68b3a9004b3fe08715221d75
         moveUnit(unit, x+i, y+j, MP);
     }
 
@@ -549,10 +561,10 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
     }
 }
 
-QJsonObject MainWindow::createUnit(QMouseEvent* event){
+void MainWindow::createUnit(QMouseEvent* event){
     for(unsigned int i=0; i<game->getBuildings().size();i++){
-        if(game->checkBuildings(event->x(),event->y()) != nullptr ){
-          QMessageBox::information(this, "Test", "Ceci est un bâtiment");
+        if (event->x()>game->getBuildings().at(i).getX()*this->width()/x && event->x()<(game->getBuildings().at(i).getX()*this->width()/x+ this->width()/x)) {
+          QMessageBox::information(this,"test","helloooooo");
         }
     }
 
