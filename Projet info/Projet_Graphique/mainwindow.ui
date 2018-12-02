@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>705</width>
+    <width>870</width>
     <height>420</height>
    </rect>
   </property>
@@ -19,10 +19,17 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>523</width>
+     <width>870</width>
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuHello">
+    <property name="title">
+     <string>Hello</string>
+    </property>
+    <addaction name="actionquit"/>
+   </widget>
+   <addaction name="menuHello"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,6 +40,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionquit">
+   <property name="text">
+    <string>quit?</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
