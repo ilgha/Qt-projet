@@ -680,8 +680,10 @@ void MainWindow::createUnit(QMouseEvent *event){
             list->show();
             window->show();
 
-
+           // QObject::connect(button,SIGNAL(clicked()), , SLOT());
             QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
+
+
 
 
 
