@@ -685,12 +685,6 @@ void MainWindow::createUnit(QMouseEvent *event){
 
            // QObject::connect(button,SIGNAL(clicked()), , SLOT());
             QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
-            QObject::connect(button,SIGNAL(clicked()),window, SLOT(game->recruit(&game->getBuildings().at(i), "AntiAir")));
-
-
-
-
-
 
         }
 
