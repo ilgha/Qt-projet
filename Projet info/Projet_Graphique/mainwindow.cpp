@@ -641,9 +641,12 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 }
 
 void MainWindow::createUnit(QMouseEvent *event){
+    int wx = width()/x;
+    int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
-
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
+        //if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
+        std::cout << game->getBuildings().at(i).getID() << std::endl;
+        if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
             QWidget *window = new QWidget();
             window->setVisible(true);
             window->setFixedSize(600,300);
@@ -682,6 +685,7 @@ void MainWindow::createUnit(QMouseEvent *event){
 
 
             QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
+            QObject::connect(button,SIGNAL(clicked()),window, SLOT(game->recruit(&game->getBuildings().at(i), "AntiAir")));
 
 
 

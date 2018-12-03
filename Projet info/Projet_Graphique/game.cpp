@@ -28,12 +28,14 @@ Game::Game(Player* player1, Player* player2){
     buildings.reserve(20);
     army.reserve(20);
     map = Map();
-    for(int i = 0; i<12; i++){
-        for(int j = 0; j<18; j++){
+    for(int i = 0; i<17; i++){
+        for(int j = 0; j<21; j++){
             if(map.getValue(i, j) == 35){
                 buildings.push_back(Factory(j, i));
             }else if(map.getValue(i, j) == 34){
                 buildings.push_back(City(j,i));
+            }else if(map.getValue(i, j) == 36){
+                buildings.push_back(Airport(j,i));
             }
         }
     }
