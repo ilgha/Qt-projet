@@ -647,31 +647,41 @@ void MainWindow::createUnit(QMouseEvent *event){
             QWidget *window = new QWidget();
             window->setVisible(true);
             window->setFixedSize(600,300);
-            window->setWindowTitle("Production of unit");
+            window->setWindowTitle("Production of units");
 
-            QComboBox *liste = new QComboBox(window);
+            QComboBox *list = new QComboBox(window);
+            QPushButton *button = new QPushButton(window);
+            QVBoxLayout *layout = new QVBoxLayout(window);
+            layout->addWidget(list);
+            layout->addWidget(button);
+            button->setText("Select");
+            button->setMaximumWidth(100);
+
 
             if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter: 9000$");
-                liste->addItem("Bomber: 22000$");
-                liste->addItem("Fighter: 20000$");
+                list->addItem("BCopter: 9000$");
+                list->addItem("Bomber: 22000$");
+                list->addItem("Fighter: 20000$");
             }
 
             else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air: 8000$");
-                liste->addItem("Infantry: 1000$");
-                liste->addItem("Md Tank: 1600$");
-                liste->addItem("Mech: 3000$");
-                liste->addItem("Mega Tank: 28000$");
-                liste->addItem("Neo Tank: 22000$");
-                liste->addItem("Recon: 15000$");
-                liste->addItem("Tank: 7000$");
+                list->addItem("Anti Air: 8000$");
+                list->addItem("Infantry: 1000$");
+                list->addItem("Md Tank: 1600$");
+                list->addItem("Mech: 3000$");
+                list->addItem("Mega Tank: 28000$");
+                list->addItem("Neo Tank: 22000$");
+                list->addItem("Recon: 15000$");
+                list->addItem("Tank: 7000$");
             }
 
 
-
-            liste->show();
+            button->show();
+            list->show();
             window->show();
+
+
+            QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
 
 
 
