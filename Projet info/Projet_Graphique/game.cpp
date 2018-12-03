@@ -151,7 +151,7 @@ void Game::setActive(Player* player){
 
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
-        if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit){
+        if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit && army.at(i)->getTeam() == unit->getTeam()){
             setHealth(unit, army[i]->getHealth());
             army[i]->setDead(true);
 
