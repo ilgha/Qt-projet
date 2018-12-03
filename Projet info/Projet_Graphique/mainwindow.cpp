@@ -48,16 +48,11 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-<<<<<<< HEAD
-        other->connectToHost("192.168.1.7", 8123);
+        //other->connectToHost("192.168.1.7", 8123);
+        other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
-=======
-        other->connectToHost("192.168.1.6", 8123);
-        //other->connectToHost("127.0.0.1", 8123);
-        connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-        //game->endTurn();
->>>>>>> d9bf123a98ea2d55ded235b655e2ae7d130fb6f7
+
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
@@ -370,17 +365,18 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                 int amtMove = army->at(i)->getMP();
                 int wx = width()/x;
                 int hy = height()/y;
-                if(std::abs(floor(event->x()/wx - army->at(i)->getX())) + std::abs(floor(event->y()/hy) - army->at(i)->getY()) <= amtMove && std::abs(floor(event->x()/wx - army->at(i)->getX())) + std::abs(floor(event->y()/hy) - army->at(i)->getY()) > 0){
-                    std::cout << floor(event->x()/wx) << "," << floor(event->y()/hy) << std::endl;
 
-                    army->at(i)->setX(floor(event->x()/wx));
-                    army->at(i)->setY(floor(event->y()/hy));
+                for(unsigned int u = 0; u <cases.size(); u++){
 
-                    game->checkFusion(army->at(i));
-                    army->at(i)->setMovable(false);
-                    game->setActiveUnit(nullptr);
+                    if((floor(event->x()/wx) == cases.at(u).first && floor(event->y()/hy) == cases.at(u).second)){
 
+                        army->at(i)->setX(floor(event->x()/wx));
+                        army->at(i)->setY(floor(event->y()/hy));
 
+                        game->checkFusion(army->at(i));
+                        army->at(i)->setMovable(false);
+                        game->setActiveUnit(nullptr);
+                    }
                }
             }
         }
@@ -436,12 +432,12 @@ void MainWindow::showMove(Unit* unit){
      *      }
      *  }*/
 
+    cases.clear();
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
         painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
-    cases.clear();
 }
 
 void MainWindow::showMenu(Building* b, Unit* u){
@@ -556,6 +552,7 @@ int MainWindow::getYIm(int ID){
 
 void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 {
+
     int i = 0;
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
@@ -687,7 +684,6 @@ void MainWindow::createUnit(QMouseEvent *event){
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
     mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
-
     mus->setVolume(50);
     mus->play();
 }
