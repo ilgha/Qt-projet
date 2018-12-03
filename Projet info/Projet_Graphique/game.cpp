@@ -109,6 +109,7 @@ void Game::recruit(Building* building, string buy){
         recruited->getTeam()->addMoney(-7000);
         army.push_back(recruited);
     }
+
 }
 
 
