@@ -206,7 +206,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
-            QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
+            QRectF target(j*width()/x, i*height()/y, (width()/x)+1, (height()/y)+1);
 
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
 
