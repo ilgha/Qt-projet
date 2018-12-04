@@ -209,15 +209,13 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
 
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-            if(game->getMap().getTile(j, i).getDef()== 1){
-                QRectF source((t[i][j]-1+45)*16, 15, 16, 16);
-            }
+
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
-//            painter.setPen(QPen(Qt::white));
-//            painter.setFont(QFont("Times", 20, QFont::Bold));
-//            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
+            //painter.setPen(QPen(Qt::white));
+            //painter.setFont(QFont("Times", 20, QFont::Bold));
+            //painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
@@ -272,9 +270,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
     // infantry action To set in a separated function
-    for(unsigned int i = 0; i<army->size(); i++){
+    //for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
-            showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
+        //  showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
         //}
 
 
@@ -286,7 +284,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
     painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
-    }
+
 }
 
 
@@ -644,8 +642,6 @@ void MainWindow::createUnit(QMouseEvent *event){
     int wx = width()/x;
     int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
-        //if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
-        std::cout << game->getBuildings().at(i).getID() << std::endl;
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
             QWidget *window = new QWidget();
             window->setVisible(true);
@@ -693,7 +689,7 @@ void MainWindow::createUnit(QMouseEvent *event){
 
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
-    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
+    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     mus->setVolume(50);
     mus->play();
 }
