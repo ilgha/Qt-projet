@@ -63,7 +63,7 @@ int Game::endTurn() {
     return 0;
 }
 
-void Game::recruit(Building* building, string buy){
+bool Game::recruit(Building* building, string buy){
     if(buy == "AntiAir" && building->getTeam()->getMoney()>8000){
         Unit* recruited = new Infantery(building->getX(), building->getY(), 1, building->getTeam());
         recruited->getTeam()->addMoney(-8000);
@@ -108,8 +108,10 @@ void Game::recruit(Building* building, string buy){
         Unit* recruited = new Infantery(building->getX(), building->getY(), 20, building->getTeam());
         recruited->getTeam()->addMoney(-7000);
         army.push_back(recruited);
+    }else{
+        return false;
     }
-
+    return true;
 }
 
 
