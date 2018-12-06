@@ -30,21 +30,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     textWidget->setStyleSheet("background-color: yellow");
     textWidget->repaint();
 
-    //create widgets
-    // Set layout
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(qMap);
-    layout->addWidget(Menu);
-    qMap->setVisible(true);
-    Menu->setVisible(true);
-    // Set layout in QWidget
-    QWidget *window = new QWidget();
-    window->setLayout(layout);
-    window->setVisible(true);
-
-    // Set QWidget as the central layout of the main window
-    setCentralWidget(window);
-
     this->army[0] = army[0];
 
     this->game = game;
@@ -63,10 +48,11 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        other->connectToHost("192.168.1.6", 8123);
-        //other->connectToHost("127.0.0.1", 8123);
+        //other->connectToHost("192.168.1.6", 8123);
+        other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
+
     } else {
         std::cout << "I am the server" << std::endl;
         other = nullptr;
