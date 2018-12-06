@@ -213,6 +213,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
+
+            //affiche la valeur de déplacement du terrain
             //painter.setPen(QPen(Qt::white));
             //painter.setFont(QFont("Times", 20, QFont::Bold));
             //painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
@@ -432,6 +434,7 @@ void MainWindow::showMove(Unit* unit){
 
     cases.clear();
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
+    checkBlocked();
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
         painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
@@ -692,4 +695,14 @@ void MainWindow::music(){
     mus->setMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     mus->setVolume(50);
     mus->play();
+}
+
+void MainWindow::checkBlocked(){
+    for(unsigned int u = 0; u<cases.size(); u++){
+        for(unsigned int i = 0; i<army->size(); i++){
+            if(cases.at(u).first == army->at(i)->getX() && cases.at(u).second == army->at(i)->getY()){
+                cases.erase(cases.begin()+u);
+            }
+        }
+    }
 }
