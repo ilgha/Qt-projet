@@ -53,11 +53,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-<<<<<<< HEAD
 
-=======
->>>>>>> 7c637cd5f02649570f79c52802b3ea266f5ce343
-    
 private:
     void sendJson(QJsonObject obj);
     void music();
@@ -78,11 +74,6 @@ private:
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
     void checkBlocked();
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> 7c637cd5f02649570f79c52802b3ea266f5ce343
 
 public slots:
     void tick();
@@ -90,10 +81,7 @@ public slots:
     void onConnected();
     void onDisconnected();
     void onData();
-<<<<<<< HEAD
-=======
 
->>>>>>> 7c637cd5f02649570f79c52802b3ea266f5ce343
 };
 
 #endif // MAINWINDOW_H
