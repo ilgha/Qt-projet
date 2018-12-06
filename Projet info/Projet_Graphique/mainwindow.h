@@ -26,8 +26,6 @@ class MainWindow : public QMainWindow
 
     //map 25087
     int t[17][21];
-    QWidget* qMap = new QWidget;
-    QWidget* Menu = new QWidget;
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;

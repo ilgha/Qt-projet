@@ -745,7 +745,7 @@ void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
     QMediaPlaylist* playlist = new QMediaPlaylist(mus);
     mus->setMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
-    //playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     playlist->setCurrentIndex(1);
     playlist->shuffle();
     mus->setVolume(50);
