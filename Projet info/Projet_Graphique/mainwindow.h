@@ -65,6 +65,7 @@ public:
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit(QMouseEvent *event);
+    void actionOnUnit(QMouseEvent *event);
     
 private:
     void sendJson(QJsonObject obj);
@@ -79,6 +80,7 @@ public slots:
     void onConnected();
     void onDisconnected();
     void onData();
+    void move(QMouseEvent *event);
 };
 
 #endif // MAINWINDOW_H
