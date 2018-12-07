@@ -4,12 +4,12 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <QVBoxLayout>
 #include <QDebug>
 #include <QLabel>
-#include <QPushButton>
+
+#include <QtWidgets>
 #include <QMessageBox>
-#include <QComboBox>
+
 #include <QWindow>
 #include <algorithm>
 #include <iostream>
@@ -17,6 +17,7 @@
 #include <string>
 #include <QString>
 #include "Plain.h"
+#include "menu.h"
 
 
 
@@ -653,47 +654,12 @@ void MainWindow::createUnit(QMouseEvent *event){
     int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
-            QWidget *window = new QWidget();
+            Menu* window = new Menu(this, game, i);
             window->setVisible(true);
             window->setFixedSize(600,300);
             window->setWindowTitle("Production of units");
-
-            QComboBox *list = new QComboBox(window);
-            QPushButton *button = new QPushButton(window);
-            QVBoxLayout *layout = new QVBoxLayout(window);
-            layout->addWidget(list);
-            layout->addWidget(button);
-            button->setText("Select");
-            button->setMaximumWidth(100);
-
-
-            if (game->getBuildings().at(i).getID()==0){
-                list->addItem("BCopter: 9000$");
-                list->addItem("Bomber: 22000$");
-                list->addItem("Fighter: 20000$");
-            }
-
-            else if (game->getBuildings().at(i).getID()==2){
-                list->addItem("Anti Air: 8000$");
-                list->addItem("Infantry: 1000$");
-                list->addItem("Md Tank: 1600$");
-                list->addItem("Mech: 3000$");
-                list->addItem("Mega Tank: 28000$");
-                list->addItem("Neo Tank: 22000$");
-                list->addItem("Recon: 15000$");
-                list->addItem("Tank: 7000$");
-            }
-
-
-            button->show();
-            list->show();
             window->show();
-
-            QObject::connect(button,SIGNAL(clicked()), window, SLOT(recruitAction()));
-            QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
-
         }
-
     }
 }
 
@@ -703,7 +669,7 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
     for (unsigned int i=0; i<army->size(); i++){
         if (floor(event->x()/wx) == army->at(i)->getX() && floor(event->y()/hy) == army->at(i)->getY()){
             if (army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && myTurn== true){
-                QWidget *window = new QWidget();
+                QWidget* window = new QWidget();
                 window->setVisible(true);
                 window->setFixedSize(600,300);
                 window->setWindowTitle("Choose an action");
@@ -744,10 +710,11 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
     QMediaPlaylist* playlist = new QMediaPlaylist(mus);
-    playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     mus->setVolume(100);
     mus->setPlaylist(playlist);
+    playlist->shuffle();
     mus->play();
 }
 

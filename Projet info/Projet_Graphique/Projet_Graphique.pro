@@ -56,7 +56,8 @@ SOURCES += \
     Tank.cpp \
     Airport.cpp \
     City.cpp \
-    unit.cpp
+    unit.cpp \
+    menu.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -85,7 +86,8 @@ HEADERS += \
     Tank.h \
     Airport.h \
     City.h \
-    Unit.h
+    Unit.h \
+    menu.h
 
 FORMS += \
         mainwindow.ui

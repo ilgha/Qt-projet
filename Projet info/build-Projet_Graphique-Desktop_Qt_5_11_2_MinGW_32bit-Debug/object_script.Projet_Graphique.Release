@@ -27,7 +27,9 @@ INPUT(
 ./release\Airport.o
 ./release\City.o
 ./release\unit.o
+./release\menu.o
 ./release\qrc_sprites.o
 ./release\qrc_msc.o
 ./release\moc_mainwindow.o
+./release\moc_menu.o
 );
