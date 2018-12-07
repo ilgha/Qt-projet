@@ -689,7 +689,7 @@ void MainWindow::createUnit(QMouseEvent *event){
             list->show();
             window->show();
 
-           // QObject::connect(button,SIGNAL(clicked()), , SLOT());
+            QObject::connect(button,SIGNAL(clicked()), window, SLOT(recruitAction()));
             QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
 
         }
@@ -744,11 +744,10 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
     QMediaPlaylist* playlist = new QMediaPlaylist(mus);
-    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
-    playlist->setCurrentIndex(1);
-    playlist->shuffle();
-    mus->setVolume(50);
+    playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    mus->setVolume(100);
+    mus->setPlaylist(playlist);
     mus->play();
 }
 
@@ -760,4 +759,8 @@ void MainWindow::checkBlocked(){
             }
         }
     }
+}
+
+void MainWindow::recruitAction(){
+    std::cout << "test" << std::endl;
 }

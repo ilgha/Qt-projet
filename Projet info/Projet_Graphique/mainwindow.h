@@ -79,6 +79,7 @@ public slots:
     void onConnected();
     void onDisconnected();
     void onData();
+    void recruitAction();
 
 };
 
