@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -48,7 +49,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        //other->connectToHost("192.168.1.6", 8123);
         other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
@@ -95,6 +95,10 @@ void MainWindow::onNewConnection() {
     sendJson(info);
     update();
 }
+
+//void MainWindow::move(QMouseEvent *event){
+//    unitMove(event);
+//}
 
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;
@@ -206,18 +210,18 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
-            QRectF target(j*width()/x, i*height()/y, width()/x, height()/y);
+            QRectF target(j*width()/x, i*height()/y, (width()/x)+1, (height()/y)+1);
 
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-            if(game->getMap().getTile(j, i).getDef()== 1){
-                QRectF source((t[i][j]-1+45)*16, 15, 16, 16);
-            }
+
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
-//            painter.setPen(QPen(Qt::white));
-//            painter.setFont(QFont("Times", 20, QFont::Bold));
-//            painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
+
+            //affiche la valeur de déplacement du terrain
+            //painter.setPen(QPen(Qt::white));
+            //painter.setFont(QFont("Times", 20, QFont::Bold));
+            //painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
@@ -272,9 +276,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
     }
 
     // infantry action To set in a separated function
-    for(unsigned int i = 0; i<army->size(); i++){
+    //for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
-            showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
+        //  showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
         //}
 
 
@@ -286,13 +290,15 @@ void MainWindow::paintEvent(QPaintEvent *event){
     painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
-    }
+
 }
 
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     createUnit(event);
+    actionOnUnit(event);
+
 
     //réseau
     if(! myTurn)
@@ -365,17 +371,18 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                 int amtMove = army->at(i)->getMP();
                 int wx = width()/x;
                 int hy = height()/y;
-                if(std::abs(floor(event->x()/wx - army->at(i)->getX())) + std::abs(floor(event->y()/hy) - army->at(i)->getY()) <= amtMove && std::abs(floor(event->x()/wx - army->at(i)->getX())) + std::abs(floor(event->y()/hy) - army->at(i)->getY()) > 0){
-                    std::cout << floor(event->x()/wx) << "," << floor(event->y()/hy) << std::endl;
 
-                    army->at(i)->setX(floor(event->x()/wx));
-                    army->at(i)->setY(floor(event->y()/hy));
+                for(unsigned int u = 0; u <cases.size(); u++){
 
-                    game->checkFusion(army->at(i));
-                    army->at(i)->setMovable(false);
-                    game->setActiveUnit(nullptr);
+                    if((floor(event->x()/wx) == cases.at(u).first && floor(event->y()/hy) == cases.at(u).second)){
 
+                        army->at(i)->setX(floor(event->x()/wx));
+                        army->at(i)->setY(floor(event->y()/hy));
 
+                        game->checkFusion(army->at(i));
+                        army->at(i)->setMovable(false);
+                        game->setActiveUnit(nullptr);
+                    }
                }
             }
         }
@@ -431,12 +438,13 @@ void MainWindow::showMove(Unit* unit){
      *      }
      *  }*/
 
+    cases.clear();
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
+    checkBlocked();
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
         painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
-    cases.clear();
 }
 
 void MainWindow::showMenu(Building* b, Unit* u){
@@ -551,6 +559,7 @@ int MainWindow::getYIm(int ID){
 
 void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 {
+
     int i = 0;
     int j = 1;
     IntPair pos = std::make_pair(x+i,y+j);
@@ -639,50 +648,115 @@ void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
 }
 
 void MainWindow::createUnit(QMouseEvent *event){
+    int wx = width()/x;
+    int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
-
-        if (event->x() > (game->getBuildings().at(i).getX()*this->width()/x) && event->x() < (game->getBuildings().at(i).getX()*this->width()/x + this->width()/x)&& event->y() > (game->getBuildings().at(i).getY()*this->height()/y) && event->y() < (game->getBuildings().at(i).getY()*this->height()/y+ this->height()/y) && game->getBuildings().at(i).getID() != 1){
+        if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
             QWidget *window = new QWidget();
             window->setVisible(true);
             window->setFixedSize(600,300);
-            window->setWindowTitle("Production of unit");
+            window->setWindowTitle("Production of units");
 
-            QComboBox *liste = new QComboBox(window);
+            QComboBox *list = new QComboBox(window);
+            QPushButton *button = new QPushButton(window);
+            QVBoxLayout *layout = new QVBoxLayout(window);
+            layout->addWidget(list);
+            layout->addWidget(button);
+            button->setText("Select");
+            button->setMaximumWidth(100);
+
 
             if (game->getBuildings().at(i).getID()==0){
-                liste->addItem("BCopter: 9000$");
-                liste->addItem("Bomber: 22000$");
-                liste->addItem("Fighter: 20000$");
+                list->addItem("BCopter: 9000$");
+                list->addItem("Bomber: 22000$");
+                list->addItem("Fighter: 20000$");
             }
 
             else if (game->getBuildings().at(i).getID()==2){
-                liste->addItem("Anti Air: 8000$");
-                liste->addItem("Infantry: 1000$");
-                liste->addItem("Md Tank: 1600$");
-                liste->addItem("Mech: 3000$");
-                liste->addItem("Mega Tank: 28000$");
-                liste->addItem("Neo Tank: 22000$");
-                liste->addItem("Recon: 15000$");
-                liste->addItem("Tank: 7000$");
+                list->addItem("Anti Air: 8000$");
+                list->addItem("Infantry: 1000$");
+                list->addItem("Md Tank: 1600$");
+                list->addItem("Mech: 3000$");
+                list->addItem("Mega Tank: 28000$");
+                list->addItem("Neo Tank: 22000$");
+                list->addItem("Recon: 15000$");
+                list->addItem("Tank: 7000$");
             }
 
 
-
-            liste->show();
+            button->show();
+            list->show();
             window->show();
 
-
-
+           // QObject::connect(button,SIGNAL(clicked()), , SLOT());
+            QObject::connect(button,SIGNAL(clicked()),window, SLOT(close()));
 
         }
 
     }
 }
 
+void MainWindow::actionOnUnit(QMouseEvent *event){
+    int wx = width()/x;
+    int hy = height()/y;
+    for (unsigned int i=0; i<army->size(); i++){
+        if (floor(event->x()/wx) == army->at(i)->getX() && floor(event->y()/hy) == army->at(i)->getY()){
+            if (army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && myTurn== true){
+                QWidget *window = new QWidget();
+                window->setVisible(true);
+                window->setFixedSize(600,300);
+                window->setWindowTitle("Choose an action");
+
+                QPushButton *moveButton = new QPushButton(window);
+                QVBoxLayout *layout = new QVBoxLayout(window);
+                layout->addWidget(moveButton);
+                moveButton->setText("move");
+                moveButton->setMaximumWidth(100);
+
+                QPushButton *attackButton = new QPushButton(window);
+                layout->addWidget(attackButton);
+                attackButton->setText("attack");
+                attackButton->setMaximumWidth(100);
+
+                QPushButton *captureButton = new QPushButton(window);
+                layout->addWidget(captureButton);
+                captureButton->setText("capture");
+                captureButton->setMinimumWidth(100);
+
+                moveButton->show();
+                attackButton->show();
+                captureButton->show();
+                window->show();
+
+                QObject::connect(moveButton,SIGNAL(clicked()), window, SLOT(close()));
+           //     QObject::connect(moveButton, SIGNAL(clicked()), this, SLOT(move(event)) );
+
+
+            }
+        }
+    }
+
+
+
+}
+
 void MainWindow::music(){
     QMediaPlayer* mus = new QMediaPlayer;
-    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
-
+    QMediaPlaylist* playlist = new QMediaPlaylist(mus);
+    mus->setMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    //playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    playlist->setCurrentIndex(1);
+    playlist->shuffle();
     mus->setVolume(50);
     mus->play();
+}
+
+void MainWindow::checkBlocked(){
+    for(unsigned int u = 0; u<cases.size(); u++){
+        for(unsigned int i = 0; i<army->size(); i++){
+            if(cases.at(u).first == army->at(i)->getX() && cases.at(u).second == army->at(i)->getY()){
+                cases.erase(cases.begin()+u);
+            }
+        }
+    }
 }

@@ -28,18 +28,21 @@ Game::Game(Player* player1, Player* player2){
     buildings.reserve(20);
     army.reserve(20);
     map = Map();
-    for(int i = 0; i<12; i++){
-        for(int j = 0; j<18; j++){
+    for(int i = 0; i<17; i++){
+        for(int j = 0; j<21; j++){
             if(map.getValue(i, j) == 35){
                 buildings.push_back(Factory(j, i));
             }else if(map.getValue(i, j) == 34){
                 buildings.push_back(City(j,i));
+            }else if(map.getValue(i, j) == 36){
+                buildings.push_back(Airport(j,i));
             }
         }
     }
 
-    army.push_back(new MdTank(7,7,20,player1));
-    army.push_back(new MdTank(13,7,20,player2));
+    army.push_back(new Infantery(7,7,20,player1));
+    army.push_back(new Infantery(7,8,20,player1));
+    army.push_back(new Infantery(13,7,20,player2));
 
     active = player1;
 }
@@ -61,7 +64,7 @@ int Game::endTurn() {
     return 0;
 }
 
-void Game::recruit(Building* building, string buy){
+bool Game::recruit(Building* building, string buy){
     if(buy == "AntiAir" && building->getTeam()->getMoney()>8000){
         Unit* recruited = new Infantery(building->getX(), building->getY(), 1, building->getTeam());
         recruited->getTeam()->addMoney(-8000);
@@ -106,7 +109,10 @@ void Game::recruit(Building* building, string buy){
         Unit* recruited = new Infantery(building->getX(), building->getY(), 20, building->getTeam());
         recruited->getTeam()->addMoney(-7000);
         army.push_back(recruited);
+    }else{
+        return false;
     }
+    return true;
 }
 
 
@@ -151,7 +157,7 @@ void Game::setActive(Player* player){
 
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
-        if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit){
+        if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit && army.at(i)->getTeam() == unit->getTeam()){
             setHealth(unit, army[i]->getHealth());
             army[i]->setDead(true);
 

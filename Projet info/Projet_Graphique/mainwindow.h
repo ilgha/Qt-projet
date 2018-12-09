@@ -53,7 +53,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-
+    
+private:
+    void sendJson(QJsonObject obj);
+    void music();
+    int tDtoIsoX(int x, int y);
+    int isoToTDX(int x, int y);
+    int tDtoIsoY(int x, int y);
+    int isoToTDY(int x, int y);
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
@@ -65,20 +72,18 @@ public:
     int getYIm(int ID);
     void moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit(QMouseEvent *event);
+    void actionOnUnit(QMouseEvent *event);
+    void checkBlocked();
     
-private:
-    void sendJson(QJsonObject obj);
-    void music();
-    int tDtoIsoX(int x, int y);
-    int isoToTDX(int x, int y);
-    int tDtoIsoY(int x, int y);
-    int isoToTDY(int x, int y);
+
+
 public slots:
     void tick();
     void onNewConnection();
     void onConnected();
     void onDisconnected();
     void onData();
+
 };
 
 #endif // MAINWINDOW_H
