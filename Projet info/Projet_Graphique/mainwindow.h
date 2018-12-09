@@ -26,8 +26,6 @@ class MainWindow : public QMainWindow
 
     //map 25087
     int t[17][21];
-    QWidget* qMap = new QWidget;
-    QWidget* Menu = new QWidget;
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
@@ -53,7 +51,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-    
+
 private:
     void sendJson(QJsonObject obj);
     void music();
@@ -74,8 +72,6 @@ private:
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
     void checkBlocked();
-    
-
 
 public slots:
     void tick();
@@ -83,6 +79,7 @@ public slots:
     void onConnected();
     void onDisconnected();
     void onData();
+    void recruitAction();
 
 };
 
