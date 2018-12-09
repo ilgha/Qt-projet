@@ -31,7 +31,6 @@ QT += multimedia
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    infantery.cpp \
     Player.cpp \
     game.cpp \
     Land.cpp \
@@ -57,11 +56,11 @@ SOURCES += \
     Airport.cpp \
     City.cpp \
     unit.cpp \
-    menu.cpp
+    menu.cpp \
+    infantry.cpp
 
 HEADERS += \
         mainwindow.h \
-    infantery.h \
     Player.h \
     game.h \
     Land.h \
@@ -87,7 +86,8 @@ HEADERS += \
     Airport.h \
     City.h \
     Unit.h \
-    menu.h
+    menu.h \
+    infantry.h
 
 FORMS += \
         mainwindow.ui

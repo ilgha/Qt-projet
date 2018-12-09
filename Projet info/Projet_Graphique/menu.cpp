@@ -1,13 +1,14 @@
 #include "menu.h"
 #include <QVBoxLayout>
-#include <QComboBox>
 #include <QPushButton>
 #include "mainwindow.h"
+#include <iostream>
 
 Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
 {
-
-    QComboBox *list = new QComboBox(this);
+    this->game = game;
+    building = i;
+    list = new QComboBox(this);
     QPushButton *button = new QPushButton(this);
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(list);
@@ -42,6 +43,51 @@ Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
 
 }
 
-void Menu::recruit(){
+void Menu::recruitAction(){
+    type = list->currentIndex();
+    if (game->getBuildings().at(building).getID()==0){
 
+        switch(type){
+        case 0:{
+            name = "BCopter";
+        }
+        case 1:{
+            name = "Bomber";
+        }
+        case 2:{
+            name = "Fighter";
+            }
+        }
+    }
+
+    else if (game->getBuildings().at(building).getID()==2){
+        switch(type){
+        case 0:{
+            name = "Anti Air";
+        }
+        case 1:{
+            name = "Infantry";
+        }
+        case 2:{
+            name = "Md Tank";
+            }
+        case 3:{
+            name = "Mech";
+        }
+        case 4:{
+            name = "Mega Tank";
+        }
+        case 5:{
+            name = "Neo Tank";
+        }
+        case 6:{
+            name = "Recon";
+            }
+        case 7:{
+            name = "Tank";
+        }
+        }
+    }
+std::cout << name << std::endl;
+    //game->recruit(&game->getBuildings().at(building), name);
 }

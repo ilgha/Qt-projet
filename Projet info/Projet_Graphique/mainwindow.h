@@ -7,7 +7,7 @@
 #include <utility>
 #include <QtNetwork>
 #include <QTimer>
-#include "infantery.h"
+#include "infantry.h"
 #include "building.h"
 #include "game.h"
 #include <vector>
