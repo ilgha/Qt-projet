@@ -3,7 +3,7 @@
 #define GAME_H
 #include "Player.h"
 #include "Unit.h"
-#include "infantery.h"
+#include "infantry.h"
 #include "AntiAir.h"
 #include "BCopter.h"
 #include "Bomber.h"

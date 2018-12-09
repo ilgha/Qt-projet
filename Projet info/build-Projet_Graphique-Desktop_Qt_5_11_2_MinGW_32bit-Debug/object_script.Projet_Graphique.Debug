@@ -1,7 +1,6 @@
 INPUT(
 ./debug\main.o
 ./debug\mainwindow.o
-./debug\infantery.o
 ./debug\Player.o
 ./debug\game.o
 ./debug\Land.o
@@ -28,6 +27,7 @@ INPUT(
 ./debug\City.o
 ./debug\unit.o
 ./debug\menu.o
+./debug\infantry.o
 ./debug\qrc_sprites.o
 ./debug\qrc_msc.o
 ./debug\moc_mainwindow.o
