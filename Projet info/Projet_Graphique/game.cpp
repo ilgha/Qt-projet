@@ -65,6 +65,7 @@ int Game::endTurn() {
 }
 
 bool Game::recruit(Building* building, string buy){
+    std::cout << "hello" << std::endl;
     if(buy == "AntiAir" && building->getTeam()->getMoney()>8000){
         Unit* recruited = new Infantry(building->getX(), building->getY(), 1, building->getTeam());
         recruited->getTeam()->addMoney(-8000);
