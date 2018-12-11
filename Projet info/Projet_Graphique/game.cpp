@@ -61,6 +61,8 @@ int Game::endTurn() {
     if(active->getMoney() == 0){
         endGame();
     }
+
+    playIA(active);
     return 0;
 }
 
@@ -235,6 +237,17 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
        std::cout << "Attaque impossible entre ces unités" << std::endl;
         return 0;
     }
+}
+
+void Game::playIA(Player* player)
+{
+    if(player->typeIA() == 0){
+
+    }else if(player->typeIA() == 1){ //IA-PathFind
+
+    }
+
+
 }
 
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){

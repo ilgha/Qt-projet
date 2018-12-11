@@ -97,9 +97,6 @@ void MainWindow::onNewConnection() {
     update();
 }
 
-//void MainWindow::move(QMouseEvent *event){
-//    unitMove(event);
-//}
 
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;

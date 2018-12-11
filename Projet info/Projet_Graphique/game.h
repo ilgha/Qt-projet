@@ -31,6 +31,7 @@ class Game {
     std::vector<Building> buildings;
     Unit* activeUnit = nullptr;
     int getDamage(Unit* unitA, Unit* unitD);
+    void playIA(Player* player);
 public:
     Game(Player* player1, Player* player2);
     int endTurn();
