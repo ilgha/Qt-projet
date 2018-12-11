@@ -14,6 +14,7 @@ class Menu : public QWidget
     Game* game;
     int building;
     string name;
+    string getName(int type);
 public:
     explicit Menu(QWidget *parent = nullptr, Game* game = nullptr, int i = NULL);
 

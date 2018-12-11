@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->posY.resize(army->size());
     ui->setupUi(this);
 
-    music();
+    //music();
 
 
     server = new QTcpServer();

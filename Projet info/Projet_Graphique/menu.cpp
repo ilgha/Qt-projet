@@ -37,7 +37,7 @@ Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
 
     button->show();
     list->show();
-
+    this->show();
     QObject::connect(button,SIGNAL(clicked()), this, SLOT(recruitAction()));
     QObject::connect(button,SIGNAL(clicked()),this, SLOT(close()));
 
@@ -45,49 +45,51 @@ Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
 
 void Menu::recruitAction(){
     type = list->currentIndex();
-    if (game->getBuildings().at(building).getID()==0){
+    name = getName(type);
+    game->recruit(&game->getBuildings().at(building), name);
+}
 
+string Menu::getName(int type){
+    if (game->getBuildings().at(building).getID()==0){
         switch(type){
         case 0:{
-            name = "BCopter";
+            return "BCopter";
         }
         case 1:{
-            name = "Bomber";
+            return "Bomber";
         }
         case 2:{
-            name = "Fighter";
-            }
+            return "Fighter";
+        }
         }
     }
 
     else if (game->getBuildings().at(building).getID()==2){
         switch(type){
         case 0:{
-            name = "Anti Air";
+            return "Anti Air";
         }
         case 1:{
-            name = "Infantry";
+            return "Infantry";
         }
         case 2:{
-            name = "Md Tank";
+            return "Md Tank";
             }
         case 3:{
-            name = "Mech";
+            return "Mech";
         }
         case 4:{
-            name = "Mega Tank";
+            return "Mega Tank";
         }
         case 5:{
-            name = "Neo Tank";
+            return "Neo Tank";
         }
         case 6:{
-            name = "Recon";
+            return "Recon";
             }
         case 7:{
-            name = "Tank";
+            return "Tank";
         }
         }
     }
-std::cout << name << std::endl;
-    //game->recruit(&game->getBuildings().at(building), name);
 }
