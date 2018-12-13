@@ -20,6 +20,7 @@
 #include "factory.h"
 #include "Airport.h"
 #include "city.h"
+#include "node.h"
 #include "map.h"
 #include <vector>
 class Game {
@@ -31,6 +32,7 @@ class Game {
     std::vector<Building> buildings;
     Unit* activeUnit = nullptr;
     int getDamage(Unit* unitA, Unit* unitD);
+    int smallestF(std::vector<node> open);
     void playIA(Player* player);
 public:
     Game(Player* player1, Player* player2);
