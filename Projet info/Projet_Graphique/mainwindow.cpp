@@ -202,7 +202,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
     //map
-
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
             t[j][i] = game->getMap().getValue(j, i);
@@ -219,11 +218,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
-
-            //affiche la valeur de déplacement du terrain
-            //painter.setPen(QPen(Qt::white));
-            //painter.setFont(QFont("Times", 20, QFont::Bold));
-            //painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
@@ -298,8 +292,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    createUnit(event);
-    actionOnUnit(event);
+    //createUnit(event);
+    //actionOnUnit(event);
 
 
     //réseau
@@ -307,6 +301,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
            return;
 
     sendJson(unitMove(event));
+
     update();
 
 }
@@ -337,7 +332,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
 
     for(unsigned int i = 0; i<army->size(); i++){
-
 
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
@@ -370,7 +364,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
 
             if(army->at(i)->isMovable()){
-                int amtMove = army->at(i)->getMP();
                 int wx = width()/x;
                 int hy = height()/y;
 
@@ -393,8 +386,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         move[newx.append(n)] = army->at(i)->getX();
         move[newy.append(n)] = army->at(i)->getY();
     }
-
-
 
     return move;
 }
