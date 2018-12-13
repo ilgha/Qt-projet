@@ -196,25 +196,24 @@ int MainWindow::isoToTDY(int x, int y){
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
-    //map
+    //map tiles
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
             t[j][i] = game->getMap().getValue(j, i);
         }
     }
 
-
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
             QRectF target(j*width()/x, i*height()/y, (width()/x)+1, (height()/y)+1);
-
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
     }
+
+    //Buildings
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
         if(game->getBuildings().at(u).getTeam() == game->getPlayer2()){
             QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
@@ -231,8 +230,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
         }
     }
 
-    //infantry
-
+    //units
     QPainter painter(this);
     for(unsigned int i = 0; i<cases.size(); i++){
         painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
@@ -281,8 +279,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    //createUnit(event);
-    //actionOnUnit(event);
+    createUnit(event);
+    actionOnUnit(event);
 
 
     //réseau
