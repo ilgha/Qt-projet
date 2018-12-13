@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        //other->connectToHost("192.168.1.7", 8123);
         other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
@@ -98,9 +97,6 @@ void MainWindow::onNewConnection() {
     update();
 }
 
-//void MainWindow::move(QMouseEvent *event){
-//    unitMove(event);
-//}
 
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;

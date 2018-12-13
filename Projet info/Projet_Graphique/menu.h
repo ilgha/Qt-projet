@@ -21,7 +21,8 @@ public:
 signals:
 
 public slots:
-    void recruitAction();
+void recruitAction();
+
 };
 
 #endif // MENU_H

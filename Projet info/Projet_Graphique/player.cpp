@@ -33,3 +33,7 @@ void Player::addMoney(int newMoney){
         money = 0;
     }
 }
+
+int Player::typeIA(){
+    return this->IA;
+}

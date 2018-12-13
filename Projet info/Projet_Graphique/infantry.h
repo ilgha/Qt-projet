@@ -8,3 +8,4 @@ public:
 Infantry(int x, int y, int health, Player* team);
 };
 #endif //Infantry_H
+

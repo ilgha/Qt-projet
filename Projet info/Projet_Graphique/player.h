@@ -11,6 +11,7 @@ public:
     void addIncome(int newIncome);
     void addMoney(int newMoney);
     int getMoney() const ;
+    int typeIA();
 
 };
 

@@ -37,7 +37,7 @@ Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
 
     button->show();
     list->show();
-
+    this->show();
     QObject::connect(button,SIGNAL(clicked()), this, SLOT(recruitAction()));
     QObject::connect(button,SIGNAL(clicked()),this, SLOT(close()));
 
