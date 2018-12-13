@@ -167,6 +167,7 @@ void Game::setActive(Player* player){
 }
 
 
+
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit && army.at(i)->getTeam() == unit->getTeam()){
@@ -198,6 +199,10 @@ Unit* Game::getActiveUnit() const{
 
 void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
+}
+
+void Game::resetActiveUnit(){
+    activeUnit = nullptr;
 }
 
 Map Game::getMap() const
