@@ -11,6 +11,7 @@
 #include "building.h"
 #include "game.h"
 #include <vector>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +48,7 @@ class MainWindow : public QMainWindow
     std::vector<int> posX;
     std::vector<int> posY;
     bool myTurn = false;
+    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
 
 public:
     explicit MainWindow(QWidget *parent, Game* game);

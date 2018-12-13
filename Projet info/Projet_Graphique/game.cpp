@@ -53,6 +53,12 @@ Game::Game(Player* player1, Player* player2){
 
     }
 
+    for(int i = buildings.size()/2; i < buildings.size(); i++){
+        buildings.at(i).setHp(army.at(2));
+        buildings.at(i).setHp(army.at(2));
+
+    }
+
 
     active = player1;
 }

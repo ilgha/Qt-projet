@@ -5,11 +5,8 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QDebug>
-#include <QLabel>
-
 #include <QtWidgets>
 #include <QMessageBox>
-
 #include <QWindow>
 #include <algorithm>
 #include <iostream>
@@ -23,7 +20,6 @@
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
-    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
     textWidget->setWindowTitle("Menu");
     textWidget->move(50,50);
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
@@ -196,6 +192,9 @@ int MainWindow::isoToTDY(int x, int y){
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
+    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
+
     //map tiles
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
@@ -280,7 +279,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     createUnit(event);
-    actionOnUnit(event);
+    //actionOnUnit(event);
 
 
     //réseau
@@ -339,7 +338,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
-        std::cout << "hello" << std::endl;
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(army->at(i) == game->getActiveUnit()){
                 int oldX = army->at(i)->getX();
