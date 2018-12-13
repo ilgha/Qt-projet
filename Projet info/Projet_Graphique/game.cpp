@@ -41,23 +41,18 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-
     army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Infantry(7,8,10,player1));
     army.push_back(new Infantry(13,7,10,player2));
 
 
-    for(int i = 0; i < buildings.size()/2; i++){
-        buildings.at(i).setHp(army.at(0));
-        buildings.at(i).setHp(army.at(0));
-
+    for(int i = 0; i< buildings.size(); i++){
+        if(buildings.at(i).getX() == 14 && buildings.at(i).getY() == 4){
+            buildings.at(i).setHp(army.at(0));
+            buildings.at(i).setHp(army.at(0));
+        }
     }
 
-    for(int i = buildings.size()/2; i < buildings.size(); i++){
-        buildings.at(i).setHp(army.at(2));
-        buildings.at(i).setHp(army.at(2));
-
-    }
 
 
     active = player1;
