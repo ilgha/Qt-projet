@@ -258,11 +258,13 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
 
 int Game::smallestF(std::vector<node> open)
 {
-
-
+    std::vector<int> listF;
+    int index;
     for (auto node : open) {
-
+        listF.push_back(node.getF());
+        index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
     }
+    return index;
 }
 
 bool Game::compareNode(node n1, node n2)
@@ -305,9 +307,9 @@ void Game::playIA(Player* player)
 
                 if(compareNode(current,end)){
 
-                    bestPath(current);
+                    bestPath(current); //déplacement de l'ia
 
-                }else{
+                }else{                 //calcul du meilleur chemin
 
                     std::vector<node> listNeighbour;
                     node neighbourN = node(current.getX(), current.getY()-1, map.getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
