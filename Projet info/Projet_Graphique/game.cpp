@@ -3,6 +3,8 @@
 #include <cmath>
 #include <algorithm>
 
+typedef std::pair <int, int> IntPair;
+
 Player *Game::getPlayer2() const
 {
     return player2;
@@ -224,7 +226,7 @@ std::vector<Building> Game::getBuildings() const
     return buildings;
 }
 
-typedef std::pair <int, int> IntPair;
+
 
 std::vector<IntPair> Game::getCases() const
 {
@@ -320,8 +322,25 @@ void Game::playIA(Player* player)
                 close.push_back(current);
 
                 if(compareNode(current,end)){
+                    clearCases();
+                    moveUnit(u,u->getX(),u->getY(),u->getMP());
+                    node nextPos = begin;
+                    for (auto position : bestPath(current)) {
+                        for (auto possible : cases) {
+                            if(position.getX() == possible.first &&
+                                    position.getY() == possible.second &&
+                                    position.getF() <= nextPos.getF()){
 
-                    bestPath(current); //déplacement de l'ia
+                                nextPos = position;
+
+                            }
+                        }
+                    }
+
+                    u->setX(nextPos.getX());
+                    u->setY(nextPos.getY());
+
+
 
                 }else{                 //calcul du meilleur chemin
 
@@ -347,6 +366,8 @@ void Game::playIA(Player* player)
                 }
             }
         }
+
+        endTurn();
     }
 }
 
