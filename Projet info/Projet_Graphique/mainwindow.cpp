@@ -5,11 +5,8 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QDebug>
-#include <QLabel>
-
 #include <QtWidgets>
 #include <QMessageBox>
-
 #include <QWindow>
 #include <algorithm>
 #include <iostream>
@@ -23,7 +20,6 @@
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
-    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
     textWidget->setWindowTitle("Menu");
     textWidget->move(50,50);
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
@@ -119,7 +115,7 @@ void MainWindow::onData() {
             return;
 
     QByteArray data = other->read(currentSize);
-    std::cout << data.toStdString() << std::endl;
+    //std::cout << data.toStdString() << std::endl;
     currentSize = 0;
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -157,7 +153,7 @@ void MainWindow::onData() {
 
         }
 
-        std::cout << game->getActive() << std::endl;
+        //std::cout << game->getActive() << std::endl;
 
 
         update();
@@ -170,7 +166,7 @@ void MainWindow::sendJson(QJsonObject obj) {
     QDataStream out(other);
     out << (quint32) data.length();
     other->write(data);
-    std::cout << "Sending " << data.toStdString() << std::endl;
+    //std::cout << "Sending " << data.toStdString() << std::endl;
 }
 
 
@@ -196,32 +192,27 @@ int MainWindow::isoToTDY(int x, int y){
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
+    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
 
-    //map
-
+    //map tiles
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
             t[j][i] = game->getMap().getValue(j, i);
         }
     }
 
-
     for(unsigned int j = 0; j<x; j++){
         for(unsigned int i = 0; i<y; i++){
             QRectF target(j*width()/x, i*height()/y, (width()/x)+1, (height()/y)+1);
-
             QRectF source((t[i][j]-1)*16, 15, 16, 16);
-
             QImage image(":/sprt/advance wars sprites/tileset projet");
             QPainter painter(this);
             painter.drawImage(target, image, source);
-
-            //affiche la valeur de déplacement du terrain
-            //painter.setPen(QPen(Qt::white));
-            //painter.setFont(QFont("Times", 20, QFont::Bold));
-            //painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getMap().getTile(j,i).getMoved("tr"))));
         }
     }
+
+    //Buildings
     for(unsigned int u = 0; u < game->getBuildings().size(); u++){
         if(game->getBuildings().at(u).getTeam() == game->getPlayer2()){
             QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
@@ -238,16 +229,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
         }
     }
 
-    //infantry
-
-    for(unsigned int i = 0; i<army->size(); i++){
-
-        //infantry move
-
-        if(army->at(i)->isMovable() && !army->at(i)->getDead()){
-            showMove(army->at(i));
-
-        }
+    //units
+    QPainter painter(this);
+    for(unsigned int i = 0; i<cases.size(); i++){
+        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
 
 
@@ -283,9 +268,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     //test réseau
 
-    QPainter painter(this);
 //    painter.fillRect(posX, posY, 20, 40, Qt::red);
-    painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
+   // painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
 
 
 
@@ -295,7 +279,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     createUnit(event);
-    actionOnUnit(event);
+    //actionOnUnit(event);
 
 
     //réseau
@@ -303,6 +287,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
            return;
 
     sendJson(unitMove(event));
+
     update();
 
 }
@@ -329,16 +314,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
-
     QJsonObject move;
 
     for(unsigned int i = 0; i<army->size(); i++){
-
 
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
                 if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
                         event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
+                    showMove(army->at(i));
                     army->at(i)->setMovable(true);
                     game->setActiveUnit(army->at(i));
                 }
@@ -354,19 +338,17 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
-
-        int oldX = army->at(i)->getX();
-        int oldY = army->at(i)->getY();
-        QString oldx = "oldX";
-        QString oldy = "oldY";
-        QString n = QString::number(i);
-        move[oldx.append(n)] = oldX;
-        move[oldy.append(n)] = oldY;
-
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
+            if(army->at(i) == game->getActiveUnit()){
+                int oldX = army->at(i)->getX();
+                int oldY = army->at(i)->getY();
+                QString oldx = "oldX";
+                QString oldy = "oldY";
+                QString n = QString::number(i);
+                move[oldx.append(n)] = oldX;
+                move[oldy.append(n)] = oldY;
 
-            if(army->at(i)->isMovable()){
-                int amtMove = army->at(i)->getMP();
+
                 int wx = width()/x;
                 int hy = height()/y;
 
@@ -377,20 +359,22 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         army->at(i)->setX(floor(event->x()/wx));
                         army->at(i)->setY(floor(event->y()/hy));
 
-                        game->checkFusion(army->at(i));
+                        //game->checkFusion(army->at(i));
                         army->at(i)->setMovable(false);
-                        game->setActiveUnit(nullptr);
+                        game->resetActiveUnit();
+                        cases.clear();
+
                     }
-               }
+                }
+                QString newx = "newX";
+                QString newy = "newY";
+                move[newx.append(n)] = army->at(i)->getX();
+                move[newy.append(n)] = army->at(i)->getY();
             }
         }
-        QString newx = "newX";
-        QString newy = "newY";
-        move[newx.append(n)] = army->at(i)->getX();
-        move[newy.append(n)] = army->at(i)->getY();
+
+
     }
-
-
 
     return move;
 }
@@ -423,26 +407,11 @@ QJsonObject MainWindow::changeTurn()
 
 
 void MainWindow::showMove(Unit* unit){
-    /*
-     *Legacy
-     *
-     * int amtMove = unit->getMP();
-     * QPainter painter(this);
-     * for(int i = -amtMove; i<=amtMove; i++){
-     *    for(int j = -amtMove; j<=amtMove; j++){
-     *        if(std::abs(i) + std::abs(j) <= amtMove){
-     *          painter.fillRect((unit->getX()*width()/x) + (i*std::abs(width()/x)), (unit->getY()*height()/y) + (j*std::abs(height()/y)), width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
-     *          }
-     *      }
-     *  }*/
 
     cases.clear();
     moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
     checkBlocked();
-    QPainter painter(this);
-    for(unsigned int i = 0; i<cases.size(); i++){
-        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
-    }
+    update();
 }
 
 void MainWindow::showMenu(Building* b, Unit* u){

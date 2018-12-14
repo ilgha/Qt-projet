@@ -33,6 +33,8 @@ class Game {
     Unit* activeUnit = nullptr;
     int getDamage(Unit* unitA, Unit* unitD);
     int smallestF(std::vector<node> open);
+    bool compareNode(node n1, node n2);
+    std::vector<node> bestPath(node target);
     void playIA(Player* player);
 public:
     Game(Player* player1, Player* player2);
@@ -50,6 +52,7 @@ public:
     void setHealth(Unit* unit, int addedHealth);
     Unit* getActiveUnit() const;
     void setActiveUnit(Unit* unit);
+    void resetActiveUnit();
     Player *getPlayer2() const;
     void setPlayer2(Player *value);
     Player *getPlayer1() const;
