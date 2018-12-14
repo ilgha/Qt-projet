@@ -188,8 +188,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
     textWidget->setWindowTitle("Menu");
     textWidget->setFixedSize(5*width()/x,height());
-    textWidget->move(0,0);
-    textWidget->setStyleSheet("background-color: pink");
+    textWidget->move(width()-1-5*width()/x,0);
+    textWidget->setStyleSheet("background-color: magenta");
 
     //map tiles
     for(unsigned int j = 0; j<y; j++){
