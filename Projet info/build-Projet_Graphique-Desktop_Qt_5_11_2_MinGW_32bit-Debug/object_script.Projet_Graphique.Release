@@ -28,6 +28,7 @@ INPUT(
 ./release\unit.o
 ./release\menu.o
 ./release\infantry.o
+./release\node.o
 ./release\qrc_sprites.o
 ./release\qrc_msc.o
 ./release\moc_mainwindow.o

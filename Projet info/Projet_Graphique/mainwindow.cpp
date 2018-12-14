@@ -20,12 +20,6 @@
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
-    textWidget->setWindowTitle("Menu");
-    textWidget->move((28*width())/x,0);
-    //textWidget->setFixedSize(,height())
-    textWidget->setStyleSheet("background-color: yellow");
-    textWidget->repaint();
-
     this->army[0] = army[0];
 
     this->game = game;
@@ -258,23 +252,14 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-    textWidget->move((28*width())/x,0);
+
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-    // infantry action To set in a separated function
-    //for(unsigned int i = 0; i<army->size(); i++){
-        //if(game->checkBuildings(army->at(i)) != nullptr){
-        //  showMenu(game->checkBuildings(army->at(i)->getX(),army->at(i)->getY()),army->at(i));
-        //}
-
-
-
-    //test réseau
-
-//    painter.fillRect(posX, posY, 20, 40, Qt::red);
-   // painter.drawText(10, 250, QString("myTurn: ") + (myTurn ? "true" : "false"));
-
-
+    textWidget->setWindowTitle("Menu");
+    //textWidget->setFixedSize(,height())
+    textWidget->move((28*width())/x,0);
+    textWidget->setStyleSheet("background-color: yellow");
+    textWidget->repaint();
 
 }
 
