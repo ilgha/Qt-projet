@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow
 
 
     //map 25087
-    int t[17][21];
+
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
@@ -40,9 +40,9 @@ class MainWindow : public QMainWindow
     quint32 currentSize = 0;
     QTimer timer;
     int a = 5;
-    unsigned int x = 21;
+    unsigned int x = 26;
     unsigned int y = 17;
-
+    int t[17][26];
     QTcpServer* server = nullptr;
     QTcpSocket* other = nullptr;
     std::vector<int> posX;

@@ -21,10 +21,8 @@
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
     textWidget->setWindowTitle("Menu");
-    textWidget->move(50,50);
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-
+    textWidget->move((28*width())/x,0);
+    //textWidget->setFixedSize(,height())
     textWidget->setStyleSheet("background-color: yellow");
     textWidget->repaint();
 
@@ -192,13 +190,16 @@ int MainWindow::isoToTDY(int x, int y){
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
 
     //map tiles
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
-            t[j][i] = game->getMap().getValue(j, i);
+            try {
+                t[j][i] = game->getMap().getValue(j, i);
+            } catch (const char* msg) {
+                t[j][i] = 0;
+            }
+
         }
     }
 
@@ -257,7 +258,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-
+    textWidget->move((28*width())/x,0);
+    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
     // infantry action To set in a separated function
     //for(unsigned int i = 0; i<army->size(); i++){
         //if(game->checkBuildings(army->at(i)) != nullptr){
