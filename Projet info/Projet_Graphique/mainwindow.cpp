@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     this->army[0] = army[0];
 
+    textWidget->setWindowTitle("Menu");
+    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : brown; color :red; }");
+
     this->game = game;
     this->army = game->getArmy();
     this->posX.resize(army->size());
@@ -33,11 +36,11 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 8123)) {
+    if(! server->listen(QHostAddress::Any, 1723)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        other->connectToHost("127.0.0.1", 8123);
+        other->connectToHost("172.19.7.85", 1723);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
 
@@ -185,11 +188,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-    textWidget->setWindowTitle("Menu");
-    textWidget->setFixedSize(5*width()/x,height());
-    textWidget->move(0,0);
-    textWidget->setStyleSheet("background-color: pink");
+                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
+                       "\nNombre de villes : " + QString::fromStdString(std::to_string(game->getBuildings().size())));
+    textWidget->setFixedSize(5+5*width()/x,height());
+    textWidget->move(width()-1-5*width()/x,0);
 
     //map tiles
     for(unsigned int j = 0; j<y; j++){

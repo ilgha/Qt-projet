@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TheOuiProject</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="sprites.qrc">
+    <normaloff>:/sprt/advance wars sprites/player.png</normaloff>:/sprt/advance wars sprites/player.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QStatusBar" name="statusBar"/>
@@ -22,6 +26,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="sprites.qrc"/>
+ </resources>
  <connections/>
 </ui>
