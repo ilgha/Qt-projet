@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     this->game = game;
     this->army = game->getArmy();
-
     this->posX.resize(army->size());
     this->posY.resize(army->size());
     ui->setupUi(this);
@@ -185,6 +184,13 @@ int MainWindow::isoToTDY(int x, int y){
 void MainWindow::paintEvent(QPaintEvent *event){
 
 
+    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
+    textWidget->setWindowTitle("Menu");
+    textWidget->setFixedSize(5*width()/x,height());
+    textWidget->move(0,0);
+    textWidget->setStyleSheet("background-color: pink");
+
     //map tiles
     for(unsigned int j = 0; j<y; j++){
         for(unsigned int i = 0; i<x; i++){
@@ -226,8 +232,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     //units
     QPainter painter(this);
-    for(unsigned int i = 0; i<cases.size(); i++){
-        painter.fillRect(cases.at(i).first*width()/x, cases.at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
+    for(unsigned int i = 0; i<game->getCases().size(); i++){
+        painter.fillRect(game->getCases().at(i).first*width()/x, game->getCases().at(i).second*height()/y, width()/x, height()/y, QBrush(QColor(230, 128, 128, 128)));
     }
 
 
@@ -252,13 +258,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
-    textWidget->setWindowTitle("Menu");
-    //textWidget->setFixedSize(,height())
-    textWidget->move(50,50);
-    textWidget->setStyleSheet("background-color: yellow");
 
 }
 
@@ -339,9 +338,9 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                 int wx = width()/x;
                 int hy = height()/y;
 
-                for(unsigned int u = 0; u <cases.size(); u++){
+                for(unsigned int u = 0; u <game->getCases().size(); u++){
 
-                    if((floor(event->x()/wx) == cases.at(u).first && floor(event->y()/hy) == cases.at(u).second)){
+                    if((floor(event->x()/wx) == game->getCases().at(u).first && floor(event->y()/hy) == game->getCases().at(u).second)){
 
                         army->at(i)->setX(floor(event->x()/wx));
                         army->at(i)->setY(floor(event->y()/hy));
@@ -349,7 +348,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         //game->checkFusion(army->at(i));
                         army->at(i)->setMovable(false);
                         game->resetActiveUnit();
-                        cases.clear();
+                        game->clearCases();
 
                     }
                 }
@@ -395,9 +394,9 @@ QJsonObject MainWindow::changeTurn()
 
 void MainWindow::showMove(Unit* unit){
 
-    cases.clear();
-    moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
-    checkBlocked();
+    game->clearCases();
+    game->moveUnit(unit, unit->getX(), unit->getY(), unit->getMP());
+    game->checkBlocked();
     update();
 }
 
@@ -511,95 +510,6 @@ int MainWindow::getYIm(int ID){
     }
 }
 
-void MainWindow::moveUnit(Unit* unit, int x, int y, int MP)
-{
-
-    int i = 0;
-    int j = 1;
-    IntPair pos = std::make_pair(x+i,y+j);
-    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    bool present = false;
-    for(unsigned int u = 0; u<cases.size(); u++){
-        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
-            present = true;
-            if( depl.at(u) < MP){
-                cases.erase(cases.begin()+u);
-                present = false;
-            }
-        }
-    }
-
-    if(MP >= 0 && !present){
-        cases.push_back(pos);
-        depl.push_back(MP);
-        moveUnit(unit, x+i, y+j, MP);
-    }
-
-    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
-    i = 0;
-    j = -1;
-
-    pos = std::make_pair(x+i,y+j);
-    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    present = false;
-    for(unsigned int u = 0; u<cases.size(); u++){
-        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
-            present = true;
-            if( depl.at(u) < MP){
-                cases.erase(cases.begin()+u);
-                present = false;
-            }
-        }
-    }
-    if(MP >= 0 && !present){
-        cases.push_back(pos);
-        depl.push_back(MP);
-        moveUnit(unit, x+i, y+j, MP);
-    }
-
-    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
-    i = 1;
-    j = 0;
-    pos = std::make_pair(x+i,y+j);
-    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    present = false;
-    for(unsigned int u = 0; u<cases.size(); u++){
-        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
-            present = true;
-            if( depl.at(u) < MP){
-                cases.erase(cases.begin()+u);
-                present = false;
-            }
-        }
-    }
-    if(MP >= 0 && !present){
-        cases.push_back(pos);
-        depl.push_back(MP);
-        moveUnit(unit, x+i, y+j, MP);
-    }
-
-    MP += game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
-    i = -1;
-    j = 0;
-
-    pos = std::make_pair(x+i,y+j);
-    MP -= game->getMap().getTile(x+i, y+j).getMoved(unit->getMT());
-    present = false;
-    for(unsigned int u = 0; u<cases.size(); u++){
-        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
-            present = true;
-            if( depl.at(u) < MP){
-                cases.erase(cases.begin()+u);
-                present = false;
-            }
-        }
-    }
-    if(MP >= 0 && !present){
-        cases.push_back(pos);
-        depl.push_back(MP);
-        moveUnit(unit, x+i, y+j, MP);
-    }
-}
 
 void MainWindow::createUnit(QMouseEvent *event){
     int wx = width()/x;
@@ -668,16 +578,6 @@ void MainWindow::music(){
     mus->setPlaylist(playlist);
     playlist->shuffle();
     mus->play();
-}
-
-void MainWindow::checkBlocked(){
-    for(unsigned int u = 0; u<cases.size(); u++){
-        for(unsigned int i = 0; i<army->size(); i++){
-            if(cases.at(u).first == army->at(i)->getX() && cases.at(u).second == army->at(i)->getY()){
-                cases.erase(cases.begin()+u);
-            }
-        }
-    }
 }
 
 void MainWindow::recruitAction(){

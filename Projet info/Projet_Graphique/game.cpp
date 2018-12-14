@@ -224,6 +224,13 @@ std::vector<Building> Game::getBuildings() const
     return buildings;
 }
 
+typedef std::pair <int, int> IntPair;
+
+std::vector<IntPair> Game::getCases() const
+{
+    return cases;
+}
+
 int Game::getDamage(Unit * unitA, Unit * unitD) {
 
     int damageChart[11][11] = {{45,120,75,65,105,10,105,1,5,60,25},
@@ -360,3 +367,106 @@ void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     }
 };
 
+void Game::moveUnit(Unit* unit, int x, int y, int MP)
+{
+
+    int i = 0;
+    int j = 1;
+    IntPair pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    bool present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 0;
+    j = -1;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 1;
+    j = 0;
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = -1;
+    j = 0;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+}
+
+void Game::checkBlocked(){
+    for(unsigned int u = 0; u<cases.size(); u++){
+        for(unsigned int i = 0; i<army.size(); i++){
+            if(cases.at(u).first == army.at(i)->getX() && cases.at(u).second == army.at(i)->getY()){
+                cases.erase(cases.begin()+u);
+            }
+        }
+    }
+}
+
+void Game::clearCases(){
+    cases.clear();
+}

@@ -23,11 +23,18 @@
 #include "node.h"
 #include "map.h"
 #include <vector>
+
+
 class Game {
+
+    typedef std::pair <int, int> IntPair;
+
     Player* player1;
     Player* player2;
     Player* active;
     Map map;
+    std::vector<int> depl;
+    std::vector<IntPair> cases;
     std::vector<Unit*> army;
     std::vector<Building> buildings;
     Unit* activeUnit = nullptr;
@@ -60,6 +67,10 @@ public:
     void attack (Unit* unitA, Unit* initD, bool isCounter);
     Map getMap() const;
     std::vector<Building> getBuildings() const;
+    void moveUnit(Unit* unit, int x, int y, int MP);
+    void checkBlocked();
+    void clearCases();
+    std::vector<IntPair> getCases() const;
 };
 
 #endif //GAME_H
