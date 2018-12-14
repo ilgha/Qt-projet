@@ -257,9 +257,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())));
     textWidget->setWindowTitle("Menu");
     //textWidget->setFixedSize(,height())
-    textWidget->move((28*width())/x,0);
+    textWidget->move(50,50);
     textWidget->setStyleSheet("background-color: yellow");
-    textWidget->repaint();
 
 }
 

@@ -54,9 +54,16 @@ Game::Game(Player* player1, Player* player2){
         }
     }
 
+    for(int i = 0; i< buildings.size(); i++){
+        if(buildings.at(i).getX() == 4 && buildings.at(i).getY() == 14){
+            buildings.at(i).setHp(army.at(2));
+            buildings.at(i).setHp(army.at(2));
+        }
+    }
 
 
-    active = player1;
+
+    active = player2;
 }
 
 int Game::endTurn() {
