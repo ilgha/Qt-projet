@@ -17,8 +17,6 @@ namespace Ui {
 class MainWindow;
 }
 
-typedef std::pair <int, int> IntPair;
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -30,8 +28,6 @@ class MainWindow : public QMainWindow
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
-    std::vector<IntPair> cases;
-    std::vector<int> depl;
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
@@ -70,10 +66,8 @@ private:
     QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
-    void moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
-    void checkBlocked();
 
 public slots:
     void tick();
