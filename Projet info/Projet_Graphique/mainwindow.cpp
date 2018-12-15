@@ -15,7 +15,12 @@
 #include <QString>
 #include "Plain.h"
 #include "menu.h"
+<<<<<<< HEAD
 #include "action.h"
+=======
+
+typedef std::pair <int, int> IntPair;
+>>>>>>> 4766a4b55ae7949b3af4f9f860996dcf5603c039
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
@@ -35,11 +40,11 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 1723)) {
+    if(! server->listen(QHostAddress::Any, 8123)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        other->connectToHost("127.0.0.1", 1723);
+        other->connectToHost("127.0.0.1", 8123);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
 
@@ -101,14 +106,14 @@ void MainWindow::onData() {
     if(currentSize == 0) {
             if(other->bytesAvailable() < 4)
                 return;
-             QDataStream in(other);
+            QDataStream in(other);
             in >> currentSize;
         }
          if(other->bytesAvailable() < currentSize)
             return;
 
     QByteArray data = other->read(currentSize);
-    //std::cout << data.toStdString() << std::endl;
+    std::cout << data.toStdString() << std::endl;
     currentSize = 0;
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -159,7 +164,7 @@ void MainWindow::sendJson(QJsonObject obj) {
     QDataStream out(other);
     out << (quint32) data.length();
     other->write(data);
-    //std::cout << "Sending " << data.toStdString() << std::endl;
+    std::cout << "Sending " << data.toStdString() << std::endl;
 }
 
 
@@ -259,6 +264,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
+    std::cout << "myTurn: " << myTurn << std::endl;
 
 }
 
@@ -301,6 +307,130 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     update();
 }
 
+int MainWindow::smallestF(std::vector<node> open)
+{
+    std::vector<int> listF;
+    int index;
+    for (auto node : open) {
+        listF.push_back(node.getF());
+        index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
+    }
+    return index;
+}
+
+bool MainWindow::compareNode(node n1, node n2)
+{
+    return ((n1.getX() == n2.getX() && (n1.getY() == n2.getY())));
+}
+
+std::vector<node> MainWindow::bestPath(node target)
+{
+    std::vector<node> bestPath;
+    while(target.getChild()){
+        bestPath.push_back(target);
+        target = *target.getChild();
+        bestPath.push_back(target);
+    }
+
+    return  bestPath;
+}
+
+void MainWindow::playIA(Player* player)
+{
+    if(player->typeIA() == 0){
+
+    }else if(player->typeIA() == 1){ //IA-PathFind A*
+        QJsonObject move;
+        for (auto u : *army) {
+            std::vector<node> open;
+            std::vector<node> close;
+            int endX = 4;
+            int endY = 14;
+            node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
+            begin.setParenting(nullptr);
+            node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
+            open.push_back(begin);
+
+            while(!open.empty()){
+
+                node current = open.at(smallestF(open));
+                open.erase(open.begin()+smallestF(open)-1);
+                close.push_back(current);
+
+                if(compareNode(current,end)){
+                    game->clearCases();
+                    game->moveUnit(u,u->getX(),u->getY(),u->getMP());
+                    node nextPos = begin;
+                    for (auto position : bestPath(current)) {
+                        for (auto possible : game->getCases()) {
+                            if(position.getX() == possible.first &&
+                                    position.getY() == possible.second &&
+                                    position.getF() <= nextPos.getF()){
+
+                                nextPos = position;
+
+                            }
+                        }
+                    }
+
+                    for(unsigned int i = 0; i<army->size(); i++){
+                        int oldX = army->at(i)->getX();
+                        int oldY = army->at(i)->getY();
+                        QString oldx = "oldX";
+                        QString oldy = "oldY";
+                        QString n = QString::number(i);
+                        move[oldx.append(n)] = oldX;
+                        move[oldy.append(n)] = oldY;
+
+
+                        int wx = width()/this->x;
+                        int hy = height()/y;
+                        QString newx = "newX";
+                        QString newy = "newY";
+                        move[newx.append(n)] = army->at(i)->getX();
+                        move[newy.append(n)] = army->at(i)->getY();
+
+
+
+                    }
+
+                    u->setX(nextPos.getX());
+                    u->setY(nextPos.getY());
+
+                    sendJson(move);
+
+
+
+                }else{                 //calcul du meilleur chemin
+
+                    std::vector<node> listNeighbour;
+                    node neighbourN = node(current.getX(), current.getY()-1, game->getMap().getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                    node neighbourS = node(current.getX(), current.getY()+1, game->getMap().getTile(current.getX(),current.getY()+1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                    node neighbourE = node(current.getX()+1, current.getY(), game->getMap().getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                    node neighbourO = node(current.getX()-1, current.getY(), game->getMap().getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+
+                    listNeighbour.push_back(neighbourN);
+                    listNeighbour.push_back(neighbourS);
+                    listNeighbour.push_back(neighbourE);
+                    listNeighbour.push_back(neighbourO);
+
+                    for (auto neighbour : listNeighbour) {
+                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
+                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
+                            neighbour.setParenting(&current);
+                            open.push_back(neighbour);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        game->endTurn();
+    }
+}
+
+
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
 
@@ -326,20 +456,20 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<army->size(); i++){
+        int oldX = army->at(i)->getX();
+        int oldY = army->at(i)->getY();
+        QString oldx = "oldX";
+        QString oldy = "oldY";
+        QString n = QString::number(i);
+        move[oldx.append(n)] = oldX;
+        move[oldy.append(n)] = oldY;
+
+
+        int wx = width()/x;
+        int hy = height()/y;
+
         if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
             if(army->at(i) == game->getActiveUnit()){
-                int oldX = army->at(i)->getX();
-                int oldY = army->at(i)->getY();
-                QString oldx = "oldX";
-                QString oldy = "oldY";
-                QString n = QString::number(i);
-                move[oldx.append(n)] = oldX;
-                move[oldy.append(n)] = oldY;
-
-
-                int wx = width()/x;
-                int hy = height()/y;
-
                 for(unsigned int u = 0; u <game->getCases().size(); u++){
 
                     if((floor(event->x()/wx) == game->getCases().at(u).first && floor(event->y()/hy) == game->getCases().at(u).second)){
@@ -354,18 +484,22 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
 
                     }
                 }
-                QString newx = "newX";
-                QString newy = "newY";
-                move[newx.append(n)] = army->at(i)->getX();
-                move[newy.append(n)] = army->at(i)->getY();
             }
+
         }
+        QString newx = "newX";
+        QString newy = "newY";
+        move[newx.append(n)] = army->at(i)->getX();
+        move[newy.append(n)] = army->at(i)->getY();
+
 
 
     }
 
     return move;
 }
+
+
 
 QJsonObject MainWindow::changeTurn()
 {
