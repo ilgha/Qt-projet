@@ -57,7 +57,9 @@ SOURCES += \
     City.cpp \
     unit.cpp \
     menu.cpp \
-    infantry.cpp
+    infantry.cpp \
+    node.cpp \
+    action.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -87,7 +89,9 @@ HEADERS += \
     City.h \
     Unit.h \
     menu.h \
-    infantry.h
+    infantry.h \
+    node.h \
+    action.h
 
 FORMS += \
         mainwindow.ui

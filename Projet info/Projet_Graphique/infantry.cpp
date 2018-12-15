@@ -1,4 +1,3 @@
-
 #include "infantry.h"
 #include <string>
 using std::string;

@@ -1,6 +1,9 @@
 #include "game.h"
 #include <iostream>
 #include <cmath>
+#include <algorithm>
+
+typedef std::pair <int, int> IntPair;
 
 Player *Game::getPlayer2() const
 {
@@ -41,20 +44,28 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-
     army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Infantry(7,8,10,player1));
     army.push_back(new Infantry(13,7,10,player2));
 
 
-    for(int i = 0; i < buildings.size()/2; i++){
-        buildings.at(i).setHp(army.at(0));
-        buildings.at(i).setHp(army.at(0));
+    for(int i = 0; i< buildings.size(); i++){
+        if(buildings.at(i).getX() == 14 && buildings.at(i).getY() == 4){
+            buildings.at(i).setHp(army.at(0));
+            buildings.at(i).setHp(army.at(0));
+        }
+    }
 
+    for(int i = 0; i< buildings.size(); i++){
+        if(buildings.at(i).getX() == 4 && buildings.at(i).getY() == 14){
+            buildings.at(i).setHp(army.at(2));
+            buildings.at(i).setHp(army.at(2));
+        }
     }
 
 
-    active = player1;
+
+    active = player2;
 }
 
 int Game::endTurn() {
@@ -71,6 +82,8 @@ int Game::endTurn() {
     if(active->getMoney() == 0){
         endGame();
     }
+
+    //playIA(active);
     return 0;
 }
 
@@ -165,6 +178,7 @@ void Game::setActive(Player* player){
 }
 
 
+
 void Game::checkFusion(Unit* unit){
     for(unsigned int i = 0; i<army.size(); i++){
         if(army[i]->getX() == unit->getX() && army[i]->getY() == unit->getY() && army[i] != unit && army.at(i)->getTeam() == unit->getTeam()){
@@ -198,6 +212,10 @@ void Game::setActiveUnit(Unit* unit){
     activeUnit = unit;
 }
 
+void Game::resetActiveUnit(){
+    activeUnit = nullptr;
+}
+
 Map Game::getMap() const
 {
     return map;
@@ -206,6 +224,13 @@ Map Game::getMap() const
 std::vector<Building> Game::getBuildings() const
 {
     return buildings;
+}
+
+
+
+std::vector<IntPair> Game::getCases() const
+{
+    return cases;
 }
 
 int Game::getDamage(Unit * unitA, Unit * unitD) {
@@ -247,6 +272,107 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
     }
 }
 
+//int Game::smallestF(std::vector<node> open)
+//{
+//    std::vector<int> listF;
+//    int index;
+//    for (auto node : open) {
+//        listF.push_back(node.getF());
+//        index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
+//    }
+//    return index;
+//}
+
+//bool Game::compareNode(node n1, node n2)
+//{
+//    return ((n1.getX() == n2.getX() && (n1.getY() == n2.getY())));
+//}
+
+//std::vector<node> Game::bestPath(node target)
+//{
+//    std::vector<node> bestPath;
+//    while(target.getChild()){
+//        bestPath.push_back(target);
+//        target = *target.getChild();
+//        bestPath.push_back(target);
+//    }
+
+//    return  bestPath;
+//}
+
+//void Game::playIA(Player* player)
+//{
+//    if(player->typeIA() == 0){
+
+//    }else if(player->typeIA() == 1){ //IA-PathFind A*
+//        for (auto u : army) {
+//            std::vector<node> open;
+//            std::vector<node> close;
+//            int endX = 4;
+//            int endY = 14;
+//            node begin = node(u->getX(),u->getY(),map.getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
+//            begin.setParenting(nullptr);
+//            node end = node(endX, endY, map.getTile(endX,endY).getMoved(u->getMT()), 0);
+//            open.push_back(begin);
+
+//            while(!open.empty()){
+
+//                node current = open.at(smallestF(open));
+//                open.erase(open.begin()+smallestF(open)-1);
+//                close.push_back(current);
+
+//                if(compareNode(current,end)){
+//                    clearCases();
+//                    moveUnit(u,u->getX(),u->getY(),u->getMP());
+//                    node nextPos = begin;
+//                    for (auto position : bestPath(current)) {
+//                        for (auto possible : cases) {
+//                            if(position.getX() == possible.first &&
+//                                    position.getY() == possible.second &&
+//                                    position.getF() <= nextPos.getF()){
+
+//                                nextPos = position;
+
+//                            }
+//                        }
+//                    }
+
+//                    u->setX(nextPos.getX());
+//                    u->setY(nextPos.getY());
+
+
+
+//                }else{                 //calcul du meilleur chemin
+
+//                    std::vector<node> listNeighbour;
+//                    node neighbourN = node(current.getX(), current.getY()-1, map.getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+//                    node neighbourS = node(current.getX(), current.getY()+1, map.getTile(current.getX(),current.getY()+1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+//                    node neighbourE = node(current.getX()+1, current.getY(), map.getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+//                    node neighbourO = node(current.getX()-1, current.getY(), map.getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+
+//                    listNeighbour.push_back(neighbourN);
+//                    listNeighbour.push_back(neighbourS);
+//                    listNeighbour.push_back(neighbourE);
+//                    listNeighbour.push_back(neighbourO);
+
+//                    for (auto neighbour : listNeighbour) {
+//                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
+//                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
+//                            neighbour.setParenting(&current);
+//                            open.push_back(neighbour);
+
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+//        endTurn();
+//    }
+//}
+
+
+
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     int damage = getDamage(unitA,unitD);
     int health = unitD->getHealth();
@@ -262,3 +388,106 @@ void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     }
 };
 
+void Game::moveUnit(Unit* unit, int x, int y, int MP)
+{
+
+    int i = 0;
+    int j = 1;
+    IntPair pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    bool present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 0;
+    j = -1;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = 1;
+    j = 0;
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+
+    MP += getMap().getTile(x+i, y+j).getMoved(unit->getMT());;
+    i = -1;
+    j = 0;
+
+    pos = std::make_pair(x+i,y+j);
+    MP -= getMap().getTile(x+i, y+j).getMoved(unit->getMT());
+    present = false;
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(pos.first == cases.at(u).first && pos.second == cases.at(u).second){
+            present = true;
+            if( depl.at(u) < MP){
+                cases.erase(cases.begin()+u);
+                present = false;
+            }
+        }
+    }
+    if(MP >= 0 && !present){
+        cases.push_back(pos);
+        depl.push_back(MP);
+        moveUnit(unit, x+i, y+j, MP);
+    }
+}
+
+void Game::checkBlocked(){
+    for(unsigned int u = 0; u<cases.size(); u++){
+        for(unsigned int i = 0; i<army.size(); i++){
+            if(cases.at(u).first == army.at(i)->getX() && cases.at(u).second == army.at(i)->getY()){
+                cases.erase(cases.begin()+u);
+            }
+        }
+    }
+}
+
+void Game::clearCases(){
+    cases.clear();
+}

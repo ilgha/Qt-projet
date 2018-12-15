@@ -10,13 +10,13 @@
 #include "infantry.h"
 #include "building.h"
 #include "game.h"
+#include "node.h"
 #include <vector>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
 }
-
-typedef std::pair <int, int> IntPair;
 
 class MainWindow : public QMainWindow
 {
@@ -25,33 +25,33 @@ class MainWindow : public QMainWindow
 
 
     //map 25087
-    int t[17][21];
+
     Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
-    std::vector<IntPair> cases;
-    std::vector<int> depl;
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
-
+    QMouseEvent *click;
     Ui::MainWindow *ui;
     quint32 currentSize = 0;
     QTimer timer;
     int a = 5;
-    unsigned int x = 21;
+    unsigned int x = 26;
     unsigned int y = 17;
-
+    int t[17][26];
     QTcpServer* server = nullptr;
     QTcpSocket* other = nullptr;
     std::vector<int> posX;
     std::vector<int> posY;
     bool myTurn = false;
+    QLabel *textWidget = new QLabel(tr("Text Widget"), this);
+
 
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-
+    QJsonObject unitMove(QMouseEvent *event);
 private:
     void sendJson(QJsonObject obj);
     void music();
@@ -64,22 +64,21 @@ private:
     void keyPressEvent(QKeyEvent *event);
     void showMove(Unit* unit);
     void showMenu(Building* b, Unit* u);
-    QJsonObject unitMove(QMouseEvent *event);
     QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
-    void moveUnit(Unit* unit, int x, int y, int MP);
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
-    void checkBlocked();
-
+    int smallestF(std::vector<node> open);
+    bool compareNode(node n1, node n2);
+    std::vector<node> bestPath(node target);
+    void playIA(Player* player);
 public slots:
     void tick();
     void onNewConnection();
     void onConnected();
     void onDisconnected();
     void onData();
-    void recruitAction();
 
 };
 
