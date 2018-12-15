@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->army[0] = army[0];
 
     textWidget->setWindowTitle("Menu");
-    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : brown; color :red; }");
+    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
 
     this->game = game;
     this->army = game->getArmy();
