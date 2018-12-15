@@ -668,8 +668,43 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
                 bool attack = game->ennemyNear(army->at(i));
                 Action* window = new Action(nullptr, i, capt, attack, this);
                 window->setVisible(true);
-                window->setFixedSize(600,300);
+                window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
+<<<<<<< HEAD
+                QVBoxLayout *layout = new QVBoxLayout(window);
+                int count =0;
+
+                if(game->ennemyNear(army->at(i))==true){
+
+                    QPushButton *attackButton = new QPushButton(window);
+                    layout->addWidget(attackButton);
+                    attackButton->setText("attack");
+                    attackButton->setMaximumWidth(100);
+                    attackButton->show();
+                    count ++;
+                }
+
+                if (game->checkBuildings(army->at(i)->getX(),army->at(i)->getY())!=nullptr){
+
+                    QPushButton *captureButton = new QPushButton(window);
+                    layout->addWidget(captureButton);
+                    captureButton->setText("capture");
+                    captureButton->setMaximumWidth(100);
+                    captureButton->show();
+                    count ++;
+                }
+
+                QPushButton *moveButton = new QPushButton(window);
+
+                layout->addWidget(moveButton);
+                moveButton->setText("move");
+                moveButton->setMaximumWidth(100);
+
+
+
+                moveButton->show();
+=======
+>>>>>>> 71f1d363d1901f2dfede0e11ff97f5bf309c2b58
                 window->show();
             }
         }
