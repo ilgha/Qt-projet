@@ -4,7 +4,7 @@
 #include "mainwindow.h"
 #include <iostream>
 
-Menu::Menu(QWidget *parent, Game* game, int i) : QWidget(parent)
+Menu::Menu(QWidget *parent, Game* game, int i)
 {
     this->game = game;
     building = i;

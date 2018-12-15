@@ -31,7 +31,7 @@ class MainWindow : public QMainWindow
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
-
+    QMouseEvent *click;
     Ui::MainWindow *ui;
     quint32 currentSize = 0;
     QTimer timer;
@@ -49,7 +49,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-
+    QJsonObject unitMove(QMouseEvent *event);
 private:
     void sendJson(QJsonObject obj);
     void music();
@@ -62,12 +62,12 @@ private:
     void keyPressEvent(QKeyEvent *event);
     void showMove(Unit* unit);
     void showMenu(Building* b, Unit* u);
-    QJsonObject unitMove(QMouseEvent *event);
     QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
+
 
 public slots:
     void tick();
@@ -75,7 +75,6 @@ public slots:
     void onConnected();
     void onDisconnected();
     void onData();
-    void recruitAction();
 
 };
 

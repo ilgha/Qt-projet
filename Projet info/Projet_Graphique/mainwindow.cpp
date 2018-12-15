@@ -15,8 +15,7 @@
 #include <QString>
 #include "Plain.h"
 #include "menu.h"
-
-
+#include "action.h"
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
@@ -266,15 +265,16 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
+    click = event;
     createUnit(event);
-    //actionOnUnit(event);
+    actionOnUnit(event);
 
 
     //réseau
     if(! myTurn)
            return;
 
-    sendJson(unitMove(event));
+    //sendJson(unitMove(event));
 
     update();
 
@@ -518,7 +518,7 @@ void MainWindow::createUnit(QMouseEvent *event){
     int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
-            Menu* window = new Menu(this, game, i);
+            Menu* window = new Menu(nullptr, game, i);
             window->setVisible(true);
             window->setFixedSize(600,300);
             window->setWindowTitle("Production of units");
@@ -533,42 +533,14 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
     for (unsigned int i=0; i<army->size(); i++){
         if (floor(event->x()/wx) == army->at(i)->getX() && floor(event->y()/hy) == army->at(i)->getY()){
             if (army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && myTurn== true){
-                QWidget* window = new QWidget();
+                Action* window = new Action(nullptr, click, this);
                 window->setVisible(true);
                 window->setFixedSize(600,300);
                 window->setWindowTitle("Choose an action");
-
-                QPushButton *moveButton = new QPushButton(window);
-                QVBoxLayout *layout = new QVBoxLayout(window);
-                layout->addWidget(moveButton);
-                moveButton->setText("move");
-                moveButton->setMaximumWidth(100);
-
-                QPushButton *attackButton = new QPushButton(window);
-                layout->addWidget(attackButton);
-                attackButton->setText("attack");
-                attackButton->setMaximumWidth(100);
-
-                QPushButton *captureButton = new QPushButton(window);
-                layout->addWidget(captureButton);
-                captureButton->setText("capture");
-                captureButton->setMinimumWidth(100);
-
-                moveButton->show();
-                attackButton->show();
-                captureButton->show();
                 window->show();
-
-                QObject::connect(moveButton,SIGNAL(clicked()), window, SLOT(close()));
-           //     QObject::connect(moveButton, SIGNAL(clicked()), this, SLOT(move(event)) );
-
-
             }
         }
     }
-
-
-
 }
 
 void MainWindow::music(){
@@ -582,6 +554,5 @@ void MainWindow::music(){
     mus->play();
 }
 
-void MainWindow::recruitAction(){
-    std::cout << "test" << std::endl;
-}
+
+
