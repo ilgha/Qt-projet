@@ -10,6 +10,7 @@
 #include "infantry.h"
 #include "building.h"
 #include "game.h"
+#include "node.h"
 #include <vector>
 #include <QLabel>
 
@@ -46,6 +47,7 @@ class MainWindow : public QMainWindow
     bool myTurn = false;
     QLabel *textWidget = new QLabel(tr("Text Widget"), this);
 
+
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
@@ -69,6 +71,10 @@ private:
     void createUnit(QMouseEvent *event);
     void actionOnUnit(QMouseEvent *event);
 
+    int smallestF(std::vector<node> open);
+    bool compareNode(node n1, node n2);
+    std::vector<node> bestPath(node target);
+    void playIA(Player* player);
 public slots:
     void tick();
     void onNewConnection();
