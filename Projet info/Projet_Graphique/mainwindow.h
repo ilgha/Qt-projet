@@ -32,7 +32,6 @@ class MainWindow : public QMainWindow
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
-    QMouseEvent *click;
     Ui::MainWindow *ui;
     quint32 currentSize = 0;
     QTimer timer;
@@ -51,8 +50,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
-    QJsonObject unitMove(QMouseEvent *event);
+    void unitMove(int i);
+    void capture(int i);
 private:
+    QJsonObject unitMove(QMouseEvent *event);
     void sendJson(QJsonObject obj);
     void music();
     int tDtoIsoX(int x, int y);

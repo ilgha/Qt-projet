@@ -9,10 +9,10 @@
 class Action : public QWidget{
 
     Q_OBJECT
-    QMouseEvent* click;
     MainWindow* mainWindow;
+    int unit;
 public:
-    Action(QWidget *parent = nullptr, QMouseEvent* click = nullptr, MainWindow* mainWindow = nullptr);
+    Action(QWidget *parent = nullptr, int unit = 0, bool capt = false, bool attack = false, MainWindow* mainWindow = nullptr);
 
 public slots:
     void moveAction();
