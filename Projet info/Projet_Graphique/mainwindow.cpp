@@ -15,12 +15,9 @@
 #include <QString>
 #include "Plain.h"
 #include "menu.h"
-<<<<<<< HEAD
 #include "action.h"
-=======
 
 typedef std::pair <int, int> IntPair;
->>>>>>> 4766a4b55ae7949b3af4f9f860996dcf5603c039
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
