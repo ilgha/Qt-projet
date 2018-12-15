@@ -671,28 +671,40 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
             if (army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && myTurn== true){
                 QWidget* window = new QWidget();
                 window->setVisible(true);
-                window->setFixedSize(600,300);
+                window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
+                QVBoxLayout *layout = new QVBoxLayout(window);
+                int count =0;
+
+                if(game->ennemyNear(army->at(i))==true){
+
+                    QPushButton *attackButton = new QPushButton(window);
+                    layout->addWidget(attackButton);
+                    attackButton->setText("attack");
+                    attackButton->setMaximumWidth(100);
+                    attackButton->show();
+                    count ++;
+                }
+
+                if (game->checkBuildings(army->at(i)->getX(),army->at(i)->getY())!=nullptr){
+
+                    QPushButton *captureButton = new QPushButton(window);
+                    layout->addWidget(captureButton);
+                    captureButton->setText("capture");
+                    captureButton->setMaximumWidth(100);
+                    captureButton->show();
+                    count ++;
+                }
 
                 QPushButton *moveButton = new QPushButton(window);
-                QVBoxLayout *layout = new QVBoxLayout(window);
+
                 layout->addWidget(moveButton);
                 moveButton->setText("move");
                 moveButton->setMaximumWidth(100);
 
-                QPushButton *attackButton = new QPushButton(window);
-                layout->addWidget(attackButton);
-                attackButton->setText("attack");
-                attackButton->setMaximumWidth(100);
 
-                QPushButton *captureButton = new QPushButton(window);
-                layout->addWidget(captureButton);
-                captureButton->setText("capture");
-                captureButton->setMinimumWidth(100);
 
                 moveButton->show();
-                attackButton->show();
-                captureButton->show();
                 window->show();
 
                 QObject::connect(moveButton,SIGNAL(clicked()), window, SLOT(close()));
