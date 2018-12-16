@@ -41,6 +41,7 @@ typedef std::pair <int, int> IntPair;
     QTcpSocket* other = nullptr;
     std::vector<int> posX;
     std::vector<int> posY;
+    std::vector<int> HP;
     std::vector<IntPair> fight;
     bool myTurn = false;
     QLabel *textWidget = new QLabel(tr("Text Widget"), this);
