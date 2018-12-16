@@ -2,5 +2,6 @@
     <qresource prefix="/msc">
         <file>../advance wars sprites/take.mp3</file>
         <file>../advance wars sprites/valk.mp3</file>
+        <file>../advance wars sprites/Wesn.mp3</file>
     </qresource>
 </RCC>

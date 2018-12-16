@@ -21,6 +21,7 @@ typedef std::pair <int, int> IntPair;
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
 
+    showFullScreen();
     textWidget->setWindowTitle("Menu");
     textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
 
@@ -192,7 +193,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                        "\nmyTurn: " + myTurn );
+                        "\nmy Turn: " + myTurn );
     textWidget->setFixedSize(5+5*width()/x,height());
     textWidget->move(width()-1-5*width()/x,0);
 
@@ -234,7 +235,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             painter.drawImage(target, image, source);
         }
         QPainter painter(this);
-        painter.setPen(QPen(Qt::cyan));
+        painter.setPen(QPen(Qt::yellow));
         painter.setFont(QFont("Times", 20, QFont::Bold));
         QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
         painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getBuildings().at(u).getHp())));
@@ -687,7 +688,18 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
                         && onFeet);
                 bool attack = (game->ennemyNear(game->getArmy()->at(i)) && game->getArmy()->at(i)->isAggressive());
                 bool movable = (game->getArmy()->at(i)->isMovable());
-                Action* window = new Action(nullptr, i, capt, attack,movable, this);
+                bool fus = false;
+                for(int u=0; u<game->getArmy()->size(); u++){
+                    if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+                       || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+                       || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+                       || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
+                        if(game->getArmy()->at(u)->getTeam() == game->getArmy()->at(i)->getTeam()){
+                            fus = true;
+                        }
+                    }
+                }
+                Action* window = new Action(nullptr, i, capt, attack,movable, fus, this);
                 window->setVisible(true);
                 window->setFixedSize(200,200);
                 window->setWindowTitle("Choose an action");
@@ -704,6 +716,7 @@ void MainWindow::music(){
     QMediaPlaylist* playlist = new QMediaPlaylist(mus);
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
+    playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/Wesn.mp3"));
     mus->setVolume(100);
     mus->setPlaylist(playlist);
     playlist->shuffle();
