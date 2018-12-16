@@ -43,7 +43,7 @@ int Unit::setHealth(int newHp){
         health = newHp;
     }
     if(health<=0){
-        delete this;
+
         setDead(true);
     }
     return health;
@@ -70,6 +70,7 @@ void Unit::setY(int y){
 
 void Unit::newTurn(){
     setMovable(true);
+    setAggressive(true);
 }
 void Unit::setMovable(bool b)
 {
@@ -81,6 +82,16 @@ bool Unit::isMovable()
     return  movable;
 }
 
+void Unit::setAggressive(bool b)
+{
+    aggressive = b;
+}
+
+bool Unit::isAggressive()
+{
+    return aggressive;
+}
+
 bool Unit::getDead() const
 {
     return dead;
@@ -89,4 +100,5 @@ bool Unit::getDead() const
 void Unit::setDead(bool value)
 {
     dead = value;
+    delete this;
 }

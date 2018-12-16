@@ -23,11 +23,15 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     QPushButton *captureButton = new QPushButton(this);
     captureButton->setText("capture");
     captureButton->setMinimumHeight(30);
-    if (movable == false){
+    if( capt == false || movable == false ){
         captureButton->setEnabled(false);
     }
-    if( capt == false ){
-        captureButton->setEnabled(false);
+
+    QPushButton *fusionButton = new QPushButton(this);
+    fusionButton->setText("capture");
+    fusionButton->setMinimumHeight(30);
+    if(movable == false ){
+        fusionButton->setEnabled(false);
     }
 
     QVBoxLayout* layout = new QVBoxLayout();
@@ -38,21 +42,30 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     moveButton->show();
     attackButton->show();
     captureButton->show();
+    fusionButton->show();
 
     QObject::connect(moveButton,SIGNAL(clicked()), this, SLOT(moveAction()));
     QObject::connect(attackButton,SIGNAL(clicked()), this, SLOT(attackAction()));
     QObject::connect(captureButton,SIGNAL(clicked()),this, SLOT(captureAction()));
+    QObject::connect(fusionButton,SIGNAL(clicked()), this, SLOT(fusionAction()));
     QObject::connect(moveButton,SIGNAL(clicked()), this, SLOT(close()));
     QObject::connect(attackButton,SIGNAL(clicked()), this, SLOT(close()));
     QObject::connect(captureButton,SIGNAL(clicked()),this, SLOT(close()));
+    QObject::connect(fusionButton,SIGNAL(clicked()), this, SLOT(close()));
 }
 
 void Action::moveAction(){
     mainWindow->unitMove(unit);
 }
+
 void Action::attackAction(){
     mainWindow->ShowCombat(unit);
 }
+
 void Action::captureAction(){
     mainWindow->capture(unit);
+}
+
+void Action::fusionAction(){
+    mainWindow->fusion();
 }
