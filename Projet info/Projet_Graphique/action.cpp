@@ -28,7 +28,7 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     }
 
     QPushButton *fusionButton = new QPushButton(this);
-    fusionButton->setText("capture");
+    fusionButton->setText("fusion");
     fusionButton->setMinimumHeight(30);
     if(movable == false ){
         fusionButton->setEnabled(false);
