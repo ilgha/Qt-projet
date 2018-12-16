@@ -273,9 +273,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-
-
-
 }
 
 
@@ -500,8 +497,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
                         game->getArmy()->at(i)->setY(floor(event->y()/hy));
-
-                        //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
 
