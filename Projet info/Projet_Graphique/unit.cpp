@@ -68,7 +68,7 @@ void Unit::setY(int y){
 }
 
 void Unit::newTurn(){
-    setMovable(true);
+
 }
 void Unit::setMovable(bool b)
 {
