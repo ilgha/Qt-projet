@@ -557,8 +557,17 @@ void MainWindow::unitMove(int i){
 
 
 void MainWindow::capture(int i){
+    QJsonObject properties;
     game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->setHp(game->getArmy()->at(i));
     game->getArmy()->at(i)->setMovable(false);
+
+    for (unsigned int i= 0; i<game->getBuildings().size(); i++){
+        int newHPB = game->getBuildings().at(i).getHp();
+        QString n = QString::number(i);
+        QString lifeB = "newHPB";
+        properties[lifeB.append(n)]= newHPB;
+    }
+    sendJson(properties);
 }
 
 
