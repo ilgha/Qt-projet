@@ -139,75 +139,40 @@ void MainWindow::onData() {
         update();
         isConfigured = true;
         myTurn = true;
+
     } else {
-        {
-            myTurn = json["turn"].toBool();
-            for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                QString n = QString::number(i);
-                QString newx = "newX";
-                QString newy = "newY";
-                QString newhp = "life";
-                int newX = json[newx.append(n)].toInt();
-                int newY = json[newy.append(n)].toInt();
-                int life = json[newhp.append(n)].toInt();
-                posX.at(i) = newX;
-                posY.at(i) = newY;
-                HP.at(i) = life;
-                game->getArmy()->at(i)->setX(posX.at(i));
-                game->getArmy()->at(i)->setY(posY.at(i));
-                game->getArmy()->at(i)->setHealth(HP.at(i));
-            }
-<<<<<<< HEAD
-            for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                if(game->getArmy()->at(i)->getHealth() == 0){
-                    game->getArmy()->at(i)->setDead(true);
-=======
 
-            for(unsigned int i = 0; i<game->getBuildings().size(); i++){
-                QString bteam = "bteam";
-                QString n = QString::number(i);
-                team.at(i) = json[bteam.append(n)].toInt();
-            }
+        myTurn = json["turn"].toBool();
+        for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+            QString n = QString::number(i);
+            QString newx = "newX";
+            QString newy = "newY";
+            QString newhp = "life";
 
-            update();
-            isConfigured = true;
-            myTurn = true;
-        } else {
-            {
-                myTurn = json["turn"].toBool();
-                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                    QString n = QString::number(i);
-                    QString newx = "newX";
-                    QString newy = "newY";
-                    QString newhp = "life";
+            int newX = json[newx.append(n)].toInt();
+            int newY = json[newy.append(n)].toInt();
+            int life = json[newhp.append(n)].toInt();
 
-                    int newX = json[newx.append(n)].toInt();
-                    int newY = json[newy.append(n)].toInt();
-                    int life = json[newhp.append(n)].toInt();
+            posX.at(i) = newX;
+            posY.at(i) = newY;
+            HP.at(i) = life;
+            game->getArmy()->at(i)->setX(posX.at(i));
+            game->getArmy()->at(i)->setY(posY.at(i));
+            game->getArmy()->at(i)->setHealth(HP.at(i));
 
-                    posX.at(i) = newX;
-                    posY.at(i) = newY;
-                    HP.at(i) = life;
-                    game->getArmy()->at(i)->setX(posX.at(i));
-                    game->getArmy()->at(i)->setY(posY.at(i));
-                    game->getArmy()->at(i)->setHealth(HP.at(i));
+        }
 
-                }
+        for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+            QString newbteam = "newBTeam";
+            QString n = QString::number(i);
+            int newBTeam = json[newbteam.append(n)].toInt();
+            team.at(i) = newBTeam;
+            game->bTeam(i, team.at(i));
+        }
 
-                for(unsigned int i = 0; i<game->getBuildings().size(); i++){
-                    QString newbteam = "newBTeam";
-                    QString n = QString::number(i);
-                    int newBTeam = json[newbteam.append(n)].toInt();
-                    team.at(i) = newBTeam;
-                    game->bTeam(i, team.at(i));
-                }
-
-                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                    if(game->getArmy()->at(i)->getHealth() == 0){
-                        game->getArmy()->at(i)->setDead(true);
-                    }
->>>>>>> 86a10cf29935ebb0c49b6ede31dc9be1b0cf2c00
-                }
+        for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+            if(game->getArmy()->at(i)->getHealth() == 0){
+                game->getArmy()->at(i)->setDead(true);
             }
         }
     }
@@ -500,10 +465,10 @@ void MainWindow::playIA(Player* player)
                         if(u->getX() == endX && u->getY() == endY){
                             b.setHp(u);
                         }
-//                        game->endTurn();
-//                        myTurn = false;
-//                        sendJson(changeTurn());
-//                        std::cout << "ia end" << std::endl;
+                        //                        game->endTurn();
+                        //                        myTurn = false;
+                        //                        sendJson(changeTurn());
+                        //                        std::cout << "ia end" << std::endl;
 
                         break;
 
@@ -596,18 +561,18 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<game->getBuildings().size(); i++){
-         int newBTeam;
-         QString newbteam = "newBTeam";
-         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 1;
-         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 2;
-         }else{
-             newBTeam = 0;
-         }
+        int newBTeam;
+        QString newbteam = "newBTeam";
+        if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 1;
+        }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 2;
+        }else{
+            newBTeam = 0;
+        }
 
-         QString n = QString::number(i);
-         move[newbteam.append(n)] = newBTeam;
+        QString n = QString::number(i);
+        move[newbteam.append(n)] = newBTeam;
     }
     return move;
 }
@@ -671,18 +636,18 @@ QJsonObject MainWindow::changeTurn()
     }
 
     for(unsigned int i = 0; i<game->getBuildings().size(); i++){
-         int newBTeam;
-         QString newbteam = "newBTeam";
-         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 1;
-         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 2;
-         }else{
-             newBTeam = 0;
-         }
+        int newBTeam;
+        QString newbteam = "newBTeam";
+        if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 1;
+        }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 2;
+        }else{
+            newBTeam = 0;
+        }
 
-         QString n = QString::number(i);
-         turn[newbteam.append(n)] = newBTeam;
+        QString n = QString::number(i);
+        turn[newbteam.append(n)] = newBTeam;
     }
 
     return turn;
@@ -747,18 +712,18 @@ void MainWindow::combat(QMouseEvent *event){
     }
 
     for(unsigned int i = 0; i<game->getBuildings().size(); i++){
-         int newBTeam;
-         QString newbteam = "newBTeam";
-         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 1;
-         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
-             newBTeam = 2;
-         }else{
-             newBTeam = 0;
-         }
+        int newBTeam;
+        QString newbteam = "newBTeam";
+        if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 1;
+        }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+            newBTeam = 2;
+        }else{
+            newBTeam = 0;
+        }
 
-         QString n = QString::number(i);
-         casualities[newbteam.append(n)] = newBTeam;
+        QString n = QString::number(i);
+        casualities[newbteam.append(n)] = newBTeam;
     }
 
     sendJson(casualities);
