@@ -363,8 +363,8 @@ void MainWindow::playIA(Player* player)
             if(u->getTeam() == game->getActive()){
                 std::vector<node> open;
                 std::vector<node> close;
-                int endX = 14;
-                int endY = 4;
+                int endX = 4;
+                int endY = 14;
                 node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
                 begin.setParenting(nullptr);
                 node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
@@ -427,7 +427,6 @@ void MainWindow::playIA(Player* player)
 
                         u->setX(nextPos.getX());
                         u->setY(nextPos.getY());
-
                         game->endTurn();
                         myTurn = false;
                         sendJson(changeTurn());
