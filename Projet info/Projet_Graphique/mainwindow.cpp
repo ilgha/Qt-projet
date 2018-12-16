@@ -1,6 +1,4 @@
 #include "mainwindow.h"
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -28,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->posX.resize(game->getArmy()->size());
     this->posY.resize(game->getArmy()->size());
     this->HP.resize(game->getArmy()->size());
+    this ->team.resize(game->getBuildings().size());
     ui->setupUi(this);
 
     //music();
@@ -56,6 +55,11 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete other;
+    delete server;
+    delete mus;
+    delete playlist;
+    delete textWidget;
     for(int i=0; i<game->getArmy()->size();i++){
 
     }
@@ -91,7 +95,6 @@ void MainWindow::onNewConnection() {
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;
     connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
-    connect(other, SIGNAL(readyRead()), this, SLOT(onFight()));
 }
 
 void MainWindow::onDisconnected() {
@@ -130,6 +133,12 @@ void MainWindow::onData() {
                 HP.at(i) = json[life.append(n)].toInt();
             }
 
+            for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+                QString bteam = "bteam";
+                QString n = QString::number(i);
+                team.at(i) = json[bteam.append(n)].toInt();
+            }
+
             update();
             isConfigured = true;
             myTurn = true;
@@ -141,16 +150,28 @@ void MainWindow::onData() {
                     QString newx = "newX";
                     QString newy = "newY";
                     QString newhp = "life";
+
                     int newX = json[newx.append(n)].toInt();
                     int newY = json[newy.append(n)].toInt();
                     int life = json[newhp.append(n)].toInt();
+
                     posX.at(i) = newX;
                     posY.at(i) = newY;
                     HP.at(i) = life;
                     game->getArmy()->at(i)->setX(posX.at(i));
                     game->getArmy()->at(i)->setY(posY.at(i));
                     game->getArmy()->at(i)->setHealth(HP.at(i));
+
                 }
+
+                for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+                    QString newbteam = "newBTeam";
+                    QString n = QString::number(i);
+                    int newBTeam = json[newbteam.append(n)].toInt();
+                    team.at(i) = newBTeam;
+                    game->bTeam(i, team.at(i));
+                }
+
                 for(unsigned int i = 0; i<game->getArmy()->size(); i++){
                     if(game->getArmy()->at(i)->getHealth() == 0){
                         game->getArmy()->at(i)->setDead(true);
@@ -529,8 +550,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
                         game->getArmy()->at(i)->setY(floor(event->y()/hy));
-
-                        //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
                         game->clearCases();
@@ -546,6 +565,21 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         int newHP = game->getArmy()->at(i)->getHealth();
         QString life = "life";
         move[life.append(n)] = newHP;
+    }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         move[newbteam.append(n)] = newBTeam;
     }
     return move;
 }
@@ -598,6 +632,22 @@ QJsonObject MainWindow::changeTurn()
         game->endGame();
         QMessageBox::information(this, " ", "Game over");
     }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         turn[newbteam.append(n)] = newBTeam;
+    }
+
     return turn;
 }
 
@@ -658,6 +708,22 @@ void MainWindow::combat(QMouseEvent *event){
         QString life = "life";
         casualities[life.append(n)] = newHP;
     }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         casualities[newbteam.append(n)] = newBTeam;
+    }
+
     sendJson(casualities);
     for(int i = 0; i<game->getArmy()->size(); i++){
         if(game->getArmy()->at(i)->getHealth() == 0){

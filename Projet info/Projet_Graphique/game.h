@@ -71,6 +71,7 @@ public:
     void checkBlocked();
     void clearCases();
     std::vector<IntPair> getCases() const;
+    void bTeam(int build, int team);
 };
 
 #endif //GAME_H

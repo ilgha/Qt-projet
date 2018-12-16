@@ -403,3 +403,11 @@ void Game::checkBlocked(){
 void Game::clearCases(){
     cases.clear();
 }
+
+void Game::bTeam(int build, int team){
+    if(team==1){
+        buildings.at(build).switchTeam(player1);
+    }else if(team==2){
+        buildings.at(build).switchTeam(player2);
+    }
+}
