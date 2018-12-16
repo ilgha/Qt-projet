@@ -1,6 +1,7 @@
 #include "menu.h"
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include <iostream>
 
@@ -45,7 +46,14 @@ Menu::Menu(QWidget *parent, Game* game, int i)
 void Menu::recruitAction(){
     type = list->currentIndex();
     name = getName(type);
-    game->recruit(&game->getBuildings().at(building), name);
+    if (game->recruit(&game->getBuildings().at(building), name)== false){
+            QMessageBox::information(this, "Pseudo", "Bonjour " );
+
+    }
+    else{
+        game->recruit(&game->getBuildings().at(building), name);
+    }
+
 }
 
 string Menu::getName(int type){
