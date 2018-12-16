@@ -45,12 +45,8 @@ Game::Game(Player* player1, Player* player2){
 
 
     army.push_back(new Infantry(7,7,10,player1));
-<<<<<<< HEAD
     army.push_back(new Mech(7,8,10,player1));
     army.push_back(new NeoTank(7,9,10,player1));
-=======
-    army.push_back(new Infantry(7,8,10,player1));
->>>>>>> b188a80a0644a0411fbe24f4c2d0db091d099115
     army.push_back(new Infantry(13,7,10,player2));
     army.push_back(new Infantry(14,7,10,player2));
 
@@ -72,6 +68,11 @@ Game::Game(Player* player1, Player* player2){
 
 
     active = player2;
+    for (unsigned int k=1; k<army.size();k++){
+        if (army.at(k)->getTeam()==active){
+            army.at(k)->setMovable(true);
+        }
+    }
 }
 
 int Game::endTurn() {
