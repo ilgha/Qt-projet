@@ -20,8 +20,6 @@
 typedef std::pair <int, int> IntPair;
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
-
-    showFullScreen();
     textWidget->setWindowTitle("Menu");
     textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
 
@@ -142,8 +140,6 @@ void MainWindow::onData() {
                 game->getArmy()->at(i)->setY(posY.at(i));
             }
 
-
-
         }
 
         if(myTurn == true){
@@ -193,7 +189,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                        "\n卐: " + myTurn );
+                        "\nmy Turn: " + myTurn );
     textWidget->setFixedSize(5+5*width()/x,height());
     textWidget->move(width()-1-5*width()/x,0);
 
