@@ -29,10 +29,10 @@ Game::Game(Player* player1, Player* player2){
 
     army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Mech(7,8,10,player1));
-    army.push_back(new NeoTank(7,9,10,player1));
+    army.push_back(new BCopter(7,9,10,player1));
 
-    army.push_back(new Tank(13,7,10,player2));
-    army.push_back(new Tank(14,7,10,player2));
+    army.push_back(new Fighter(13,7,10,player2));
+    army.push_back(new Bomber(14,7,10,player2));
 
 
     for(int i = 0; i< buildings.size(); i++){
@@ -44,8 +44,8 @@ Game::Game(Player* player1, Player* player2){
 
     for(int i = 0; i< buildings.size(); i++){
         if(buildings.at(i).getX() == 4 && buildings.at(i).getY() == 14){
-            buildings.at(i).setHp(army.at(2));
-            buildings.at(i).setHp(army.at(2));
+            buildings.at(i).setHp(army.at(4));
+            buildings.at(i).setHp(army.at(4));
         }
     }
 
