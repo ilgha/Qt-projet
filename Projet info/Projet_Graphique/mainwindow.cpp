@@ -1,6 +1,4 @@
 #include "mainwindow.h"
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -22,25 +20,28 @@ typedef std::pair <int, int> IntPair;
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
     textWidget->setWindowTitle("Menu");
-    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
+    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 16pt; background-color : grey; color : black; }");
 
     this->game = game;
     this->posX.resize(game->getArmy()->size());
     this->posY.resize(game->getArmy()->size());
     this->HP.resize(game->getArmy()->size());
+    this ->team.resize(game->getBuildings().size());
     ui->setupUi(this);
 
-    music();
+    //music();
 
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 8123)) {
+    if(! server->listen(QHostAddress::Any, 10000)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
+
         other->connectToHost("127.0.0.1", 8123);
         //other->connectToHost("81.240.157.94", 10000);
+
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
 
@@ -57,7 +58,14 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete other;
+    delete server;
+    delete mus;
+    delete playlist;
+    delete textWidget;
+    for(int i=0; i<game->getArmy()->size();i++){
 
+    }
 }
 
 void MainWindow::onNewConnection() {
@@ -90,7 +98,6 @@ void MainWindow::onNewConnection() {
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;
     connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
-    connect(other, SIGNAL(readyRead()), this, SLOT(onFight()));
 }
 
 void MainWindow::onDisconnected() {
@@ -150,9 +157,56 @@ void MainWindow::onData() {
                 game->getArmy()->at(i)->setY(posY.at(i));
                 game->getArmy()->at(i)->setHealth(HP.at(i));
             }
+<<<<<<< HEAD
             for(unsigned int i = 0; i<game->getArmy()->size(); i++){
                 if(game->getArmy()->at(i)->getHealth() == 0){
                     game->getArmy()->at(i)->setDead(true);
+=======
+
+            for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+                QString bteam = "bteam";
+                QString n = QString::number(i);
+                team.at(i) = json[bteam.append(n)].toInt();
+            }
+
+            update();
+            isConfigured = true;
+            myTurn = true;
+        } else {
+            {
+                myTurn = json["turn"].toBool();
+                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+                    QString n = QString::number(i);
+                    QString newx = "newX";
+                    QString newy = "newY";
+                    QString newhp = "life";
+
+                    int newX = json[newx.append(n)].toInt();
+                    int newY = json[newy.append(n)].toInt();
+                    int life = json[newhp.append(n)].toInt();
+
+                    posX.at(i) = newX;
+                    posY.at(i) = newY;
+                    HP.at(i) = life;
+                    game->getArmy()->at(i)->setX(posX.at(i));
+                    game->getArmy()->at(i)->setY(posY.at(i));
+                    game->getArmy()->at(i)->setHealth(HP.at(i));
+
+                }
+
+                for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+                    QString newbteam = "newBTeam";
+                    QString n = QString::number(i);
+                    int newBTeam = json[newbteam.append(n)].toInt();
+                    team.at(i) = newBTeam;
+                    game->bTeam(i, team.at(i));
+                }
+
+                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+                    if(game->getArmy()->at(i)->getHealth() == 0){
+                        game->getArmy()->at(i)->setDead(true);
+                    }
+>>>>>>> 86a10cf29935ebb0c49b6ede31dc9be1b0cf2c00
                 }
             }
         }
@@ -353,13 +407,6 @@ std::vector<node> MainWindow::bestPath(std::vector<node> close)
         bestPath.push_back(target);
         std::cout << "bestpath: " << "(" << target.getX() << "," << target.getY() << ")" << std::endl;
     }
-    //    node target = close.back();
-    //    while(target != close.front()){
-    //        bestPath.push_back(target);
-    //        target = *target.getChild();
-    //       bestPath.push_back(target);
-    //        std::cout << target.getChild() << std::endl;
-    //   }
 
     return  bestPath;
 }
@@ -531,8 +578,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
                         game->getArmy()->at(i)->setY(floor(event->y()/hy));
-
-                        //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
                         game->clearCases();
@@ -549,6 +594,21 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         QString life = "life";
         move[life.append(n)] = newHP;
     }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         move[newbteam.append(n)] = newBTeam;
+    }
     return move;
 }
 
@@ -561,8 +621,17 @@ void MainWindow::unitMove(int i){
 
 
 void MainWindow::capture(int i){
+    QJsonObject properties;
     game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->setHp(game->getArmy()->at(i));
     game->getArmy()->at(i)->setMovable(false);
+
+    for (unsigned int i= 0; i<game->getBuildings().size(); i++){
+        int newHPB = game->getBuildings().at(i).getHp();
+        QString n = QString::number(i);
+        QString lifeB = "newHPB";
+        properties[lifeB.append(n)]= newHPB;
+    }
+    sendJson(properties);
 }
 
 
@@ -600,6 +669,22 @@ QJsonObject MainWindow::changeTurn()
         game->endGame();
         QMessageBox::information(this, " ", "Game over");
     }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         turn[newbteam.append(n)] = newBTeam;
+    }
+
     return turn;
 }
 
@@ -660,6 +745,22 @@ void MainWindow::combat(QMouseEvent *event){
         QString life = "life";
         casualities[life.append(n)] = newHP;
     }
+
+    for(unsigned int i = 0; i<game->getBuildings().size(); i++){
+         int newBTeam;
+         QString newbteam = "newBTeam";
+         if(game->getPlayer1() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 1;
+         }else if(game->getPlayer2() == game->getBuildings().at(i).getTeam()){
+             newBTeam = 2;
+         }else{
+             newBTeam = 0;
+         }
+
+         QString n = QString::number(i);
+         casualities[newbteam.append(n)] = newBTeam;
+    }
+
     sendJson(casualities);
     for(int i = 0; i<game->getArmy()->size(); i++){
         if(game->getArmy()->at(i)->getHealth() == 0){

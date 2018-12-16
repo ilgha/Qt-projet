@@ -13,6 +13,8 @@
 #include "node.h"
 #include <vector>
 #include <QLabel>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +44,7 @@ typedef std::pair <int, int> IntPair;
     std::vector<int> posX;
     std::vector<int> posY;
     std::vector<int> HP;
+    std::vector<int> team;
     std::vector<IntPair> fight;
     bool myTurn = false;
     QLabel *textWidget = new QLabel(tr("Text Widget"), this);
@@ -75,6 +78,8 @@ private:
     int actionOnUnit(QMouseEvent *event);
     unsigned int smallestF(std::vector<node> open);
     std::vector<node> bestPath(std::vector<node> close);
+    QMediaPlayer* mus = new QMediaPlayer;
+    QMediaPlaylist* playlist = new QMediaPlaylist(mus);
 
 public slots:
     void tick();

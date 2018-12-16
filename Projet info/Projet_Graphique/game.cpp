@@ -32,7 +32,7 @@ Game::Game(Player* player1, Player* player2){
     army.push_back(new Tank(7,9,10,player1));
 
     army.push_back(new Infantry(13,7,10,player2));
-    army.push_back(new Infantry(14,7,10,player2));
+
 
 
 
@@ -402,4 +402,12 @@ void Game::checkBlocked(){
 
 void Game::clearCases(){
     cases.clear();
+}
+
+void Game::bTeam(int build, int team){
+    if(team==1){
+        buildings.at(build).switchTeam(player1);
+    }else if(team==2){
+        buildings.at(build).switchTeam(player2);
+    }
 }
