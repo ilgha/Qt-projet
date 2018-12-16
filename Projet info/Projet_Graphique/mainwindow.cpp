@@ -202,7 +202,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     textWidget->setText("Income player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
                        "\nMoney player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                       "Income player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getIncome())) +
+                       "\nIncome player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getIncome())) +
                        "\nMoney player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getMoney())) +
                        "\nmy Turn: " + myTurn);
     textWidget->setFixedSize(5+5*width()/x,height());
@@ -623,13 +623,16 @@ void MainWindow::combat(QMouseEvent *event){
     for(int i=0; i<game->getArmy()->size(); i++){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
             event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
-            game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
-            game->getActiveUnit()->setMovable(false);
-            game->getActiveUnit()->setAggressive(false);
-            game->setActiveUnit(nullptr);
-            fight.clear();
-
-
+            if(game->getActiveUnit()->getX()+1 == game->getArmy()->at(i)->getX() && game->getActiveUnit()->getY() == game->getArmy()->at(i)->getY()
+               || game->getActiveUnit()->getX()-1 == game->getArmy()->at(i)->getX() && game->getActiveUnit()->getY() == game->getArmy()->at(i)->getY()
+               || game->getActiveUnit()->getX() == game->getArmy()->at(i)->getX() && game->getActiveUnit()->getY()+1 == game->getArmy()->at(i)->getY()
+               || game->getActiveUnit()->getX() == game->getArmy()->at(i)->getX() && game->getActiveUnit()->getY()-1 == game->getArmy()->at(i)->getY()){
+                game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
+                game->getActiveUnit()->setMovable(false);
+                game->getActiveUnit()->setAggressive(false);
+                game->setActiveUnit(nullptr);
+                fight.clear();
+            }
         }
     }
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
