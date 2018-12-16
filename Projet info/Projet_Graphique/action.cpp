@@ -1,7 +1,7 @@
 #include "action.h"
 #include <iostream>
 
-Action::Action(QWidget *parent, int unit, bool capt, bool attack, MainWindow* mainWindow)
+Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, MainWindow* mainWindow)
 {
     this->unit = unit;
     this->mainWindow = mainWindow;
@@ -9,6 +9,9 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack, MainWindow* ma
     QPushButton* moveButton = new QPushButton(this);
     moveButton->setText("move");
     moveButton->setMinimumHeight(30);
+    if (movable==false){
+        moveButton->setEnabled(false);
+    }
 
     QPushButton *attackButton = new QPushButton(this);
     attackButton->setText("attack");
@@ -20,6 +23,9 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack, MainWindow* ma
     QPushButton *captureButton = new QPushButton(this);
     captureButton->setText("capture");
     captureButton->setMinimumHeight(30);
+    if (movable == false){
+        captureButton->setEnabled(false);
+    }
     if( capt == false ){
         captureButton->setEnabled(false);
     }
