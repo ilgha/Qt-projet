@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 10000)) {
+    if(! server->listen(QHostAddress::Any, 8123)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
@@ -397,49 +397,18 @@ void MainWindow::playIA(Player* player)
                 int endY = 14;
                 Building b = *game->checkBuildings(endX,endY);
                 node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
-                std::cout << "begin node: " << begin.getX() << "," << begin.getY() << std::endl;
                 node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
-                std::cout << "end node: " << end.getX() << "," << end.getY() << std::endl;
                 open.push_back(begin);
 
                 while(!open.empty() || b.getHp() != 0){
 
-                    std::cout << "open: ";
-                    for (auto nodeO : open) {
-                        std::cout << "(" << nodeO.getX() << "," << nodeO.getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
-                    std::cout << "close: ";
-                    for (auto nodeC : close) {
-                        std::cout << "(" << nodeC.getX() << "," << nodeC.getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
                     node current = open.at(smallestF(open));
-                    std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
                     open.erase(open.begin()+smallestF(open));
-                    std::cout << "open: ";
-                    for (auto nodeO : open) {
-                        std::cout << "(" << nodeO.getX() << "," << nodeO.getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
                     close.push_back(current);
-                    std::cout << "close: ";
-                    for (auto nodeC : close) {
-                        std::cout << "(" << nodeC.getX() << "," << nodeC.getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
 
                     if(current == end){
-                        std::cout << "close: ";
-                        for (auto nodeC : close) {
-                            std::cout << "(" << nodeC.getX() << "," << nodeC.getY() << ")" << ' ';
-                        }
-                        std::cout << std::endl;
-                        //game->clearCases();
+
                         game->moveUnit(u,u->getX(),u->getY(),u->getMP());
                         node nextPos = begin;
                         game->checkBlocked();
@@ -454,7 +423,7 @@ void MainWindow::playIA(Player* player)
                                 }
                             }
                         }
-                        std::cout << "(" << nextPos.getX() << "," << nextPos.getY() << ")" << ' ';
+                        std::cout << "(" << nextPos.getX() << "," << nextPos.getY() << ")" << std::endl;
 
                         u->setX(nextPos.getX());
                         u->setY(nextPos.getY());
@@ -465,10 +434,6 @@ void MainWindow::playIA(Player* player)
                         if(u->getX() == endX && u->getY() == endY){
                             b.setHp(u);
                         }
-                        //                        game->endTurn();
-                        //                        myTurn = false;
-                        //                        sendJson(changeTurn());
-                        //                        std::cout << "ia end" << std::endl;
 
                         break;
 

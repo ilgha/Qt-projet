@@ -32,6 +32,9 @@ Game::Game(Player* player1, Player* player2){
     army.push_back(new Tank(7,9,10,player1));
 
     army.push_back(new Infantry(13,7,10,player2));
+    army.push_back(new Infantry(16,3,10,player2));
+    army.push_back(new Infantry(5,16,10,player2));
+    army.push_back(new Infantry(2,5,10,player2));
 
 
 
