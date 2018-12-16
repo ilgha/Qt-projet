@@ -100,13 +100,13 @@ void MainWindow::onDisconnected() {
 void MainWindow::onData() {
     std::cout << "Some data !" << std::endl;
     if(currentSize == 0) {
-            if(other->bytesAvailable() < 4)
-                return;
-            QDataStream in(other);
-            in >> currentSize;
-        }
-         if(other->bytesAvailable() < currentSize)
+        if(other->bytesAvailable() < 4)
             return;
+        QDataStream in(other);
+        in >> currentSize;
+    }
+    if(other->bytesAvailable() < currentSize)
+        return;
 
     QByteArray data = other->read(currentSize);
     //std::cout << data.toStdString() << std::endl;
@@ -116,46 +116,46 @@ void MainWindow::onData() {
     QJsonObject json = doc.object();
 
 
-        if(! isConfigured) {
-            for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                QString x = "x";
-                QString y = "y";
-                QString n = QString::number(i);
+    if(! isConfigured) {
+        for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+            QString x = "x";
+            QString y = "y";
+            QString n = QString::number(i);
 
-                posY.at(i) = json[y.append(n)].toInt();
-                posX.at(i) = json[x.append(n)].toInt();
-            }
-
-            update();
-            isConfigured = true;
-            myTurn = true;
-        } else {
-            {
-                myTurn = json["turn"].toBool();
-                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                    QString n = QString::number(i);
-                    QString newx = "newX";
-                    QString newy = "newY";
-                    int newX = json[newx.append(n)].toInt();
-                    int newY = json[newy.append(n)].toInt();
-                    posX.at(i) = newX;
-                    posY.at(i) = newY;
-                    game->getArmy()->at(i)->setX(posX.at(i));
-                    game->getArmy()->at(i)->setY(posY.at(i));
-                }
-            }
-        }
-
-        if(myTurn == true){
-
-            std::cout << game->getActive() << std::endl;
-            std::cout << game->getActive()->typeIA() << std::endl;
-            playIA(game->getActive());
-            std::cout << game->getActive() << std::endl;
-
+            posY.at(i) = json[y.append(n)].toInt();
+            posX.at(i) = json[x.append(n)].toInt();
         }
 
         update();
+        isConfigured = true;
+        myTurn = true;
+    } else {
+        {
+            myTurn = json["turn"].toBool();
+            for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+                QString n = QString::number(i);
+                QString newx = "newX";
+                QString newy = "newY";
+                int newX = json[newx.append(n)].toInt();
+                int newY = json[newy.append(n)].toInt();
+                posX.at(i) = newX;
+                posY.at(i) = newY;
+                game->getArmy()->at(i)->setX(posX.at(i));
+                game->getArmy()->at(i)->setY(posY.at(i));
+            }
+        }
+    }
+
+    if(myTurn == true){
+
+        std::cout << game->getActive() << std::endl;
+        std::cout << game->getActive()->typeIA() << std::endl;
+        playIA(game->getActive());
+        std::cout << game->getActive() << std::endl;
+
+    }
+
+    update();
 }
 
 
@@ -191,10 +191,10 @@ int MainWindow::isoToTDY(int x, int y){
 void MainWindow::paintEvent(QPaintEvent *event){
 
     textWidget->setText("Income player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                       "\nMoney player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                       "Income player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getIncome())) +
-                       "\nMoney player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getMoney())) +
-                       "\nmy Turn: " + myTurn);
+                        "\nMoney player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
+                        "Income player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getIncome())) +
+                        "\nMoney player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getMoney())) +
+                        "\nmy Turn: " + myTurn);
     textWidget->setFixedSize(5+5*width()/x,height());
     textWidget->move(width()-1-5*width()/x,0);
 
@@ -295,7 +295,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 
     //réseau
     if(! myTurn)
-           return;
+        return;
 
     update();
 
@@ -306,7 +306,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
     case Qt::Key_P: {
         if(! myTurn)
-               return;
+            return;
         game->endTurn();
         myTurn = false;
         sendJson(changeTurn());
@@ -340,13 +340,13 @@ std::vector<node> MainWindow::bestPath(std::vector<node> close)
         bestPath.push_back(target);
         std::cout << "bestpath: " << "(" << target.getX() << "," << target.getY() << ")" << std::endl;
     }
-//    node target = close.back();
-//    while(target != close.front()){
-//        bestPath.push_back(target);
-//        target = *target.getChild();
-//       bestPath.push_back(target);
-//        std::cout << target.getChild() << std::endl;
-//   }
+    //    node target = close.back();
+    //    while(target != close.front()){
+    //        bestPath.push_back(target);
+    //        target = *target.getChild();
+    //       bestPath.push_back(target);
+    //        std::cout << target.getChild() << std::endl;
+    //   }
 
     return  bestPath;
 }
@@ -371,6 +371,7 @@ void MainWindow::playIA(Player* player)
                 int endX = 4;
                 int endY = 14;
                 node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
+                std::cout << "begin node: " << begin.getX() << "," << begin.getY() << std::endl;
                 begin.setParenting(nullptr);
                 node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
                 std::cout << "end node: " << end.getX() << "," << end.getY() << std::endl;
@@ -409,7 +410,7 @@ void MainWindow::playIA(Player* player)
                     std::cout << std::endl;
 
                     if(current == end){
-                        std::reverse(close.begin(),close.end());
+                        //std::reverse(close.begin(),close.end());
                         std::cout << "close: ";
                         for (auto nodeC : close) {
                             std::cout << "(" << nodeC.getX() << "," << nodeC.getY() << ")" << ' ';
@@ -432,6 +433,14 @@ void MainWindow::playIA(Player* player)
 
                         u->setX(nextPos.getX());
                         u->setY(nextPos.getY());
+                        u->setMovable(false);
+                        game->resetActiveUnit();
+                        game->clearCases();
+
+                        if(u->getX() == endX && u->getY() == endY){
+                            Building b = *game->checkBuildings(u->getX(),u->getY());
+                            b.setHp(u);
+                        }
                         game->endTurn();
                         myTurn = false;
                         sendJson(changeTurn());
@@ -475,7 +484,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
         if(game->getArmy()->at(i)->isMovable() && game->getActiveUnit() == game->getArmy()->at(i)){
             if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
-                event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
+                    event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
                 game->setActiveUnit(nullptr);
                 game->clearCases();
             }
@@ -592,9 +601,9 @@ void MainWindow::showCombat(int i){
     game->setActiveUnit(game->getArmy()->at(i));
     for(int u=0; u<game->getArmy()->size(); u++){
         if(game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY()){
+                || game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
+                || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY()
+                || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY()){
             IntPair pos = std::make_pair(game->getArmy()->at(u)->getX(),game->getArmy()->at(u)->getY());
             fight.push_back(pos);
         }
@@ -606,7 +615,7 @@ void MainWindow::combat(QMouseEvent *event){
 
     for(int i=0; i<game->getArmy()->size(); i++){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
-            event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
+                event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
             game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
             game->getActiveUnit()->setMovable(false);
             game->getActiveUnit()->setAggressive(false);
@@ -745,9 +754,9 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
                 bool fus = false;
                 for(int u=0; u<game->getArmy()->size(); u++){
                     if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
-                       || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
-                       || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
-                       || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
+                            || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+                            || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+                            || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
                         if(game->getArmy()->at(u)->getTeam() == game->getArmy()->at(i)->getTeam()){
                             fus = true;
                         }
@@ -782,9 +791,9 @@ void MainWindow::showFusion(int i){
     game->setActiveUnit(game->getArmy()->at(i));
     for(int u=0; u<game->getArmy()->size(); u++){
         if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
-           || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
-           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
-           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
+                || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+                || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+                || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
             if(game->getArmy()->at(u)->getTeam() == game->getArmy()->at(i)->getTeam()){
                 IntPair pos = std::make_pair(game->getArmy()->at(u)->getX(),game->getArmy()->at(u)->getY());
                 fight.push_back(pos);
@@ -796,7 +805,7 @@ void MainWindow::showFusion(int i){
 void MainWindow::fusion(QMouseEvent *event){
     for(int i=0; i<game->getArmy()->size(); i++){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
-            event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
+                event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
 
             game->checkFusion(game->getActiveUnit());
             game->setActiveUnit(nullptr);
