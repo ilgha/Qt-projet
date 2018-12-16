@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->HP.resize(game->getArmy()->size());
     ui->setupUi(this);
 
-    //music();
+    music();
 
 
     server = new QTcpServer();
@@ -811,7 +811,7 @@ void MainWindow::music(){
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/take.mp3"));
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/valk.mp3"));
     playlist->addMedia(QUrl("qrc:/msc/advance wars sprites/Wesn.mp3"));
-    mus->setVolume(100);
+    mus->setVolume(50);
     mus->setPlaylist(playlist);
     playlist->shuffle();
     mus->play();
