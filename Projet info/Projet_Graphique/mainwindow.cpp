@@ -671,9 +671,11 @@ void MainWindow::createUnit(QMouseEvent *event){
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1 && game->getBuildings().at(i).getTeam()== game->getActive()){
 
             for(int u = 0; game->getArmy()->size(); u++){
-                //if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
-                    //return;
-                //}
+                if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
+                    std::cout << game->getBuildings().at(i).getX() << std::endl;
+                    std::cout << game->getArmy()->at(u)->getX() << std::endl;
+                    return;
+                }
             }
 
             Menu* window = new Menu(nullptr, game, i);
@@ -698,10 +700,6 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
                 window->setVisible(true);
                 window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
-<<<<<<< HEAD
-=======
-
->>>>>>> 2545bb27e656f14b75deb54621d18725904cb0f7
                 window->show();
             }
         }

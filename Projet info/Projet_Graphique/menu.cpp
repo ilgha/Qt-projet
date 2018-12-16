@@ -66,22 +66,22 @@ string Menu::getName(int type){
     else if (game->getBuildings().at(building).getID()==2){
         switch(type){
         case 0:{
-            return "Anti Air";
+            return "AntiAir";
         }
         case 1:{
             return "Infantry";
         }
         case 2:{
-            return "Md Tank";
+            return "MdTank";
             }
         case 3:{
             return "Mech";
         }
         case 4:{
-            return "Mega Tank";
+            return "MegaTank";
         }
         case 5:{
-            return "Neo Tank";
+            return "NeoTank";
         }
         case 6:{
             return "Recon";
