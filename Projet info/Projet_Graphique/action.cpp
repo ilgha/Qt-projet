@@ -45,6 +45,7 @@ void Action::moveAction(){
     mainWindow->unitMove(unit);
 }
 void Action::attackAction(){
+    mainWindow->ShowCombat(unit);
 }
 void Action::captureAction(){
     mainWindow->capture(unit);
