@@ -385,7 +385,6 @@ void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
         attack(unitD, unitA, true);
     }
     else{
-        std::cout << "hellooo" << std::endl;
         unitD->setHealth(health - damage);
     }
 };
