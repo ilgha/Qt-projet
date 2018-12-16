@@ -27,25 +27,26 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-    army.push_back(new Infantry(7,7,10,player1));
-    army.push_back(new Mech(7,8,10,player1));
-    army.push_back(new BCopter(7,9,10,player1));
+    army.push_back(new Tank(7,7,10,player1));
+    army.push_back(new Tank(7,8,10,player1));
+    army.push_back(new Tank(7,9,10,player1));
 
-    army.push_back(new Fighter(13,7,10,player2));
-    army.push_back(new Bomber(14,7,10,player2));
+    army.push_back(new Infantry(13,7,10,player2));
+    army.push_back(new Infantry(14,7,10,player2));
+
 
 
     for(int i = 0; i< buildings.size(); i++){
-        if(buildings.at(i).getX() == 14 && buildings.at(i).getY() == 4){
+        if(buildings.at(i).getX() == 4 && buildings.at(i).getY() == 14){
             buildings.at(i).setHp(army.at(0));
             buildings.at(i).setHp(army.at(0));
         }
     }
 
     for(int i = 0; i< buildings.size(); i++){
-        if(buildings.at(i).getX() == 4 && buildings.at(i).getY() == 14){
-            buildings.at(i).setHp(army.at(4));
-            buildings.at(i).setHp(army.at(4));
+        if(buildings.at(i).getX() == 14 && buildings.at(i).getY() == 4){
+            buildings.at(i).setHp(army.at(3));
+            buildings.at(i).setHp(army.at(3));
         }
     }
 
@@ -90,7 +91,6 @@ int Game::endTurn() {
     }
     active->addMoney(active->getIncome());
 
-    //playIA(active);
     return 0;
 }
 
@@ -278,107 +278,6 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
         return 0;
     }
 }
-
-//int Game::smallestF(std::vector<node> open)
-//{
-//    std::vector<int> listF;
-//    int index;
-//    for (auto node : open) {
-//        listF.push_back(node.getF());
-//        index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
-//    }
-//    return index;
-//}
-
-//bool Game::compareNode(node n1, node n2)
-//{
-//    return ((n1.getX() == n2.getX() && (n1.getY() == n2.getY())));
-//}
-
-//std::vector<node> Game::bestPath(node target)
-//{
-//    std::vector<node> bestPath;
-//    while(target.getChild()){
-//        bestPath.push_back(target);
-//        target = *target.getChild();
-//        bestPath.push_back(target);
-//    }
-
-//    return  bestPath;
-//}
-
-//void Game::playIA(Player* player)
-//{
-//    if(player->typeIA() == 0){
-
-//    }else if(player->typeIA() == 1){ //IA-PathFind A*
-//        for (auto u : army) {
-//            std::vector<node> open;
-//            std::vector<node> close;
-//            int endX = 4;
-//            int endY = 14;
-//            node begin = node(u->getX(),u->getY(),map.getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
-//            begin.setParenting(nullptr);
-//            node end = node(endX, endY, map.getTile(endX,endY).getMoved(u->getMT()), 0);
-//            open.push_back(begin);
-
-//            while(!open.empty()){
-
-//                node current = open.at(smallestF(open));
-//                open.erase(open.begin()+smallestF(open)-1);
-//                close.push_back(current);
-
-//                if(compareNode(current,end)){
-//                    clearCases();
-//                    moveUnit(u,u->getX(),u->getY(),u->getMP());
-//                    node nextPos = begin;
-//                    for (auto position : bestPath(current)) {
-//                        for (auto possible : cases) {
-//                            if(position.getX() == possible.first &&
-//                                    position.getY() == possible.second &&
-//                                    position.getF() <= nextPos.getF()){
-
-//                                nextPos = position;
-
-//                            }
-//                        }
-//                    }
-
-//                    u->setX(nextPos.getX());
-//                    u->setY(nextPos.getY());
-
-
-
-//                }else{                 //calcul du meilleur chemin
-
-//                    std::vector<node> listNeighbour;
-//                    node neighbourN = node(current.getX(), current.getY()-1, map.getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-//                    node neighbourS = node(current.getX(), current.getY()+1, map.getTile(current.getX(),current.getY()+1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-//                    node neighbourE = node(current.getX()+1, current.getY(), map.getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-//                    node neighbourO = node(current.getX()-1, current.getY(), map.getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-
-//                    listNeighbour.push_back(neighbourN);
-//                    listNeighbour.push_back(neighbourS);
-//                    listNeighbour.push_back(neighbourE);
-//                    listNeighbour.push_back(neighbourO);
-
-//                    for (auto neighbour : listNeighbour) {
-//                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
-//                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
-//                            neighbour.setParenting(&current);
-//                            open.push_back(neighbour);
-
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-//        endTurn();
-//    }
-//}
-
-
 
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     int damage = getDamage(unitA,unitD);
