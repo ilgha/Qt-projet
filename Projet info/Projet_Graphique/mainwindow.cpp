@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 10000)) {
+    if(! server->listen(QHostAddress::Any, 8123)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
@@ -63,8 +63,8 @@ MainWindow::~MainWindow()
     delete mus;
     delete playlist;
     delete textWidget;
-    for(int i=0; i<game->getArmy()->size();i++){
-
+    for(auto unit : *game->getArmy()){
+        delete unit;
     }
 }
 
@@ -463,7 +463,9 @@ void MainWindow::playIA(Player* player)
                         game->clearCases();
 
                         if(u->getX() == endX && u->getY() == endY){
-                            b.setHp(u);
+                            auto it = std::find(game->getArmy()->begin(), game->getArmy()->end(), u);
+                            std::cout << "distance" << distance(game->getArmy()->begin(), it) << std::endl;
+                            capture(distance(game->getArmy()->begin(), it));
                         }
                         //                        game->endTurn();
                         //                        myTurn = false;
