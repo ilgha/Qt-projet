@@ -22,7 +22,7 @@ typedef std::pair <int, int> IntPair;
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
     textWidget->setWindowTitle("Menu");
-    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
+    textWidget->setStyleSheet("QLabel { font-weight: bold; font: 16pt; background-color : grey; color : black; }");
 
     this->game = game;
     this->posX.resize(game->getArmy()->size());
@@ -30,16 +30,16 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
     this->HP.resize(game->getArmy()->size());
     ui->setupUi(this);
 
-    music();
+    //music();
 
 
     server = new QTcpServer();
 
-    if(! server->listen(QHostAddress::Any, 8123)) {
+    if(! server->listen(QHostAddress::Any, 10000)) {
         std::cout << "I am a client" << std::endl;
         other = new QTcpSocket();
         connect(other, SIGNAL(connected()), this, SLOT(onConnected()));
-        other->connectToHost("127.0.0.1", 8123);
+        other->connectToHost("localhost", 10000);
         connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
         game->endTurn();
 
@@ -56,7 +56,9 @@ MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(ne
 MainWindow::~MainWindow()
 {
     delete ui;
+    for(int i=0; i<game->getArmy()->size();i++){
 
+    }
 }
 
 void MainWindow::onNewConnection() {
