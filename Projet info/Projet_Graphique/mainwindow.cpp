@@ -327,6 +327,7 @@ int MainWindow::smallestF(std::vector<node*> open)
         listF.push_back(node->getF());
         index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
     }
+    std::cout << "index: " << index << std::endl;
     return index;
 }
 
@@ -388,19 +389,18 @@ void MainWindow::playIA(Player* player)
                     std::cout << std::endl;
 
                     node current = *open.at(smallestF(open));
-                    node* pcurrent = &current;
                     std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
-                    open.erase(open.begin()+smallestF(open)-1);
+                    //open.erase(open.begin()+smallestF(open));
                     std::cout << "open: ";
                     for (auto nodeO : open) {
                         std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
                     }
                     std::cout << std::endl;
 
-                    std::cout << pcurrent << std::endl;
+                    std::cout << &current << std::endl;
 
-                    close.push_back(pcurrent);
+                    close.push_back(&current);
                     std::cout << close.size() << std::endl;
                     std::cout << "close: ";
                     for (auto nodeC : open) {
@@ -449,7 +449,6 @@ void MainWindow::playIA(Player* player)
                         listNeighbour.push_back(&neighbourE);
                         listNeighbour.push_back(&neighbourO);
 
-<<<<<<< HEAD
                         for (auto neighbour : listNeighbour) {
                             if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
@@ -457,13 +456,7 @@ void MainWindow::playIA(Player* player)
                                 open.push_back(neighbour);
 
                             }
-=======
-                    for (auto neighbour : listNeighbour) {
-                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
-                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
-                            neighbour.setParenting(&current);
-                            open.push_back(neighbour);
->>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
+
                         }
                     }
                 }
