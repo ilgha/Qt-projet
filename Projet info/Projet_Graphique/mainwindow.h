@@ -27,7 +27,6 @@ class MainWindow : public QMainWindow
     //map 25087
 
     Game* game = nullptr;
-    std::vector<Unit*> *army;
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;
@@ -68,7 +67,7 @@ private:
     int getXIm(int ID);
     int getYIm(int ID);
     void createUnit(QMouseEvent *event);
-    void actionOnUnit(QMouseEvent *event);
+    int actionOnUnit(QMouseEvent *event);
     int smallestF(std::vector<node> open);
     bool compareNode(node n1, node n2);
     std::vector<node> bestPath(node target);

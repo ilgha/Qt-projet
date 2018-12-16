@@ -44,7 +44,7 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-    army.push_back(new Infantry(7,7,10,player1));
+    army.push_back(new Infantry(7,2,10,player1));
     army.push_back(new Infantry(7,8,10,player1));
     army.push_back(new Infantry(13,7,10,player2));
 
@@ -484,6 +484,11 @@ void Game::checkBlocked(){
             if(cases.at(u).first == army.at(i)->getX() && cases.at(u).second == army.at(i)->getY()){
                 cases.erase(cases.begin()+u);
             }
+        }
+    }
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(cases.at(u).first < 0 || cases.at(u).second < 0){
+            cases.erase(cases.begin()+u);
         }
     }
 }
