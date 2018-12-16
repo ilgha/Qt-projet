@@ -346,9 +346,9 @@ std::vector<node*> MainWindow::bestPath(node target)
 
     return  bestPath;
 }
-/*
+
 void MainWindow::playIA(Player* player)
-{
+{/*
     if(player->typeIA() == 0){
         return;
 
@@ -449,7 +449,6 @@ void MainWindow::playIA(Player* player)
                         listNeighbour.push_back(&neighbourE);
                         listNeighbour.push_back(&neighbourO);
 
-<<<<<<< HEAD
                         for (auto neighbour : listNeighbour) {
                             if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
@@ -457,22 +456,15 @@ void MainWindow::playIA(Player* player)
                                 open.push_back(neighbour);
 
                             }
-=======
-                    for (auto neighbour : listNeighbour) {
-                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
-                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
-                            neighbour.setParenting(&current);
-                            open.push_back(neighbour);
->>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
+
                         }
                     }
                 }
             }
         }
-    }
+    }*/
 }
 
-*/
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
@@ -480,7 +472,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
             if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
                 event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
                 game->setActiveUnit(nullptr);
-               // game->getArmy()->at(i)->setMovable(false);
                 game->clearCases();
             }
         }
@@ -504,8 +495,8 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                 for(unsigned int u = 0; u <game->getCases().size(); u++){
 
                     if((floor(event->x()/wx) == game->getCases().at(u).first && floor(event->y()/hy) == game->getCases().at(u).second)){
-                        for(unsigned int u = 0; u < game->getBuildings().size(); u++){
-                            if(game->getArmy()->at(i)->getX() == game->getBuildings().at(u).getX() && game->getArmy()->at(i)->getX() == game->getBuildings().at(u).getX()){
+                        for(unsigned int t = 0; t < game->getBuildings().size(); t++){
+                            if(game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX() && game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX()){
                                 game->getBuildings().at(u).reset();
                             }
                         }
@@ -528,8 +519,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         move[newx.append(n)] = game->getArmy()->at(i)->getX();
         move[newy.append(n)] = game->getArmy()->at(i)->getY();
 
-
-
     }
 
     return move;
@@ -541,11 +530,12 @@ void MainWindow::unitMove(int i){
     game->getArmy()->at(i)->setMovable(true);
     game->setActiveUnit(game->getArmy()->at(i));
 }
+
+
 void MainWindow::capture(int i){
     game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->setHp(game->getArmy()->at(i));
     game->getArmy()->at(i)->setMovable(false);
 }
-
 
 
 QJsonObject MainWindow::changeTurn()
