@@ -23,10 +23,7 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     QPushButton *captureButton = new QPushButton(this);
     captureButton->setText("capture");
     captureButton->setMinimumHeight(30);
-    if (movable == false){
-        captureButton->setEnabled(false);
-    }
-    if( capt == false ){
+    if( capt == false || movable == false ){
         captureButton->setEnabled(false);
     }
 

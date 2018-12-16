@@ -448,8 +448,12 @@ void MainWindow::playIA(Player* player)
                         listNeighbour.push_back(&neighbourS);
                         listNeighbour.push_back(&neighbourE);
                         listNeighbour.push_back(&neighbourO);
+<<<<<<< HEAD
 
                         for (auto neighbour : listNeighbour) {
+=======
+                      for (auto neighbour : listNeighbour) {
+>>>>>>> 4ab769867943f1624e57f47b635b1592aa504eb6
                             if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
                                 neighbour->setParenting(&current);
@@ -591,6 +595,8 @@ void MainWindow::combat(QMouseEvent *event){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
             event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
             game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
+            game->getActiveUnit()->setMovable(false);
+            game->getActiveUnit()->setAggressive(false);
             game->setActiveUnit(nullptr);
             fight.clear();
 
@@ -711,7 +717,7 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
         if (floor(event->x()/wx) == game->getArmy()->at(i)->getX() && floor(event->y()/hy) == game->getArmy()->at(i)->getY()){
             if (game->getArmy()->at(i)->getTeam() == game->getActive() && !game->getArmy()->at(i)->getDead() && myTurn== true){
                 bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr && game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->getTeam()!= game->getActive());
-                bool attack = game->ennemyNear(game->getArmy()->at(i));
+                bool attack = (game->ennemyNear(game->getArmy()->at(i)) && game->getArmy()->at(i)->isAggressive());
                 bool movable = (game->getArmy()->at(i)->isMovable());
                 Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);

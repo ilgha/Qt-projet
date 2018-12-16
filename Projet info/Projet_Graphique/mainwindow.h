@@ -73,6 +73,7 @@ private:
     int smallestF(std::vector<node*> open);
     bool compareNode(node n1, node n2);
     std::vector<node*> bestPath(node target);
+
 public slots:
     void tick();
     void onNewConnection();
