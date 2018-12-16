@@ -521,13 +521,11 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
-
                         game->clearCases();
 
                     }
                 }
             }
-
         }
         QString newx = "newX";
         QString newy = "newY";
@@ -536,10 +534,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         int newHP = game->getArmy()->at(i)->getHealth();
         QString life = "life";
         move[life.append(n)] = newHP;
-
-
     }
-
     return move;
 }
 
