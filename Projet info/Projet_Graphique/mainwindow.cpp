@@ -552,7 +552,16 @@ QJsonObject MainWindow::changeTurn()
         turn[newy.append(n)] = oldY;
     }
     game->endTurn();
-
+    int k=0;
+    for(unsigned int j=0; j< game->getBuildings().size(); j++ ){
+        if (game->getBuildings().at(j).getTeam()== game->getActive()){
+            k++;
+        }
+    }
+    if (k==0){
+        game->endGame();
+        QMessageBox::information(this, " ", "Game over");
+    }
     return turn;
 }
 

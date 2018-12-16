@@ -3,27 +3,10 @@
 #include <cmath>
 #include <algorithm>
 
+
 typedef std::pair <int, int> IntPair;
 
-Player *Game::getPlayer2() const
-{
-    return player2;
-}
 
-void Game::setPlayer2(Player *value)
-{
-    player2 = value;
-}
-
-Player *Game::getPlayer1() const
-{
-    return player1;
-}
-
-void Game::setPlayer1(Player *value)
-{
-    player1 = value;
-}
 
 Game::Game(Player* player1, Player* player2){
     this->player1 = player1;
@@ -76,6 +59,25 @@ Game::Game(Player* player1, Player* player2){
     }
 }
 
+Player *Game::getPlayer2() const
+{
+    return player2;
+}
+
+void Game::setPlayer2(Player *value)
+{
+    player2 = value;
+}
+
+Player *Game::getPlayer1() const
+{
+    return player1;
+}
+
+void Game::setPlayer1(Player *value)
+{
+    player1 = value;
+}
 int Game::endTurn() {
     erase();
     if(active == player1){
@@ -87,9 +89,6 @@ int Game::endTurn() {
         army[i]->newTurn();
     }
     active->addMoney(active->getIncome());
-    if(active->getMoney() == 0){
-        endGame();
-    }
 
     //playIA(active);
     return 0;
@@ -173,8 +172,8 @@ bool Game::ennemyNear(Unit *unit)
     }
 }
 
-int Game::endGame(){
-    return 0;
+void Game::endGame(){
+
 }
 
 Player* Game::getActive() const{
