@@ -28,7 +28,6 @@ class MainWindow : public QMainWindow
 
     Player* player = nullptr;
     Game* game = nullptr;
-    std::vector<Unit*> *army;
     bool inMenu = false;
     bool inMove = false;
     bool isConfigured = false;

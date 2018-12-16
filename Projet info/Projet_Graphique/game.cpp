@@ -486,6 +486,11 @@ void Game::checkBlocked(){
             }
         }
     }
+    for(unsigned int u = 0; u<cases.size(); u++){
+        if(cases.at(u).first < 0 || cases.at(u).second < 0){
+            cases.erase(cases.begin()+u);
+        }
+    }
 }
 
 void Game::clearCases(){
