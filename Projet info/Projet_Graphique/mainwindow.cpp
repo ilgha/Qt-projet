@@ -346,7 +346,7 @@ std::vector<node> MainWindow::bestPath(node target)
 
     return  bestPath;
 }
-
+/*
 void MainWindow::playIA(Player* player)
 {
     if(player->typeIA() == 0){
@@ -427,7 +427,7 @@ void MainWindow::playIA(Player* player)
     }
 }
 
-
+*/
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
@@ -558,6 +558,7 @@ void MainWindow::combat(QMouseEvent *event){
             game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
             game->setActiveUnit(nullptr);
             fight.clear();
+
         }
     }
 }
