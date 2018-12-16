@@ -234,7 +234,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             painter.drawImage(target, image, source);
         }
         QPainter painter(this);
-        painter.setPen(QPen(Qt::yellow));
+        painter.setPen(QPen(Qt::black));
         painter.setFont(QFont("Times", 20, QFont::Bold));
         QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
         painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getBuildings().at(u).getHp())));
@@ -463,6 +463,11 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
+                        for(unsigned int u = 0; u < game->getBuildings().size(); u++){
+                            if(game->getArmy()->at(i)->getX() != game->getBuildings().at(u).getX() && game->getArmy()->at(i)->getX() != game->getBuildings().at(u).getX()){
+                                game->getBuildings().at(u).reset();
+                            }
+                        }
                         game->clearCases();
 
                     }
