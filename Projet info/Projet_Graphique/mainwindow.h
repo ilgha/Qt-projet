@@ -26,7 +26,6 @@ class MainWindow : public QMainWindow
 
     //map 25087
 
-    Player* player = nullptr;
     Game* game = nullptr;
     std::vector<Unit*> *army;
     bool inMenu = false;

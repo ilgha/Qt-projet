@@ -110,7 +110,7 @@ void MainWindow::onData() {
             return;
 
     QByteArray data = other->read(currentSize);
-    //std::cout << data.toStdString() << std::endl;
+    std::cout << data.toStdString() << std::endl;
     currentSize = 0;
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -148,8 +148,14 @@ void MainWindow::onData() {
 
         }
 
-        //std::cout << game->getActive() << std::endl;
+        if(myTurn == true){
 
+            std::cout << game->getActive() << std::endl;
+            std::cout << game->getActive()->typeIA() << std::endl;
+            playIA(game->getActive());
+            std::cout << game->getActive() << std::endl;
+
+        }
 
         update();
 }
@@ -292,8 +298,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
                return;
         game->endTurn();
         myTurn = false;
-        playIA(game->getActive());
-        std::cout << "ia play" << std::endl;
         sendJson(changeTurn());
 
         break;
@@ -338,10 +342,16 @@ std::vector<node> MainWindow::bestPath(node target)
 void MainWindow::playIA(Player* player)
 {
     if(player->typeIA() == 0){
+        return;
 
-    }else if(player->typeIA() == 1){ //IA-PathFind A*
+    }else if(player->typeIA() == 1){ //IA immobile
 
-        QJsonObject turn;
+        game->endTurn();
+        myTurn = false;
+        sendJson(changeTurn());
+        std::cout << "ia end" << std::endl;
+
+    }else if(player->typeIA() == 2){ //IA-PathFind A*
 
         for (auto u : *army) {
             std::vector<node> open;
@@ -377,26 +387,7 @@ void MainWindow::playIA(Player* player)
 
                     u->setX(nextPos.getX());
                     u->setY(nextPos.getY());
-
-                    turn["turn"] = (myTurn == false);
-
-                    for(unsigned int i = 0; i<army->size(); i++){
-
-                        int oldX = army->at(i)->getX();
-                        int oldY = army->at(i)->getY();
-                        QString oldx = "oldX";
-                        QString oldy = "oldY";
-                        QString n = QString::number(i);
-                        turn[oldx.append(n)] = oldX;
-                        turn[oldy.append(n)] = oldY;
-                        QString newx = "newX";
-                        QString newy = "newY";
-                        turn[newx.append(n)] = oldX;
-                        turn[newy.append(n)] = oldY;
-                    }
-
-                    game->endTurn();
-                    sendJson(turn);
+                    sendJson(changeTurn());
 
                     break;
 
@@ -521,7 +512,6 @@ QJsonObject MainWindow::changeTurn()
         turn[newy.append(n)] = oldY;
     }
     game->endTurn();
-
 
     return turn;
 }
