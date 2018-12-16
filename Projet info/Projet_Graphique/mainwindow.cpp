@@ -16,6 +16,7 @@
 #include "Plain.h"
 #include "menu.h"
 #include "action.h"
+#include "windows.h"
 
 typedef std::pair <int, int> IntPair;
 
@@ -62,6 +63,7 @@ void MainWindow::onNewConnection() {
     other = server->nextPendingConnection();
     connect(other, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
     connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
+    connect(other, SIGNAL(readyRead()), this, SLOT(onFight()));
 
 
     QJsonObject info;
@@ -88,6 +90,7 @@ void MainWindow::onNewConnection() {
 void MainWindow::onConnected() {
     std::cout << "I am connected" << std::endl;
     connect(other, SIGNAL(readyRead()), this, SLOT(onData()));
+    connect(other, SIGNAL(readyRead()), this, SLOT(onFight()));
 }
 
 void MainWindow::onDisconnected() {
@@ -106,7 +109,7 @@ void MainWindow::onData() {
             return;
 
     QByteArray data = other->read(currentSize);
-    std::cout << data.toStdString() << std::endl;
+    //std::cout << data.toStdString() << std::endl;
     currentSize = 0;
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -127,19 +130,20 @@ void MainWindow::onData() {
             isConfigured = true;
             myTurn = true;
         } else {
-            myTurn = json["turn"].toBool();
-            for(unsigned int i = 0; i<game->getArmy()->size(); i++){
-                QString n = QString::number(i);
-                QString newx = "newX";
-                QString newy = "newY";
-                int newX = json[newx.append(n)].toInt();
-                int newY = json[newy.append(n)].toInt();
-                posX.at(i) = newX;
-                posY.at(i) = newY;
-                game->getArmy()->at(i)->setX(posX.at(i));
-                game->getArmy()->at(i)->setY(posY.at(i));
+            {
+                myTurn = json["turn"].toBool();
+                for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+                    QString n = QString::number(i);
+                    QString newx = "newX";
+                    QString newy = "newY";
+                    int newX = json[newx.append(n)].toInt();
+                    int newY = json[newy.append(n)].toInt();
+                    posX.at(i) = newX;
+                    posY.at(i) = newY;
+                    game->getArmy()->at(i)->setX(posX.at(i));
+                    game->getArmy()->at(i)->setY(posY.at(i));
+                }
             }
-
         }
 
         if(myTurn == true){
@@ -153,7 +157,6 @@ void MainWindow::onData() {
 
         update();
 }
-
 
 
 void MainWindow::sendJson(QJsonObject obj) {
@@ -187,9 +190,11 @@ int MainWindow::isoToTDY(int x, int y){
 
 void MainWindow::paintEvent(QPaintEvent *event){
 
-    textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
-                       "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                        "\nmy Turn: " + myTurn );
+    textWidget->setText("Income player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
+                       "\nMoney player 1: " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
+                       "Income player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getIncome())) +
+                       "\nMoney player 2: " + QString::fromStdString(std::to_string(game->getPlayer2()->getMoney())) +
+                       "\nmy Turn: " + myTurn);
     textWidget->setFixedSize(5+5*width()/x,height());
     textWidget->move(width()-1-5*width()/x,0);
 
@@ -519,6 +524,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
         move[newx.append(n)] = game->getArmy()->at(i)->getX();
         move[newy.append(n)] = game->getArmy()->at(i)->getY();
 
+
     }
 
     return move;
@@ -596,6 +602,8 @@ void MainWindow::showCombat(int i){
 }
 
 void MainWindow::combat(QMouseEvent *event){
+    QJsonObject casualities;
+
     for(int i=0; i<game->getArmy()->size(); i++){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
             event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
@@ -605,8 +613,15 @@ void MainWindow::combat(QMouseEvent *event){
             game->setActiveUnit(nullptr);
             fight.clear();
 
+
         }
     }
+    for(unsigned int i = 0; i<game->getArmy()->size(); i++){
+        QString life = "life";
+        QString n = QString::number(i);
+        casualities[life.append(n)] = game->getArmy()->at(i)->getHealth();
+    }
+    sendJson(casualities);
 }
 
 
