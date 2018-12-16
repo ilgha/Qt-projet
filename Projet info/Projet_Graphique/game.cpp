@@ -69,6 +69,11 @@ Game::Game(Player* player1, Player* player2){
 
 
     active = player2;
+    for (unsigned int k=1; k<army.size();k++){
+        if (army.at(k)->getTeam()==active){
+            army.at(k)->setMovable(true);
+        }
+    }
 }
 
 int Game::endTurn() {

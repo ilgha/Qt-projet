@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Player.h"
+#include "player.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <utility>
