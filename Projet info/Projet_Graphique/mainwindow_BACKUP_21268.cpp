@@ -667,15 +667,16 @@ void MainWindow::createUnit(QMouseEvent *event){
     int wx = width()/x;
     int hy = height()/y;
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
-
+<<<<<<< HEAD
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1 && game->getBuildings().at(i).getTeam()== game->getActive()){
-
+=======
+        if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
             for(int u = 0; game->getArmy()->size(); u++){
-                //if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
-                    //return;
-                //}
-            }
+                if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
 
+                }
+            }
+>>>>>>> 9dbd0c529628ad75ab7884651d8cc6f6f9659b3c
             Menu* window = new Menu(nullptr, game, i);
             window->setVisible(true);
             window->setFixedSize(600,300);
@@ -698,10 +699,7 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
                 window->setVisible(true);
                 window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
-<<<<<<< HEAD
-=======
 
->>>>>>> 2545bb27e656f14b75deb54621d18725904cb0f7
                 window->show();
             }
         }
