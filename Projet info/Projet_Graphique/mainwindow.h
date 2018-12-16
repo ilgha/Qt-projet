@@ -70,10 +70,14 @@ private:
     int getYIm(int ID);
     void createUnit(QMouseEvent *event);
     int actionOnUnit(QMouseEvent *event);
-    int smallestF(std::vector<node> open);
+    int smallestF(std::vector<node*> open);
     bool compareNode(node n1, node n2);
+<<<<<<< HEAD
+    std::vector<node*> bestPath(node target);
+=======
     std::vector<node> bestPath(node target);
 
+>>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
 public slots:
     void tick();
     void onNewConnection();

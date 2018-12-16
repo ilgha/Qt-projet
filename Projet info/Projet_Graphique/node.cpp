@@ -9,8 +9,16 @@ node::node(int x, int y, int cost, int heur)
     this->child=nullptr;
 }
 
-bool node::operator== ( const node & nodeDroite ) const
-{ return x == nodeDroite.x && y == nodeDroite.y; }
+//bool node::operator== ( const node &nodeDroite ) const
+//{ return x == nodeDroite.x && y == nodeDroite.y; }
+
+bool node::operator== (const node &n) const
+{
+   if((x == n.getX()) && (y == n.getY()))
+     return true;
+   else
+     return false;
+}
 
 int node::getCost()
 {
@@ -27,12 +35,12 @@ int node::getF()
     return (cost+heur);
 }
 
-int node::getX()
+int node::getX() const
 {
     return x;
 }
 
-int node::getY()
+int node::getY() const
 {
     return y;
 }
