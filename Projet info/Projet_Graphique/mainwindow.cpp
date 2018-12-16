@@ -63,8 +63,8 @@ MainWindow::~MainWindow()
     delete mus;
     delete playlist;
     delete textWidget;
-    for(int i=0; i<game->getArmy()->size();i++){
-
+    for(auto unit : *game->getArmy()){
+        delete unit;
     }
 }
 
@@ -432,7 +432,9 @@ void MainWindow::playIA(Player* player)
                         game->clearCases();
 
                         if(u->getX() == endX && u->getY() == endY){
-                            b.setHp(u);
+                            auto it = std::find(game->getArmy()->begin(), game->getArmy()->end(), u);
+                            std::cout << "distance" << distance(game->getArmy()->begin(), it) << std::endl;
+                            capture(distance(game->getArmy()->begin(), it));
                         }
 
                         break;
