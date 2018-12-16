@@ -30,7 +30,7 @@ int node::getHeuristic()
     return heur;
 }
 
-int node::getF()
+unsigned int node::getF()
 {
     return (cost+heur);
 }
