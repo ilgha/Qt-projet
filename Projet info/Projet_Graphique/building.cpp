@@ -54,4 +54,5 @@ int Building::setHp(Unit* unit) {
 
 void Building::reset() {
     hp = maxHp;
+    std::cout << hp << std::endl;
 }

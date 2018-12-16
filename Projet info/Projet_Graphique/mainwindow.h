@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "player.h"
+#include "Player.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <utility>
@@ -73,7 +73,6 @@ private:
     int smallestF(std::vector<node*> open);
     bool compareNode(node n1, node n2);
     std::vector<node*> bestPath(node target);
-
 
 public slots:
     void tick();
