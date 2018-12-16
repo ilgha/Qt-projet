@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow
 
 
     //map 25087
-
+typedef std::pair <int, int> IntPair;
     Game* game = nullptr;
     bool inMenu = false;
     bool inMove = false;
@@ -41,8 +41,10 @@ class MainWindow : public QMainWindow
     QTcpSocket* other = nullptr;
     std::vector<int> posX;
     std::vector<int> posY;
+    std::vector<IntPair> fight;
     bool myTurn = false;
     QLabel *textWidget = new QLabel(tr("Text Widget"), this);
+    void combat(QMouseEvent *event);
 
 
 public:
@@ -50,6 +52,7 @@ public:
     ~MainWindow();
     void unitMove(int i);
     void capture(int i);
+    void ShowCombat(int i);
 private:
     QJsonObject unitMove(QMouseEvent *event);
     void sendJson(QJsonObject obj);
@@ -62,7 +65,6 @@ private:
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *event);
     void showMove(Unit* unit);
-    void showMenu(Building* b, Unit* u);
     QJsonObject changeTurn();
     int getXIm(int ID);
     int getYIm(int ID);
@@ -70,7 +72,12 @@ private:
     int actionOnUnit(QMouseEvent *event);
     int smallestF(std::vector<node*> open);
     bool compareNode(node n1, node n2);
+<<<<<<< HEAD
     std::vector<node*> bestPath(node target);
+=======
+    std::vector<node> bestPath(node target);
+
+>>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
 public slots:
     void tick();
     void onNewConnection();

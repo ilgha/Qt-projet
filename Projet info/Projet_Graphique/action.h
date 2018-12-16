@@ -12,7 +12,7 @@ class Action : public QWidget{
     MainWindow* mainWindow;
     int unit;
 public:
-    Action(QWidget *parent = nullptr, int unit = 0, bool capt = false, bool attack = false, MainWindow* mainWindow = nullptr);
+    Action(QWidget *parent = nullptr, int unit = 0, bool capt = false, bool attack = false, bool movable= false, MainWindow* mainWindow = nullptr);
 
 public slots:
     void moveAction();

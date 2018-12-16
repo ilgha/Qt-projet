@@ -10,7 +10,7 @@ class Building : public Land{
     Player* team = nullptr;
     int x, y, hp, ID;
     Player* switchTeam(Player* team);
-    void reset();
+
     int maxHp = 20;
     int income = 1000;
 public:
@@ -21,6 +21,7 @@ public:
     int getY() const;
     int getID() const;
     int setHp(Unit* unit);
+    void reset();
 };
 
 #endif // BUILDING_H

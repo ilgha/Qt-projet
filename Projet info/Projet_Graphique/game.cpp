@@ -44,9 +44,9 @@ Game::Game(Player* player1, Player* player2){
     }
 
 
-    army.push_back(new Infantry(7,2,10,player1));
+    army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Infantry(7,8,10,player1));
-    army.push_back(new Infantry(13,7,10,player2));
+    army.push_back(new Tank(13,7,10,player2));
 
 
     for(int i = 0; i< buildings.size(); i++){
@@ -376,14 +376,16 @@ int Game::getDamage(Unit * unitA, Unit * unitD) {
 void Game::attack(Unit* unitA,Unit* unitD, bool isCounter){
     int damage = getDamage(unitA,unitD);
     int health = unitD->getHealth();
+
     if (health - damage <=0){
         unitD->setHealth(0);
     }
     else if (isCounter == false) {
-        unitD -> setHealth(health - damage);
-        void attack(Unit* unitD, Unit* unitA,bool isCounter=true);
+        unitD->setHealth(health - damage);
+        attack(unitD, unitA, true);
     }
     else{
+        std::cout << "hellooo" << std::endl;
         unitD->setHealth(health - damage);
     }
 };

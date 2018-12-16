@@ -47,7 +47,7 @@ void Menu::recruitAction(){
     type = list->currentIndex();
     name = getName(type);
     if (game->recruit(&game->getBuildings().at(building), name)== false){
-        QMessageBox::critical(this, "Pseudo", "Vous n'avez pas voulu donner votre nom… snif.");
+        QMessageBox::critical(this, " ", "You don't have enough money");
     }
     else{
         game->recruit(&game->getBuildings().at(building), name);
