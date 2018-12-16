@@ -186,7 +186,6 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
     textWidget->setText("Income : " + QString::fromStdString(std::to_string(game->getPlayer1()->getIncome())) +
                        "\nMoney : " + QString::fromStdString(std::to_string(game->getPlayer1()->getMoney())) +
-                       "\nNombre de villes : " + QString::fromStdString(std::to_string(game->getBuildings().size())) +
                         "\nmyTurn: " + myTurn );
     textWidget->setFixedSize(5+5*width()/x,height());
     textWidget->move(width()-1-5*width()/x,0);
@@ -228,6 +227,11 @@ void MainWindow::paintEvent(QPaintEvent *event){
             QPainter painter(this);
             painter.drawImage(target, image, source);
         }
+        QPainter painter(this);
+        painter.setPen(QPen(Qt::yellow));
+        painter.setFont(QFont("Times", 20, QFont::Bold));
+        QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
+        painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getBuildings().at(u).getHp())));
     }
 
     //units

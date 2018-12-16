@@ -47,6 +47,7 @@ int Building::setHp(Unit* unit) {
     hp = hp-unit->getHealth();
     if(hp <= 0){
         switchTeam(unit->getTeam());
+        reset();
     }
     return hp;
 }
