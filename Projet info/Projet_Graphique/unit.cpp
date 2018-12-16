@@ -44,6 +44,7 @@ int Unit::setHealth(int newHp){
     }
     if(health<=0){
         delete this;
+        setDead(true);
     }
     return health;
 }
