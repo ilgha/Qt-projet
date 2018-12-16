@@ -110,7 +110,7 @@ void MainWindow::onData() {
             return;
 
     QByteArray data = other->read(currentSize);
-    std::cout << data.toStdString() << std::endl;
+    //std::cout << data.toStdString() << std::endl;
     currentSize = 0;
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -161,7 +161,7 @@ void MainWindow::sendJson(QJsonObject obj) {
     QDataStream out(other);
     out << (quint32) data.length();
     other->write(data);
-    std::cout << "Sending " << data.toStdString() << std::endl;
+    //std::cout << "Sending " << data.toStdString() << std::endl;
 }
 
 
@@ -260,7 +260,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             }
         }
     }
-    std::cout << "myTurn: " << myTurn << std::endl;
+    //std::cout << "myTurn: " << myTurn << std::endl;
 
 
 
@@ -269,16 +269,16 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    click = event;
-    createUnit(event);
-    actionOnUnit(event);
-
+    if(game->getActiveUnit() == nullptr){
+        createUnit(event);
+        actionOnUnit(event);
+    }else{
+        sendJson(unitMove(event));
+    }
 
     //réseau
     if(! myTurn)
            return;
-
-    sendJson(unitMove(event));
 
     update();
 
@@ -433,24 +433,13 @@ void MainWindow::playIA(Player* player)
 
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
-
     for(unsigned int i = 0; i<army->size(); i++){
-
-        if(army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead()){
-            if(!army->at(i)->isMovable() && game->getActiveUnit() == nullptr){
-                if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
-                        event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
-                    showMove(army->at(i));
-                    army->at(i)->setMovable(true);
-                    game->setActiveUnit(army->at(i));
-                }
-
-            }else if(army->at(i)->isMovable() && game->getActiveUnit() == army->at(i)){
-                if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
-                    event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
-                    game->setActiveUnit(nullptr);
-                    army->at(i)->setMovable(false);
-                }
+        if(army->at(i)->isMovable() && game->getActiveUnit() == army->at(i)){
+            if(event->x() > army->at(i)->getX()*this->width()/x && event->x() < (army->at(i)->getX()*this->width()/x + this->width()/x) &&
+                event->y() > army->at(i)->getY()*this->height()/y && event->y() < (army->at(i)->getY()*this->height()/y + this->height()/y)){
+                game->setActiveUnit(nullptr);
+                army->at(i)->setMovable(false);
+                game->clearCases();
             }
         }
     }
@@ -497,6 +486,16 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
     }
 
     return move;
+}
+
+
+void MainWindow::unitMove(int i){
+    showMove(army->at(i));
+    army->at(i)->setMovable(true);
+    game->setActiveUnit(army->at(i));
+}
+void MainWindow::capture(int i){
+    game->checkBuildings(army->at(i)->getX(), army->at(i)->getY())->setHp(army->at(i));
 }
 
 
@@ -662,14 +661,17 @@ void MainWindow::createUnit(QMouseEvent *event){
 }
 
 void MainWindow::actionOnUnit(QMouseEvent *event){
+
     int wx = width()/x;
     int hy = height()/y;
     for (unsigned int i=0; i<army->size(); i++){
         if (floor(event->x()/wx) == army->at(i)->getX() && floor(event->y()/hy) == army->at(i)->getY()){
             if (army->at(i)->getTeam() == game->getActive() && !army->at(i)->getDead() && myTurn== true){
-                Action* window = new Action(nullptr, click, this);
+                bool capt = (game->checkBuildings(army->at(i)->getX(), army->at(i)->getY()) != nullptr);
+                bool attack = game->ennemyNear(army->at(i));
+                Action* window = new Action(nullptr, i, capt, attack, this);
                 window->setVisible(true);
-                window->setFixedSize(600,300);
+                window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
                 window->show();
             }
