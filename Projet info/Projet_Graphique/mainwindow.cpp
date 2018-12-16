@@ -432,9 +432,11 @@ void MainWindow::playIA(Player* player)
                         game->clearCases();
 
                         if(u->getX() == endX && u->getY() == endY){
-                            auto it = std::find(game->getArmy()->begin(), game->getArmy()->end(), u);
-                            std::cout << "distance" << distance(game->getArmy()->begin(), it) << std::endl;
-                            capture(distance(game->getArmy()->begin(), it));
+                            for(unsigned int i = 0; i < game->getBuildings().size(); i++){
+                                if(x == game->getBuildings().at(i).getX() && y == game->getBuildings().at(i).getY()){
+                                    game->getBuildings().at(i).setHp(u);
+                                }
+                            }
                         }
 
                         break;
