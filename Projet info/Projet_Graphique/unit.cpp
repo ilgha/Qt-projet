@@ -70,6 +70,7 @@ void Unit::setY(int y){
 
 void Unit::newTurn(){
     setMovable(true);
+    setAggressive(true);
 }
 void Unit::setMovable(bool b)
 {
@@ -79,6 +80,16 @@ void Unit::setMovable(bool b)
 bool Unit::isMovable()
 {
     return  movable;
+}
+
+void Unit::setAggressive(bool b)
+{
+    aggressive = b;
+}
+
+bool Unit::isAggressive()
+{
+    return aggressive;
 }
 
 bool Unit::getDead() const

@@ -346,7 +346,7 @@ std::vector<node*> MainWindow::bestPath(node target)
 
     return  bestPath;
 }
-/*
+
 void MainWindow::playIA(Player* player)
 {
     if(player->typeIA() == 0){
@@ -448,22 +448,14 @@ void MainWindow::playIA(Player* player)
                         listNeighbour.push_back(&neighbourS);
                         listNeighbour.push_back(&neighbourE);
                         listNeighbour.push_back(&neighbourO);
-
-<<<<<<< HEAD
-                        for (auto neighbour : listNeighbour) {
+                      for (auto neighbour : listNeighbour) {
                             if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
                                 neighbour->setParenting(&current);
                                 open.push_back(neighbour);
 
                             }
-=======
-                    for (auto neighbour : listNeighbour) {
-                        if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
-                                && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
-                            neighbour.setParenting(&current);
-                            open.push_back(neighbour);
->>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
+
                         }
                     }
                 }
@@ -472,7 +464,7 @@ void MainWindow::playIA(Player* player)
     }
 }
 
-*/
+
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
@@ -480,7 +472,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
             if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
                 event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
                 game->setActiveUnit(nullptr);
-               // game->getArmy()->at(i)->setMovable(false);
                 game->clearCases();
             }
         }
@@ -601,6 +592,8 @@ void MainWindow::combat(QMouseEvent *event){
         if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
             event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
             game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
+            game->getActiveUnit()->setMovable(false);
+            game->getActiveUnit()->setAggressive(false);
             game->setActiveUnit(nullptr);
             fight.clear();
 
@@ -721,7 +714,7 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
         if (floor(event->x()/wx) == game->getArmy()->at(i)->getX() && floor(event->y()/hy) == game->getArmy()->at(i)->getY()){
             if (game->getArmy()->at(i)->getTeam() == game->getActive() && !game->getArmy()->at(i)->getDead() && myTurn== true){
                 bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr && game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->getTeam()!= game->getActive());
-                bool attack = game->ennemyNear(game->getArmy()->at(i));
+                bool attack = (game->ennemyNear(game->getArmy()->at(i)) && game->getArmy()->at(i)->isAggressive());
                 bool movable = (game->getArmy()->at(i)->isMovable());
                 Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);

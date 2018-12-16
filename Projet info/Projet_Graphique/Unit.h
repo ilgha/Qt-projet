@@ -15,6 +15,7 @@ class Unit{
     int healthMax;
     int mp;
     bool movable = false;
+    bool aggressive = false;
     string mt;
     Player* team;
     int ID;
@@ -37,6 +38,8 @@ public:
     void newTurn();
     void setMovable(bool b);
     bool isMovable();
+    void setAggressive(bool b);
+    bool isAggressive();
 
     int getHealthMax() const;
     void setHealthMax(int value);
