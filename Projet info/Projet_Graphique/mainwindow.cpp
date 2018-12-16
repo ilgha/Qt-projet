@@ -351,7 +351,7 @@ std::vector<node> MainWindow::bestPath(std::vector<node> close)
 }
 
 void MainWindow::playIA(Player* player)
-{/*
+{
     if(player->typeIA() == 0){
         return;
 
@@ -372,7 +372,6 @@ void MainWindow::playIA(Player* player)
                 node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
                 begin.setParenting(nullptr);
                 node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
-<<<<<<< HEAD
                 std::cout << "end node: " << end.getX() << "," << end.getY() << std::endl;
                 open.push_back(begin);
 
@@ -392,14 +391,6 @@ void MainWindow::playIA(Player* player)
 
                     node current = open.at(smallestF(open));
                     std::cout << current.getChild() << std::endl;
-=======
-                open.push_back(&begin);
-                while(!open.empty()){
-
-                    node current = *open.at(smallestF(open));
-<<<<<<< HEAD
-                    node* pcurrent = &current;
->>>>>>> 79efc324dbd0469be02f1dec994819affa9b4dcb
                     std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
                     open.erase(open.begin()+smallestF(open)-1);
@@ -409,25 +400,12 @@ void MainWindow::playIA(Player* player)
                     }
                     std::cout << std::endl;
 
-<<<<<<< HEAD
                     close.push_back(current);
-=======
-                    std::cout << pcurrent << std::endl;
-
-                    close.push_back(pcurrent);
-                    std::cout << close.size() << std::endl;
->>>>>>> 79efc324dbd0469be02f1dec994819affa9b4dcb
                     std::cout << "close: ";
                     for (auto nodeC : close) {
                         std::cout << "(" << nodeC.getX() << "," << nodeC.getY() << ")" << ' ';
                     }
                     std::cout << std::endl;
-=======
-
-                    open.erase(open.begin()+smallestF(open));
-
-                    close.push_back(&current);
->>>>>>> 4ad1f00ce179bfc4c41ee3390373e50367852a60
 
                     if(current == end){
                         std::reverse(close.begin(),close.end());
@@ -471,27 +449,14 @@ void MainWindow::playIA(Player* player)
                         node neighbourE = node(current.getX()+1, current.getY(), game->getMap().getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()+1-endX)+std::abs(current.getY()-endY));
                         node neighbourO = node(current.getX()-1, current.getY(), game->getMap().getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-1-endX)+std::abs(current.getY()-endY));
 
-<<<<<<< HEAD
                         listNeighbour.push_back(neighbourN);
                         listNeighbour.push_back(neighbourS);
                         listNeighbour.push_back(neighbourE);
                         listNeighbour.push_back(neighbourO);
 
-                        for (auto neighbour : listNeighbour) {
-                            if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
-=======
-                        listNeighbour.push_back(&neighbourN);
-                        listNeighbour.push_back(&neighbourS);
-                        listNeighbour.push_back(&neighbourE);
-                        listNeighbour.push_back(&neighbourO);
-<<<<<<< HEAD
 
                         for (auto neighbour : listNeighbour) {
-=======
-                      for (auto neighbour : listNeighbour) {
->>>>>>> 4ab769867943f1624e57f47b635b1592aa504eb6
-                            if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
->>>>>>> 79efc324dbd0469be02f1dec994819affa9b4dcb
+                            if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
                                 neighbour.setParenting(&current);
                                 open.push_back(neighbour);
@@ -502,7 +467,7 @@ void MainWindow::playIA(Player* player)
                 }
             }
         }
-    }*/
+    }
 }
 
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
