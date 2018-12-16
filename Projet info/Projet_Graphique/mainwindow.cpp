@@ -506,8 +506,6 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
                         game->getArmy()->at(i)->setY(floor(event->y()/hy));
-
-                        //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
 
@@ -721,7 +719,7 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
                 bool movable = (game->getArmy()->at(i)->isMovable());
                 Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);
-                window->setFixedSize(200,150);
+                window->setFixedSize(200,200);
                 window->setWindowTitle("Choose an action");
                 window->show();
                 return 1;
@@ -740,4 +738,9 @@ void MainWindow::music(){
     mus->setPlaylist(playlist);
     playlist->shuffle();
     mus->play();
+}
+
+void MainWindow::fusion(){
+    game->checkFusion(game->getActiveUnit());
+    game->setActiveUnit(nullptr);
 }
