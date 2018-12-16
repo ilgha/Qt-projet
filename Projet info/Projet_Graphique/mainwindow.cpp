@@ -669,9 +669,9 @@ void MainWindow::createUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getBuildings().size(); i++){
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1){
             for(int u = 0; game->getArmy()->size(); u++){
-                if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
-
-                }
+                //if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
+                    //return;
+                //}
             }
             Menu* window = new Menu(nullptr, game, i);
             window->setVisible(true);
@@ -695,43 +695,6 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
                 window->setVisible(true);
                 window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
-<<<<<<< Updated upstream
-=======
-
-                QVBoxLayout *layout = new QVBoxLayout(window);
-                int count =0;
-
-                if(game->ennemyNear(army->at(i))==true){
-
-                    QPushButton *attackButton = new QPushButton(window);
-                    layout->addWidget(attackButton);
-                    attackButton->setText("attack");
-                    attackButton->setMaximumWidth(100);
-                    attackButton->show();
-                    count ++;
-                }
-
-                if (game->checkBuildings(army->at(i)->getX(),army->at(i)->getY())!=nullptr){
-
-                    QPushButton *captureButton = new QPushButton(window);
-                    layout->addWidget(captureButton);
-                    captureButton->setText("capture");
-                    captureButton->setMaximumWidth(100);
-                    captureButton->show();
-                    count ++;
-                }
-
-                QPushButton *moveButton = new QPushButton(window);
-
-                layout->addWidget(moveButton);
-                moveButton->setText("move");
-                moveButton->setMaximumWidth(100);
-
-
-
-                moveButton->show();
-
->>>>>>> Stashed changes
                 window->show();
             }
         }
