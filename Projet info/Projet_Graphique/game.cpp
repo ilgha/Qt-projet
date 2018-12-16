@@ -30,17 +30,9 @@ Game::Game(Player* player1, Player* player2){
     army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Mech(7,8,10,player1));
     army.push_back(new NeoTank(7,9,10,player1));
-<<<<<<< HEAD
 
     army.push_back(new Tank(13,7,10,player2));
     army.push_back(new Tank(14,7,10,player2));
-
-
-=======
-    army.push_back(new Tank(13,7,10,player2));
-    army.push_back(new Tank(14,7,10,player2));
-
->>>>>>> d70a3c84eae334f15f19e8d7d83f1dd349e049fd
 
 
     for(int i = 0; i< buildings.size(); i++){

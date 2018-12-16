@@ -759,11 +759,7 @@ void MainWindow::music(){
     playlist->shuffle();
     mus->play();
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d70a3c84eae334f15f19e8d7d83f1dd349e049fd
 
 void MainWindow::showFusion(int i){
     game->setActiveUnit(game->getArmy()->at(i));
@@ -791,7 +787,3 @@ void MainWindow::fusion(QMouseEvent *event){
         }
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> d70a3c84eae334f15f19e8d7d83f1dd349e049fd
