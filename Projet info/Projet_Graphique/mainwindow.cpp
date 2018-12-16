@@ -672,10 +672,6 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
                 bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr && game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->getTeam()!= game->getActive());
                 bool attack = game->ennemyNear(game->getArmy()->at(i));
                 bool movable = (game->getArmy()->at(i)->isMovable());
-                if (movable==true){
-                    std::cout<<"mavable"<<std::endl;
-                }
-                else{std::cout<<"not movable"<<std::endl;}
                 Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);
                 window->setFixedSize(200,150);
