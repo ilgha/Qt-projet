@@ -1,5 +1,4 @@
 #include "building.h"
-#include <iostream>
 
 Building::Building(int posX, int posY, int defence, int f, int b, int tr, int ti, int a, int ID) : Land(defence, f, b, tr, ti, a){
     hp = maxHp;
@@ -38,7 +37,6 @@ Player* Building::switchTeam(Player* team) {
     }else{
         this->team = team;
         this->team->addIncome(this->income);
-        std::cout << "Building Captured" << std::endl;
     }
     return team;
 }
@@ -54,5 +52,4 @@ int Building::setHp(Unit* unit) {
 
 void Building::reset() {
     hp = maxHp;
-    std::cout << hp << std::endl;
 }
