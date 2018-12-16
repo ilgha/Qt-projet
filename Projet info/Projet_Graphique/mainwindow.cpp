@@ -234,7 +234,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             painter.drawImage(target, image, source);
         }
         QPainter painter(this);
-        painter.setPen(QPen(Qt::black));
+        painter.setPen(QPen(Qt::cyan));
         painter.setFont(QFont("Times", 20, QFont::Bold));
         QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
         painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getBuildings().at(u).getHp())));
@@ -327,6 +327,7 @@ int MainWindow::smallestF(std::vector<node*> open)
         listF.push_back(node->getF());
         index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
     }
+    std::cout << "index: " << index << std::endl;
     return index;
 }
 
@@ -348,7 +349,7 @@ std::vector<node*> MainWindow::bestPath(node target)
 }
 
 void MainWindow::playIA(Player* player)
-{/*
+{
     if(player->typeIA() == 0){
         return;
 
@@ -388,19 +389,18 @@ void MainWindow::playIA(Player* player)
                     std::cout << std::endl;
 
                     node current = *open.at(smallestF(open));
-                    node* pcurrent = &current;
                     std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
-                    open.erase(open.begin()+smallestF(open)-1);
+                    open.erase(open.begin()+smallestF(open));
                     std::cout << "open: ";
                     for (auto nodeO : open) {
                         std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
                     }
                     std::cout << std::endl;
 
-                    std::cout << pcurrent << std::endl;
+                    std::cout << &current << std::endl;
 
-                    close.push_back(pcurrent);
+                    close.push_back(&current);
                     std::cout << close.size() << std::endl;
                     std::cout << "close: ";
                     for (auto nodeC : open) {
@@ -448,12 +448,8 @@ void MainWindow::playIA(Player* player)
                         listNeighbour.push_back(&neighbourS);
                         listNeighbour.push_back(&neighbourE);
                         listNeighbour.push_back(&neighbourO);
-<<<<<<< HEAD
 
                         for (auto neighbour : listNeighbour) {
-=======
-                      for (auto neighbour : listNeighbour) {
->>>>>>> 4ab769867943f1624e57f47b635b1592aa504eb6
                             if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                     && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
                                 neighbour->setParenting(&current);
@@ -466,7 +462,7 @@ void MainWindow::playIA(Player* player)
                 }
             }
         }
-    }*/
+    }
 }
 
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
@@ -501,13 +497,11 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                     if((floor(event->x()/wx) == game->getCases().at(u).first && floor(event->y()/hy) == game->getCases().at(u).second)){
                         for(unsigned int t = 0; t < game->getBuildings().size(); t++){
                             if(game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX() && game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX()){
-                                game->getBuildings().at(u).reset();
+                                game->getBuildings().at(t).reset();
                             }
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
                         game->getArmy()->at(i)->setY(floor(event->y()/hy));
-
-                        //game->checkFusion(game->getArmy()->at(i));
                         game->getArmy()->at(i)->setMovable(false);
                         game->resetActiveUnit();
 
@@ -580,10 +574,10 @@ void MainWindow::showMove(Unit* unit){
 void MainWindow::ShowCombat(int i){
     game->setActiveUnit(game->getArmy()->at(i));
     for(int u=0; u<game->getArmy()->size(); u++){
-        if(game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY()){
+        if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
             IntPair pos = std::make_pair(game->getArmy()->at(u)->getX(),game->getArmy()->at(u)->getY());
             fight.push_back(pos);
         }
@@ -724,7 +718,7 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
                 bool movable = (game->getArmy()->at(i)->isMovable());
                 Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);
-                window->setFixedSize(200,150);
+                window->setFixedSize(200,200);
                 window->setWindowTitle("Choose an action");
                 window->show();
                 return 1;
@@ -743,4 +737,9 @@ void MainWindow::music(){
     mus->setPlaylist(playlist);
     playlist->shuffle();
     mus->play();
+}
+
+void MainWindow::fusion(){
+    game->checkFusion(game->getActiveUnit());
+    game->setActiveUnit(nullptr);
 }

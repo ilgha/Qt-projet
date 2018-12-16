@@ -53,6 +53,7 @@ public:
     void unitMove(int i);
     void capture(int i);
     void ShowCombat(int i);
+    void fusion();
 private:
     QJsonObject unitMove(QMouseEvent *event);
     void sendJson(QJsonObject obj);

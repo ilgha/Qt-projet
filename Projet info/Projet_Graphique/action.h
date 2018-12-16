@@ -18,6 +18,7 @@ public slots:
     void moveAction();
     void attackAction();
     void captureAction();
+    void fusionAction();
 };
 
 #endif // ACTION_H
