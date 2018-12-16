@@ -234,7 +234,7 @@ void MainWindow::paintEvent(QPaintEvent *event){
             painter.drawImage(target, image, source);
         }
         QPainter painter(this);
-        painter.setPen(QPen(Qt::black));
+        painter.setPen(QPen(Qt::cyan));
         painter.setFont(QFont("Times", 20, QFont::Bold));
         QRectF target(game->getBuildings().at(u).getX()*width()/x, game->getBuildings().at(u).getY()*height()/y, width()/x, height()/y);
         painter.drawText(target, Qt::AlignBottom, QString::fromStdString(std::to_string(game->getBuildings().at(u).getHp())));
@@ -348,7 +348,7 @@ std::vector<node*> MainWindow::bestPath(node target)
 }
 
 void MainWindow::playIA(Player* player)
-{/*
+{
     if(player->typeIA() == 0){
         return;
 
@@ -358,7 +358,7 @@ void MainWindow::playIA(Player* player)
         myTurn = false;
         sendJson(changeTurn());
         std::cout << "ia end" << std::endl;
-
+/*
     }else if(player->typeIA() == 2){ //IA-PathFind A*
         for (auto u : *game->getArmy()) {
             if(u->getTeam() == game->getActive()){
@@ -465,8 +465,8 @@ void MainWindow::playIA(Player* player)
                     }
                 }
             }
-        }
-    }*/
+        }*/
+    }
 }
 
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
@@ -501,7 +501,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
                     if((floor(event->x()/wx) == game->getCases().at(u).first && floor(event->y()/hy) == game->getCases().at(u).second)){
                         for(unsigned int t = 0; t < game->getBuildings().size(); t++){
                             if(game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX() && game->getArmy()->at(i)->getX() == game->getBuildings().at(t).getX()){
-                                game->getBuildings().at(u).reset();
+                                game->getBuildings().at(t).reset();
                             }
                         }
                         game->getArmy()->at(i)->setX(floor(event->x()/wx));
@@ -580,10 +580,10 @@ void MainWindow::showMove(Unit* unit){
 void MainWindow::ShowCombat(int i){
     game->setActiveUnit(game->getArmy()->at(i));
     for(int u=0; u<game->getArmy()->size(); u++){
-        if(game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY()
-           || game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY()){
+        if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
             IntPair pos = std::make_pair(game->getArmy()->at(u)->getX(),game->getArmy()->at(u)->getY());
             fight.push_back(pos);
         }
