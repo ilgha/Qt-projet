@@ -43,7 +43,7 @@ int Unit::setHealth(int newHp){
         health = newHp;
     }
     if(health<=0){
-        delete this;
+
         setDead(true);
     }
     return health;
@@ -100,4 +100,5 @@ bool Unit::getDead() const
 void Unit::setDead(bool value)
 {
     dead = value;
+    delete this;
 }
