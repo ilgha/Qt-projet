@@ -20,7 +20,7 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack, MainWindow* ma
     QPushButton *captureButton = new QPushButton(this);
     captureButton->setText("capture");
     captureButton->setMinimumHeight(30);
-    if( capt == false){
+    if( capt == false ){
         captureButton->setEnabled(false);
     }
 

@@ -668,7 +668,7 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
     for (unsigned int i=0; i<game->getArmy()->size(); i++){
         if (floor(event->x()/wx) == game->getArmy()->at(i)->getX() && floor(event->y()/hy) == game->getArmy()->at(i)->getY()){
             if (game->getArmy()->at(i)->getTeam() == game->getActive() && !game->getArmy()->at(i)->getDead() && myTurn== true){
-                bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr);
+                bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr && game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->getTeam()!= game->getActive());
                 bool attack = game->ennemyNear(game->getArmy()->at(i));
                 Action* window = new Action(nullptr, i, capt, attack, this);
                 window->setVisible(true);
