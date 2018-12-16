@@ -319,12 +319,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     update();
 }
 
-int MainWindow::smallestF(std::vector<node> open)
+int MainWindow::smallestF(std::vector<node*> open)
 {
     std::vector<int> listF;
     int index;
     for (auto node : open) {
-        listF.push_back(node.getF());
+        listF.push_back(node->getF());
         index = distance(listF.begin(),min_element(listF.begin(),listF.end()));
     }
     return index;
@@ -335,18 +335,18 @@ bool MainWindow::compareNode(node n1, node n2)
     return ((n1.getX() == n2.getX() && (n1.getY() == n2.getY())));
 }
 
-std::vector<node> MainWindow::bestPath(node target)
+std::vector<node*> MainWindow::bestPath(node target)
 {
-    std::vector<node> bestPath;
+    std::vector<node*> bestPath;
     while(target.getChild()){
-        bestPath.push_back(target);
+        bestPath.push_back(&target);
         target = *target.getChild();
-        bestPath.push_back(target);
+        bestPath.push_back(&target);
     }
 
     return  bestPath;
 }
-
+/*
 void MainWindow::playIA(Player* player)
 {
     if(player->typeIA() == 0){
@@ -360,65 +360,110 @@ void MainWindow::playIA(Player* player)
         std::cout << "ia end" << std::endl;
 
     }else if(player->typeIA() == 2){ //IA-PathFind A*
-
         for (auto u : *game->getArmy()) {
-            std::vector<node> open;
-            std::vector<node> close;
-            int endX = 4;
-            int endY = 14;
-            node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
-            begin.setParenting(nullptr);
-            node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
-            open.push_back(begin);
+            if(u->getTeam() == game->getActive()){
+                std::vector<node*> open;
+                std::vector<node*> close;
+                int endX = 14;
+                int endY = 4;
+                node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
+                std::cout << "begin node: " << begin.getX() << "," << begin.getY() << std::endl;
+                begin.setParenting(nullptr);
+                node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
+                std::cout << "end node: " << end.getX() << "," << end.getY() << std::endl;
+                open.push_back(&begin);
 
-            while(!open.empty()){
+                while(!open.empty()){
 
-                node current = open.at(smallestF(open));
-                open.erase(open.begin()+smallestF(open)-1);
-                close.push_back(current);
+                    std::cout << "open: ";
+                    for (auto nodeO : open) {
+                        std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
+                    }
+                    std::cout << std::endl;
 
-                if(compareNode(current,end)){
-                    game->clearCases();
-                    game->moveUnit(u,u->getX(),u->getY(),u->getMP());
-                    node nextPos = begin;
-                    for (auto position : bestPath(current)) {
-                        for (auto possible : game->getCases()) {
-                            if(position.getX() == possible.first &&
-                                    position.getY() == possible.second &&
-                                    position.getF() <= nextPos.getF()){
+                    std::cout << "close: ";
+                    for (auto nodeC : close) {
+                        std::cout << "(" << nodeC->getX() << "," << nodeC->getY() << ")" << ' ';
+                    }
+                    std::cout << std::endl;
 
-                                nextPos = position;
+                    node current = *open.at(smallestF(open));
+                    node* pcurrent = &current;
+                    std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
+                    open.erase(open.begin()+smallestF(open)-1);
+                    std::cout << "open: ";
+                    for (auto nodeO : open) {
+                        std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
+                    }
+                    std::cout << std::endl;
+
+                    std::cout << pcurrent << std::endl;
+
+                    close.push_back(pcurrent);
+                    std::cout << close.size() << std::endl;
+                    std::cout << "close: ";
+                    for (auto nodeC : open) {
+                        std::cout << "(" << nodeC->getX() << "," << nodeC->getY() << ")" << ' ';
+                    }
+                    std::cout << std::endl;
+
+                    if(compareNode(current,end)){
+                        game->clearCases();
+                        game->moveUnit(u,u->getX(),u->getY(),u->getMP());
+                        node nextPos = begin;
+                        for (auto position : bestPath(current)) {
+                            for (auto possible : game->getCases()) {
+                                if(position->getX() == possible.first &&
+                                        position->getY() == possible.second &&
+                                        position->getF() <= nextPos.getF()){
+
+                                    nextPos = *position;
+
+                                }
                             }
                         }
-                    }
 
-                    u->setX(nextPos.getX());
-                    u->setY(nextPos.getY());
-                    sendJson(changeTurn());
+                        u->setX(nextPos.getX());
+                        u->setY(nextPos.getY());
 
-                    break;
+                        game->endTurn();
+                        myTurn = false;
+                        sendJson(changeTurn());
+                        std::cout << "ia end" << std::endl;
+
+                        break;
 
 
 
-                }else{                 //calcul du meilleur chemin
+                    }else{                 //calcul du meilleur chemin
 
-                    std::vector<node> listNeighbour;
-                    node neighbourN = node(current.getX(), current.getY()-1, game->getMap().getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-                    node neighbourS = node(current.getX(), current.getY()+1, game->getMap().getTile(current.getX(),current.getY()+1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-                    node neighbourE = node(current.getX()+1, current.getY(), game->getMap().getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
-                    node neighbourO = node(current.getX()-1, current.getY(), game->getMap().getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                        std::vector<node*> listNeighbour;
+                        node neighbourN = node(current.getX(), current.getY()-1, game->getMap().getTile(current.getX(),current.getY()-1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                        node neighbourS = node(current.getX(), current.getY()+1, game->getMap().getTile(current.getX(),current.getY()+1).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                        node neighbourE = node(current.getX()+1, current.getY(), game->getMap().getTile(current.getX()+1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
+                        node neighbourO = node(current.getX()-1, current.getY(), game->getMap().getTile(current.getX()-1,current.getY()).getMoved(u->getMT()), std::abs(current.getX()-endX)+std::abs(current.getY()-endY));
 
-                    listNeighbour.push_back(neighbourN);
-                    listNeighbour.push_back(neighbourS);
-                    listNeighbour.push_back(neighbourE);
-                    listNeighbour.push_back(neighbourO);
+                        listNeighbour.push_back(&neighbourN);
+                        listNeighbour.push_back(&neighbourS);
+                        listNeighbour.push_back(&neighbourE);
+                        listNeighbour.push_back(&neighbourO);
 
+<<<<<<< HEAD
+                        for (auto neighbour : listNeighbour) {
+                            if((neighbour->getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
+                                    && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
+                                neighbour->setParenting(&current);
+                                open.push_back(neighbour);
+
+                            }
+=======
                     for (auto neighbour : listNeighbour) {
                         if((neighbour.getCost()>0 || !(std::find(close.begin(), close.end(), neighbour) != close.end()))
                                 && !(std::find(open.begin(), open.end(), neighbour) != open.end())) {
                             neighbour.setParenting(&current);
                             open.push_back(neighbour);
+>>>>>>> f7d746d017f46acb6646ff8baecd6b929a2d06df
                         }
                     }
                 }
@@ -427,7 +472,7 @@ void MainWindow::playIA(Player* player)
     }
 }
 
-
+*/
 QJsonObject MainWindow::unitMove(QMouseEvent *event){
     QJsonObject move;
     for(unsigned int i = 0; i<game->getArmy()->size(); i++){
@@ -558,6 +603,7 @@ void MainWindow::combat(QMouseEvent *event){
             game->attack(game->getActiveUnit(), game->getArmy()->at(i), false);
             game->setActiveUnit(nullptr);
             fight.clear();
+
         }
     }
 }
