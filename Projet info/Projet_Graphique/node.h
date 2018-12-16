@@ -10,7 +10,7 @@ public:
     bool operator== (const node &n) const;
     int getCost();
     int getHeuristic();
-    int getF();
+    unsigned int getF();
     int getX() const;
     int getY() const;
     node* getChild();
