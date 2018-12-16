@@ -20,8 +20,6 @@
 typedef std::pair <int, int> IntPair;
 
 MainWindow::MainWindow(QWidget *parent, Game* game) : QMainWindow(parent), ui(new Ui::MainWindow){
-
-    showFullScreen();
     textWidget->setWindowTitle("Menu");
     textWidget->setStyleSheet("QLabel { font-weight: bold; font: 20pt; background-color : grey; color : black; }");
 
