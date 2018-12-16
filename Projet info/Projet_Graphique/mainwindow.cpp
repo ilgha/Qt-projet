@@ -267,8 +267,10 @@ void MainWindow::paintEvent(QPaintEvent *event){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(game->getActiveUnit() == nullptr){
-        createUnit(event);
-        actionOnUnit(event);
+        int united = actionOnUnit(event);
+        if(united == 0){
+            createUnit(event);
+        }
     }else{
         sendJson(unitMove(event));
     }
@@ -670,14 +672,6 @@ void MainWindow::createUnit(QMouseEvent *event){
 
         if(floor(event->x()/wx) == game->getBuildings().at(i).getX() && floor(event->y()/hy) == game->getBuildings().at(i).getY() && game->getBuildings().at(i).getID() != 1 && game->getBuildings().at(i).getTeam()== game->getActive()){
 
-            for(int u = 0; game->getArmy()->size(); u++){
-                if(game->getArmy()->at(u)->getX() == game->getBuildings().at(i).getX() && game->getArmy()->at(u)->getY() == game->getBuildings().at(i).getY()){
-                    std::cout << game->getBuildings().at(i).getX() << std::endl;
-                    std::cout << game->getArmy()->at(u)->getX() << std::endl;
-                    return;
-                }
-            }
-
             Menu* window = new Menu(nullptr, game, i);
             window->setVisible(true);
             window->setFixedSize(600,300);
@@ -687,7 +681,7 @@ void MainWindow::createUnit(QMouseEvent *event){
     }
 }
 
-void MainWindow::actionOnUnit(QMouseEvent *event){
+int MainWindow::actionOnUnit(QMouseEvent *event){
 
     int wx = width()/x;
     int hy = height()/y;
@@ -701,9 +695,11 @@ void MainWindow::actionOnUnit(QMouseEvent *event){
                 window->setFixedSize(200,100);
                 window->setWindowTitle("Choose an action");
                 window->show();
+                return 1;
             }
         }
     }
+    return 0;
 }
 
 void MainWindow::music(){
