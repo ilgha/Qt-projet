@@ -1,7 +1,7 @@
 #include "action.h"
 #include <iostream>
 
-Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, MainWindow* mainWindow)
+Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, bool fus, MainWindow* mainWindow)
 {
     this->unit = unit;
     this->mainWindow = mainWindow;
@@ -30,7 +30,7 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     QPushButton *fusionButton = new QPushButton(this);
     fusionButton->setText("fusion");
     fusionButton->setMinimumHeight(30);
-    if(movable == false ){
+    if(movable == false || fus == false){
         fusionButton->setEnabled(false);
     }
 
