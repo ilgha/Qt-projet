@@ -47,7 +47,7 @@ public:
     Game(Player* player1, Player* player2);
     int endTurn();
     bool recruit(Building* building, string buy);
-    int endGame();
+    void endGame();
     std::vector<Unit*> *getArmy();
     Building* checkBuildings(unsigned int x, unsigned int y);
     Land* checkLand(Unit* units);
