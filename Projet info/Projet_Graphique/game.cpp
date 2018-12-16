@@ -46,8 +46,8 @@ Game::Game(Player* player1, Player* player2){
 
     army.push_back(new Infantry(7,7,10,player1));
     army.push_back(new Infantry(7,8,10,player1));
-    army.push_back(new Infantry(13,7,10,player2));
-    army.push_back(new Infantry(14,7,10,player2));
+    army.push_back(new Tank(13,7,10,player2));
+    army.push_back(new Tank(14,7,10,player2));
 
 
     for(int i = 0; i< buildings.size(); i++){

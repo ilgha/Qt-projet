@@ -45,15 +45,16 @@ typedef std::pair <int, int> IntPair;
     bool myTurn = false;
     QLabel *textWidget = new QLabel(tr("Text Widget"), this);
     void combat(QMouseEvent *event);
-
+    void fusion(QMouseEvent* event);
 
 public:
     explicit MainWindow(QWidget *parent, Game* game);
     ~MainWindow();
     void unitMove(int i);
     void capture(int i);
-    void ShowCombat(int i);
-    void fusion();
+    void showCombat(int i);
+    void showFusion(int i);
+
 private:
     QJsonObject unitMove(QMouseEvent *event);
     void sendJson(QJsonObject obj);

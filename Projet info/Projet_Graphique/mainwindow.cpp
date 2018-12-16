@@ -368,45 +368,16 @@ void MainWindow::playIA(Player* player)
                 int endX = 14;
                 int endY = 4;
                 node begin = node(u->getX(),u->getY(),game->getMap().getTile(u->getX(),u->getY()).getMoved(u->getMT()), std::abs(u->getX()-endX)+std::abs(u->getY()-endY));
-                std::cout << "begin node: " << begin.getX() << "," << begin.getY() << std::endl;
                 begin.setParenting(nullptr);
                 node end = node(endX, endY, game->getMap().getTile(endX,endY).getMoved(u->getMT()), 0);
-                std::cout << "end node: " << end.getX() << "," << end.getY() << std::endl;
                 open.push_back(&begin);
-
                 while(!open.empty()){
 
-                    std::cout << "open: ";
-                    for (auto nodeO : open) {
-                        std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
-                    std::cout << "close: ";
-                    for (auto nodeC : close) {
-                        std::cout << "(" << nodeC->getX() << "," << nodeC->getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
                     node current = *open.at(smallestF(open));
-                    std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
                     open.erase(open.begin()+smallestF(open));
-                    std::cout << "open: ";
-                    for (auto nodeO : open) {
-                        std::cout << "(" << nodeO->getX() << "," << nodeO->getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
-
-                    std::cout << &current << std::endl;
 
                     close.push_back(&current);
-                    std::cout << close.size() << std::endl;
-                    std::cout << "close: ";
-                    for (auto nodeC : open) {
-                        std::cout << "(" << nodeC->getX() << "," << nodeC->getY() << ")" << ' ';
-                    }
-                    std::cout << std::endl;
 
                     if(compareNode(current,end)){
                         game->clearCases();
@@ -571,7 +542,7 @@ void MainWindow::showMove(Unit* unit){
     update();
 }
 
-void MainWindow::ShowCombat(int i){
+void MainWindow::showCombat(int i){
     game->setActiveUnit(game->getArmy()->at(i));
     for(int u=0; u<game->getArmy()->size(); u++){
         if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
@@ -736,7 +707,30 @@ void MainWindow::music(){
     mus->play();
 }
 
-void MainWindow::fusion(){
-    game->checkFusion(game->getActiveUnit());
-    game->setActiveUnit(nullptr);
+
+void MainWindow::showFusion(int i){
+    game->setActiveUnit(game->getArmy()->at(i));
+    for(int u=0; u<game->getArmy()->size(); u++){
+        if((game->getArmy()->at(u)->getX()+1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX()-1 == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY() == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()+1 == game->getArmy()->at(i)->getY())
+           || (game->getArmy()->at(u)->getX() == game->getArmy()->at(i)->getX() && game->getArmy()->at(u)->getY()-1 == game->getArmy()->at(i)->getY())){
+            if(game->getArmy()->at(u)->getTeam() == game->getArmy()->at(i)->getTeam()){
+                IntPair pos = std::make_pair(game->getArmy()->at(u)->getX(),game->getArmy()->at(u)->getY());
+                fight.push_back(pos);
+            }
+        }
+    }
+}
+
+void MainWindow::fusion(QMouseEvent *event){
+    for(int i=0; i<game->getArmy()->size(); i++){
+        if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
+            event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
+
+            game->checkFusion(game->getActiveUnit());
+            game->setActiveUnit(nullptr);
+            fight.clear();
+        }
+    }
 }

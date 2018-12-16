@@ -38,7 +38,9 @@ Action::Action(QWidget *parent, int unit, bool capt, bool attack,bool movable, M
     layout->addWidget(moveButton);
     layout->addWidget(attackButton);
     layout->addWidget(captureButton);
+    layout->addWidget(fusionButton);
     this->setLayout(layout);
+
     moveButton->show();
     attackButton->show();
     captureButton->show();
@@ -59,7 +61,7 @@ void Action::moveAction(){
 }
 
 void Action::attackAction(){
-    mainWindow->ShowCombat(unit);
+    mainWindow->showCombat(unit);
 }
 
 void Action::captureAction(){
@@ -67,5 +69,5 @@ void Action::captureAction(){
 }
 
 void Action::fusionAction(){
-    mainWindow->fusion();
+    mainWindow->showFusion(unit);
 }
