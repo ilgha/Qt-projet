@@ -393,7 +393,7 @@ void MainWindow::playIA(Player* player)
                     std::cout << current.getChild() << std::endl;
                     std::cout << "current node: " << current.getX() << "," << current.getY() << std::endl;
 
-                    open.erase(open.begin()+smallestF(open)-1);
+                    open.erase(open.begin()+smallestF(open));
                     std::cout << "open: ";
                     for (auto nodeO : open) {
                         std::cout << "(" << nodeO.getX() << "," << nodeO.getY() << ")" << ' ';
