@@ -432,7 +432,7 @@ QJsonObject MainWindow::unitMove(QMouseEvent *event){
             if(event->x() > game->getArmy()->at(i)->getX()*this->width()/x && event->x() < (game->getArmy()->at(i)->getX()*this->width()/x + this->width()/x) &&
                 event->y() > game->getArmy()->at(i)->getY()*this->height()/y && event->y() < (game->getArmy()->at(i)->getY()*this->height()/y + this->height()/y)){
                 game->setActiveUnit(nullptr);
-                game->getArmy()->at(i)->setMovable(false);
+               // game->getArmy()->at(i)->setMovable(false);
                 game->clearCases();
             }
         }
@@ -490,6 +490,7 @@ void MainWindow::unitMove(int i){
 }
 void MainWindow::capture(int i){
     game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->setHp(game->getArmy()->at(i));
+    game->getArmy()->at(i)->setMovable(false);
 }
 
 
@@ -665,9 +666,14 @@ int MainWindow::actionOnUnit(QMouseEvent *event){
             if (game->getArmy()->at(i)->getTeam() == game->getActive() && !game->getArmy()->at(i)->getDead() && myTurn== true){
                 bool capt = (game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY()) != nullptr && game->checkBuildings(game->getArmy()->at(i)->getX(), game->getArmy()->at(i)->getY())->getTeam()!= game->getActive());
                 bool attack = game->ennemyNear(game->getArmy()->at(i));
-                Action* window = new Action(nullptr, i, capt, attack, this);
+                bool movable = (game->getArmy()->at(i)->isMovable());
+                if (movable==true){
+                    std::cout<<"mavable"<<std::endl;
+                }
+                else{std::cout<<"not movable"<<std::endl;}
+                Action* window = new Action(nullptr, i, capt, attack,movable, this);
                 window->setVisible(true);
-                window->setFixedSize(200,100);
+                window->setFixedSize(200,150);
                 window->setWindowTitle("Choose an action");
                 window->show();
                 return 1;
